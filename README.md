@@ -37,3 +37,8 @@ bip21 url that frontend can turn into qr, and address to check status
 	id: Number
 	ltcPrivKey: String WIF String
 	btcPrivKey: String WIF String
+
+# Items
+
+
+# Units

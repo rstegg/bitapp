@@ -1,3 +1,3 @@
-import btc from './bitcoin'
-import ltc from './litecoin'
-export default { btc, ltc}
+const BTC  = require('./bitcoin')
+const LTC  = require('./litecoin')
+module.exports = { BTC, LTC}
