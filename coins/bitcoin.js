@@ -18,3 +18,7 @@ api.deriveAddress = (xpriv, derivation) =>{
   const derived = privKey.derive(`m/0/${derivation}'`)
   return derived.privateKey.toAddress()
 }
+
+api.checkBalance = (address) =>
+  electrum(['getaddressbalance', address])
+  .then(R.pipe(R.trim, JSON.parse))

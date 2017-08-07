@@ -10,14 +10,5 @@ module.exports = (accountId, currency) => {
   )
   const addresses = models.Address
     .findAll({where:{accountId, currency }, raw: true })
-  return P.map(addresses, check)
-  .then((balances)=>{
-    const confirmed = R.map(  R.compose(parseFloat, R.prop('confirmed')), balances)
-    const unconfirmed = R.map(R.compose(parseFloat, R.prop('unconfirmed')), balances)
-    return {
-      confirmed: R.sum(confirmed),
-      unconfirmed: R.sum(unconfirmed),
-      detail:balances
-    }
-  })
+  return P.map(addresses, R.prop('address'))
 }

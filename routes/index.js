@@ -4,8 +4,9 @@ module.exports = function setup (app) {
   app.get('/accounts/new', accounts.newAccount)
 
   app.get('/accounts/:accountId/request/:currency/:amountUSD', accounts.requestPayment)
-  app.get('/accounts/:accid/balance/:currency', accounts.checkWalletBalance)
-  // app.get('/accounts/:accid/balance/:currency/:someAddress', accounts.checkAddressBalance)
+  app.get('/accounts/:accountId/balance/:currency/:address', accounts.checkAddressBalance)
+  app.get('/accounts/:accountId/balance/:currency', accounts.checkWalletBalance)
+  app.get('/accounts/:accountId/addresses/:currency', accounts.getAccountAddresses)
 
   // app.post('/accounts/:accid/send/:currency/:address/:amountUSD')
 }
