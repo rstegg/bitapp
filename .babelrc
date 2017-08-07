@@ -1,0 +1,16 @@
+{
+  "presets": ["react-native"],
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "components": "./js/components",
+        "config": "./js/config",
+        "navigation": "./js/navigation",
+        "actions": "./js/redux/actions",
+        "services": "./js/services",
+        "themes": "./js/themes",
+        "pages": "./js/pages"
+      }
+    }]
+  ]
+}

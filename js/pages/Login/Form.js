@@ -1,0 +1,39 @@
+import React from 'react'
+import { View } from 'react-native'
+import { Field, reduxForm } from 'redux-form'
+
+import TextField from 'components/TextField'
+import Text from 'components/BitKitText'
+
+import { onLoginSubmit } from 'actions/login'
+
+import styles from './Styles'
+
+const LoginField = ({ name, autoFocus, keyboardType, label, forgotButton }) =>
+  <View style={styles.inputGroup}>
+    <Field
+      component={TextField}
+      name={name}
+      autoFocus={autoFocus}
+      numberofLines={1}
+      autoCapitalize='none'
+      keyboardType={keyboardType}
+      label={label}
+      style={styles.textInput} />
+      {forgotButton}
+  </View>
+
+const ForgotButton = ({ onPress }) =>
+  <Text style={styles.forgot} onPress={onPress}>forgot?</Text>
+
+const LoginForm = ({ handleSubmit, submitting, navigation }) =>
+  <View onSubmit={handleSubmit} style={styles.loginScreen}>
+    <LoginField name='phone' autoFocus onSubmitEditing={() => focusField('password')} keyboardType='phone-pad' label='Phone' />
+    <LoginField name='password' keyboardType='default' label='Password'
+      forgotButton={<ForgotButton onPress={() => navigation.navigate('ForgotScreen')}/>} />
+  </View>
+
+export default reduxForm({
+  form: 'login',
+  onSubmit: onLoginSubmit
+})(LoginForm)
