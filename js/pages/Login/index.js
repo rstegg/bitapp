@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Keyboard, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
@@ -20,11 +20,6 @@ const Login = ({ isLoading, navigation }) =>
         center={<Header.Logo />}
         right={<Header.TextButton text='Sign In' isLoading={isLoading} onPress={isLoading ? null : () => this.props.onSubmit()} />} />
       <LoginForm navigation={navigation} />
-      <TouchableOpacity onPress={() => this._tinafey()}>
-        <View style={{backgroundColor: '#ef653d', flexGrow: 5}}>
-          <Text style={styles.tinafey}>Executive Login: Tina Fey</Text>
-        </View>
-      </TouchableOpacity>
     </View>
   </TouchableWithoutFeedback>
 

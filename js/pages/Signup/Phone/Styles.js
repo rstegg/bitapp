@@ -17,8 +17,5 @@ export default StyleSheet.create({
   textField: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  textInput: {
-    height: 40,
   }
 })

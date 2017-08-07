@@ -9,28 +9,32 @@ import { onSignupSubmit } from 'actions/signup'
 
 import styles from './Styles'
 
-const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, forgotButton }) =>
+const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, forgotButton, password }) =>
   <View style={styles.inputGroup}>
     <Field
       component={TextField}
       name={name}
       autoFocus={autoFocus}
       numberofLines={1}
-      autoCapitalize={autoCapitalize}
+      autoCapitalize={autoCapitalize || 'none'}
+      autoComplete={false}
       keyboardType={keyboardType}
       label={label}
-      style={styles.textInput} />
+      style={styles.textInput}
+      password={password} />
   </View>
 
-const SignupForm = ({ handleSubmit, submitting, navigation }) =>
+const SignupSuccessForm = ({ handleSubmit, submitting }) =>
   <View onSubmit={handleSubmit} style={styles.signupScreen}>
-    <SignupField name='name' autoFocus autoCapitalize='words' keyboardType='default' label='Name' />
-    <SignupField name='phone' keyboardType='phone-pad' label='Phone' />
-    <SignupField name='password' keyboardType='default' label='Password' />
+    <SignupField name='name' keyboardType='default' autoCapitalize='words' label='Full name' autoFocus />
+    <SignupField name='password' keyboardType='default' label='Password' password />
     <Text style={{fontSize: 12, padding: 10, paddingLeft: 20,}}>Password must include at least six characters and one number</Text>
   </View>
 
+const onSubmit = (values, dispatch) =>
+  dispatch(onSignupSubmit(values))
+
 export default reduxForm({
   form: 'signup',
-  onSubmit: onSignupSubmit
-})(SignupForm)
+  onSubmit
+})(SignupSuccessForm)

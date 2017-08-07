@@ -22,10 +22,11 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
     color: Colors.teal,
   },
-  tinafey: {
-    padding: 30,
-    fontSize: 18,
-    alignSelf: 'center',
-    color: Colors.lightBlue,
-  }
+  centered: {
+    alignItems: 'center'
+  },
+  icon: {
+    width: 26,
+    height: 26,
+  },
 })

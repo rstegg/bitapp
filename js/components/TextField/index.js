@@ -5,30 +5,27 @@ import {
   Platform
 } from 'react-native'
 
-import { MKTextField } from 'react-native-material-kit'
+import { TextField } from 'react-native-material-textfield'
 import ErrorMessage from 'components/ErrorMessage'
 
-export default class TextField extends Component {
+export default class BitTextField extends Component {
   focus() {
     this.refs.defaultInput.focus()
   }
   render() {
-    const { label, style, underlineEnabled, textInputStyle, onSubmitEditing, meta: { touched, error, }, ...rest } = this.props
-    let underlineSize = underlineEnabled ? 1 : 0
+    const { label, multiline, style, underlineEnabled, textInputStyle, onSubmitEditing, input, meta: { touched, error, }, ...rest } = this.props
     return (
       <View>
-        <MKTextField
+        <TextField
           ref='defaultInput'
+          {...input}
           {...rest}
-          floatingLabelEnabled={true}
-          underlineEnabled={underlineEnabled}
-          underlineSize={underlineSize}
-          returnKeyType={onSubmitEditing ? 'next' : 'done'}
+          returnKeyLabel={onSubmitEditing ? 'next' : 'done'}
           textInputStyle={[styles.textInput, textInputStyle]}
           tintColor='#aaa'
-          style={[styles.textInputContainer, Platform.select({ios: styles.textInputContainerIos}), style]}
-          placeholder={label}
-          floatingLabelFont={styles.floatingLabel}
+          label={label}
+          multiline={multiline}
+          labelTextStyle={styles.floatingLabel}
           highlightColor='#aaa'
         />
         {touched && error && <ErrorMessage error={error} />}

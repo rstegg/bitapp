@@ -17,7 +17,15 @@ export default class Loader extends Component {
 const styles = StyleSheet.create({
   spinner: {
     position: 'absolute',
-    bottom: Metrics.ScreenHeight / 2,
-    left: Metrics.ScreenWidth / 2 - 10,
+    width: 25,
+    height: 25,
+    borderRadius: 25,
+    borderTopWidth: 2,
+    borderTopColor: Colors.bloodOrange,
+    borderRightWidth: 2,
+    borderRightColor: Colors.bloodOrange,
+    backgroundColor: 'transparent',
+    bottom: Metrics.screenHeight / 2,
+    left: Metrics.screenWidth / 2 - 25
   },
 })

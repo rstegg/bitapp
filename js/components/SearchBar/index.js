@@ -28,7 +28,7 @@ export default class SearchBar extends Component {
           onChangeText={onSearch}
           autoCapitalize='none'
           onSubmitEditing={onSubmitEditing}
-          returnKeyType={'search'}
+          returnKeyLabel={'search'}
           autoCorrect={false}
           selectionColor={Colors.snow}
         />

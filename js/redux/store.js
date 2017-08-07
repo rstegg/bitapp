@@ -1,29 +1,30 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { autoRehydrate } from 'redux-persist'
-import DebugConfig from 'config/Debug'
+import { autoRehydrate, persistStore } from 'redux-persist'
 import { createEpicMiddleware } from 'redux-observable'
-import RehydrationServices from 'services/Rehydration'
-import ReduxPersist from 'config/ReduxPersist'
-import ScreenTracking from 'services/ScreenTrack'
+import { AsyncStorage } from 'react-native'
+import { composeWithDevTools } from 'remote-redux-devtools'
+
+const persistConfig = {
+  storage: AsyncStorage,
+  blacklist: []
+}
+
+const composeEnhancers = composeWithDevTools({ realtime: true })
 
 export default (rootReducer, rootEpic) => {
-  const enhanceStore = DebugConfig.useReactotron ? console.tron.createStore : createStore
   const epicMiddleware = createEpicMiddleware(rootEpic)
 
-  const store = enhanceStore(
+  const store = createStore(
     rootReducer,
-    compose(
+    composeEnhancers(
       applyMiddleware(
-        ScreenTracking,
         epicMiddleware
       ),
       autoRehydrate()
     )
   )
 
-  if (ReduxPersist.active) {
-    RehydrationServices.updateReducers(store)
-  }
+  persistStore(store, persistConfig)
 
   return store
 

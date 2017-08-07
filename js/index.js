@@ -7,12 +7,9 @@ import createStore from './redux'
 
 const store = createStore()
 
-export default class BitKit extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <RootContainer />
-      </Provider>
-    )
-  }
-}
+const BitKit = () =>
+  <Provider store={store}>
+    <RootContainer />
+  </Provider>
+
+export default BitKit

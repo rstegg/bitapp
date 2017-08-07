@@ -11,7 +11,9 @@
     "react": "16.0.0-alpha.12",
     "react-native": "0.47.1",
     "react-native-animatable": "^1.2.3",
+    "react-native-image-picker": "^0.26.3",
     "react-native-material-kit": "^0.4.1",
+    "react-native-material-textfield": "^0.8.3",
     "react-native-vector-icons": "^4.3.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
@@ -29,7 +31,8 @@
     "jest": "20.0.4",
     "react-test-renderer": "16.0.0-alpha.12",
     "reactotron-react-native": "^1.12.2",
-    "reactotron-redux": "^1.12.2"
+    "reactotron-redux": "^1.12.2",
+    "remote-redux-devtools": "^0.5.12"
   },
   "jest": {
     "preset": "react-native"

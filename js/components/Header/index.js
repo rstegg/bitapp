@@ -24,27 +24,27 @@ export default Header = ({left, center, right, style}) => {
 
 Header.Logo = () => <Image source={Images.logo} style={styles.logo} resizeMode='contain'/>
 
-Header.Text = ({style, children}) =>
+Header.Text = ({ style, children }) =>
   <View style={{justifyContent: 'center', marginTop: 16,}}>
     <Text numberOfLines={1} style={styles.headerText}>{children}</Text>
   </View>
 
-Header.MenuButton = (_, {drawer}) =>
-  <TouchableOpacity onPress={drawer.open} style={styles.menuButton}>
+Header.MenuButton = ({ openDrawer }) =>
+  <TouchableOpacity onPress={openDrawer} style={styles.menuButton}>
     <Image source={Images.hamburger} style={styles.imageButton} resizeMode='contain' />
   </TouchableOpacity>
 
-Header.HomeButton = ({to}) =>
+Header.HomeButton = ({ to }) =>
    <TouchableOpacity onPress={to} style={styles.iconButton}>
         <Image source={Images.home} style={styles.imageButton} resizeMode='contain' />
     </TouchableOpacity>
 
-Header.ViewButton = ({to}) =>
+Header.ViewButton = ({ to }) =>
    <TouchableOpacity onPress={to} style={styles.iconButton}>
         <IonIcon name='android-open' style={styles.viewButton} size={28} />
     </TouchableOpacity>
 
-Header.BackButton = ({to, text}) =>
+Header.BackButton = ({ to, text }) =>
   <TouchableOpacity onPress={to} style={styles.navButton}>
     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
       <Image source={Images.backButton} style={styles.backButton} resizeMode='contain' />
@@ -52,14 +52,14 @@ Header.BackButton = ({to, text}) =>
     </View>
   </TouchableOpacity>
 
-Header.CloseButton = ({to, buttonStyle}) =>
+Header.CloseButton = ({ to, buttonStyle }) =>
    <TouchableOpacity onPress={to} style={styles.navButton}>
       <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 10, paddingBottom: 15,}}>
         <Text style={[styles.linkText, {fontSize: 30, textAlign: 'left'}, buttonStyle]}>&times</Text>
       </View>
     </TouchableOpacity>
 
-Header.TextButton = ({text, onPress, isLoading}) =>
+Header.TextButton = ({ text, onPress, isLoading }) =>
   <ActionButton onPress={onPress} style={styles.navButton} isLoading={isLoading || false} textStyle={styles.linkText}>
     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', padding: 10}}>
       { (text) ? <Text numberOfLines={1} style={styles.linkText}>{text}</Text> : <View/> }

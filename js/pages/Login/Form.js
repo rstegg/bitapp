@@ -9,7 +9,7 @@ import { onLoginSubmit } from 'actions/login'
 
 import styles from './Styles'
 
-const LoginField = ({ name, autoFocus, keyboardType, label, forgotButton }) =>
+const LoginField = ({ name, autoFocus, keyboardType, label, password, forgotButton }) =>
   <View style={styles.inputGroup}>
     <Field
       component={TextField}
@@ -19,7 +19,8 @@ const LoginField = ({ name, autoFocus, keyboardType, label, forgotButton }) =>
       autoCapitalize='none'
       keyboardType={keyboardType}
       label={label}
-      style={styles.textInput} />
+      style={styles.textInput}
+      password={password} />
       {forgotButton}
   </View>
 
@@ -29,7 +30,7 @@ const ForgotButton = ({ onPress }) =>
 const LoginForm = ({ handleSubmit, submitting, navigation }) =>
   <View onSubmit={handleSubmit} style={styles.loginScreen}>
     <LoginField name='phone' autoFocus onSubmitEditing={() => focusField('password')} keyboardType='phone-pad' label='Phone' />
-    <LoginField name='password' keyboardType='default' label='Password'
+    <LoginField name='password' keyboardType='default' label='Password' password
       forgotButton={<ForgotButton onPress={() => navigation.navigate('ForgotScreen')}/>} />
   </View>
 
