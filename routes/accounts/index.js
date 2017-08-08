@@ -3,6 +3,7 @@ const newAddress = require('./requestPayment')
 const checkAddressBalance = require('./checkAddressBalance')
 const checkWalletBalance = require('./checkWalletBalance')
 const getAccountAddresses = require('./getAccountAddresses')
+const spend = require('./spend')
 module.exports = {
   newAccount : (req, res, next) => {
     create()
@@ -32,4 +33,12 @@ module.exports = {
    checkWalletBalance(accountId, currency)
    .then(x => res.json(x))
    .catch(next)
-}}
+  },
+
+  spend: (req, res, next) =>{
+   const {accountId, currency, amountUSD, address} = req.params
+   spend(accountId, currency, address, amountUSD)
+   .then(x => res.json(x))
+   .catch(next)
+  }
+}

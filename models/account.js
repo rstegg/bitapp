@@ -20,6 +20,7 @@ const nextDerivation =
     R.inc
   )
 
+console.log(coins['LTC'])
 const derive = R.curry(
   (xpriv, currency,  derivation) =>
     coins[currency].deriveAddress(xpriv, derivation))

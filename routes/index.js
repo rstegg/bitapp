@@ -7,6 +7,6 @@ module.exports = function setup (app) {
   app.get('/accounts/:accountId/balance/:currency/:address', accounts.checkAddressBalance)
   app.get('/accounts/:accountId/balance/:currency', accounts.checkWalletBalance)
   app.get('/accounts/:accountId/addresses/:currency', accounts.getAccountAddresses)
+  app.get('/accounts/:accountId/send/:currency/:address/:amountUSD', accounts.spend)
 
-  // app.post('/accounts/:accid/send/:currency/:address/:amountUSD')
 }
