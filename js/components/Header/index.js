@@ -8,7 +8,7 @@ import { Images } from 'themes'
 import ActionButton from 'components/ActionButton'
 import Text from 'components/BitKitText'
 
-import { IonIcon } from 'react-native-vector-icons'
+import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import styles from './Styles'
 

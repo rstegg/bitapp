@@ -8,7 +8,7 @@ import {
 
 import { Colors } from 'themes'
 
-import { IonIcon } from 'react-native-vector-icons'
+import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import Text from 'components/BitKitText'
 
@@ -28,7 +28,7 @@ export default class ListRow extends Component {
   }
 
   formatDate(dateStr) {
-    const formatter = new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" })
+    const formatter = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric' })
     return formatter.format(new Date(dateStr))
   }
 
@@ -46,7 +46,7 @@ export default class ListRow extends Component {
             </View>
           </View>
           <TouchableOpacity style={styles.options} onPress={this.props.onOptionsBtnPress}>
-            <IonIcon name="android-more-horizontal" style={styles.optionsIcon} />
+            <IonIcon name='android-more-horizontal' style={styles.optionsIcon} />
           </TouchableOpacity>
         </View>
         </TouchableOpacity>
