@@ -87,7 +87,7 @@ export default (state = initialState, action) => {
       return { ...state, activeItem: { ...state.activeItem, isImageLoading: false } }
 
     case 'DELETE_ITEM':
-      return { ...state, itemsList: { isLoading: false, items: state.itemsList.items.filter((item) => item.id != action.item.id) } }
+      return { ...state, itemsList: { isLoading: false, items: state.itemsList.items.filter(item => item.id != action.item.id) } }
 
     default:
       return state

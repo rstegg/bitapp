@@ -22,7 +22,7 @@ const ListRow = ({ product }) =>
           </View>
         </View>
         <TouchableOpacity style={styles.options} onPress={this.props.onOptionsBtnPress}>
-          <IonIcon name='android-more-horizontal' style={styles.optionsIcon} />
+          <IonIcon name='md-more' style={styles.optionsIcon} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

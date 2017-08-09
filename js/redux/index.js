@@ -8,6 +8,7 @@ import tab from './reducers/tab'
 import user from './reducers/user'
 import items from './reducers/items'
 import products from './reducers/products'
+import orders from './reducers/orders'
 
 import authEpics from './epics/auth'
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user,
   items,
   products,
+  orders,
   nav,
   tab,
   form: formReducer

@@ -24,7 +24,7 @@ export default (rootReducer, rootEpic) => {
     )
   )
 
-  persistStore(store, persistConfig)
+  persistStore(store, persistConfig).purge()
 
   return store
 

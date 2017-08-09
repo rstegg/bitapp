@@ -39,9 +39,9 @@ Header.HomeButton = ({ to }) =>
         <Image source={Images.home} style={styles.imageButton} resizeMode='contain' />
     </TouchableOpacity>
 
-Header.ViewButton = ({ to }) =>
+Header.CartButton = ({ to }) =>
    <TouchableOpacity onPress={to} style={styles.iconButton}>
-        <IonIcon name='android-open' style={styles.viewButton} size={28} />
+        <IonIcon name='ios-cart-outline' style={styles.viewButton} size={28} />
     </TouchableOpacity>
 
 Header.BackButton = ({ to, text }) =>

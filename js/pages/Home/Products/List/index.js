@@ -138,14 +138,14 @@ const mapStateToProps = ({ products }) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchProducts: () => dispatch(fetchProducts()),
-  setActiveProduct: (product) => dispatch(setActiveProduct(product)),
-  deleteProduct: (product) => {
+  setActiveProduct: product => dispatch(setActiveProduct(product)),
+  deleteProduct: product => {
     Alert.alert(product.name, 'Are you sure you want to delete this product?', [
-      { text: 'Yes', onPress: () => { dispatch(deleteProduct(product)) } },
+      { text: 'Yes', onPress: () => dispatch(deleteProduct(product)) },
       { text: 'No' },
     ])
   },
-  duplicateProduct: (product) => dispatch(duplicateProduct(product))
+  duplicateProduct: product => dispatch(duplicateProduct(product))
 })
 
 export default connect(

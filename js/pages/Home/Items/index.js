@@ -32,7 +32,8 @@ class Items extends Component {
       <View style={styles.container}>
         <Header
           left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
-          center={<Header.Logo />} />
+          center={<Header.Logo />}
+          right={<Header.CartButton to={() => navigation.navigate('CheckoutReviewScreen')}/>} />
           <View style={styles.section}>
             <View style={styles.centered}>
               <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
