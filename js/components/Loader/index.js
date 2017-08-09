@@ -10,13 +10,12 @@ export default class Loader extends Component {
       ref='loader'
       animation='rotate'
       iterationCount='infinite'
-      style={this.props.style || styles.spinner} color={this.props.color || Colors.cloud}/>
+      style={[this.props.style || styles.fullScreenLoader, styles.spinner]} color={this.props.color || Colors.cloud} />
   }
 }
 
 const styles = StyleSheet.create({
   spinner: {
-    position: 'absolute',
     width: 25,
     height: 25,
     borderRadius: 25,
@@ -25,7 +24,10 @@ const styles = StyleSheet.create({
     borderRightWidth: 2,
     borderRightColor: Colors.bloodOrange,
     backgroundColor: 'transparent',
+  },
+  fullScreenLoader: {
+    position: 'absolute',
     bottom: Metrics.screenHeight / 2,
     left: Metrics.screenWidth / 2 - 25
-  },
+  }
 })

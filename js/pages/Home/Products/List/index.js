@@ -4,20 +4,19 @@ import {
   Alert,
   Image,
   ListView,
-  StyleSheet,
   View
 } from 'react-native'
 import { connect } from 'react-redux'
 
 import Text from 'components/BitKitText'
-import Header from 'components/Header'
 import Loader from 'components/Loader'
 
 import { fetchProducts, setActiveProduct, duplicateProduct, deleteProduct } from 'actions/products'
 
-import { Images, Colors, Metrics } from 'themes'
+import { Images } from 'themes'
 
 import ListRow from './ListRow'
+import styles from './Styles'
 
 const OPTIONS = [
   'Edit',
@@ -67,12 +66,12 @@ class List extends Component {
       <View style={styles.intro}>
         <View style={styles.introTextContainer}>
           <Text style={styles.introText}>
-            You don&rsquo;t have
+            You don&rsquot have
           </Text>
           <Text style={styles.introText}>
             any collections
           </Text>
-          <Image source={Images.faq} style={{width: 100, height: 100, marginTop: 20,}} resizeMode='contain' />
+          <Image source={Images.faq} style={styles.introImage} resizeMode='contain' />
         </View>
         <View style={styles.introContent}>
           <Text style={styles.introDescription}>
@@ -127,51 +126,7 @@ class List extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-  },
-  list: {
-    flexGrow: 1,
-    paddingTop: 10,
-    marginHorizontal: 10,
-  },
-  duplicateLoading: {
-    position: 'absolute',
-    left: Metrics.screenWidth/4,
-    marginTop: 40,
-    fontSize: 24,
-  },
-  intro: {
-    position: 'absolute',
-    bottom: 100,
-    left: 0,
-    right: 0,
-  },
-  introTextContainer: {
-    marginBottom: Metrics.screenHeight / 5,
-    alignItems: 'center',
-  },
-  introText: {
-    color: Colors.darkGrey,
-    fontSize: 24,
-  },
-  introContent: {
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
-  introDescription: {
-    fontSize: 18,
-    color: Colors.orange,
-    textAlign: 'center',
-  },
-  arrow: {
-    height: 25,
-  }
-
-})
-
-const dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
 const mapStateToProps = ({ products }) =>
 ({
@@ -186,13 +141,14 @@ const mapDispatchToProps = dispatch =>
   setActiveProduct: (product) => dispatch(setActiveProduct(product)),
   deleteProduct: (product) => {
     Alert.alert(product.name, 'Are you sure you want to delete this product?', [
-      {text: 'Yes', onPress: () => { dispatch(deleteProduct(product)) } },
-      {text: 'No'},
+      { text: 'Yes', onPress: () => { dispatch(deleteProduct(product)) } },
+      { text: 'No' },
     ])
   },
   duplicateProduct: (product) => dispatch(duplicateProduct(product))
 })
 
-List = connect(mapStateToProps, mapDispatchToProps)(List)
-
-export default List
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List)

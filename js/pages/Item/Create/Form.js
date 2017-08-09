@@ -11,23 +11,25 @@ import { onCreateItemSubmit } from 'actions/items'
 
 import styles from './Styles'
 
-const CreateItemField = ({ name, autoFocus, label, multiline }) =>
-  <View style={styles.inputGroup}>
+const CreateItemField = ({ name, autoFocus, label, multiline, lines, style, inputStyle, ...rest }) =>
+  <View style={[styles.inputGroup, style]}>
     <Field
       component={TextField}
       name={name}
+      {...rest}
       autoFocus={autoFocus}
-      numberofLines={1}
-      autoCapitalize='none'
+      numberofLines={lines}
       label={label}
+      style={style}
       multiline={multiline}
-      style={styles.textInput} />
+      containerStyle={inputStyle}
+      underlineColor='red' />
   </View>
 
 const CreateItemForm = ({ handleSubmit, submitting }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
-    <CreateItemField name='name' label='Name' autoFocus />
-    <CreateItemField name='description' label='Description' multiline />
+    <CreateItemField name='name' label='Name' autoFocus lines={1} autoCapitalize='words' />
+    <CreateItemField name='description' label='Description' multiline lines={4} style={{height: 200, borderBottomWidth: 0}} inputStyle={{borderBottomWidth: 0}} autoCapitalize='sentences' borderBottomWidth={0} />
   </View>
 
 export default reduxForm({

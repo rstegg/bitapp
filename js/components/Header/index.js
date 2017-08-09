@@ -60,7 +60,7 @@ Header.CloseButton = ({ to, buttonStyle }) =>
     </TouchableOpacity>
 
 Header.TextButton = ({ text, onPress, isLoading }) =>
-  <ActionButton onPress={onPress} style={styles.navButton} isLoading={isLoading || false} textStyle={styles.linkText}>
+  <ActionButton onPress={onPress} style={styles.navButton} isLoading={isLoading} textStyle={styles.linkText}>
     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', padding: 10}}>
       { (text) ? <Text numberOfLines={1} style={styles.linkText}>{text}</Text> : <View/> }
     </View>

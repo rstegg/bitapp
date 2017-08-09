@@ -5,7 +5,7 @@ import {
   Platform
 } from 'react-native'
 
-import { TextField } from 'react-native-material-textfield'
+import TextField from './field'
 import ErrorMessage from 'components/ErrorMessage'
 
 export default class BitTextField extends Component {
@@ -21,7 +21,7 @@ export default class BitTextField extends Component {
           {...input}
           {...rest}
           returnKeyLabel={onSubmitEditing ? 'next' : 'done'}
-          textInputStyle={[styles.textInput, textInputStyle]}
+          style={[styles.textInput, style, textInputStyle]}
           tintColor='#aaa'
           label={label}
           multiline={multiline}

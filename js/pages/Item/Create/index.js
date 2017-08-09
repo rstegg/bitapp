@@ -70,7 +70,7 @@ class CreateItem extends Component {
     this.refs[nextField].focus()
   }
   render() {
-    const { item, createItem, saveItem, isLoading, navigation } = this.props
+    const { user, item, createItem, saveItem, isLoading, navigation } = this.props
     if(this.state.renderPlaceholderOnly) {
       return <Loader />
     }
@@ -107,12 +107,13 @@ const mapStateToProps = ({ user, items }) =>
   errors: items.newItem.errors,
   isLoading: items.newItem.isLoading,
   isImageLoading: items.newItem.isImageLoading,
-  item: items.newItem
+  item: items.newItem,
+  user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  onSubmit: () => dispatch(submit('createItem')),
+  saveItem: () => dispatch(submit('createItem')),
   createItem: (item, user) => dispatch(createItem(item, user)),
   uploadNewItemImage: (image, user) => dispatch(uploadNewItemImage(image, user)),
   removeNewItemImage: (item, user) => dispatch(removeNewItemImage(item, user)),

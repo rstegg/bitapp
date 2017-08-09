@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, View } from 'react-native'
+import { Image, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 
@@ -38,6 +38,9 @@ class Products extends Component {
             </View>
           </View>
           <ProductsList />
+          <TouchableOpacity onPress={() => navigation.navigate('CreateProductScreen')}>
+            <Text>Create a product</Text>
+          </TouchableOpacity>
       </View>
     )
   }
