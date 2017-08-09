@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
 import { Images } from 'themes'
-
+import { NavigationActions } from 'react-navigation'
 import styles from './Styles'
 
 const LaunchScreen = ({ navigation }) =>
@@ -18,7 +18,12 @@ const LaunchScreen = ({ navigation }) =>
         <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('LoginScreen')}>
           <Image source={Images.loginButton} style={styles.buttonImage}  />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('HomeScreen')}>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.dispatch(NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'HomeScreen'})
+          ]
+        }))}>
           <Image source={Images.home} style={styles.buttonImage}  />
         </TouchableOpacity>
       </View>
