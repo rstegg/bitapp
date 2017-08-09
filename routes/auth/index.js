@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const passport = require('passport')
-const { prop, path, isNil } = require('ramda')
+const { path, isNil } = require('ramda')
 
 const login = require('./login')
 const signup = require('./signup')
