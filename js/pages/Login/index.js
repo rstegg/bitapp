@@ -12,13 +12,13 @@ import { Colors } from 'themes'
 import styles from './Styles'
 import LoginForm from './Form'
 
-const Login = ({ isLoading, navigation }) =>
+const Login = ({ isLoading, navigation, onSubmit }) =>
   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Header
         left={<Header.TextButton text='Cancel' onPress={isLoading ? null : () => navigation.goBack()}/>}
         center={<Header.Logo />}
-        right={<Header.TextButton text='Sign In' isLoading={isLoading} onPress={isLoading ? null : () => this.props.onSubmit()} />} />
+        right={<Header.TextButton text='Sign In' isLoading={isLoading} onPress={isLoading ? null : () => onSubmit()} />} />
       <LoginForm navigation={navigation} />
     </View>
   </TouchableWithoutFeedback>
