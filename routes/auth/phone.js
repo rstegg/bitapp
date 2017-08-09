@@ -1,15 +1,36 @@
 const Models = require('../../models')
 const twilio = require('../../services/twilio')
+const { length } = require('ramda')
 
-const shortId = require('shortid')
+
+const validatePhone = p =>
+  new Promise((resolve, reject) => {
+    const phone = p.trim().replace(/^\D+/g, '').replace(/ /g,'')
+    if(phone.startsWith('1')) {
+      if(length(phone) === 11) {
+        resolve('+' + phone)
+      }
+      reject('bad number')
+    }
+    if(length(phone) === 10) {
+      resolve('+1' + phone)
+    }
+    reject('bad number')
+  })
+
+
 
 module.exports = (req, res) =>
-  Models.User.create({ phone: req.body.phone, verifyCode: shortId.generate() })
-    .then(user =>
+  validatePhone(req.body.phone)
+    .then(phone =>
+      Models.User.create({ phone, verifyCode: Math.floor(1000 + Math.random() * 9000) })
+    )
+    .then(user => {
       twilio.messages.create({
-        body: 'Hello from Node',
-        to: '+19519922715',  // Text this number
+        body: `Your code is: ${user.verifyCode}`,
+        to: user.phone,  // Text this number
         from: '+19092459291' // From a valid Twilio number
       })
-    )
-    .catch(err => console.log(err))
+      return res.json({ phone: req.body.phone })
+    })
+    .catch(err => res.status(400).json({errors: err}))

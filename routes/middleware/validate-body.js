@@ -1,5 +1,3 @@
-module.exports = (validator, error = "Invalid Body") => (req, res, next) => {
-   if (!validator(req.body)) return res.status(400).json({error})
-
-   return next()
-}
+module.exports = (validator, error = 'Invalid Body') => (req, res, next) =>
+  !validator(req.body) ? res.status(400).json({ error })
+    : next()

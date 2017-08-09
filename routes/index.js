@@ -5,7 +5,7 @@ const auth = require('./auth')
 
 module.exports =
   router
-    .use('/auth', auth.phone)
+    .use('/auth', auth)
     .get('/accounts/new', accounts.newAccount)
     .get('/accounts/:accountId/request/:currency/:amountUSD', accounts.requestPayment)
     .get('/accounts/:accountId/balance/:currency/:address', accounts.checkAddressBalance)

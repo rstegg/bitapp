@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ."
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +13,7 @@
     "baconjs": "^0.7.95",
     "bitcore-lib": "^0.14.0",
     "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.2",
@@ -26,5 +28,8 @@
     "shortid": "^2.2.8",
     "superagent": "^3.5.2",
     "twilio": "^3.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
