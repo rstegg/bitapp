@@ -20,7 +20,6 @@ const nextDerivation =
     R.inc
   )
 
-console.log(coins['LTC'])
 const derive = R.curry(
   (xpriv, currency,  derivation) =>
     coins[currency].deriveAddress(xpriv, derivation))
@@ -47,7 +46,7 @@ module.exports = function(sequelize, DataTypes) {
   Account.prototype.nextAddress =
     function (currency) {
       const {Address} = require('./index')
-      const xpriv = this[selector[currency]]
+      const xpriv = this.getXpriv(currency)
       const accountId = this.id
       return lastDerivation(currency, accountId)
       .then(nextDerivation)
@@ -57,6 +56,8 @@ module.exports = function(sequelize, DataTypes) {
         return Address.create({address, currency, derivation, accountId})
       })
     }
-
+  Account.prototype.getXpriv = function (currency) {
+    return this[selector[currency]]
+  };
   return Account;
 };

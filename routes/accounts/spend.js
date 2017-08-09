@@ -7,72 +7,111 @@ const Bacon = require('baconjs')
 
 const sumBalances = (prev, current) => {
   return {
-    balance: prev.balance + current.balance,
-    addresses: R.append(current.address, prev.addresses)
+    balance:  current.balance + prev.balance,
+    addresses: R.append(current, prev.addresses)
   }
 }
+
 const amountProperty = (currency, amountUSD) =>{
   return Bacon.fromPromise(convert(currency, amountUSD))
 }
+/**
+ * Gets an array of private keys needed to sign the transacion
+ * @return {Array PrivateKeys} the array of private keys
+ */
+
+ const getPrivateKeys = R.curry((currency, balance, xpriv) => {
+  const derivations = R.map(R.prop('derivation'), balance.addresses)
+  const derivedKeys = coins[currency].derivePrivKeys(xpriv, derivations)
+  const privateKeys = R.map(R.prop('privateKey'), derivedKeys)
+  return R.merge(balance, {privateKeys})
+})
 
 // get balances until you have enough to cover a spend
+// it would be nice to have a way to query for the
+// if you find it odd to have it as streams is because I will
+// later change this to make the query a stream itself
+
+const attachBalance = R.curry((getBalance, address) =>
+  Bacon.fromPromise(
+    getBalance(address.address)
+    .then(R.merge(address))))
+
+// balanceStream :: Currency -> Promise Array Address -> Float
+// -> Stream Object {balance: Number, addresses:[Address], total: Number }
 const balanceStream = (currency, addresses, amount) =>{
+
   const runningTotal = Bacon.fromPromise(addresses)
     .flatMap(Bacon.fromArray)
-    .flatMap((address)=>Bacon.fromPromise(coins[currency].checkBalance(address.address)))
+    .flatMap(attachBalance(coins[currency].checkBalance))
     .map(R.evolve({confirmed: parseFloat, unconfirmed: parseFloat}))
-    .map(R.applySpec({
-      balance: ({confirmed, unconfirmed}) => confirmed + unconfirmed,
-      address: R.prop('address')
-    }))
+    .map((balance) =>
+      R.merge(balance, {balance: balance.confirmed + balance.unconfirmed}))
+    .filter(({balance}) => balance > 0)
     .scan( {balance: 0, addresses: []}, sumBalances)
-
   return amount
-    .combine(runningTotal, (amount, total) => R.merge(total, {amount}))
-    .takeWhile(({amount, balance}) => balance < amount)
-    .last()
+    .map(R.objOf("amount"))
+    .combine(runningTotal, R.merge)
+    .filter(({amount, balance}) => balance > amount)
+    .take(1)
 }
+
+const finalize = (notEnoughBalance, processingPayment) =>
+  new P.Promise((resolve, reject) => {
+
+  notEnoughBalance.onValue((total) =>
+    resolve(R.merge(total, {
+      message: "You don't have enough balance to pay that amount",
+      status: "error"
+    })))
+
+  processingPayment.onValue((total)=>
+    resolve(R.merge(total, {
+      message: "Processing payment",
+      status: "success"
+      })))
+  })
+
+const getChangeAddress = (currency, account) =>
+  (balance) =>
+    Bacon.fromPromise(
+      account
+      .then((account) => account.nextAddress(currency))
+      .then((address) => address.address)
+      .then(R.objOf('change'))
+      .then(R.merge(balance)))
+
 module.exports = (accountId, currency, address,  amountUSD) => {
   // get addresses for an account
   const addresses = models.Address
     .findAll({where:{accountId, currency }, raw: true })
 
+  const account = models.Account
+    .findOne({where:{id: accountId }})
 
-  const change = Bacon.fromPromise(
-    models.Account
-      .findOne({where:{id: accountId }})
-      .then((account) => account.nextAddress(currency))
-      .then((address) => address.address)
-      .then(R.objOf('change')))
+  const xpriv = Bacon.fromPromise(account)
+    .map((acc) => acc.getXpriv(currency))
 
+  const change = getChangeAddress(currency, account)
   const amount = amountProperty(currency, amountUSD)
   const balance = balanceStream(currency, addresses, amount)
 
   const notEnoughBalance =  balance.filter(
-    total => (total.balance > total.amount))
-
-  const processingPayment = balance.filter(
     total => (total.balance < total.amount))
+
+  const processingPayment =
+    balance.filter(total => (total.balance > total.amount))
     .map(R.assoc("address", address))
-    .combine(change, R.merge)
-
-    // need to query for privatekeys
-
-  return new P.Promise(function (resolve, reject) {
-    notEnoughBalance.onValue((total)=>{
-      resolve(R.merge(total, {
-        message: "You don't have enough balance to pay that amount",
-        status: "error"
-      }))
-    })
-
-    processingPayment.onValue((total)=>{
-      resolve(R.merge(total, {
-        message: "Processing payment",
-        status: "success"
-      }))
-    })
-  })
-    // get a change address
-    // get utxos for the addresses with balance
+    .flatMap(change)
+    .combine(xpriv, getPrivateKeys(currency))
+    .map(R.evolve({
+      addresses: R.map(R.prop('address'))
+    }))
+    .map(coins[currency].spend)
+    .flatMap(Bacon.fromPromise)
+    .map((tx) => tx.serialize())
+    .log()
+    .map(coins[currency].broadcast)
+    .flatMap(Bacon.fromPromise)
+  return finalize(notEnoughBalance, processingPayment)
 }

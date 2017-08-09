@@ -1,3 +1,4 @@
-const BTC  = require('./bitcoin')
-const LTC  = require('./litecoin')
+const api = require('./bitcoin')
+const BTC  = api('BTC')
+const LTC  = api('LTC')
 module.exports = { BTC, LTC}

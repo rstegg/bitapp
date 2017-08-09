@@ -18,6 +18,7 @@ const convert = require('../../coins/convert');
 module.exports = (account, currency, amountUSD) => {
     const address =  models.Account.findOne({where: {id: account}})
     .then((acc)=> acc.nextAddress(currency))
+
     const amount = convert(currency, amountUSD)
     return P.join(amount, address,
       (amount, address) => {
