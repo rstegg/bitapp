@@ -20,13 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     },
-    verifyCode: DataTypes.STRING,
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        is: ["^[a-z]+$",'i'],
-      }
+    verifyCode: DataTypes.STRING
     }
   })
 
