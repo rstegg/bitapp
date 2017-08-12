@@ -1,10 +1,8 @@
 const Models = require('../../models')
-const twilio = require('../../services/twilio')
-
-const shortId = require('shortid')
+const { User } = Models
 
 module.exports = (req, res) =>
-  Models.User.update(
+  User.update(
     { verified: true },
     { where: { phone: req.body.phone, verifyCode: req.body.code, verified: false }}
   )

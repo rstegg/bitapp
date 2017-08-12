@@ -1,5 +1,4 @@
 const Models = require('../../models')
-const twilio = require('../../services/twilio')
 
 module.exports = (req, res) =>
   Models.User.update(
