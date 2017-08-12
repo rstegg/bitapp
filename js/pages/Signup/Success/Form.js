@@ -31,8 +31,8 @@ const SignupSuccessForm = ({ handleSubmit, submitting }) =>
     <Text style={{fontSize: 12, padding: 10, paddingLeft: 20,}}>Password must include at least six characters and one number</Text>
   </View>
 
-const onSubmit = (values, dispatch) =>
-  dispatch(onSignupSubmit(values))
+const onSubmit = ({ name, password }, dispatch) =>
+  dispatch(onSignupSubmit({ name, password }))
 
 export default reduxForm({
   form: 'signup',

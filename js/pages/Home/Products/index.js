@@ -33,15 +33,12 @@ class Products extends Component {
           left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
           center={<Header.Logo />}
           right={<Header.CartButton to={() => navigation.navigate('CheckoutReviewScreen')}/>} />
-          <View style={styles.section}>
-            <View style={styles.centered}>
-              <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
-            </View>
+        <View style={styles.section}>
+          <View style={styles.centered}>
+            <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
           </View>
-          <ProductsList />
-          <TouchableOpacity onPress={() => navigation.navigate('CreateProductScreen')}>
-            <Text>Create a product</Text>
-          </TouchableOpacity>
+        </View>
+        <ProductsList navigation={navigation} />
       </View>
     )
   }

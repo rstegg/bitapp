@@ -1,18 +1,22 @@
 import { combineEpics } from 'redux-observable'
 import { onLoginSuccess, onLoginFailure } from '../actions/login'
-import { onSignupSuccess, onSignupFailure } from '../actions/signup'
+import { onSignupSuccess, onSignupPhoneSuccess, onSignupVerifySuccess, onSignupFailure } from '../actions/signup'
 import { path } from 'ramda'
 import { Observable } from 'rxjs'
 
-import { post } from './helpers/req'
+import { openPost } from './helpers/req'
 
 const getError = path([ 'response', 'text', 'error' ])
 
 const api = {
   login: ({ username, password }) =>
-    post('auth/login', { username, password }),
+    openPost('auth/login', { username, password }),
   signup: ({ user }) =>
-    post('auth/signup', { user })
+    openPost('auth/signup', { user }),
+  phone: ({ phone }) =>
+    openPost('auth/phone', { phone }),
+  verify: ({ code }) =>
+    openPost('auth/verify', { code })
 }
 
 const onLoginSubmit = action$ =>
@@ -35,7 +39,29 @@ const onSignupSubmit = action$ =>
         ))
       )
 
+const onSignupPhoneSubmit = action$ =>
+  action$.ofType('SIGNUP_PHONE_SUBMIT')
+    .mergeMap(action =>
+      api.phone(action.payload)
+        .map(onSignupPhoneSuccess)
+        .catch(res => Observable.of(
+          onSignupFailure(getError(res))
+        ))
+      )
+
+const onSignupVerifySubmit = action$ =>
+  action$.ofType('SIGNUP_VERIFY_SUBMIT')
+    .mergeMap(action =>
+      api.verify(action.payload)
+        .map(onSignupVerifySuccess)
+        .catch(res => Observable.of(
+          onSignupFailure(getError(res))
+        ))
+      )
+
 export default combineEpics(
   onLoginSubmit,
-  onSignupSubmit
+  onSignupSubmit,
+  onSignupPhoneSubmit,
+  onSignupVerifySubmit
 )

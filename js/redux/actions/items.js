@@ -120,13 +120,13 @@ export const uploadNewItemImage = (image, user) =>
   payload: { image, user }
 })
 
-export const onUploadNewItemImageSuccess = res =>
+export const uploadNewItemImageSuccess = res =>
 ({
   type: 'UPLOAD_NEW_ITEM_IMAGE_SUCCESS',
   payload: { image: res.body.image }
 })
 
-export const onUploadNewItemImageFailure = res =>
+export const uploadNewItemImageFailure = res =>
 ({
   type: 'UPLOAD_NEW_ITEM_IMAGE_FAILURE',
   payload: { errors: res.body.errors }
@@ -154,13 +154,13 @@ export const uploadActiveItemImage = (image, user) =>
   payload: { image, user }
 })
 
-export const onUploadActiveItemImageSuccess = res =>
+export const uploadActiveItemImageSuccess = res =>
 ({
   type: 'UPLOAD_ACTIVE_ITEM_IMAGE_SUCCESS',
   payload: { image: res.body.image }
 })
 
-export const onUploadActiveItemImageFailure = res =>
+export const uploadActiveItemImageFailure = res =>
 ({
   type: 'UPLOAD_ACTIVE_ITEM_IMAGE_FAILURE',
   payload: { errors: res.body.errors }

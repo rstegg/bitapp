@@ -3,19 +3,19 @@ export const resetNewProduct = () =>
   type: 'RESET_NEW_PRODUCT'
 })
 
-export const fetchProducts = product =>
+export const fetchProducts = user =>
 ({
   type: 'FETCH_PRODUCTS',
   payload: {
-    product
+    user
   }
 })
 
-export const fetchProductsSuccess = product =>
+export const fetchProductsSuccess = res =>
 ({
   type: 'FETCH_PRODUCTS_SUCCESS',
   payload: {
-    product
+    products: res.body.products
   }
 })
 

@@ -3,6 +3,7 @@ const initialState = {
   isRegistered: false,
   isLoading: false,
   signupPage: 'signupPhone',
+  phone: '',
   errors: {}
 }
 
@@ -12,7 +13,8 @@ export default (state = initialState, action) => {
   return Object.assign({}, state, {
     error: null,
     isLoading: false,
-    signupPage: 'signupVerify'
+    signupPage: 'signupVerify',
+    phone: action.payload.phone
   })
   case 'SIGNUP_VERIFY_SUBMIT':
   case 'LOGIN_SUBMIT':

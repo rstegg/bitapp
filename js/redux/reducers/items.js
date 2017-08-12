@@ -32,14 +32,14 @@ export default (state = initialState, action) => {
     case 'FETCH_ITEMS':
       return { ...state, itemsList: { isLoading: true, items: [] } }
     case 'FETCH_ITEMS_SUCCESS':
-      return { ...state, itemsList: { isLoading: false, items: action.items } }
+      return { ...state, itemsList: { isLoading: false, items: action.payload.items } }
     case 'FETCH_ITEMS_FAILURE':
-      return { ...state, itemsList: { isLoading: false, items: [], errors: action.errors } }
+      return { ...state, itemsList: { isLoading: false, items: [], errors: action.payload.errors } }
 
     case 'CREATE_ITEM':
       return { ...state, newItem: { ...state.item, isLoading: true, errors: { } } }
     case 'CREATE_ITEM_SUCCESS':
-      return { ...state, newItem: { ...state.item, isLoading: false }, activeItem: action.item }
+      return { ...state, newItem: { ...state.item, isLoading: false }, activeItem: action.payload.item }
     case 'CREATE_ITEM_FAILURE':
       return { ...state, newItem: { ...state.item, isLoading: false } }
 
@@ -51,13 +51,13 @@ export default (state = initialState, action) => {
       return { ...state, duplicateItem: {  isLoading: false } }
 
     case 'SET_ACTIVE_ITEM':
-      return { ...state, activeItem: action.item }
+      return { ...state, activeItem: action.payload.item }
 
     case 'UPDATE_ITEM':
       return { ...state, activeItem: { ...state.item, isLoading: true, errors: { } } }
     case 'UPDATE_ITEM_SUCCESS':
     case 'UPDATE_ITEM_FAILURE':
-      return { ...state, activeItem: { ...action.item, isLoading: false} }
+      return { ...state, activeItem: { ...action.payload.item, isLoading: false} }
 
       /* new item image */
     case 'UPLOAD_NEW_ITEM_IMAGE':
@@ -87,7 +87,7 @@ export default (state = initialState, action) => {
       return { ...state, activeItem: { ...state.activeItem, isImageLoading: false } }
 
     case 'DELETE_ITEM':
-      return { ...state, itemsList: { isLoading: false, items: state.itemsList.items.filter(item => item.id != action.item.id) } }
+      return { ...state, itemsList: { isLoading: false, items: state.itemsList.items.filter(item => item.id != action.payload.item.id) } }
 
     default:
       return state

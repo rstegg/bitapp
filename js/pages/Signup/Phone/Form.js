@@ -26,12 +26,12 @@ const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, pas
   </View>
 
 const SignupPhoneForm = ({ handleSubmit, submitting, navigation }) =>
-  <View onSubmit={vals => handleSubmit(onSignupPhoneSubmit(vals))} style={styles.signupScreen}>
+  <View onSubmit={handleSubmit} style={styles.signupScreen}>
     <SignupField name='phone' keyboardType='phone-pad' label='Phone' autoFocus />
   </View>
 
-const onSubmit = (values, dispatch) =>
-  dispatch(onSignupPhoneSubmit(values))
+const onSubmit = ({ phone }, dispatch) =>
+  dispatch(onSignupPhoneSubmit(phone))
 
 export default reduxForm({
   form: 'signupPhone',

@@ -6,11 +6,11 @@ export const onSignupPhoneSubmit = phone =>
   }
 })
 
-export const onSignupPhoneSuccess = phone =>
+export const onSignupPhoneSuccess = res =>
 ({
   type: 'SIGNUP_PHONE_SUCCESS',
   payload: {
-    phone
+    phone: res.body.phone
   }
 })
 
@@ -22,12 +22,9 @@ export const onSignupVerifySubmit = code =>
   }
 })
 
-export const onSignupVerifySuccess = code =>
+export const onSignupVerifySuccess = () =>
 ({
-  type: 'SIGNUP_VERIFY_SUCCESS',
-  payload: {
-    code
-  }
+  type: 'SIGNUP_VERIFY_SUCCESS'
 })
 
 export const onSignupSubmit = user =>
@@ -40,7 +37,10 @@ export const onSignupSubmit = user =>
 
 export const onSignupSuccess = res =>
 ({
-  type: 'SIGNUP_SUCCESS'
+  type: 'SIGNUP_SUCCESS',
+  payload: {
+    user: res.body.user
+  }
 })
 
 export const onSignupFailure = res =>

@@ -27,10 +27,10 @@ const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, pas
 
 const SignupVerifyForm = ({ handleSubmit, submitting, phone }) =>
   <View onSubmit={handleSubmit} style={styles.signupScreen}>
-    <Text style={{fontSize: 12, padding: 10, paddingLeft: 20,}}>{phone}</Text>
+    <Text style={{fontSize: 24, padding: 10, paddingLeft: 20, textAlign: 'center'}}>{phone}</Text>
     <Text style={{fontSize: 12, padding: 10, paddingLeft: 20,}}>We have sent you an SMS with a code to the number above.</Text>
     <Text style={{fontSize: 12, padding: 10, paddingLeft: 20,}}>To complete your phone number verification, please enter the activation code.</Text>
-    <SignupField name='phoneVerify' keyboardType='phone-pad' label='Activation Code' autoFocus />
+    <SignupField name='code' keyboardType='phone-pad' label='Activation Code' autoFocus />
   </View>
 
 const mapStateToProps = ({ user }) =>
@@ -40,8 +40,8 @@ const mapStateToProps = ({ user }) =>
 
 const ConnectedSignupVerifyForm = connect(mapStateToProps)(SignupVerifyForm)
 
-const onSubmit = (values, dispatch) =>
-  dispatch(onSignupVerifySubmit(values))
+const onSubmit = ({ code }, dispatch) =>
+  dispatch(onSignupVerifySubmit(code))
 
 export default reduxForm({
   form: 'signupVerify',

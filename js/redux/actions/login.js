@@ -8,7 +8,10 @@ export const onLoginSubmit = user =>
 
 export const onLoginSuccess = res =>
 ({
-  type: 'LOGIN_SUCCESS'
+  type: 'LOGIN_SUCCESS',
+  payload: {
+    user: res.body.user
+  }
 })
 
 export const onLoginFailure = res =>

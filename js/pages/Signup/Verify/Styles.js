@@ -5,12 +5,15 @@ export default StyleSheet.create({
   ...BaseStyles.screen,
   signupScreen: {
     flexGrow: 1,
+    alignItems: 'center',
     backgroundColor: Colors.lightGrey,
+    width: Metrics.screenWidth,
     height: Metrics.screenHeight,
   },
   inputGroup: {
+    width: Metrics.screenWidth,
     backgroundColor: 'white',
-    padding: 5,
+    paddingBottom: 5,
     paddingHorizontal: 15,
     marginBottom: 2,
   },

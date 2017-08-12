@@ -34,15 +34,12 @@ class Items extends Component {
           left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
           center={<Header.Logo />}
           right={<Header.CartButton to={() => navigation.navigate('CheckoutReviewScreen')}/>} />
-          <View style={styles.section}>
-            <View style={styles.centered}>
-              <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
-            </View>
+        <View style={styles.section}>
+          <View style={styles.centered}>
+            <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
           </View>
-          <ItemsList />
-          <TouchableOpacity onPress={() => navigation.navigate('CreateItemScreen')}>
-            <Text>Create an item</Text>
-          </TouchableOpacity>
+        </View>
+        <ItemsList navigation={navigation} />
       </View>
     )
   }

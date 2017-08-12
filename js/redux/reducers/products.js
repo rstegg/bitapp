@@ -22,13 +22,13 @@ export default (state = initialState, action) => {
   switch(action.type) {
   case 'CREATE_PRODUCT':
   case 'UPDATE_PRODUCT':
-    return { ...state, currentProduct: { ...action.product, isLoading: true } }
+    return { ...state, currentProduct: { ...action.payload.product, isLoading: true } }
   case 'CREATE_PRODUCT_SUCCESS':
   case 'UPDATE_PRODUCT_SUCCESS':
-    return { ...state, currentProduct: { ...action.product, isLoading: false, isNew: false } }
-  case 'CREATE_PRODUCT_ERROR':
-  case 'UPDATE_PRODUCT_ERROR':
-    return { ...state, currentProduct: { ...action.product, isLoading: false } }
+    return { ...state, currentProduct: { ...action.payload.product, isLoading: false, isNew: false } }
+  case 'CREATE_PRODUCT_FAILURE':
+  case 'UPDATE_PRODUCT_FAILURE':
+    return { ...state, currentProduct: { ...action.payload.product, isLoading: false } }
 
   case 'FETCH_PRODUCTS':
     return {...state, productsList: {
@@ -40,39 +40,30 @@ export default (state = initialState, action) => {
   case 'FETCH_PRODUCTS_SUCCESS':
     return {...state, productsList: {
         isLoading: false,
-        products: action.products,
+        products: action.payload.products,
       }
     }
 
 
-  case 'FETCH_PRODUCTS_ERROR':
+  case 'FETCH_PRODUCTS_FAILURE':
     return { ...state, productsList: { isLoading: false, products: state.productsList.products } }
   case 'RESET_CURRENT_PRODUCT':
     return { ...state, currentProduct: initialState.currentProduct }
   case 'SET_CURRENT_PRODUCT':
-    return { ...state, currentProduct: action.product }
+    return { ...state, currentProduct: action.payload.product }
   case 'UPDATE_CURRENT_PRODUCT':
     return { ...state,
-      currentProduct: { ...state.currentProduct, ...action.product }
+      currentProduct: { ...state.currentProduct, ...action.payload.product }
     }
 
   case 'DELETE_PRODUCT':
-    const { tabId, id } = action.product
+    const { id } = action.payload.product
 
     return { ...state, productsList: {
         isLoading: false,
-        products: state.productsList[tabId].products.filter((product) => product.id != id)
+        products: state.productsList[id].products.filter(product => product.id != id)
       }
     }
-
-  case 'CREATE_PRODUCT_IMAGE':
-    return { ...state, currentProduct: { ...state.currentProduct, image: { isLoading: true } } }
-  case 'CREATE_PRODUCT_IMAGE_SUCCESS':
-    return { ...state, currentProduct: { ...state.currentProduct, image: { isLoading: false, ...action.image }, image_id: action.image.id } }
-  case 'CREATE_PRODUCT_IMAGE_ERROR':
-    return { ...state, currentProduct: { ...state.currentProduct, image: null } }
-  case 'DELETE_PRODUCT_IMAGE':
-    return { ...state, currentProduct: { ...state.currentProduct, image: null, image_id: null } }
 
   default:
     return state

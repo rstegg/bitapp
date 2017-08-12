@@ -4,6 +4,7 @@ import {
   Alert,
   Image,
   ListView,
+  TouchableOpacity,
   View
 } from 'react-native'
 import { connect } from 'react-redux'
@@ -31,7 +32,7 @@ const CANCEL_INDEX = 3
 
 class List extends Component {
   componentDidMount() {
-    this.props.fetchProducts()
+    this.props.fetchProducts(this.props.user)
   }
 
   selectProduct(product) {
@@ -63,24 +64,25 @@ class List extends Component {
 
   renderIntro() {
     return (
-      <View style={styles.intro}>
-        <View style={styles.introTextContainer}>
-          <Text style={styles.introText}>
-            You don&rsquot have
-          </Text>
-          <Text style={styles.introText}>
-            any collections
-          </Text>
-          <Image source={Images.faq} style={styles.introImage} resizeMode='contain' />
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateItemScreen')} style={styles.intro}>
+        <View>
+          <View style={styles.introTextContainer}>
+            <Text style={styles.introText}>
+              You don&rsquo;t have
+            </Text>
+            <Text style={styles.introText}>
+              any products
+            </Text>
+            <Image source={Images.faq} style={styles.introImage} resizeMode='contain' />
+          </View>
+          <View style={styles.introContent}>
+            <Text style={styles.introDescription}>
+              Click here to start an item
+            </Text>
+            <Image source={Images.chevronRight} style={styles.arrow} resizeMode='contain' />
+          </View>
         </View>
-        <View style={styles.introContent}>
-          <Text style={styles.introDescription}>
-            Click here to start a collection
-          </Text>
-          <Image source={Images.close} style={styles.arrow} resizeMode='contain' />
-        </View>
-        <View style={{flexGrow: 1}} />
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -128,16 +130,17 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
-const mapStateToProps = ({ products }) =>
+const mapStateToProps = ({ products, user }) =>
 ({
   isLoading: products.productsList.isLoading,
   isDuplicateLoading: products.duplicateProduct.isLoading,
   products: dataSource.cloneWithRows(products.productsList.products),
+  user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchProducts: () => dispatch(fetchProducts()),
+  fetchProducts: user => dispatch(fetchProducts(user)),
   setActiveProduct: product => dispatch(setActiveProduct(product)),
   deleteProduct: product => {
     Alert.alert(product.name, 'Are you sure you want to delete this product?', [
