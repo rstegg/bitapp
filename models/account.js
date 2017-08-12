@@ -52,7 +52,6 @@ module.exports = function(sequelize, DataTypes) {
       .then(nextDerivation)
       .then((derivation) => {
         const address = derive(xpriv, currency, derivation).toString()
-        console.log(address)
         return Address.create({address, currency, derivation, accountId})
       })
     }

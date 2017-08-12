@@ -14,10 +14,17 @@ const models = require('../../models')
 const R = require('ramda')
 const P = require('bluebird')
 const convert = require('../../coins/convert');
+const validators = require('./validators')
 
-module.exports = (account, currency, amountUSD) => {
-    const address =  models.Account.findOne({where: {id: account}})
-    .then((acc)=> acc.nextAddress(currency))
+module.exports = {
+
+  spec: R.pick(["accountId", "currency", "amountUSD"], validators),
+
+  fn: ({accountId, currency, amountUSD}) => {
+
+    const address =  models.Account
+      .findOne({where: {id: accountId}})
+      .then((acc)=> acc.nextAddress(currency))
 
     const amount = convert(currency, amountUSD)
     return P.join(amount, address,
@@ -29,4 +36,5 @@ module.exports = (account, currency, amountUSD) => {
           amountUSD
         }
     })
+  }
 }
