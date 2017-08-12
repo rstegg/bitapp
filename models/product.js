@@ -2,15 +2,11 @@ const ProductAttributes = ['unit', 'quantity']
 
 module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('Product', {
-    name: {
+    unit: {
       type: DataTypes.STRING,
       unique: true
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    image: {
+    unitPrice: {
       type: DataTypes.STRING,
       allowNull: true
     }
