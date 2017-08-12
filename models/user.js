@@ -29,5 +29,11 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   })
+
+  User.associate = (models) => {
+    User.hasMany(models.Item)
+    User.hasMany(models.Product)
+  }
+
   return User
 }

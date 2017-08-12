@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Product.associate = (models) => {
     Product.belongsTo(models.User)
-    Product.hasOne(models.Item)
+    Product.belongsTo(models.Item)
   }
 
   Product.getProductsByUser = (user, Item) =>
