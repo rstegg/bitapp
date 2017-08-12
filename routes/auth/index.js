@@ -13,10 +13,6 @@ const validField = p => obj => !isNil(path([ p ], obj))
 
 module.exports =
   router
-    .post('/login',
-      passport.authenticate('local', { session: false }),
-      login
-    )
     .post('/phone',
       validateBody(validField('phone')),
       phone
@@ -28,4 +24,8 @@ module.exports =
     .post('/signup',
       validateBody(validField('password')),
       signup
+    )
+    .use(passport.authenticate('local', { session: false }))
+    .post('/',
+      login
     )

@@ -1,8 +1,6 @@
 const Models = require('../../models')
 const twilio = require('../../services/twilio')
 
-const shortId = require('shortid')
-
 module.exports = (req, res) =>
   Models.User.update(
     { password: req.body.password, registered: true },

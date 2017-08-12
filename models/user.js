@@ -1,4 +1,3 @@
-'use strict';
 module.exports = function(sequelize, DataTypes) {
   const User = sequelize.define('User', {
     phone: {
@@ -29,6 +28,6 @@ module.exports = function(sequelize, DataTypes) {
         is: ["^[a-z]+$",'i'],
       }
     }
-  });
-  return User;
-};
+  })
+  return User
+}

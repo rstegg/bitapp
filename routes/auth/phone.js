@@ -2,7 +2,6 @@ const Models = require('../../models')
 const twilio = require('../../services/twilio')
 const { length } = require('ramda')
 
-
 const validatePhone = p =>
   new Promise((resolve, reject) => {
     const phone = p.trim().replace(/^\D+/g, '').replace(/ /g,'')
