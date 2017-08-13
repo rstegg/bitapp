@@ -1,18 +1,18 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var Payment = sequelize.define('Payment', {
+  var Payment = sequelize.define('payment', {
     date: DataTypes.DATETIME,
     currency: DataTypes.STRING,
     amountUSD: DataTypes.DECIMAL,
     status: DataTypes.STRING,
     txid: DataTypes.STRING,
     amount: DataTypes.DECIMAL
-  }, {
-    classMethods: {
-      associate: function(models) {
-        // associations can be defined here
-      }
-    }
-  });
+  })
+
+  Payment.associate = function(models) {
+    Payment.belongsTo(models.user)
+    Payment.belongsTo(models.order)
+  }
+
   return Payment;
 };
