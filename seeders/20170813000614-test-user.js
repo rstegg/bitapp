@@ -16,7 +16,7 @@ module.exports = {
       id: 2,
       name: 'Ryan Stegmann',
       phone: "+19519922715",
-      password: "$2a$10$egNaDMBMrRwiK42U47kGeuixGL27wdg2OHt9Z9uqoHr26wgSSgx2m",
+      password: "$2a$10$YPj2v10imyFhiLbAUEncQuLvUEweqSi4DmLLpAxuq2W2ezSwpIonK",
       registered: true,
       verified: true,
       verifyCode: "1234",
@@ -26,6 +26,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('users', null, {});
   }
 };

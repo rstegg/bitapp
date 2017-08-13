@@ -26,7 +26,7 @@ module.exports =
       validateBody(validFields(['name', 'password'], 'user')),
       signup
     )
-    .use(passport.authenticate('local', { session: false }))
-    .post('/',
+    .post('/login',
+      passport.authenticate('local', { session: false }),
       login
     )
