@@ -13,10 +13,13 @@ module.exports = () => {
   const { ExtractJwt, Strategy: JwtStrategy } = passportJWT
   const { Strategy: LocalStrategy } = passportLocal
 
-  const localStrategy = new LocalStrategy(
-    function(username, password, done) {
-      user.findOne({ where: { username: username } })
+  const localStrategy = new LocalStrategy({
+    usernameField: "phone", passwordField: "password"
+  }, function(phone, password, done) {
+      user.findOne({ where: { phone: phone } })
         .then(function (user) {
+          console.log(user)
+          console.log()
           if (!user) {
             return done(null, false, { error: 'Incorrect username' })
           }

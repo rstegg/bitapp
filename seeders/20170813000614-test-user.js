@@ -2,11 +2,11 @@
 const now = () => (new Date()).toISOString()
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('Users', [{
+    return queryInterface.bulkInsert('users', [{
       id: 1,
       name: 'Galileo Sanchez',
       phone: "+1213531958",
-      password: "$2a$10$2EL7Vm9lsi4gjpIAsMnPCeEwq6jgStTDgRb/CoU3YdvpjnitPCtxC",
+      password: "$2a$10$YPj2v10imyFhiLbAUEncQuLvUEweqSi4DmLLpAxuq2W2ezSwpIonK",
       registered: true,
       verified: true,
       verifyCode: "1234",
