@@ -19,7 +19,7 @@ module.exports = {
       orderId: {
         type: Sequelize.INTEGER,
         references : {
-          model: 'Orders',
+          model: 'orders',
           key: 'id'
         }
       },
@@ -49,6 +49,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('OrderDetails');
+    return queryInterface.dropTable('orderDetails');
   }
 };

@@ -30,7 +30,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'users',
           key: 'id'
         }
       },
@@ -38,7 +38,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Orders',
+          model: 'orders',
           key: 'id'
         }
       },
@@ -53,6 +53,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Payments');
+    return queryInterface.dropTable('payments');
   }
 };
