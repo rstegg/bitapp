@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Order = sequelize.define('order', {
     totalUSD: DataTypes.DECIMAL,
-    date: DataTypes.DATETIME
+    date: DataTypes.DATE
   })
 
   Order.associate = (models) => {

@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.DECIMAL
       },
       date: {
-        type: Sequelize.DATETIME
+        type: Sequelize.DATE
       },
       quantity: {
         type: Sequelize.DECIMAL
