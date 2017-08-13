@@ -23,10 +23,6 @@ module.exports =
       validateBody(validItem),
       createItem
     )
-    .put('/:id',
-      validateBody(validItem),
-      updateItem
-    )
     .delete('/:id',
       deleteItem
     )
