@@ -1,11 +1,12 @@
 const Models = require('../../models')
-const { Item } = Models
+const { item } = Models
+const { pick } = require('ramda')
 
 const itemParams = ['name', 'description', 'image']
 
 module.exports = (req, res) =>
-  Item.update(
-    itemParams,
+  item.update(
+    pick(itemParams, req.body),
     { where: { userId: req.user.id, id: req.params.id } }
   )
   .then(item => res.json(item))

@@ -22,14 +22,14 @@ const validatePhone = p =>
 module.exports = (req, res) =>
   validatePhone(req.body.phone)
     .then(phone =>
-      Models.User.create({ phone, verifyCode: Math.floor(1000 + Math.random() * 9000) })
+      Models.user.create({ phone, verifyCode: Math.floor(1000 + Math.random() * 9000) })
     )
     .then(user => {
       twilio.messages.create({
         body: `Your code is: ${user.verifyCode}`,
         to: user.phone,  // Text this number
-        from: '+19092459291' // From a valid Twilio number
+        from: process.env.TWILIO_NUMBER // From a valid Twilio number
       })
-      return res.json({ phone: req.body.phone })
+      return res.json({ phone: user.phone })
     })
-    .catch(err => res.status(400).json({errors: err}))
+    .catch(error => res.status(400).json({error}))

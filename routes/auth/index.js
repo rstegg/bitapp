@@ -8,6 +8,7 @@ const phone = require('./phone')
 const verify = require('./verify')
 
 const validateBody = require('../middleware/validate-body')
+const validFields = require('../middleware/valid-fields')
 
 const validField = p => obj => !isNil(path([ p ], obj))
 
@@ -18,11 +19,11 @@ module.exports =
       phone
     )
     .post('/verify',
-      validateBody(validField('code')),
+      validateBody(validFields(['code', 'phone'])),
       verify
     )
     .post('/signup',
-      validateBody(validField('password')),
+      validateBody(validFields(['name', 'password'], 'user')),
       signup
     )
     .use(passport.authenticate('local', { session: false }))

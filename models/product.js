@@ -1,7 +1,7 @@
-const ProductAttributes = ['unit', 'quantity']
+const ProductAttributes = ['unit', 'unitPrice']
 
 module.exports = function(sequelize, DataTypes) {
-  const Product = sequelize.define('Product', {
+  const Product = sequelize.define('product', {
     unit: {
       type: DataTypes.STRING,
       unique: true
@@ -13,8 +13,8 @@ module.exports = function(sequelize, DataTypes) {
   })
 
   Product.associate = (models) => {
-    Product.belongsTo(models.User)
-    Product.belongsTo(models.Item)
+    Product.belongsTo(models.user)
+    Product.belongsTo(models.item)
   }
 
   Product.getProductsByUser = (user, Item) =>

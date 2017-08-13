@@ -1,5 +1,5 @@
 const models = require('../models')
-const { User } = models
+const { user } = models
 
 const jwt = require('jsonwebtoken')
 
@@ -15,7 +15,7 @@ module.exports = () => {
 
   const localStrategy = new LocalStrategy(
     function(username, password, done) {
-      User.findOne({ where: { username: username } })
+      user.findOne({ where: { username: username } })
         .then(function (user) {
           if (!user) {
             return done(null, false, { error: 'Incorrect username' })
@@ -38,7 +38,7 @@ module.exports = () => {
 
   const jwtStrategy = new JwtStrategy(jwtOptions,
     function(jwt_payload, done) {
-      User.findById(jwt_payload.id)
+      user.findById(jwt_payload.id)
         .then(function(user) {
           if(!user) {
             return done(null, false, { error: 'Invalid token' })

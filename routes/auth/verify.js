@@ -1,10 +1,14 @@
 const Models = require('../../models')
-const { User } = Models
+const { user } = Models
 
 module.exports = (req, res) =>
-  User.update(
+  user.update(
     { verified: true },
     { where: { phone: req.body.phone, verifyCode: req.body.code, verified: false }}
   )
+  .then(user =>
+    !user ? Promise.reject('bad code')
+      : user
+    )
   .then(user => res.json(user))
-  .catch(err => console.log(err))
+  .catch(error => res.status(400).json({error}))
