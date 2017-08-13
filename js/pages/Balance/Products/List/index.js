@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { fetchItems, setActiveItem, duplicateItem, deleteItem } from 'actions/items'
+import { fetchProducts, setActiveProduct, duplicateProduct, deleteProduct } from 'actions/products'
 
 import { Images } from 'themes'
 
@@ -32,15 +32,15 @@ const CANCEL_INDEX = 3
 
 class List extends Component {
   componentDidMount() {
-    this.props.fetchItems(this.props.user)
+    this.props.fetchProducts(this.props.user)
   }
 
-  selectItem(item) {
-    this.props.setActiveItem(item)
-    this.props.navigation.navigate('CreateProductScreen')
+  selectProduct(product) {
+    this.props.setActiveProduct(product)
+    this.props.navigation.navigate('ViewProduct')
   }
 
-  selectOptions(item) {
+  selectOptions(product) {
     ActionSheetIOS.showActionSheetWithOptions({
       options: OPTIONS,
       cancelButtonIndex: CANCEL_INDEX,
@@ -49,14 +49,14 @@ class List extends Component {
     (buttonIndex) => {
       switch(buttonIndex) {
         case DUPLICATE_INDEX:
-          this.props.duplicateItem(item)
+          this.props.duplicateProduct(product)
           break
         case DELETE_INDEX:
-          this.props.deleteItem(item)
+          this.props.deleteProduct(product)
           break
         case EDIT_INDEX:
-          this.props.setActiveItem(item)
-          this.props.navigation.navigate('EditItem')
+          this.props.setActiveProduct(product)
+          this.props.navigation.navigate('EditProduct')
           break
       }
     })
@@ -71,7 +71,7 @@ class List extends Component {
               You don&rsquo;t have
             </Text>
             <Text style={styles.introText}>
-              any items
+              any products
             </Text>
             <Image source={Images.faq} style={styles.introImage} resizeMode='contain' />
           </View>
@@ -86,18 +86,18 @@ class List extends Component {
     )
   }
 
-  renderRow(item) {
+  renderRow(product) {
     return <ListRow
-            key={item.id}
-            item={item}
-            onSelect={() => this.selectItem(item)}
-            onOptionsBtnPress={() => this.selectOptions(item)} />
+            key={product.id}
+            product={product}
+            onSelect={() => this.selectProduct(product)}
+            onOptionsBtnPress={() => this.selectOptions(product)} />
   }
 
   renderList() {
-    return <ListView key='items-list'
+    return <ListView key='products-list'
               style={styles.list}
-              dataSource={this.props.items}
+              dataSource={this.props.products}
               renderRow={this.renderRow.bind(this)}
               keyboardDismissMode='on-drag'
               keyboardShouldPersistTaps={true}
@@ -111,10 +111,10 @@ class List extends Component {
       content = <Loader />
     } else if(this.props.isDuplicateLoading) {
       content = <View style={{flexGrow: 1,}}>
-                  <Text style={styles.duplicateLoading}>Duplicating item...</Text>
+                  <Text style={styles.duplicateLoading}>Duplicating product...</Text>
                   <Loader />
                 </View>
-    } else if(this.props.items.getRowCount() > 0) {
+    } else if(this.props.products.getRowCount() > 0) {
       content = this.renderList()
     } else {
       content = this.renderIntro()
@@ -130,25 +130,25 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
-const mapStateToProps = ({ items, user }) =>
+const mapStateToProps = ({ products, user }) =>
 ({
-  isLoading: items.itemsList.isLoading,
-  isDuplicateLoading: items.duplicateItem.isLoading,
-  items: dataSource.cloneWithRows(items.itemsList.items),
+  isLoading: products.productsList.isLoading,
+  isDuplicateLoading: products.duplicateProduct.isLoading,
+  products: dataSource.cloneWithRows(products.productsList.products),
   user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  fetchItems: user => dispatch(fetchItems(user)),
-  setActiveItem: item => dispatch(setActiveItem(item)),
-  deleteItem: item => {
-    Alert.alert(item.name, 'Are you sure you want to delete this item?', [
-      {text: 'Yes', onPress: () =>dispatch(deleteItem(item)) },
-      {text: 'No'},
+  fetchProducts: user => dispatch(fetchProducts(user)),
+  setActiveProduct: product => dispatch(setActiveProduct(product)),
+  deleteProduct: product => {
+    Alert.alert(product.name, 'Are you sure you want to delete this product?', [
+      { text: 'Yes', onPress: () => dispatch(deleteProduct(product)) },
+      { text: 'No' },
     ])
   },
-  duplicateItem: item => dispatch(duplicateItem(item))
+  duplicateProduct: product => dispatch(duplicateProduct(product))
 })
 
 export default connect(

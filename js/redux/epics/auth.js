@@ -1,67 +1,80 @@
 import { combineEpics } from 'redux-observable'
-import { onLoginSuccess, onLoginFailure } from '../actions/login'
-import { onSignupSuccess, onSignupPhoneSuccess, onSignupVerifySuccess, onSignupFailure } from '../actions/signup'
+import { loginSuccess, loginFailure } from '../actions/login'
+import { signupSuccess, signupPhoneSuccess, signupVerifySuccess, signupFailure } from '../actions/signup'
 import { path } from 'ramda'
 import { Observable } from 'rxjs'
 
 import { openPost } from './helpers/req'
 
-const getError = path([ 'response', 'text', 'error' ])
+const getError = path([ 'response', 'body', 'error' ])
 
 const api = {
-  login: ({ username, password }) =>
+  login: ({ phone, password }) =>
     openPost('auth/login', { username, password }),
+  loginForgot: ({ phone }) =>
+    openPost('auth/forgot', { phone }),
   signup: ({ user }) =>
     openPost('auth/signup', { user }),
   phone: ({ phone }) =>
     openPost('auth/phone', { phone }),
-  verify: ({ code }) =>
-    openPost('auth/verify', { code })
+  verify: ({ code, phone }) =>
+    openPost('auth/verify', { code, phone })
 }
 
-const onLoginSubmit = action$ =>
+const loginSubmit = action$ =>
   action$.ofType('LOGIN_SUBMIT')
     .mergeMap(action =>
       api.login(action.payload)
-        .map(onLoginSuccess)
+        .map(loginSuccess)
         .catch(res => Observable.of(
-          onLoginFailure(getError(res))
+          loginFailure(getError(res))
         ))
     )
 
-const onSignupSubmit = action$ =>
+const loginForgotSubmit = action$ =>
+  action$.ofType('LOGIN_FORGOT_SUBMIT')
+    .mergeMap(action =>
+      api.loginForgot(action.payload)
+        .map(loginSuccess)
+        .catch(res => Observable.of(
+          loginFailure(getError(res))
+        ))
+    )
+
+const signupSubmit = action$ =>
   action$.ofType('SIGNUP_SUBMIT')
     .mergeMap(action =>
       api.signup(action.payload)
-        .map(onSignupSuccess)
+        .map(signupSuccess)
         .catch(res => Observable.of(
-          onSignupFailure(getError(res))
+          signupFailure(res)
         ))
       )
 
-const onSignupPhoneSubmit = action$ =>
+const signupPhoneSubmit = action$ =>
   action$.ofType('SIGNUP_PHONE_SUBMIT')
     .mergeMap(action =>
       api.phone(action.payload)
-        .map(onSignupPhoneSuccess)
+        .map(signupPhoneSuccess)
         .catch(res => Observable.of(
-          onSignupFailure(getError(res))
+          signupFailure(getError(res))
         ))
       )
 
-const onSignupVerifySubmit = action$ =>
+const signupVerifySubmit = action$ =>
   action$.ofType('SIGNUP_VERIFY_SUBMIT')
     .mergeMap(action =>
       api.verify(action.payload)
-        .map(onSignupVerifySuccess)
+        .map(signupVerifySuccess)
         .catch(res => Observable.of(
-          onSignupFailure(getError(res))
+          signupFailure(getError(res))
         ))
       )
 
 export default combineEpics(
-  onLoginSubmit,
-  onSignupSubmit,
-  onSignupPhoneSubmit,
-  onSignupVerifySubmit
+  loginSubmit,
+  loginForgotSubmit,
+  signupSubmit,
+  signupPhoneSubmit,
+  signupVerifySubmit
 )

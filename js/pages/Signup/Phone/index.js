@@ -8,6 +8,8 @@ import Header from 'components/Header'
 import SignupPhoneForm from './Form'
 import styles from './Styles'
 
+import { signupPhoneSubmit } from 'actions/signup'
+
 class SignupPhone extends Component {
   componentWillMount() {
     const { navigation, signupPage } = this.props
@@ -22,7 +24,7 @@ class SignupPhone extends Component {
     }
   }
   render() {
-    const { isLoading, navigation, signupPage, onSubmit } = this.props
+    const { isLoading, navigation, signupPage, signupPhoneSubmit, onSubmit } = this.props
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -30,7 +32,7 @@ class SignupPhone extends Component {
             left={<Header.TextButton text='Cancel' onPress={isLoading ? null : () => navigation.goBack()}/>}
             center={<Header.Logo />}
             right={<Header.TextButton text='Next' isLoading={isLoading} onPress={isLoading ? null : () => onSubmit()} />} />
-          <SignupPhoneForm navigation={navigation} />
+          <SignupPhoneForm onSubmit={({ phone }) => signupPhoneSubmit(phone)} />
         </View>
       </TouchableWithoutFeedback>
     )
@@ -47,7 +49,8 @@ const mapStateToProps = ({ user }) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  onSubmit: () => dispatch(submit('signupPhone'))
+  onSubmit: () => dispatch(submit('signupPhone')),
+  signupPhoneSubmit: phone => dispatch(signupPhoneSubmit(phone))
 })
 
 export default connect(

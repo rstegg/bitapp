@@ -9,33 +9,39 @@ export const onCheckoutSubmit = (cart, user) =>
 
 export const onCheckoutSuccess = res =>
 ({
-  type: 'ON_CHECKOUT_SUCCESS'
+  type: 'ON_CHECKOUT_SUCCESS',
+  payload: {
+    transaction: res.body.transaction
+  }
 })
 
 export const onCheckoutFailure = res =>
 ({
-  type: 'ON_CHECKOUT_FAILURE'
+  type: 'ON_CHECKOUT_FAILURE',
+  payload: {
+    error: res.body.error
+  }
 })
 
-export const productAddToCart = product =>
+export const addProductToCart = product =>
 ({
-  type: 'PRODUCT_ADD_TO_CART',
+  type: 'ADD_PRODUCT_TO_CART',
   payload: {
     product
   }
 })
 
-export const productRemoveFromCart = product =>
+export const removeProductFromCart = product =>
 ({
-  type: 'PRODUCT_REMOVE_FROM_CART',
+  type: 'REMOVE_PRODUCT_FROM_CART',
   payload: {
     product
   }
 })
 
-export const productEditOnCart = (productId, product) =>
+export const editCartProduct = (productId, product) =>
 ({
-  type: 'PRODUCT_EDIT_ON_CART',
+  type: 'EDIT_CART_PRODUCT',
   payload: {
     productId,
     product

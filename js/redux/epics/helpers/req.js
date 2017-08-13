@@ -14,6 +14,7 @@ export const get = (endpoint, token) =>
   Observable.from(
     su.get(`${API_HOST}/${endpoint}`)
       .set('Accept', 'application/json')
+      .set('Authorization', token)
   )
 
 export const post = (endpoint, body, token) =>
@@ -21,6 +22,7 @@ export const post = (endpoint, body, token) =>
     su.post(`${API_HOST}/${endpoint}`)
       .send(body)
       .set('Accept', 'application/json')
+      .set('Authorization', token)
   )
 
 export const imagePost = (endpoint, body, token) =>

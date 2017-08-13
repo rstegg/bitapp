@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 import TextField from 'components/TextField'
 import Text from 'components/BitKitText'
 
-import { onSignupPhoneSubmit } from 'actions/signup'
-
 import styles from './Styles'
 
 const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, password }) =>
@@ -22,18 +20,14 @@ const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, pas
       keyboardType={keyboardType}
       label={label}
       style={styles.textInput}
-      password={password} />
+      secureTextEntry={password} />
   </View>
 
-const SignupPhoneForm = ({ handleSubmit, submitting, navigation }) =>
+const SignupPhoneForm = ({ handleSubmit, submitting }) =>
   <View onSubmit={handleSubmit} style={styles.signupScreen}>
     <SignupField name='phone' keyboardType='phone-pad' label='Phone' autoFocus />
   </View>
 
-const onSubmit = ({ phone }, dispatch) =>
-  dispatch(onSignupPhoneSubmit(phone))
-
 export default reduxForm({
-  form: 'signupPhone',
-  onSubmit
+  form: 'signupPhone'
 })(SignupPhoneForm)

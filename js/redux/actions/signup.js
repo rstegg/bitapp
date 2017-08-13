@@ -1,4 +1,4 @@
-export const onSignupPhoneSubmit = phone =>
+export const signupPhoneSubmit = phone =>
 ({
   type: 'SIGNUP_PHONE_SUBMIT',
   payload: {
@@ -6,7 +6,7 @@ export const onSignupPhoneSubmit = phone =>
   }
 })
 
-export const onSignupPhoneSuccess = res =>
+export const signupPhoneSuccess = res =>
 ({
   type: 'SIGNUP_PHONE_SUCCESS',
   payload: {
@@ -14,20 +14,21 @@ export const onSignupPhoneSuccess = res =>
   }
 })
 
-export const onSignupVerifySubmit = code =>
+export const signupVerifySubmit = (code, phone) =>
 ({
   type: 'SIGNUP_VERIFY_SUBMIT',
   payload: {
-    code
+    code,
+    phone
   }
 })
 
-export const onSignupVerifySuccess = () =>
+export const signupVerifySuccess = () =>
 ({
   type: 'SIGNUP_VERIFY_SUCCESS'
 })
 
-export const onSignupSubmit = user =>
+export const signupSubmit = user =>
 ({
   type: 'SIGNUP_SUBMIT',
   payload: {
@@ -35,15 +36,19 @@ export const onSignupSubmit = user =>
   }
 })
 
-export const onSignupSuccess = res =>
+export const signupSuccess = res =>
 ({
   type: 'SIGNUP_SUCCESS',
   payload: {
-    user: res.body.user
+    user: res.body.user,
+    token: res.body.token
   }
 })
 
-export const onSignupFailure = res =>
+export const signupFailure = error =>
 ({
-  type: 'SIGNUP_FAILURE'
+  type: 'SIGNUP_FAILURE',
+  payload: {
+    error
+  }
 })

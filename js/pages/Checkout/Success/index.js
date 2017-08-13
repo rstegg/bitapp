@@ -43,12 +43,7 @@ class CreateProduct extends Component {
           center={<Header.Logo />} />
           <Text>Checkout</Text>
           <View style={styles.buttonGroup}>
-            <TouchableOpacity onPress={this.setState({currentCoin: 'BTC'})}>
-              <Text>BTC</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.setState({currentCoin: 'LTC'})}>
-              <Text>LTC</Text>
-            </TouchableOpacity>
+            <Text>{this.props.coinType}</Text>
           </View>
           <View style={styles.addressContainer}>
             <Text style={styles.addressLeft}>To:</Text>
