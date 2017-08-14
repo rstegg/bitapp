@@ -16,12 +16,7 @@ const initialState = {
     isLoading: false,
     errors: {},
   },
-  activeForm: {
-    description: '',
-    id: null,
-    image: null,
-    name: '',
-  },
+  keyword: ''
 }
 
 export default (state = initialState, action) => {
@@ -35,6 +30,16 @@ export default (state = initialState, action) => {
       return { ...state, itemsList: { isLoading: false, items: action.payload.items } }
     case 'FETCH_ITEMS_FAILURE':
       return { ...state, itemsList: { isLoading: false, items: [], errors: action.payload.errors } }
+
+    case 'SEARCH_ITEMS':
+      return { ...state, keyword: action.payload.keyword, itemsList: { isLoading: true } }
+    case 'SEARCH_ITEMS_SUCCESS':
+      return { ...state, itemsList: { isLoading: false, items: action.payload.items } }
+    case 'SEARCH_ITEMS_FAILURE':
+      return { ...state, itemsList: { ...state.itemsList, isLoading: false, errors: action.payload.errors } }
+
+    case 'CLEAR_SEARCH_ITEMS':
+      return { ...state, keyword: '' }
 
     case 'CREATE_ITEM':
       return { ...state, newItem: { ...state.item, isLoading: true, errors: { } } }

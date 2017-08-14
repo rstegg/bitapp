@@ -6,26 +6,26 @@ export const addToCart = product =>
   }
 })
 
-export const onCheckoutSubmit = (cart, user) =>
+export const checkoutSubmit = (cart, user) =>
 ({
-  type: 'ON_CHECKOUT_SUBMIT',
+  type: 'CHECKOUT_SUBMIT',
   payload: {
     cart,
     user
   }
 })
 
-export const onCheckoutSuccess = res =>
+export const checkoutSuccess = res =>
 ({
-  type: 'ON_CHECKOUT_SUCCESS',
+  type: 'CHECKOUT_SUCCESS',
   payload: {
     transaction: res.body.transaction
   }
 })
 
-export const onCheckoutFailure = res =>
+export const checkoutFailure = res =>
 ({
-  type: 'ON_CHECKOUT_FAILURE',
+  type: 'CHECKOUT_FAILURE',
   payload: {
     error: res.body.error
   }

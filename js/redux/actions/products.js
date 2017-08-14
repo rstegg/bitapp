@@ -27,6 +27,31 @@ export const fetchProductsFailure = errors =>
   }
 })
 
+export const searchProducts = (keyword, user) =>
+({
+  type: 'SEARCH_PRODUCTS',
+  payload: {
+    keyword,
+    user
+  }
+})
+
+export const searchProductsSuccess = res =>
+({
+  type: 'SEARCH_PRODUCTS_SUCCESS',
+  payload: {
+    products: res.body.products
+  }
+})
+
+export const searchProductsFailure = errors =>
+({
+  type: 'SEARCH_PRODUCTS_FAILURE',
+  payload: {
+    errors
+  }
+})
+
 export const createProduct = (product, item, user) =>
 ({
   type: 'CREATE_PRODUCT',

@@ -9,31 +9,6 @@ export default StyleSheet.create({
     backgroundColor: Colors.transparent,
     justifyContent: 'space-between'
   },
-  addressContainer: {
-    paddingBottom: Metrics.baseMargin
-  },
-  addressLeft: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  addressRight: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  priceContainer: {
-    paddingBottom: Metrics.baseMargin
-  },
-  priceLeft: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  priceRight: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  qrCodeContainer: {
-    alignItems: 'center'
-  },
   statusContainer: {
     marginTop: Metrics.doubleSection,
     alignItems: 'center'

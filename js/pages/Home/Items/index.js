@@ -14,6 +14,8 @@ import { Images } from 'themes'
 import ItemsList from './List'
 import styles from './Styles'
 
+import { searchItems } from 'actions/items'
+
 class Items extends Component {
   static navigationOptions = {
     tabBarLabel: 'Items',
@@ -27,7 +29,7 @@ class Items extends Component {
   }
 
   render() {
-    const { isLoading, navigation } = this.props
+    const { isLoading, navigation, searchItems, clearSearch, keyword, user } = this.props
     return (
       <View style={styles.container}>
         <Header
@@ -36,7 +38,7 @@ class Items extends Component {
           right={<Header.CartButton to={() => navigation.navigate('CheckoutReviewScreen')}/>} />
         <View style={styles.section}>
           <View style={styles.centered}>
-            <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
+            <SearchBar onSearch={keyword => searchItems(keyword, user)} onCancel={clearSearch} searchTerm={keyword} />
           </View>
         </View>
         <ItemsList navigation={navigation} />
@@ -47,10 +49,12 @@ class Items extends Component {
 
 
 
-const mapStateToProps = ({ user }) =>
+const mapStateToProps = ({ user, items }) =>
 ({
   errors: user.errors,
-  isLoading: user.isLoading
+  isLoading: user.isLoading,
+  user,
+  keyword: items.keyword
 })
 
 const mapDispatchToProps = dispatch =>

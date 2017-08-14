@@ -27,6 +27,31 @@ export const fetchItemsFailure = errors =>
   }
 })
 
+export const searchItems = (keyword, user) =>
+({
+  type: 'SEARCH_ITEMS',
+  payload: {
+    keyword,
+    user
+  }
+})
+
+export const searchItemsSuccess = res =>
+({
+  type: 'SEARCH_ITEMS_SUCCESS',
+  payload: {
+    items: res.body.items
+  }
+})
+
+export const searchItemsFailure = errors =>
+({
+  type: 'SEARCH_ITEMS_FAILURE',
+  payload: {
+    errors
+  }
+})
+
 export const createItem = (item, user) =>
 ({
   type: 'CREATE_ITEM',

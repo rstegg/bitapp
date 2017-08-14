@@ -7,6 +7,7 @@ import {
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import Text from 'components/BitKitText'
+import { Images } from 'themes'
 
 import styles from './Styles'
 
@@ -15,7 +16,7 @@ const ListRow = ({ product }) =>
     <TouchableOpacity onPress={this.props.onSelect} >
       <View style={styles.productRow}>
         <View style={styles.info}>
-          <Image source={{uri: product.image}} style={styles.image} resizeMode='cover' />
+          <Image source={product.item && product.item.image ? { uri: product.item.image } : Images.productPlaceholder} style={styles.image} resizeMode='cover' />
           <View style={styles.infoText}>
             <Text numberOfLines={1} style={styles.name}>{product.name}</Text>
             <Text numberOfLines={1} style={styles.details}>{product.description}</Text>

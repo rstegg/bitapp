@@ -1,6 +1,7 @@
 import { combineEpics } from 'redux-observable'
 import {
   fetchProductsSuccess,
+  searchProductsSuccess,
   createProductSuccess,
   editProductSuccess,
   deleteProductSuccess,
@@ -17,6 +18,10 @@ const api = {
     post('products', { product, item }, user.token),
   editProduct: ({ product, user }) =>
     put(`products/${product.id}`, { product }, user.token),
+  searchProducts: ({ keyword }) =>
+    put(`products/search/keyword`, { keyword }, user.token),
+  searchCodeProducts: ({ code }) =>
+    put(`products/search/code`, { code }, user.token),
   deleteProduct: ({ productId, user }) =>
     remove(`products/${productId}`, user.token)
 }
@@ -28,6 +33,17 @@ const fetchProducts = action$ =>
         .map(fetchProductsSuccess)
         .catch(error => Observable.of({
           type: 'FETCH_PRODUCTS_FAILURE',
+          payload: { error }
+        }))
+      )
+
+const searchProducts = action$ =>
+  action$.ofType('SEARCH_PRODUCTS')
+    .mergeMap(action =>
+      api.searchProducts(action.payload)
+        .map(searchProductsSuccess)
+        .catch(error => Observable.of({
+          type: 'SEARCH_PRODUCTS_FAILURE',
           payload: { error }
         }))
       )

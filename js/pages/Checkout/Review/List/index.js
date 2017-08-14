@@ -69,7 +69,7 @@ class List extends Component {
               dataSource={this.props.products}
               renderRow={this.renderRow.bind(this)}
               keyboardDismissMode='on-drag'
-              keyboardShouldPersistTaps={true}
+              keyboardShouldPersistTaps='always'
               showsVerticalScrollIndicator={false}
               removeClippedSubviews={false} />
   }
