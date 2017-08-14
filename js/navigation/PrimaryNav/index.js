@@ -8,6 +8,7 @@ import SignupVerify from 'pages/Signup/Verify'
 import SignupSuccess from 'pages/Signup/Success'
 import CreateItem from 'pages/Item/Create'
 import CreateProduct from 'pages/Product/Create'
+import AddToCart from 'pages/Product/AddToCart'
 import CheckoutReview from 'pages/Checkout/Review'
 import CheckoutSuccess from 'pages/Checkout/Success'
 import CheckoutCoinSelect from 'pages/Checkout/CoinSelect'
@@ -25,6 +26,7 @@ const PrimaryNav = StackNavigator({
   HomeScreen: { screen: ReduxTabNav },
   CreateItemScreen: { screen: CreateItem },
   CreateProductScreen: { screen: CreateProduct },
+  AddToCartScreen: { screen: AddToCart },
   CheckoutReviewScreen: { screen: CheckoutReview },
   CheckoutCoinSelectScreen: { screen: CheckoutCoinSelect },
   CheckoutSuccessScreen: { screen: CheckoutSuccess },

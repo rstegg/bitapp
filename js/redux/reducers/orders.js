@@ -12,6 +12,13 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case 'ADD_TO_CART':
+    return Object.assign({}, state, {
+      cart: {
+        ...state.cart,
+        products: [ ...state.cart.products, action.payload.product ]
+      }
+    })
   case 'ON_CHECKOUT_SUBMIT':
     return Object.assign({}, state, {
       cart: {

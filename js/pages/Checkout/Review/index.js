@@ -16,7 +16,9 @@ const ReviewCheckout = ({ cart, user, isLoading, checkoutSubmit, navigation }) =
       left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
       center={<Header.Logo />}
       right={<Header.TextButton text='Checkout' isLoading={isLoading} onPress={() => isLoading ? null : onCheckoutSubmit(cart, user)} />} />
-    <Text>Current Cart</Text>
+      <View style={styles.centered}>
+        <Text style={styles.headerText}>Cart</Text>
+      </View>
     <CheckoutList />
   </View>
 

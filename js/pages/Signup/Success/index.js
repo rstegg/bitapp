@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
+import { NavigationActions } from 'react-navigation'
 
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
@@ -11,11 +12,18 @@ import styles from './Styles'
 
 import { signupSubmit } from 'actions/signup'
 
+const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'HomeScreen'})
+  ]
+}))
+
 class SignupSuccess extends Component {
   componentWillUpdate(nextProps) {
     const { navigation, signupPage } = nextProps
     if(signupPage === 'signupComplete') {
-      navigation.navigate('HomeScreen')
+      navigateToHome(navigation)
     }
   }
   render() {

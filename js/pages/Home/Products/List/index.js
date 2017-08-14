@@ -37,7 +37,7 @@ class List extends Component {
 
   selectProduct(product) {
     this.props.setActiveProduct(product)
-    this.props.navigation.navigate('ViewProduct')
+    this.props.navigation.navigate('AddToCartScreen')
   }
 
   selectOptions(product) {

@@ -14,7 +14,7 @@ import styles from './Styles'
 
 import { createProduct } from 'actions/products'
 
-class CreateProduct extends Component {
+class CheckoutSuccess extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -74,4 +74,4 @@ const mapStateToProps = ({ user, orders }) =>
   url: orders.url
 })
 
-export default connect(mapStateToProps)(CreateProduct)
+export default connect(mapStateToProps)(CheckoutSuccess)

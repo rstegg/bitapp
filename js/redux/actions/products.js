@@ -27,19 +27,21 @@ export const fetchProductsFailure = errors =>
   }
 })
 
-export const createProduct = product =>
+export const createProduct = (product, item, user) =>
 ({
   type: 'CREATE_PRODUCT',
   payload: {
-    product
+    product,
+    item,
+    user
   }
 })
 
-export const createProductSuccess = product =>
+export const createProductSuccess = res =>
 ({
   type: 'CREATE_PRODUCT_SUCCESS',
   payload: {
-    product
+    product: res.body.product
   }
 })
 

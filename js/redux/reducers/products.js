@@ -22,13 +22,14 @@ export default (state = initialState, action) => {
   switch(action.type) {
   case 'CREATE_PRODUCT':
   case 'UPDATE_PRODUCT':
-    return { ...state, currentProduct: { ...action.payload.product, isLoading: true } }
+    return { ...state, activeProduct: { ...action.payload.product, isLoading: true } }
   case 'CREATE_PRODUCT_SUCCESS':
+    return { ...state, activeProduct: { ...action.payload.product, isLoading: false, isNew: true } }
   case 'UPDATE_PRODUCT_SUCCESS':
-    return { ...state, currentProduct: { ...action.payload.product, isLoading: false, isNew: false } }
+    return { ...state, activeProduct: { ...action.payload.product, isLoading: false, isNew: false } }
   case 'CREATE_PRODUCT_FAILURE':
   case 'UPDATE_PRODUCT_FAILURE':
-    return { ...state, currentProduct: { ...action.payload.product, isLoading: false } }
+    return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
 
   case 'FETCH_PRODUCTS':
     return {...state, productsList: {
@@ -47,13 +48,17 @@ export default (state = initialState, action) => {
 
   case 'FETCH_PRODUCTS_FAILURE':
     return { ...state, productsList: { isLoading: false, products: state.productsList.products } }
-  case 'RESET_CURRENT_PRODUCT':
-    return { ...state, currentProduct: initialState.currentProduct }
-  case 'SET_CURRENT_PRODUCT':
-    return { ...state, currentProduct: action.payload.product }
-  case 'UPDATE_CURRENT_PRODUCT':
+  case 'RESET_ACTIVE_PRODUCT':
+    return { ...state, activeProduct: initialState.activeProduct }
+  case 'SET_ACTIVE_PRODUCT':
+    return { ...state, activeProduct: action.payload.product }
+  case 'UPDATE_ACTIVE_PRODUCT':
     return { ...state,
-      currentProduct: { ...state.currentProduct, ...action.payload.product }
+      activeProduct: { ...state.activeProduct, ...action.payload.product }
+    }
+  case 'ADD_TO_CART':
+    return { ...state,
+      activeProduct: { ...state.activeProduct, isAdded: true }
     }
 
   case 'DELETE_PRODUCT':

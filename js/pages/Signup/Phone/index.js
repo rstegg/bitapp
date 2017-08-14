@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
+import { NavigationActions } from 'react-navigation'
 
 import Header from 'components/Header'
 
@@ -10,17 +11,24 @@ import styles from './Styles'
 
 import { signupPhoneSubmit } from 'actions/signup'
 
+const navigateToVerify = navigation => navigation.dispatch(NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'SignupVerifyScreen'})
+  ]
+}))
+
 class SignupPhone extends Component {
   componentWillMount() {
     const { navigation, signupPage } = this.props
     if(signupPage === 'signupVerify') {
-      navigation.navigate('SignupVerifyScreen')
+      navigateToVerify(navigation)
     }
   }
   componentWillUpdate(nextProps) {
     const { navigation, signupPage } = nextProps
     if(signupPage === 'signupVerify') {
-      navigation.navigate('SignupVerifyScreen')
+      navigateToVerify(navigation)
     }
   }
   render() {

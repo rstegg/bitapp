@@ -13,8 +13,8 @@ import { get, post, imagePost, put, remove } from './helpers/req'
 const api = {
   fetchProducts: ({ user }) =>
     get('products', user.token),
-  createProduct: ({ product, user }) =>
-    post('products', { product }, user.token),
+  createProduct: ({ product, item, user }) =>
+    post('products', { product, item }, user.token),
   editProduct: ({ product, user }) =>
     put(`products/${product.id}`, { product }, user.token),
   deleteProduct: ({ productId, user }) =>

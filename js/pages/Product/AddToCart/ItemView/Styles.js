@@ -9,7 +9,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.grey,
   },
-  checkoutRow: {
+  itemRow: {
     flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -30,30 +30,16 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   infoText: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  detailsText: {
-    flex: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
+    flexGrow: 1,
+    padding: 10,
+    paddingHorizontal: 15,
   },
   name: {
-    fontSize: 12,
+    fontSize: 18,
     padding: 5,
   },
-  price: {
-    fontSize: 12,
-    padding: 5,
-  },
-  quantity: {
-    fontSize: 12,
-    padding: 5,
-  },
-  total: {
-    fontSize: 12,
+  details: {
+    fontSize: 14,
     padding: 5,
   },
   options: {

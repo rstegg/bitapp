@@ -21,7 +21,7 @@ const LaunchScreen = ({ navigation }) =>
         <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.dispatch(NavigationActions.reset({
           index: 0,
           actions: [
-            NavigationActions.navigate({ routeName: 'SignupSuccessScreen'})
+            NavigationActions.navigate({ routeName: 'HomeScreen'})
           ]
         }))}>
           <Image source={Images.home} style={styles.buttonImage}  />

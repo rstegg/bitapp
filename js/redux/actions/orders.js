@@ -1,3 +1,11 @@
+export const addToCart = product =>
+({
+  type: 'ADD_TO_CART',
+  payload: {
+    product
+  }
+})
+
 export const onCheckoutSubmit = (cart, user) =>
 ({
   type: 'ON_CHECKOUT_SUBMIT',

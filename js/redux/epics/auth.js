@@ -10,7 +10,7 @@ const getError = path([ 'response', 'body', 'error' ])
 
 const api = {
   login: ({ phone, password }) =>
-    openPost('auth/login', { username, password }),
+    openPost('auth/login', { phone, password }),
   loginForgot: ({ phone }) =>
     openPost('auth/forgot', { phone }),
   signup: ({ user }) =>
@@ -23,12 +23,13 @@ const api = {
 
 const loginSubmit = action$ =>
   action$.ofType('LOGIN_SUBMIT')
-    .mergeMap(action =>
-      api.login(action.payload)
+    .mergeMap(action => {console.log(action)
+      return api.login(action.payload)
+        .do(console.log)
         .map(loginSuccess)
         .catch(res => Observable.of(
           loginFailure(getError(res))
-        ))
+        ))}
     )
 
 const loginForgotSubmit = action$ =>

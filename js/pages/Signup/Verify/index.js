@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
+import { NavigationActions } from 'react-navigation'
 
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
@@ -11,11 +12,18 @@ import styles from './Styles'
 
 import { signupVerifySubmit } from 'actions/signup'
 
+const navigateToSuccess = navigation => navigation.dispatch(NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'SignupSuccessScreen'})
+  ]
+}))
+
 class SignupVerify extends Component {
   componentWillUpdate(nextProps) {
     const { navigation, signupPage } = nextProps
     if(signupPage === 'signupSuccess') {
-      navigation.navigate('SignupSuccessScreen')
+      navigateToSuccess(navigation)
     }
   }
   render() {

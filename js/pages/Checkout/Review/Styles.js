@@ -40,5 +40,11 @@ export default StyleSheet.create({
   },
   statusText: {
     fontSize: 16,
-  }
+  },
+  centered: {
+    alignItems: 'center'
+  },
+  headerText: {
+    fontSize: 18
+  },
 })

@@ -5,8 +5,6 @@ import { Field, reduxForm } from 'redux-form'
 import TextField from 'components/TextField'
 import Text from 'components/BitKitText'
 
-import { loginSubmit } from 'actions/login'
-
 import styles from './Styles'
 
 const LoginField = ({ name, autoFocus, keyboardType, label, password, forgotButton }) =>
@@ -34,10 +32,6 @@ const LoginForm = ({ handleSubmit, submitting, navigation }) =>
       forgotButton={<ForgotButton onPress={() => navigation.navigate('LoginForgotScreen')}/>} />
   </View>
 
-const onSubmit = ({ phone, password }, dispatch) =>
-  dispatch(loginSubmit({ phone, password }))
-
 export default reduxForm({
-  form: 'login',
-  onSubmit
+  form: 'login'
 })(LoginForm)

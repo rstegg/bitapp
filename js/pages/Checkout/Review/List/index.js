@@ -66,7 +66,7 @@ class List extends Component {
   renderList() {
     return <ListView key='items-list'
               style={styles.list}
-              dataSource={this.props.items}
+              dataSource={this.props.products}
               renderRow={this.renderRow.bind(this)}
               keyboardDismissMode='on-drag'
               keyboardShouldPersistTaps={true}
@@ -78,7 +78,7 @@ class List extends Component {
     let content
     if(this.props.isLoading) {
       content = <Loader />
-    } else if(this.props.cart.getRowCount() > 0) {
+    } else if(this.props.products.getRowCount() > 0) {
       content = this.renderList()
     } else {
       content = this.renderIntro()
@@ -97,7 +97,7 @@ const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1
 const mapStateToProps = ({ orders }) =>
 ({
   isLoading: orders.cart.isLoading,
-  cart: dataSource.cloneWithRows(orders.cart.products),
+  products: dataSource.cloneWithRows(orders.cart.products),
 })
 
 const mapDispatchToProps = dispatch =>

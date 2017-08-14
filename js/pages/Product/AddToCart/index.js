@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { InteractionManager, TouchableWithoutFeedback, Platform, Image, View } from 'react-native'
 import { connect } from 'react-redux'
-import { submit } from 'redux-form'
+import { submit, formValueSelector } from 'redux-form'
 import { NavigationActions } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
@@ -15,20 +15,20 @@ import Loader from 'components/Loader'
 import { Images, Metrics } from 'themes'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
-import CreateProductForm from './Form'
+import AddToCartForm from './Form'
 import ItemView from './ItemView'
 import styles from './Styles'
 
-import { createProduct } from 'actions/products'
+import { addToCart } from 'actions/orders'
 
-const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
+const navigateToCart = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
   actions: [
-    NavigationActions.navigate({ routeName: 'HomeScreen'})
+    NavigationActions.navigate({ routeName: 'CheckoutReviewScreen'})
   ]
 }))
 
-class CreateProduct extends Component {
+class AddToCart extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -43,12 +43,12 @@ class CreateProduct extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.item.isCreated) {
-      navigateToHome(this.props.navigation)
+    if(nextProps.product.isAdded) {
+      navigateToCart(this.props.navigation)
     }
   }
 
-  selectOptions(item) {
+  selectOptions(product) {
     ActionSheetIOS.showActionSheetWithOptions({
       options: OPTIONS,
       cancelButtonIndex: CANCEL_INDEX,
@@ -57,13 +57,13 @@ class CreateProduct extends Component {
     (buttonIndex) => {
       switch(buttonIndex) {
         case DUPLICATE_INDEX:
-          this.props.duplicateItem(item)
+          this.props.duplicateItem(product)
           break
         case DELETE_INDEX:
-          this.props.deleteItem(item)
+          this.props.deleteItem(product)
           break
         case EDIT_INDEX:
-          this.props.setActiveItem(item)
+          this.props.setActiveItem(product)
           this.props.navigation.navigate('EditItem')
           break
       }
@@ -74,8 +74,8 @@ class CreateProduct extends Component {
     this.refs[nextField].focus()
   }
   render() {
-    const { user, item, product, createProduct, saveProduct, isLoading, navigation } = this.props
-    if(!item) {
+    const { user, product, quantity, addToCart, saveToCart, isLoading, navigation } = this.props
+    if(!product) {
       navigation.navigate('HomeScreen')
     }
     if(this.state.renderPlaceholderOnly) {
@@ -86,28 +86,28 @@ class CreateProduct extends Component {
         <Header
           left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
           center={<Header.Logo />}
-          right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveProduct()} />} />
-          <ItemView item={item} onOptionsBtnPress={() => this.selectOptions(item)} />
-          <CreateProductForm onSubmit={product => createProduct({...product, unit: product.unit || 'unit'}, item, user)} />
+          right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveToCart()} />} />
+          <ItemView item={product.item} onOptionsBtnPress={() => this.selectOptions(product.item)} />
+          <AddToCartForm onSubmit={values => addToCart({...product, ...values})} />
+          <Text>Total: ${quantity * product.unitPrice}</Text>
       </View>
     )
   }
 }
 
-const mapStateToProps = ({ user, items, products }) =>
+const selector = formValueSelector('addToCart')
+
+const mapStateToProps = ({ user, products, orders, ...state }) =>
 ({
-  errors: products.newProduct.errors,
-  isLoading: products.newProduct.isLoading,
-  isImageLoading: products.newProduct.isImageLoading,
-  product: products.newProduct,
-  item: items.activeItem,
-  user
+  product: products.activeProduct,
+  user,
+  quantity: selector(state, 'quantity')
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  saveProduct: () => dispatch(submit('createProduct')),
-  createProduct: (product, item, user) => dispatch(createProduct(product, item, user))
+  saveToCart: () => dispatch(submit('addToCart')),
+  addToCart: product => dispatch(addToCart(product))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(AddToCart)

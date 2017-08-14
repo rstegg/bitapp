@@ -2,7 +2,8 @@ export const loginSubmit = user =>
 ({
   type: 'LOGIN_SUBMIT',
   payload: {
-    user
+    phone: user.phone,
+    password: user.password
   }
 })
 
@@ -10,7 +11,8 @@ export const loginSuccess = res =>
 ({
   type: 'LOGIN_SUCCESS',
   payload: {
-    user: res.body.user
+    user: res.body.user,
+    token: res.body.token
   }
 })
 

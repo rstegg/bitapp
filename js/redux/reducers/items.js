@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
     case 'CREATE_ITEM':
       return { ...state, newItem: { ...state.item, isLoading: true, errors: { } } }
     case 'CREATE_ITEM_SUCCESS':
-      return { ...state, newItem: { ...state.item, isLoading: false }, activeItem: action.payload.item }
+      return { ...state, newItem: { ...state.item, isLoading: false, isCreated: true }, activeItem: action.payload.item }
     case 'CREATE_ITEM_FAILURE':
       return { ...state, newItem: { ...state.item, isLoading: false } }
 
