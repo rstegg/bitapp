@@ -9,9 +9,9 @@ const validFields = curryN(1, (fields, p) =>
       fields.map(field => validField(field))
     )
   )
-  :
-  allPass(
-    fields.map(field => validField(field))
-  ))
+    :
+    allPass(
+      fields.map(field => validField(field))
+    ))
 
 module.exports = validFields

@@ -1,9 +1,9 @@
 const Models = require('../../models')
 const { item } = Models
 
-const productParams = ['name', 'description', 'image']
+const productParams = [ 'name', 'description', 'image' ]
 
 module.exports = (req, res) =>
   item.getItemsByUser(req.user)
-  .then(items => res.status(200).json({items}))
-  .catch(error => res.status(400).json({error}))
+    .then(items => res.status(200).json({ items }))
+    .catch(error => res.status(400).json({ error }))

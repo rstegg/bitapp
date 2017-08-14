@@ -13,6 +13,7 @@ const validFields = require('../middleware/valid-fields')
 
 const validProduct = validFields(['name'], 'item')
 
+
 module.exports =
   router
     .use(passport.authenticate('jwt', { session: false }))

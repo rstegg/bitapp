@@ -1,4 +1,4 @@
-const ItemAttributes = ['name', 'description', 'image']
+const ItemAttributes = [ 'id', 'name', 'description', 'image' ]
 
 module.exports = function(sequelize, DataTypes) {
   const Item = sequelize.define('item', {
@@ -26,10 +26,10 @@ module.exports = function(sequelize, DataTypes) {
       where: { userId: user.id },
       attributes: ItemAttributes
     })
-    .then(items =>
-      !items ? Promise.reject('No items')
-      : items
-    )
+      .then(items =>
+        !items ? Promise.reject('No items')
+          : items
+      )
 
   return Item
 }

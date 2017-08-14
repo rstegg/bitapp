@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = function(sequelize, DataTypes) {
   var OrderDetail = sequelize.define('orderDetail', {
     pricePerUnit: DataTypes.DECIMAL,
@@ -12,5 +12,5 @@ module.exports = function(sequelize, DataTypes) {
     OrderDetail.belongsTo(models.user)
     OrderDetail.belongsTo(models.product)
   }
-  return OrderDetail;
-};
+  return OrderDetail
+}
