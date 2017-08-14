@@ -11,7 +11,7 @@ const validateBody = require('../middleware/validate-body')
 const validateParams = require('../middleware/validate-params')
 const validFields = require('../middleware/valid-fields')
 
-const validItem = validFields(['name'], 'item')
+const validItem = validFields([ 'name' ], 'item')
 
 module.exports =
   router

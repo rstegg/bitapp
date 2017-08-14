@@ -19,11 +19,11 @@ module.exports =
       phone
     )
     .post('/verify',
-      validateBody(validFields(['code', 'phone'])),
+      validateBody(validFields([ 'code', 'phone' ])),
       verify
     )
     .post('/signup',
-      validateBody(validFields(['name', 'password'], 'user')),
+      validateBody(validFields([ 'name', 'password' ], 'user')),
       signup
     )
     .post('/login',

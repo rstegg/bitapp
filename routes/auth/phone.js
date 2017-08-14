@@ -5,13 +5,13 @@ const { length } = require('ramda')
 const validatePhone = p =>
   new Promise((resolve, reject) => {
     const phone = p.trim().replace(/^\D+/g, '').replace(/ /g,'')
-    if(phone.startsWith('1')) {
-      if(length(phone) === 11) {
+    if (phone.startsWith('1')) {
+      if (length(phone) === 11) {
         resolve('+' + phone)
       }
       reject('bad number')
     }
-    if(length(phone) === 10) {
+    if (length(phone) === 10) {
       resolve('+1' + phone)
     }
     reject('bad number')
@@ -32,4 +32,4 @@ module.exports = (req, res) =>
       })
       return res.json({ phone: user.phone })
     })
-    .catch(error => res.status(400).json({error}))
+    .catch(error => res.status(400).json({ error }))

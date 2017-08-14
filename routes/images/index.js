@@ -16,7 +16,7 @@ module.exports =
     )
     .post('/:itemid',
       upload.single('image'),
-      updateItemImage
+      updateImage
     )
     .delete('/:itemid',
       remove

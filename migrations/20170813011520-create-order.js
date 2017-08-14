@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   up: function(queryInterface, Sequelize) {
     return queryInterface.createTable('orders', {
@@ -30,9 +30,9 @@ module.exports = {
           key: 'id'
         }
       },
-    });
+    })
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Orders');
+    return queryInterface.dropTable('Orders')
   }
-};
+}

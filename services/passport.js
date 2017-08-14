@@ -14,22 +14,22 @@ module.exports = () => {
   const { Strategy: LocalStrategy } = passportLocal
 
   const localStrategy = new LocalStrategy({
-    usernameField: "phone", passwordField: "password"
+    usernameField: 'phone', passwordField: 'password'
   }, function(phone, password, done) {
-      user.findOne({ where: { phone: phone } })
-        .then(function (user) {
-          if (!user) return done(null, false, { error: 'Incorrect username' })
+    user.findOne({ where: { phone: phone } })
+      .then(function (user) {
+        if (!user) { return done(null, false, { error: 'Incorrect username' }) }
 
-          user.validPassword(password)
-            .then((valid) => {
-              if(!valid)  return done(null, false, { error: 'Incorrect password' })
-              return done(null, user)
-            })
-        })
-        .catch(function(err) {
-          return done(err)
-        })
-    }
+        user.validPassword(password)
+          .then((valid) => {
+            if (!valid)  { return done(null, false, { error: 'Incorrect password' }) }
+            return done(null, user)
+          })
+      })
+      .catch(function(err) {
+        return done(err)
+      })
+  }
   )
 
   const jwtOptions = {}
@@ -38,10 +38,10 @@ module.exports = () => {
   jwtOptions.ignoreExpiration = true
 
   const jwtStrategy = new JwtStrategy(jwtOptions,
-    function(jwt_payload, done) {
-      user.findById(jwt_payload.id)
+    function(jwtPayload, done) {
+      user.findById(jwtPayload.id)
         .then(function(user) {
-          if(!user) {
+          if (!user) {
             return done(null, false, { error: 'Invalid token' })
           }
           return done(null, user)

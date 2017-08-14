@@ -8,5 +8,5 @@ module.exports = (req, res) =>
     image: req.body.item.image || '',
     userId: req.user.id,
   })
-  .then(item => res.status(200).json({item}))
-  .catch(errors => res.status(400).json({errors}))
+    .then(item => res.status(200).json({ item }))
+    .catch(errors => res.status(400).json({ errors }))

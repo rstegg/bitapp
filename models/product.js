@@ -1,4 +1,4 @@
-const ProductAttributes = ['unit', 'unitPrice']
+const ProductAttributes = [ 'unit', 'unitPrice' ]
 
 module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('product', {
@@ -20,16 +20,16 @@ module.exports = function(sequelize, DataTypes) {
   Product.getProductsByUser = (user, Item) =>
     Product.findAll({
       where: { userId: user.id },
-      include: [{
+      include: [ {
         model: Item,
-        attributes: ['name', 'description', 'image']
-      }],
+        attributes: [ 'name', 'description', 'image' ]
+      } ],
       attributes: ProductAttributes
     })
-    .then(products =>
-      !products ? Promise.reject('No products')
-      : products
-    )
+      .then(products =>
+        !products ? Promise.reject('No products')
+          : products
+      )
 
   return Product
 }

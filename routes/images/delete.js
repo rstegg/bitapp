@@ -13,8 +13,8 @@ const remove = (file) => {
 }
 
 module.exports = (req, res) => {
-  Item.findOne({where: {id: req.params.id}})
-  .then((item) => remove(item.image))
-  .then(()=> res.status(200).json({success: true}))
-  .catch((error) => res.status(400).json({error}))
+  Item.findOne({ where: { id: req.params.id } })
+    .then((item) => remove(item.image))
+    .then(() => res.status(200).json({ success: true }))
+    .catch((error) => res.status(400).json({ error }))
 }

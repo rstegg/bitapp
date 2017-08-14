@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = function(sequelize, DataTypes) {
   var Payment = sequelize.define('payment', {
     date: DataTypes.DATE,
@@ -14,5 +14,5 @@ module.exports = function(sequelize, DataTypes) {
     Payment.belongsTo(models.order)
   }
 
-  return Payment;
-};
+  return Payment
+}
