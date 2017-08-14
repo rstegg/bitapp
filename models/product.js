@@ -1,15 +1,9 @@
-const ProductAttributes = ['unit', 'unitPrice', 'code']
+const ProductAttributes = [ 'id', 'unit', 'unitPrice', 'code' ]
 
 module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('product', {
-    unit: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    unitPrice: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
+    unit: DataTypes.STRING,
+    unitPrice: DataTypes.STRING,
     code: {
       type: DataTypes.STRING,
       allowNull: true

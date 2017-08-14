@@ -1,10 +1,9 @@
 const Models = require('../../models')
 const { product } = Models
 
-module.exports = (req, res) => {
-  console.log(req.body)
+module.exports = (req, res) =>
   product.create({
-    code: req.body.code,
+    code: req.body.product.code,
     unit: req.body.product.unit,
     unitPrice: req.body.product.price,
     itemId: req.body.item.id,
@@ -12,4 +11,3 @@ module.exports = (req, res) => {
   })
     .then(product => res.status(200).json({ product }))
     .catch(errors => res.status(400).json({ errors }))
-}
