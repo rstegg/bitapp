@@ -38,5 +38,5 @@
 -  **post** `/payment/request`
   - **params**  
     - **currency** LTC | BTC
-    - **order** Array of {productId, quantity}
+    - **order** Array of {product, quantity}
   - **returns** {order, payment }
