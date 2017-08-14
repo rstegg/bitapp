@@ -11,11 +11,11 @@ module.exports = {
       },
       unit: {
         type: Sequelize.STRING,
-        unique: true
+        allowNull: false
       },
       unitPrice: {
         type: Sequelize.STRING,
-        allowNull: true
+        allowNull: false
       },
       userId: {
         allowNull: false,

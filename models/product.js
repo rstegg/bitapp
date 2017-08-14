@@ -4,11 +4,11 @@ module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('product', {
     unit: {
       type: DataTypes.STRING,
-      unique: true
+      allowNull: false
     },
     unitPrice: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     code: {
       type: DataTypes.STRING,
