@@ -9,6 +9,6 @@ module.exports = (req, res) =>{
     itemId: req.body.item.id,
     userId: req.user.id,
   })
-  .then(product => {console.log(product); res.status(200).json({product})})
+  .then(product => res.status(200).json({product}))
   .catch(errors => res.status(400).json({errors}))
 }
