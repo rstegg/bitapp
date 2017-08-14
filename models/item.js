@@ -1,4 +1,4 @@
-const ItemAttributes = ['name', 'description', 'image']
+const ItemAttributes = ['id', 'name', 'description', 'image']
 
 module.exports = function(sequelize, DataTypes) {
   const Item = sequelize.define('item', {
