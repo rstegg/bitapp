@@ -1,5 +1,5 @@
-const ProductAttributes = [ 'id', 'unit', 'unitPrice', 'code' ]
-
+const ProductAttributes = ['id', 'unit', 'unitPrice', 'code']
+const {propEq, find} = require('ramda')
 module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('product', {
     unit: DataTypes.STRING,
@@ -43,5 +43,14 @@ module.exports = function(sequelize, DataTypes) {
       : products
     )
 
+  Product.prototype.makeDetails = function (details) {
+    const {quantity} = find(propEq('id', this.id))
+    return {
+      productId: this.id,
+      total: this.unitPrice * quantity,
+      userId: this.userId,
+      quantity: quantity
+    }
+  };
   return Product
 }
