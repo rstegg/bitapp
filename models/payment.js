@@ -1,7 +1,6 @@
 'use strict'
 module.exports = function(sequelize, DataTypes) {
   var Payment = sequelize.define('payment', {
-    date: DataTypes.DATE,
     currency: DataTypes.STRING,
     amountUSD: DataTypes.DECIMAL,
     status: DataTypes.STRING,

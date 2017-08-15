@@ -6,26 +6,22 @@ const { payment, order } = Models
 /**
  * products {orderId, currency}
  */
-module.exports = (req, res) => {
-  const paymentObj = order.findById(req.body.orderId)
-  .then((order) => {
-    return {
-      status: 'pending',
-      userId: req.user.id,
-      orderId: req.body.orderId,
-      currency: req.body.currency,
-      amountUSD: order.totalUSD,
-    }
-  })
-  const paymentRequest = paymentObj
-    .then(({amountUSD, currency}) =>
-      bitapi.startPayment(1, currency, amountUSD)
-    )
-  P.all([paymentObj, paymentRequest])
-  .then((paymentObj, request)=>
-    payment.create(merge(payment, request), {raw: true})
-    .then(merge(request))
-  )
-  .then(payment => res.status(200).json({ payment }))
-  .catch(errors => res.status(400).json({ errors }))
-}
+
+module.exports = (req, res) =>
+  order.findById(req.body.orderId)
+    .then(foundOrder => {
+      const orderObj = {
+        status: 'pending',
+        userId: req.user.id,
+        orderId: foundOrder.id,
+        currency: req.body.currency,
+        amountUSD: foundOrder.totalUSD,
+      }
+      const requestObj = bitapi.startPayment(1, req.body.currency, foundOrder.totalUSD)
+
+      return P.all([orderObj, requestObj])
+        .then((orderObj, requestObj) => payment.create(merge(orderObj, requestObj)))
+        .then(merge(requestObj))
+        .then(payment => res.status(200).json({ payment }))
+        .catch(errors => res.status(400).json({ errors }))
+    })
