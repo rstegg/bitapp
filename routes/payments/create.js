@@ -13,7 +13,6 @@ module.exports = (req, res) => {
       status: 'pending',
       userId: req.user.id,
       orderId: req.body.orderId,
-      date: Date.now(),
       currency: req.body.currency,
       amountUSD: order.totalUSD,
     }
