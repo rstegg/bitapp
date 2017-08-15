@@ -2,8 +2,7 @@ const P = require('bluebird')
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return P.
-     queryInterface.addColumn('products', 'code', {
+    return queryInterface.addColumn('products', 'code', {
       type: Sequelize.STRING,
       allowNull: true,
       unique: true

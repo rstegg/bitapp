@@ -8,20 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      totalUSD: {
-        type: Sequelize.DECIMAL
-      },
-      date: {
-        type: Sequelize.DATE
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
+      totalUSD: Sequelize.DECIMAL,
+      products: Sequelize.ARRAY(Sequelize.JSONB),
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE,
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,

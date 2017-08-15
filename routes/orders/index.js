@@ -1,13 +1,12 @@
 const router = require('express').Router()
 const passport = require('passport')
-const { path, isNil } = require('ramda')
 
 const createOrder = require('./create')
 
 const validateBody = require('../middleware/validate-body')
-const validFields = require('../middleware/valid-fields')
+const validField = require('../middleware/valid-field')
 
-const validOrder = validFields(['products'])
+const validOrder = validField('products')
 
 module.exports =
   router
