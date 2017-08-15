@@ -19,9 +19,8 @@ module.exports = (req, res) =>
       }
       const requestObj = bitapi.startPayment(1, req.body.currency, foundOrder.totalUSD)
 
-      return P.all([orderObj, requestObj])
-        .then((orderObj, requestObj) => payment.create(merge(orderObj, requestObj)))
-        .then(merge(requestObj))
-        .then(payment => res.status(200).json({ payment }))
-        .catch(errors => res.status(400).json({ errors }))
+      return requestObj
+        .then(newRequest => payment.create(merge(orderObj, newRequest)))
     })
+    .then(newPayment => { console.log(newPayment); res.json({ payment: newPayment }) })
+    .catch(errors => { console.log(errors); res.status(400).json({ errors }) })
