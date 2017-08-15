@@ -22,8 +22,9 @@ import { uploadNewItemImage, removeNewItemImage, createItem } from 'actions/item
 
 const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
+  params: { tab: 'ItemsScreen' },
   actions: [
-    NavigationActions.navigate({ routeName: 'HomeScreen'})
+    NavigationActions.navigate({ routeName: 'HomeScreen' })
   ]
 }))
 

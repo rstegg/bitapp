@@ -24,9 +24,9 @@ export default (state = initialState, action) => {
   case 'UPDATE_PRODUCT':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: true } }
   case 'CREATE_PRODUCT_SUCCESS':
-    return { ...state, activeProduct: { ...action.payload.product, isLoading: false, isNew: true } }
+    return { ...state, newProduct: { ...action.payload.product, isLoading: false, isCreated: true } }
   case 'UPDATE_PRODUCT_SUCCESS':
-    return { ...state, activeProduct: { ...action.payload.product, isLoading: false, isNew: false } }
+    return { ...state, activeProduct: { ...action.payload.product, isLoading: false, isCreated: false } }
   case 'CREATE_PRODUCT_FAILURE':
   case 'UPDATE_PRODUCT_FAILURE':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }

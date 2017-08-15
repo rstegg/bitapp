@@ -5,7 +5,9 @@ import {
   editItemSuccess,
   deleteItemSuccess,
   uploadItemImageSuccess,
-  uploadActiveItemImageSuccess
+  uploadActiveItemImageSuccess,
+  removeNewItemImageSuccess,
+  removeActiveItemImageSuccess
 } from 'actions/items'
 import { Observable } from 'rxjs/Rx'
 import { get, post, imagePost, put, remove } from './helpers/req'
@@ -19,10 +21,12 @@ const api = {
     put(`items/${item.id}`, { item }, user.token),
   deleteItem: ({ itemId, user }) =>
     remove(`items/${itemId}`, user.token),
-  uploadItemImage: ({ image, user }) =>
-    imagePost('image/item', image, user.token),
+  uploadNewItemImage: ({ image, user }) =>
+    imagePost('images', image, user.token),
   uploadActiveItemImage: ({ image, itemId, user }) =>
-    imagePost(`image/item/${itemId}`, image, user.token),
+    imagePost(`images/${itemId}`, image, user.token),
+  removeActiveItemImage: ({ itemId, user }) =>
+    remove(`images/${itemId}`, user.token),
 }
 
 const fetchItems = action$ =>
@@ -69,24 +73,46 @@ const deleteItem = action$ =>
         }))
       )
 
-const uploadItemImage = action$ =>
-  action$.ofType('UPLOAD_ITEM_IMAGE')
+const uploadNewItemImage = action$ =>
+  action$.ofType('UPLOAD_NEW_ITEM_IMAGE')
     .mergeMap(action =>
-      api.uploadItemImage(action.payload)
-        .map(uploadItemImageSuccess)
+      api.uploadNewItemImage(action.payload)
+        .map(uploadNewItemImageSuccess)
         .catch(error => Observable.of({
-          type: 'UPLOAD_ITEM_IMAGE_FAILURE',
+          type: 'UPLOAD_NEW_ITEM_IMAGE_FAILURE',
           payload: { error }
         }))
       )
 
 const uploadActiveItemImage = action$ =>
-  action$.ofType('UPLOAD_EDIT_ITEM_IMAGE')
+  action$.ofType('UPLOAD_ACTIVE_ITEM_IMAGE')
     .mergeMap(action =>
       api.uploadActiveItemImage(action.payload)
         .map(uploadActiveItemImageSuccess)
         .catch(error => Observable.of({
-          type: 'UPLOAD_EDIT_ITEM_IMAGE_FAILURE',
+          type: 'UPLOAD_ACTIVE_ITEM_IMAGE_FAILURE',
+          payload: { error }
+        }))
+      )
+
+const removeNewItemImage = action$ =>
+  action$.ofType('REMOVE_NEW_ITEM_IMAGE')
+    .mergeMap(action =>
+      api.removeNewItemImage(action.payload)
+        .map(removeNewItemImageSuccess)
+        .catch(error => Observable.of({
+          type: 'REMOVE_NEW_ITEM_IMAGE_FAILURE',
+          payload: { error }
+        }))
+      )
+
+const removeActiveItemImage = action$ =>
+  action$.ofType('REMOVE_ACTIVE_ITEM_IMAGE')
+    .mergeMap(action =>
+      api.removeActiveItemImage(action.payload)
+        .map(removeActiveItemImageSuccess)
+        .catch(error => Observable.of({
+          type: 'REMOVE_ACTIVE_ITEM_IMAGE_FAILURE',
           payload: { error }
         }))
       )
@@ -96,6 +122,8 @@ export default combineEpics(
   createItem,
   editItem,
   deleteItem,
-  uploadItemImage,
-  uploadActiveItemImage
+  uploadNewItemImage,
+  uploadActiveItemImage,
+  removeNewItemImage,
+  removeActiveItemImage
 )

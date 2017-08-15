@@ -1,13 +1,16 @@
 import { combineEpics } from 'redux-observable'
 import {
   checkoutSuccess,
+  currencySuccess,
 } from 'actions/orders'
 import { Observable } from 'rxjs/Rx'
 import { get, post, imagePost, put, remove } from './helpers/req'
 
 const api = {
-  checkout: ({ cart, user }) =>
-    post('payment/request', { cart }, user.token),
+  checkout: ({ products, user }) =>
+    post('orders', { products }, user.token),
+  currency: ({ currency, orderId, user }) =>
+    post('payments', { currency, orderId }, user.token),
 }
 
 const checkoutSubmit = action$ =>
@@ -21,6 +24,18 @@ const checkoutSubmit = action$ =>
         }))
       )
 
+const currencySubmit = action$ =>
+  action$.ofType('CURRENCY_SUBMIT')
+    .mergeMap(action =>
+      api.currency(action.payload)
+        .map(currencySuccess)
+        .catch(error => Observable.of({
+          type: 'CURRENCY_FAILURE',
+          payload: { error }
+        }))
+      )
+
 export default combineEpics(
-  checkoutSubmit
+  checkoutSubmit,
+  currencySubmit,
 )

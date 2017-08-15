@@ -5,9 +5,11 @@ export default StyleSheet.create({
   ...BaseStyles.screen,
   buttonGroup: {
     flex: 1,
+    flexDirection: 'row',
     width: Metrics.screenWidth,
     backgroundColor: Colors.transparent,
-    justifyContent: 'space-between'
+    justifyContent: 'space-around',
+    paddingVertical: 25,
   },
   addressContainer: {
     paddingBottom: Metrics.baseMargin

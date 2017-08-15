@@ -5,8 +5,6 @@ import {
   createProductSuccess,
   editProductSuccess,
   deleteProductSuccess,
-  uploadProductImageSuccess,
-  uploadActiveProductImageSuccess
 } from 'actions/products'
 import { Observable } from 'rxjs/Rx'
 import { get, post, imagePost, put, remove } from './helpers/req'
@@ -19,9 +17,9 @@ const api = {
   editProduct: ({ product, user }) =>
     put(`products/${product.id}`, { product }, user.token),
   searchProducts: ({ keyword }) =>
-    put(`products/search/keyword`, { keyword }, user.token),
+    put('products/search/keyword', { keyword }, user.token),
   searchCodeProducts: ({ code }) =>
-    put(`products/search/code`, { code }, user.token),
+    put('products/search/code', { code }, user.token),
   deleteProduct: ({ productId, user }) =>
     remove(`products/${productId}`, user.token)
 }

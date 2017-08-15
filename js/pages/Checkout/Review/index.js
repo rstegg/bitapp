@@ -1,26 +1,39 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
+import { length } from 'ramda'
 
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
-import { onCheckoutSubmit } from 'actions/orders'
+import { checkoutSubmit } from 'actions/orders'
 
 import CheckoutList from './List'
 import styles from './Styles'
 
-const ReviewCheckout = ({ cart, user, isLoading, checkoutSubmit, navigation }) =>
-  <View>
-    <Header
-      left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
-      center={<Header.Logo />}
-      right={<Header.TextButton text='Checkout' isLoading={isLoading} onPress={() => isLoading ? null : onCheckoutSubmit(cart, user)} />} />
-      <View style={styles.centered}>
-        <Text style={styles.headerText}>Cart</Text>
+class ReviewCheckout extends Component {
+  componentWillUpdate(nextProps) {
+    if(nextProps.cart.isOrdered) {
+      this.props.navigation.navigate('CheckoutCoinSelectScreen')
+    }
+  }
+  render() {
+    const { cart, user, isLoading, checkoutSubmit, navigation } = this.props
+    return (
+      <View>
+        <Header
+          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          center={<Header.Logo />}
+          right={<Header.TextButton text='Checkout' isLoading={isLoading} onPress={() => isLoading || !length(cart.products) ? null : checkoutSubmit(cart.products, user)} />} />
+          <View style={styles.centered}>
+            <Text style={styles.headerText}>Cart</Text>
+          </View>
+        <CheckoutList />
       </View>
-    <CheckoutList />
-  </View>
+    )
+  }
+}
+
 
 const mapStateToProps = ({ user, orders }) =>
 ({

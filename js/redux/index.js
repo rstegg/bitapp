@@ -13,6 +13,7 @@ import orders from './reducers/orders'
 import authEpics from './epics/auth'
 import itemsEpics from './epics/items'
 import productsEpics from './epics/products'
+import ordersEpics from './epics/orders'
 
 const rootReducer = combineReducers({
   user,
@@ -28,6 +29,7 @@ const rootEpic = combineEpics(
   authEpics,
   itemsEpics,
   productsEpics,
+  ordersEpics,
 )
 
 export default () =>

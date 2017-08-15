@@ -23,8 +23,9 @@ import { createProduct } from 'actions/products'
 
 const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
+  params: { tab: 'ProductsScreen' },
   actions: [
-    NavigationActions.navigate({ routeName: 'HomeScreen'})
+    NavigationActions.navigate({ routeName: 'HomeScreen' })
   ]
 }))
 
@@ -43,7 +44,7 @@ class CreateProduct extends Component {
   }
 
   componentWillUpdate(nextProps) {
-    if(nextProps.item.isCreated) {
+    if(nextProps.product.isCreated) {
       navigateToHome(this.props.navigation)
     }
   }

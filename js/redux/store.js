@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'remote-redux-devtools'
 
 const persistConfig = {
   storage: AsyncStorage,
-  blacklist: []
+  whitelist: ['user']
 }
 
 const composeEnhancers = composeWithDevTools({ realtime: true })
@@ -24,7 +24,7 @@ export default (rootReducer, rootEpic) => {
     )
   )
 
-  persistStore(store, persistConfig).purge()
+  persistStore(store, persistConfig)
 
   return store
 

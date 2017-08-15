@@ -2,11 +2,11 @@ const initialState = {
   cart: {
     isLoading: false,
     products: [],
-
   },
-  address: null,
-  totalPrice: null,
-  checkoutStatus: null,
+  orderId: '',
+  address: '',
+  totalPrice: '',
+  checkoutStatus: '',
   url: ''
 }
 
@@ -19,24 +19,48 @@ export default (state = initialState, action) => {
         products: [ ...state.cart.products, action.payload.product ]
       }
     })
-  case 'ON_CHECKOUT_SUBMIT':
+  case 'CHECKOUT_SUBMIT':
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
         isLoading: true
       }
     })
-  case 'ON_CHECKOUT_SUCCESS':
+  case 'CHECKOUT_SUCCESS':
+    return Object.assign({}, state, {
+      cart: {
+        ...state.cart,
+        isOrdered: true,
+        isLoading: false,
+      },
+      orderId: action.payload.order.id
+    })
+  case 'CHECKOUT_FAILURE':
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
         isLoading: false
       }
     })
-  case 'ON_CHECKOUT_FAILURE':
+  case 'CURRENCY_SUBMIT':
+    return Object.assign({}, state, {
+      isLoading: true
+    })
+  case 'CURRENCY_SUCCESS':
+    return Object.assign({}, state, {
+      isLoading: false,
+      isCreated: true,
+      currency: action.payload.payment.currency,
+      amountUSD: action.payload.payment.amountUSD,
+      amount: action.payload.payment.amount,
+      url: action.payload.payment.url,
+      status: action.payload.payment.status,
+    })
+  case 'CURRENCY_FAILURE':
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
+        isCreated: false,
         isLoading: false
       }
     })

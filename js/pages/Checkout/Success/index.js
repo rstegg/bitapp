@@ -43,21 +43,21 @@ class CheckoutSuccess extends Component {
           center={<Header.Logo />} />
           <Text>Checkout</Text>
           <View style={styles.buttonGroup}>
-            <Text>{this.props.coinType}</Text>
-          </View>
-          <View style={styles.addressContainer}>
-            <Text style={styles.addressLeft}>To:</Text>
-            <Text style={styles.addressRight}>{this.props.address}</Text>
+            <Text>{this.props.currency}</Text>
           </View>
           <View style={styles.priceContainer}>
-            <Text style={styles.priceLeft}>Total Price:</Text>
-            <Text style={styles.priceRight}>{this.props.totalPrice}</Text>
+            <Text style={styles.priceLeft}>Total Price (USD):</Text>
+            <Text style={styles.priceRight}>${this.props.amountUSD}</Text>
+          </View>
+          <View style={styles.priceContainer}>
+            <Text style={styles.priceLeft}>Total Price (BTC):</Text>
+            <Text style={styles.priceRight}>${this.props.amount}</Text>
           </View>
           <View style={styles.qrCodeContainer}>
             <QRCode value={this.props.url} />
           </View>
           <View style={styles.statusContainer}>
-            <Text style={styles.statusText}>{this.props.checkoutStatus}</Text>
+            <Text style={styles.statusText}>{this.props.status}</Text>
           </View>
       </View>
     )
@@ -68,10 +68,11 @@ class CheckoutSuccess extends Component {
 const mapStateToProps = ({ user, orders }) =>
 ({
   user,
-  address: orders.address,
-  totalPrice: orders.totalPrice,
-  checkoutStatus: orders.checkoutStatus,
-  url: orders.url
+  currency: orders.currency,
+  amountUSD: orders.amountUSD,
+  amount: orders.amount,
+  url: orders.url,
+  status: orders.status
 })
 
 export default connect(mapStateToProps)(CheckoutSuccess)
