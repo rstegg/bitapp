@@ -47,7 +47,11 @@ const BaseStyles = {
       ...Fonts.style.h2,
       fontSize: 14,
       color: Colors.text
-    }
+    },
+    bottomContainer: {
+      margin: Metrics.smallMargin,
+      marginBottom: Metrics.doubleSection,
+    },
   },
   darkLabelContainer: {
     padding: Metrics.smallMargin,

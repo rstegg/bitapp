@@ -32,25 +32,16 @@ class LaunchScreen extends Component {
     const { navigation } = this.props
     return (
       <View style={styles.launchContainer}>
-        <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
           <View style={styles.centered}>
             <Image source={Images.launch} style={styles.logo} />
           </View>
 
-          <View style={styles.bottomSection}>
+          <View style={styles.bottomContainer}>
             <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('SignupPhoneScreen')}>
               <Image source={Images.signupButton} style={styles.buttonImage} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('LoginScreen')}>
               <Image source={Images.loginButton} style={styles.buttonImage}  />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.dispatch(NavigationActions.reset({
-              index: 0,
-              actions: [
-                NavigationActions.navigate({ routeName: 'HomeScreen' })
-              ]
-            }))}>
-              <Image source={Images.home} style={styles.buttonImage}  />
             </TouchableOpacity>
           </View>
       </View>
