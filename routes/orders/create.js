@@ -1,36 +1,33 @@
 const Models = require('../../models')
 const { order, product, orderDetail } = Models
-const { compose, apply, objOf, map, prop, props, pluck } = require('ramda')
+const { sum, compose, splitEvery, unnest, map, product: Product, pluck, zip, zipObj } = require('ramda')
+const P = require('bluebird')
 
+const orderDetailAttrs = ['unitPrice','quantity','total']
 
-module.exports = (req, res) => {
-
-  const ids = pluck('id', req.body.products)
-  // get all the products in one query
-  const details = product.findAll({
-    where: {id: { $in: ids, userId: req.user.id}},
-    raw: true
+module.exports = (req, res) =>
+  product.findAll({
+    where: { id: { $in: pluck('id', req.body.products) }, userId: req.user.id }
   })
-  // make the order details array
-  .then((products)=>{
-    map((product) => product.makeDetail(req.body.products))
-  })
+  .then(products => {
+    const quantities = pluck('quantity', req.body.products)
+    const unitPrices = pluck('unitPrice', products)
+    const quantityPrices = zip(quantities, unitPrices)
+    const totals = map(Product, quantityPrices)
+    const totalUSD = sum(totals)
+    const makeDetails = map(zipObj(orderDetailAttrs))
+    const detailsArrNested = zip(quantityPrices, totals)
+    const detailsArr = splitEvery(3, unnest(unnest(detailsArrNested)))
+    const details = makeDetails(detailsArr)
 
-  const order = details
-    .then(compose(sum, pluck('total')))
-    .then((total) =>
-      order.create({
-        userId: req.user.id,
-        totalUSD: total,
-      }, {raw: true}))
+    const newOrder = order.create({
+       totalUSD,
+       userId: req.user.id,
+     }, { raw: true })
 
-  P.all([order, details])
-  // save the details with the order id
-  .then((order, details) => {
-    order.details = map(assoc('orderId', order.id), details)
-    orderDetail.bulkCreate(order.details)
-    return order.details
+    const orderDetails = orderDetail.bulkCreate(details)
+
+    return P.all([newOrder, orderDetails])
   })
-  .then(order => res.json({ order }))
+  .then(([order, orderDetails]) => res.json({ order }))
   .catch(errors => { console.log(errors); res.status(400).json({ errors }) })
-}
