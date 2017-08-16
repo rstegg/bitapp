@@ -42,9 +42,23 @@ export default StyleSheet.create({
     fontSize: 28,
     color: Colors.orange,
   },
+  checkButton: {
+    fontSize: 24,
+    color: Colors.orange
+  },
+  checkButtonDisabled: {
+    fontSize: 24,
+    color: Colors.lightGrey,
+  },
   backButton: {
     width: 25,
     height: 25,
+    marginBottom: 5
+  },
+  forwardButton: {
+    width: 25,
+    height: 25,
+    marginBottom: 5
   },
   item: {
     minWidth: 80,

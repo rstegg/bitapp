@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -50,6 +49,9 @@
 		C2E641F8B7FD449EA5D60F7F /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0105C3065B34C26AF3610B3 /* Zocial.ttf */; };
 		F2469DFE205847C9BE38C8E9 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01EC5C1BC86A46409D0FF349 /* Octicons.ttf */; };
 		FDFF7D16AE27414E96DB775D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CA5E88E99434BC68B506A7D /* MaterialIcons.ttf */; };
+		F9CA72D8B717479C853606ED /* Agenda-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F6BD799B45DF46FCB785CC56 /* Agenda-Bold.ttf */; };
+		CB51242C2DFD4389816EF29B /* Agenda-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B793A8E58104637B637A0F3 /* Agenda-Light.ttf */; };
+		94CB5C67CCD841AF8E5C5B43 /* Agenda-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9CE441422B541E4A55AF48C /* Agenda-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +352,9 @@
 		D835763E122347CEB93EEAAC /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		F0105C3065B34C26AF3610B3 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		FFC4E610EDA94E3C8FE68EBF /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
+		F6BD799B45DF46FCB785CC56 /* Agenda-Bold.ttf */ = {isa = PBXFileReference; name = "Agenda-Bold.ttf"; path = "../assets/fonts/Agenda-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5B793A8E58104637B637A0F3 /* Agenda-Light.ttf */ = {isa = PBXFileReference; name = "Agenda-Light.ttf"; path = "../assets/fonts/Agenda-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D9CE441422B541E4A55AF48C /* Agenda-Medium.ttf */ = {isa = PBXFileReference; name = "Agenda-Medium.ttf"; path = "../assets/fonts/Agenda-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -564,6 +569,9 @@
 				01EC5C1BC86A46409D0FF349 /* Octicons.ttf */,
 				69514D6E669E434EA87B1138 /* SimpleLineIcons.ttf */,
 				F0105C3065B34C26AF3610B3 /* Zocial.ttf */,
+				F6BD799B45DF46FCB785CC56 /* Agenda-Bold.ttf */,
+				5B793A8E58104637B637A0F3 /* Agenda-Light.ttf */,
+				D9CE441422B541E4A55AF48C /* Agenda-Medium.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1088,6 +1096,9 @@
 				F2469DFE205847C9BE38C8E9 /* Octicons.ttf in Resources */,
 				65C83017BECE4CC98F5A9418 /* SimpleLineIcons.ttf in Resources */,
 				C2E641F8B7FD449EA5D60F7F /* Zocial.ttf in Resources */,
+				F9CA72D8B717479C853606ED /* Agenda-Bold.ttf in Resources */,
+				CB51242C2DFD4389816EF29B /* Agenda-Light.ttf in Resources */,
+				94CB5C67CCD841AF8E5C5B43 /* Agenda-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

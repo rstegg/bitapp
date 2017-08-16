@@ -46,12 +46,14 @@ const styles = {
     marginTop: 5,
   },
   textInput: {
-    fontFamily: 'HelveticaNeue-Light',
+    fontFamily: 'Agenda',
+    fontWeight: '100',
     color: '#444',
     fontSize: 18
   },
   floatingLabel: {
-    fontFamily: 'HelveticaNeue-Light',
+    fontFamily: 'Agenda',
+    fontWeight: '100',
     fontSize: 18,
     color: '#666'
   }

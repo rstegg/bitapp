@@ -69,6 +69,9 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Agenda-Bold.ttf</string>
+		<string>Agenda-Light.ttf</string>
+		<string>Agenda-Medium.ttf</string>
 	</array>
 </dict>
 </plist>
