@@ -11,7 +11,7 @@ import { Images } from 'themes'
 
 import styles from './Styles'
 
-const ItemView = ({ item, onOptionsBtnPress }) =>
+const ItemView = ({ item }) =>
   <View style={styles.listRow}>
     <View style={styles.itemRow}>
       <View style={styles.info}>
@@ -21,9 +21,6 @@ const ItemView = ({ item, onOptionsBtnPress }) =>
           <Text numberOfLines={1} style={styles.details}>{item.description}</Text>
         </View>
       </View>
-      <TouchableOpacity style={styles.options} onPress={onOptionsBtnPress}>
-        <IonIcon name='md-more' style={styles.optionsIcon} />
-      </TouchableOpacity>
     </View>
   </View>
 

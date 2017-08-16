@@ -17,7 +17,7 @@ class ReviewCheckout extends Component {
     return (
       <View>
         <Header
-          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack(null)} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Checkout' isLoading={isLoading} onPress={() => isLoading || !length(cart.products) ? null : checkoutSubmit(cart.products, user)} />} />
           <View style={styles.centered}>

@@ -19,7 +19,7 @@ import { searchItems } from 'actions/items'
 
 class Items extends Component {
   static navigationOptions = {
-    tabBarLabel: 'Items',
+    tabBarLabel: 'Inventory',
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
       <Image
@@ -47,6 +47,11 @@ class Items extends Component {
           </View>
         </View>
         <ItemsList navigation={navigation} />
+        <TouchableOpacity onPress={() => navigation.navigate('CreateItemScreen')}>
+          <View style={styles.floatingButton}>
+            <Image source={Images.largePlus} style={styles.largePlus} resizeMode='contain' />
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }

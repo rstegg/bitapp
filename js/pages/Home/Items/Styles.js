@@ -3,10 +3,24 @@ import { Metrics, BaseStyles, Colors } from 'themes'
 
 export default StyleSheet.create({
   ...BaseStyles.screen,
-  loginScreen: {
-    flexGrow: 1,
-    backgroundColor: Colors.lightGrey,
-    height: Metrics.screenHeight,
+  floatingButton: {
+    position: 'absolute',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 0,
+    width: Metrics.screenWidth,
+    height: 100,
+    zIndex: 1,
+  },
+  buttonText: {
+    color: 'white',
+    textAlign: 'left',
+    fontSize: 18,
+  },
+  largePlus: {
+    width: 70,
+    height: 70,
   },
   inputGroup: {
     backgroundColor: 'white',

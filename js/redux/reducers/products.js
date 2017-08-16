@@ -60,7 +60,7 @@ export default (state = initialState, action) => {
     }
   case 'ADD_TO_CART':
     return { ...state,
-      activeProduct: { ...state.activeProduct, isAdded: true }
+      activeProduct: { ...state.activeProduct }
     }
 
   case 'DELETE_PRODUCT':

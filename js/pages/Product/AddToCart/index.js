@@ -21,13 +21,6 @@ import styles from './Styles'
 
 import { addToCart } from 'actions/orders'
 
-const navigateToCart = navigation => navigation.dispatch(NavigationActions.reset({
-  index: 0,
-  actions: [
-    NavigationActions.navigate({ routeName: 'CheckoutScreen' })
-  ]
-}))
-
 class AddToCart extends Component {
   constructor(props) {
     super(props)
@@ -40,12 +33,6 @@ class AddToCart extends Component {
     InteractionManager.runAfterInteractions(() => {
      this.setState({renderPlaceholderOnly: false})
     })
-  }
-
-  componentWillUpdate(nextProps) {
-    if(nextProps.product.isAdded) {
-      navigateToCart(this.props.navigation)
-    }
   }
 
   selectOptions(product) {
@@ -84,12 +71,17 @@ class AddToCart extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack(null)} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveToCart()} />} />
           <ItemView item={product.item} onOptionsBtnPress={() => this.selectOptions(product.item)} />
+          <View style={styles.unitPriceContainer}>
+            <Text style={styles.unitPrice}>${product.unitPrice} per {product.unit}</Text>
+          </View>
           <AddToCartForm onSubmit={values => addToCart({...product, ...values})} />
-          <Text>Total: ${quantity * product.unitPrice}</Text>
+          <View style={styles.totalPriceContainer}>
+            <Text style={styles.totalPriceContainer}>Total: ${quantity * product.unitPrice || 0}</Text>
+          </View>
       </View>
     )
   }

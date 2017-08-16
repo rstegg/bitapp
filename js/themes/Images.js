@@ -24,6 +24,8 @@ const images = {
   closeButton: require('../Images/Icons/close-button.png'),
   productPlaceholder: require('../Images/product-placeholder.png'),
   itemPlaceholder: require('../Images/item-placeholder.png'),
+  largePlus: require('../Images/LargePlus.png'),
+  headerLogo: require('../Images/header-logo.png'),
 }
 
 export default images

@@ -18,6 +18,12 @@ export default (state, action) => {
         state
       )
       break
+    case 'ADD_TO_CART':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'CheckoutScreen' }),
+        state
+      )
+      break
     case 'CHECKOUT_SUCCESS':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'CheckoutCoinSelectScreen' }),

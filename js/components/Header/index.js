@@ -23,7 +23,7 @@ export default Header = ({left, center, right, style}) => {
   )
 }
 
-Header.Logo = () => <Image source={Images.logo} style={styles.logo} resizeMode='contain'/>
+Header.Logo = () => <Image source={Images.headerLogo} style={styles.logo} resizeMode='contain'/>
 
 Header.Text = ({ style, children }) =>
   <View style={{justifyContent: 'center', marginTop: 16,}}>

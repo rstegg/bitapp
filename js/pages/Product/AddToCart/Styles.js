@@ -7,6 +7,24 @@ export default StyleSheet.create({
     flexGrow: 1,
     backgroundColor: Colors.lightGrey
   },
+  unitPriceContainer: {
+    flex: 1,
+    flexGrow: 0.25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  unitPrice: {
+    fontSize: 24
+  },
+  totalPriceContainer: {
+    flexGrow: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 50,
+  },
+  totalPrice: {
+    fontSize: 24
+  },
   addImage: {
     flexGrow: 1
   },

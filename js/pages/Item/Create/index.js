@@ -71,7 +71,7 @@ class CreateItem extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack(null)} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveItem()} />} />
 

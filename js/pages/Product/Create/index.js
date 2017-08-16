@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { InteractionManager, TouchableWithoutFeedback, Platform, Image, View } from 'react-native'
+import { ActionSheetIOS, InteractionManager, TouchableWithoutFeedback, Platform, Image, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 import { NavigationActions } from 'react-navigation'
@@ -35,28 +35,6 @@ class CreateProduct extends Component {
     })
   }
 
-  selectOptions(item) {
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: OPTIONS,
-      cancelButtonIndex: CANCEL_INDEX,
-      destructiveButtonIndex: DELETE_INDEX,
-    },
-    (buttonIndex) => {
-      switch(buttonIndex) {
-        case DUPLICATE_INDEX:
-          this.props.duplicateItem(item)
-          break
-        case DELETE_INDEX:
-          this.props.deleteItem(item)
-          break
-        case EDIT_INDEX:
-          this.props.setActiveItem(item)
-          this.props.navigation.navigate('EditItem')
-          break
-      }
-    })
-  }
-
   focusNextField(nextField) {
     this.refs[nextField].focus()
   }
@@ -71,10 +49,10 @@ class CreateProduct extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack(null)} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveProduct()} />} />
-          <ItemView item={item} onOptionsBtnPress={() => this.selectOptions(item)} />
+          <ItemView item={item} />
           <CreateProductForm onSubmit={product => createProduct({...product, unit: product.unit || 'unit'}, item, user)} />
       </View>
     )
@@ -85,7 +63,6 @@ const mapStateToProps = ({ user, items, products }) =>
 ({
   errors: products.newProduct.errors,
   isLoading: products.newProduct.isLoading,
-  isImageLoading: products.newProduct.isImageLoading,
   product: products.newProduct,
   item: items.activeItem,
   user

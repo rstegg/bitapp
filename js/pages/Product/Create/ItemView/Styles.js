@@ -3,7 +3,6 @@ import { Colors } from 'themes'
 
 export default StyleSheet.create({
   listRow: {
-    flexGrow: 1,
     height: 80,
     marginBottom: 10,
     borderWidth: 1,
