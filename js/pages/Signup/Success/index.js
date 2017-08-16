@@ -15,7 +15,7 @@ import { signupSubmit } from 'actions/signup'
 const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
   actions: [
-    NavigationActions.navigate({ routeName: 'HomeScreen'})
+    NavigationActions.navigate({ routeName: 'HomeScreen' })
   ]
 }))
 

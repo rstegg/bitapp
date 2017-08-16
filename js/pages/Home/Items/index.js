@@ -10,6 +10,7 @@ import Text from 'components/BitKitText'
 import SearchBar from 'components/SearchBar'
 
 import { Images } from 'themes'
+import { resetNewItem } from 'actions/items'
 
 import ItemsList from './List'
 import styles from './Styles'
@@ -28,14 +29,18 @@ class Items extends Component {
     ),
   }
 
+  componentDidMount() {
+    this.props.resetNewItem()
+  }
+
   render() {
     const { isLoading, navigation, searchItems, clearSearch, keyword, user } = this.props
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.AccountButton to={() => navigation.navigate('DrawerOpen')} />}
           center={<Header.Logo />}
-          right={<Header.CartButton to={() => navigation.navigate('CheckoutReviewScreen')}/>} />
+          right={<Header.CartButton to={() => navigation.navigate('CheckoutScreen')}/>} />
         <View style={styles.section}>
           <View style={styles.centered}>
             <SearchBar onSearch={keyword => searchItems(keyword, user)} onCancel={clearSearch} searchTerm={keyword} />
@@ -49,17 +54,20 @@ class Items extends Component {
 
 
 
-const mapStateToProps = ({ user, items }) =>
+const mapStateToProps = ({ user, items, products }) =>
 ({
   errors: user.errors,
   isLoading: user.isLoading,
   user,
-  keyword: items.keyword
+  keyword: items.keyword,
+  item: items.newItem,
+  product: products.newProduct,
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  onSubmit: () => dispatch(submit('login'))
+  onSubmit: () => dispatch(submit('searchItem')),
+  resetNewItem: () => dispatch(resetNewItem())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Items)

@@ -24,7 +24,7 @@ import { addToCart } from 'actions/orders'
 const navigateToCart = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
   actions: [
-    NavigationActions.navigate({ routeName: 'CheckoutReviewScreen'})
+    NavigationActions.navigate({ routeName: 'CheckoutScreen' })
   ]
 }))
 

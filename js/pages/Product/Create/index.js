@@ -21,14 +21,6 @@ import styles from './Styles'
 
 import { createProduct } from 'actions/products'
 
-const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
-  index: 0,
-  params: { tab: 'ProductsScreen' },
-  actions: [
-    NavigationActions.navigate({ routeName: 'HomeScreen' })
-  ]
-}))
-
 class CreateProduct extends Component {
   constructor(props) {
     super(props)
@@ -41,12 +33,6 @@ class CreateProduct extends Component {
     InteractionManager.runAfterInteractions(() => {
      this.setState({renderPlaceholderOnly: false})
     })
-  }
-
-  componentWillUpdate(nextProps) {
-    if(nextProps.product.isCreated) {
-      navigateToHome(this.props.navigation)
-    }
   }
 
   selectOptions(item) {
@@ -77,7 +63,7 @@ class CreateProduct extends Component {
   render() {
     const { user, item, product, createProduct, saveProduct, isLoading, navigation } = this.props
     if(!item) {
-      navigation.navigate('HomeScreen')
+      navigation.goBack()
     }
     if(this.state.renderPlaceholderOnly) {
       return <Loader />

@@ -24,9 +24,9 @@ export default (state = initialState, action) => {
   case 'UPDATE_PRODUCT':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: true } }
   case 'CREATE_PRODUCT_SUCCESS':
-    return { ...state, newProduct: { ...action.payload.product, isLoading: false, isCreated: true } }
+    return { ...state, newProduct: { ...action.payload.product, isLoading: false } }
   case 'UPDATE_PRODUCT_SUCCESS':
-    return { ...state, activeProduct: { ...action.payload.product, isLoading: false, isCreated: false } }
+    return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
   case 'CREATE_PRODUCT_FAILURE':
   case 'UPDATE_PRODUCT_FAILURE':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
@@ -50,6 +50,8 @@ export default (state = initialState, action) => {
     return { ...state, productsList: { isLoading: false, products: state.productsList.products } }
   case 'RESET_ACTIVE_PRODUCT':
     return { ...state, activeProduct: initialState.activeProduct }
+  case 'RESET_NEW_PRODUCT':
+    return { ...state, newProduct: initialState.newProduct }
   case 'SET_ACTIVE_PRODUCT':
     return { ...state, activeProduct: action.payload.product }
   case 'UPDATE_ACTIVE_PRODUCT':

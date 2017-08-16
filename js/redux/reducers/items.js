@@ -22,7 +22,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type) {
     case 'RESET_NEW_ITEM':
-      return { ...state, newItem: { isLoading: false, errors: { }}}
+      return { ...state, newItem: initialState.newItem }
 
     case 'FETCH_ITEMS':
       return { ...state, itemsList: { isLoading: true, items: [] } }
@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
     case 'CREATE_ITEM':
       return { ...state, newItem: { ...state.item, isLoading: true, errors: { } } }
     case 'CREATE_ITEM_SUCCESS':
-      return { ...state, newItem: { ...state.item, isLoading: false, isCreated: true }, activeItem: action.payload.item }
+      return { ...state, newItem: { ...state.item, isLoading: false }, activeItem: action.payload.item }
     case 'CREATE_ITEM_FAILURE':
       return { ...state, newItem: { ...state.item, isLoading: false } }
 

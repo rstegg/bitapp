@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
 
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
@@ -10,17 +11,12 @@ import { currencySubmit } from 'actions/orders'
 import styles from './Styles'
 
 class CoinSelect extends Component {
-  componentWillUpdate(nextProps) {
-    if(nextProps.isCreated) {
-      this.props.navigation.navigate('CheckoutSuccessScreen')
-    }
-  }
   render() {
     const { navigation, user, currencySubmit, orderId } = this.props
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
           center={<Header.Logo />} />
         <View style={styles.buttonGroup}>
           <TouchableOpacity onPress={() => currencySubmit('BTC', orderId, user)}>
@@ -38,7 +34,6 @@ class CoinSelect extends Component {
 const mapStateToProps = ({ user, orders }) =>
 ({
   user,
-  isCreated: orders.isCreated,
   orderId: orders.orderId
 })
 

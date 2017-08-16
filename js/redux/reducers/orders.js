@@ -30,7 +30,6 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
-        isOrdered: true,
         isLoading: false,
       },
       orderId: action.payload.order.id
@@ -49,7 +48,6 @@ export default (state = initialState, action) => {
   case 'CURRENCY_SUCCESS':
     return Object.assign({}, state, {
       isLoading: false,
-      isCreated: true,
       currency: action.payload.payment.currency,
       amountUSD: action.payload.payment.amountUSD,
       amount: action.payload.payment.amount,
@@ -60,7 +58,6 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
-        isCreated: false,
         isLoading: false
       }
     })

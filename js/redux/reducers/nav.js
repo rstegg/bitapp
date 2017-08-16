@@ -1,6 +1,42 @@
 import PrimaryNav from 'navigation/PrimaryNav'
+import { NavigationActions } from 'react-navigation'
 
 export default (state, action) => {
-  const newState = PrimaryNav.router.getStateForAction(action, state)
+  let newState
+  switch(action.type) {
+    case 'CREATE_ITEM_SUCCESS':
+    case 'UPDATE_ITEM_SUCCESS':
+    case 'CREATE_PRODUCT_SUCCESS':
+    case 'UPDATE_PRODUCT_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'HomeScreen' })
+          ]
+        }),
+        state
+      )
+      break
+    case 'CHECKOUT_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'CheckoutCoinSelectScreen' }),
+        state
+      )
+      break
+    case 'CURRENCY_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'CheckoutSuccessScreen' })
+          ]
+        }),
+        state
+      )
+      break
+    default:
+      newState = PrimaryNav.router.getStateForAction(action, state)
+  }
   return newState || state
 }

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { InteractionManager, TouchableWithoutFeedback, Platform, Image, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
-import { NavigationActions } from 'react-navigation'
 import ImagePicker from 'react-native-image-picker'
 
 import Header from 'components/Header'
@@ -20,14 +19,6 @@ import styles from './Styles'
 
 import { uploadNewItemImage, removeNewItemImage, createItem } from 'actions/items'
 
-const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
-  index: 0,
-  params: { tab: 'ItemsScreen' },
-  actions: [
-    NavigationActions.navigate({ routeName: 'HomeScreen' })
-  ]
-}))
-
 class CreateItem extends Component {
   constructor(props) {
     super(props)
@@ -40,12 +31,6 @@ class CreateItem extends Component {
     InteractionManager.runAfterInteractions(() => {
      this.setState({renderPlaceholderOnly: false})
     })
-  }
-
-  componentWillUpdate(nextProps) {
-    if(nextProps.item.isCreated) {
-      navigateToHome(this.props.navigation)
-    }
   }
 
   _handleImageBtnPress() {

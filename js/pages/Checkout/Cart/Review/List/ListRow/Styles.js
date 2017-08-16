@@ -9,6 +9,11 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.grey,
   },
+  checkoutRow: {
+    flexGrow: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   productRow: {
     flexGrow: 1,
     flexDirection: 'row',
@@ -25,16 +30,30 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   infoText: {
-    flexGrow: 1,
-    padding: 10,
-    paddingHorizontal: 15,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  detailsText: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
   },
   name: {
-    fontSize: 18,
+    fontSize: 12,
     padding: 5,
   },
-  details: {
-    fontSize: 14,
+  price: {
+    fontSize: 12,
+    padding: 5,
+  },
+  quantity: {
+    fontSize: 12,
+    padding: 5,
+  },
+  total: {
+    fontSize: 12,
     padding: 5,
   },
   options: {

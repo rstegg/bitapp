@@ -39,7 +39,7 @@ class CheckoutSuccess extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.HomeButton to={() => navigation.navigate('HomeScreen')} />}
           center={<Header.Logo />} />
           <Text>Checkout</Text>
           <View style={styles.buttonGroup}>

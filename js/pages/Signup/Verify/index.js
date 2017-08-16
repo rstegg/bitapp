@@ -15,7 +15,7 @@ import { signupVerifySubmit } from 'actions/signup'
 const navigateToSuccess = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
   actions: [
-    NavigationActions.navigate({ routeName: 'SignupSuccessScreen'})
+    NavigationActions.navigate({ routeName: 'SignupSuccessScreen' })
   ]
 }))
 

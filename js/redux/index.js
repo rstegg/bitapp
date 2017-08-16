@@ -4,7 +4,8 @@ import { reducer as formReducer } from 'redux-form'
 import configureStore from './store'
 
 import nav from './reducers/nav'
-import tab from './reducers/tab'
+import homeTab from './reducers/homeTab'
+import checkoutTab from './reducers/checkoutTab'
 import user from './reducers/user'
 import items from './reducers/items'
 import products from './reducers/products'
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   products,
   orders,
   nav,
-  tab,
+  homeTab,
+  checkoutTab,
   form: formReducer
 })
 

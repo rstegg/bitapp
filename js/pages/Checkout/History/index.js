@@ -8,27 +8,22 @@ import Text from 'components/BitKitText'
 
 import { checkoutSubmit } from 'actions/orders'
 
-import CheckoutList from './List'
+import HistoryList from './List'
 import styles from './Styles'
 
-class ReviewCheckout extends Component {
-  componentWillUpdate(nextProps) {
-    if(nextProps.cart.isOrdered) {
-      this.props.navigation.navigate('CheckoutCoinSelectScreen')
-    }
-  }
+class CheckoutHistory extends Component {
   render() {
     const { cart, user, isLoading, checkoutSubmit, navigation } = this.props
     return (
       <View>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Checkout' isLoading={isLoading} onPress={() => isLoading || !length(cart.products) ? null : checkoutSubmit(cart.products, user)} />} />
           <View style={styles.centered}>
-            <Text style={styles.headerText}>Cart</Text>
+            <Text style={styles.headerText}>Checkout History</Text>
           </View>
-        <CheckoutList />
+        <HistoryList />
       </View>
     )
   }
@@ -50,4 +45,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ReviewCheckout)
+)(CheckoutHistory)

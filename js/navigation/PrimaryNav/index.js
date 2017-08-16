@@ -9,10 +9,11 @@ import SignupSuccess from 'pages/Signup/Success'
 import CreateItem from 'pages/Item/Create'
 import CreateProduct from 'pages/Product/Create'
 import AddToCart from 'pages/Product/AddToCart'
-import CheckoutReview from 'pages/Checkout/Review'
-import CheckoutSuccess from 'pages/Checkout/Success'
-import CheckoutCoinSelect from 'pages/Checkout/CoinSelect'
-import ReduxTabNav from 'navigation/ReduxTabNav'
+import CheckoutReview from 'pages/Checkout/Cart/Review'
+import CheckoutSuccess from 'pages/Checkout/Cart/Success'
+import CheckoutCoinSelect from 'pages/Checkout/Cart/CoinSelect'
+import ReduxHomeTabNav from 'navigation/ReduxHomeTabNav'
+import ReduxCheckoutTabNav from 'navigation/ReduxCheckoutTabNav'
 
 import styles from './Styles'
 
@@ -23,11 +24,11 @@ const PrimaryNav = StackNavigator({
   SignupPhoneScreen: { screen: SignupPhone },
   SignupVerifyScreen: { screen: SignupVerify },
   SignupSuccessScreen: { screen: SignupSuccess },
-  HomeScreen: { screen: ReduxTabNav },
+  HomeScreen: { screen: ReduxHomeTabNav },
   CreateItemScreen: { screen: CreateItem },
   CreateProductScreen: { screen: CreateProduct },
   AddToCartScreen: { screen: AddToCart },
-  CheckoutReviewScreen: { screen: CheckoutReview },
+  CheckoutScreen: { screen: ReduxCheckoutTabNav },
   CheckoutCoinSelectScreen: { screen: CheckoutCoinSelect },
   CheckoutSuccessScreen: { screen: CheckoutSuccess },
 }, {

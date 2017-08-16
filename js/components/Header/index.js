@@ -9,6 +9,7 @@ import ActionButton from 'components/ActionButton'
 import Text from 'components/BitKitText'
 
 import IonIcon from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import styles from './Styles'
 
@@ -42,6 +43,11 @@ Header.HomeButton = ({ to }) =>
 Header.CartButton = ({ to }) =>
    <TouchableOpacity onPress={to} style={styles.iconButton}>
         <IonIcon name='ios-cart-outline' style={styles.viewButton} size={28} />
+    </TouchableOpacity>
+
+Header.AccountButton = ({ to }) =>
+   <TouchableOpacity onPress={to} style={styles.iconButton}>
+        <FontAwesome name='user-circle-o' style={styles.viewButton} size={28} />
     </TouchableOpacity>
 
 Header.BackButton = ({ to, text }) =>

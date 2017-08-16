@@ -14,7 +14,7 @@ import { signupPhoneSubmit } from 'actions/signup'
 const navigateToVerify = navigation => navigation.dispatch(NavigationActions.reset({
   index: 0,
   actions: [
-    NavigationActions.navigate({ routeName: 'SignupVerifyScreen'})
+    NavigationActions.navigate({ routeName: 'SignupVerifyScreen' })
   ]
 }))
 

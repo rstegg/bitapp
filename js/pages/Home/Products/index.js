@@ -11,6 +11,8 @@ import SearchBar from 'components/SearchBar'
 
 import { Images } from 'themes'
 
+import { resetNewProduct } from 'actions/products'
+
 import ProductsList from './List'
 import styles from './Styles'
 
@@ -25,14 +27,19 @@ class Products extends Component {
       />
     ),
   }
+
+  componentDidMount() {
+    this.props.resetNewProduct()
+  }
+
   render() {
     const { isLoading, navigation } = this.props
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.MenuButton openDrawer={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.AccountButton to={() => navigation.navigate('DrawerOpen')} />}
           center={<Header.Logo />}
-          right={<Header.CartButton to={() => navigation.navigate('CheckoutReviewScreen')}/>} />
+          right={<Header.CartButton to={() => navigation.navigate('CheckoutScreen')}/>} />
         <View style={styles.section}>
           <View style={styles.centered}>
             <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
@@ -46,15 +53,17 @@ class Products extends Component {
 
 
 
-const mapStateToProps = ({ user }) =>
+const mapStateToProps = ({ user, products }) =>
 ({
   errors: user.errors,
-  isLoading: user.isLoading
+  isLoading: user.isLoading,
+  product: products.newProduct
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  onSubmit: () => dispatch(submit('login'))
+  onSubmit: () => dispatch(submit('searchProduct')),
+  resetNewProduct: () => dispatch(resetNewProduct()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
