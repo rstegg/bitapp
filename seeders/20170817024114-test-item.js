@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 const now = () => (new Date()).toISOString()
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('items', [{
+    return queryInterface.bulkInsert('items', [ {
       id: 1,
       name: 'Item 1',
       description: 'Test Item 1',
@@ -18,10 +18,10 @@ module.exports = {
       userId: 2,
       createdAt: now(),
       updatedAt: now(),
-    },], {});
+    }, ], {})
   },
 
   down: function (queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('items', null, {});
+    return queryInterface.bulkDelete('items', null, {})
   }
-};
+}

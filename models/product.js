@@ -1,5 +1,5 @@
-const ProductAttributes = ['id', 'unit', 'unitPrice', 'code']
-const {propEq, find} = require('ramda')
+const ProductAttributes = [ 'id', 'unit', 'unitPrice', 'code' ]
+const { propEq, find } = require('ramda')
 module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('product', {
     unit: DataTypes.STRING,
@@ -32,25 +32,25 @@ module.exports = function(sequelize, DataTypes) {
   Product.searchByCode = (user, code ,Item) =>
     Product.findOne({
       where: { userId: user.id, code },
-      include: [{
+      include: [ {
         model: Item,
-        attributes: ['name', 'description', 'image']
-      }],
+        attributes: [ 'name', 'description', 'image' ]
+      } ],
       attributes: ProductAttributes
     })
-    .then(products =>
-      !products ? Promise.reject('No products')
-      : products
-    )
+      .then(products =>
+        !products ? Promise.reject('No products')
+          : products
+      )
 
   Product.prototype.makeDetails = function (details) {
-    const {quantity} = find(propEq('id', this.id))
+    const { quantity } = find(propEq('id', this.id))
     return {
       productId: this.id,
       total: this.unitPrice * quantity,
       userId: this.userId,
       quantity: quantity
     }
-  };
+  }
   return Product
 }

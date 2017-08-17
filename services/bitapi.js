@@ -5,6 +5,6 @@ const su = require('superagent')
 module.exports = {
   startPayment : (account, currency, amountUSD) =>
     su.get(`${baseUrl}/${account}/request/${currency}/${amountUSD}`)
-    .set('Accept', 'application/json')
-    .then(prop('body'))
+      .set('Accept', 'application/json')
+      .then(prop('body'))
 }

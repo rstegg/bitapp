@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 const P = require('bluebird')
 module.exports = {
   up: function (queryInterface, Sequelize) {
@@ -10,8 +10,8 @@ module.exports = {
 
   down: function (queryInterface, Sequelize) {
     return P.all([
-      queryInterface.addColumn('orderDetails', 'date', {type: Sequelize.DATE}),
-      queryInterface.addColumn('orders', 'date', {type: Sequelize.DATE})
+      queryInterface.addColumn('orderDetails', 'date', { type: Sequelize.DATE }),
+      queryInterface.addColumn('orders', 'date', { type: Sequelize.DATE })
     ])
   }
-};
+}

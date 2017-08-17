@@ -11,7 +11,7 @@ const validateBody = require('../middleware/validate-body')
 const validateParams = require('../middleware/validate-params')
 const validFields = require('../middleware/valid-fields')
 
-const validProduct = validFields(['name'], 'item')
+const validProduct = validFields([ 'name' ], 'item')
 
 
 module.exports =

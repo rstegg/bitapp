@@ -5,5 +5,5 @@ const getAll = require('./getAll')
 
 module.exports =
   router
-  .use(passport.authenticate('jwt', { session: false }))
+    .use(passport.authenticate('jwt', { session: false }))
     .get('/order/:orderId', getAll)
