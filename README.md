@@ -7,8 +7,9 @@
 - [ ] Order detail
 - [x] upload new image
 - [x] delete image giving item id
-
-
+- [ ] get all orders by user id
+- [ ] get all transactions by userid
+- [ ] fetch all details by orderid
 
 
 # User Stories
