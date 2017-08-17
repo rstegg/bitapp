@@ -14,6 +14,10 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  column: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   icon: {
     color: Colors.darkGrey,
     fontSize: 24,

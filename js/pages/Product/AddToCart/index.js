@@ -19,7 +19,7 @@ import AddToCartForm from './Form'
 import ItemView from './ItemView'
 import styles from './Styles'
 
-import { addToCart } from 'actions/orders'
+import { addToCart } from 'actions/checkout'
 
 class AddToCart extends Component {
   constructor(props) {
@@ -89,7 +89,7 @@ class AddToCart extends Component {
 
 const selector = formValueSelector('addToCart')
 
-const mapStateToProps = ({ user, products, orders, ...state }) =>
+const mapStateToProps = ({ user, products, checkout, ...state }) =>
 ({
   product: products.activeProduct,
   user,

@@ -20,7 +20,7 @@ const BankAccountList = ({ withdrawalInfo, handleRemove, navigation }) =>
       renderRow={(rowData, sectionId, rowId) => <BankAccountRow data={rowData} isLoading={isLoading} onPressTrash={() => handleRemove(rowData)}/>}
       renderSectionHeader={ (data, id) => <Header.Text style={{margin: 5, textAlign: 'left'}}>{'Bank Account(s)'}</Header.Text> }
       keyboardDismissMode='on-drag'
-      keyboardShouldPersistTaps={true}
+      keyboardShouldPersistTaps='always'
       showsVerticalScrollIndicator={false}
       enableEmptySections={true}
       removeClippedSubviews={false}

@@ -6,7 +6,7 @@ import { NavigationActions } from 'react-navigation'
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
-import { currencySubmit } from 'actions/orders'
+import { currencySubmit } from 'actions/checkout'
 
 import styles from './Styles'
 
@@ -31,10 +31,10 @@ class CoinSelect extends Component {
   }
 }
 
-const mapStateToProps = ({ user, orders }) =>
+const mapStateToProps = ({ user, checkout }) =>
 ({
   user,
-  orderId: orders.orderId
+  orderId: checkout.orderId
 })
 
 const mapDispatchToProps = dispatch =>

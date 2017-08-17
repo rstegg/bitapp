@@ -1,83 +1,31 @@
-export const addToCart = product =>
+export const fetchOrders = user =>
 ({
-  type: 'ADD_TO_CART',
+  type: 'FETCH_ORDERS',
   payload: {
-    product
-  }
-})
-
-export const addProductToCart = product =>
-({
-  type: 'ADD_PRODUCT_TO_CART',
-  payload: {
-    product
-  }
-})
-
-export const removeProductFromCart = product =>
-({
-  type: 'REMOVE_PRODUCT_FROM_CART',
-  payload: {
-    product
-  }
-})
-
-export const editCartProduct = (productId, product) =>
-({
-  type: 'EDIT_CART_PRODUCT',
-  payload: {
-    productId,
-    product
-  }
-})
-
-export const checkoutSubmit = (products, user) =>
-({
-  type: 'CHECKOUT_SUBMIT',
-  payload: {
-    products,
     user
   }
 })
 
-export const checkoutSuccess = res =>
+export const fetchOrdersSuccess = res =>
 ({
-  type: 'CHECKOUT_SUCCESS',
+  type: 'FETCH_ORDERS_SUCCESS',
   payload: {
-    order: res.body.order
+    orders: res.body.orders
   }
 })
 
-export const checkoutFailure = res =>
+export const fetchOrdersFailure = res =>
 ({
-  type: 'CHECKOUT_FAILURE',
+  type: 'FETCH_ORDERS_FAILURE',
   payload: {
-    error: res.body.error
+    error: res.body.error || res
   }
 })
 
-export const currencySubmit = (currency, orderId, user) =>
+export const setActiveOrder = order =>
 ({
-  type: 'CURRENCY_SUBMIT',
+  type: 'SET_ACTIVE_ORDER',
   payload: {
-    currency,
-    orderId,
-    user
-  }
-})
-
-export const currencySuccess = res =>
-({
-  type: 'CURRENCY_SUCCESS',
-  payload: {
-    payment: res.body.payment
-  }
-})
-
-export const currencyFailure = res =>
-({
-  type: 'CURRENCY_FAILURE',
-  payload: {
-    error: res.body.error
+    order
   }
 })

@@ -1,7 +1,15 @@
 import React, { Component } from 'react'
-import { InteractionManager, TouchableWithoutFeedback, Platform, Image, View } from 'react-native'
+import {
+  InteractionManager,
+  TouchableWithoutFeedback,
+  Platform,
+  Image,
+  ListView,
+  View
+} from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
+import { length } from 'ramda'
 import QRCode from 'react-native-qrcode-svg'
 
 import Header from 'components/Header'
@@ -10,9 +18,8 @@ import Loader from 'components/Loader'
 
 import { Images, Metrics } from 'themes'
 
+import OrderDetailsList from './List'
 import styles from './Styles'
-
-import { createProduct } from 'actions/products'
 
 class BalanceDetails extends Component {
   constructor(props) {
@@ -32,47 +39,32 @@ class BalanceDetails extends Component {
     this.refs[nextField].focus()
   }
   render() {
-    const { user, navigation } = this.props
-    if(this.state.renderPlaceholderOnly) {
+    const { user, navigation, order, products } = this.props
+    if(this.state.renderPlaceholderOnly || order.isLoading) {
       return <Loader />
+    }
+    if(products.getRowCount() <= 0) {
+      return <Text>Woops! Try again</Text>
     }
     return (
       <View style={styles.container}>
         <Header
           left={<Header.BackButton to={() => navigation.goBack()} />}
           center={<Header.Logo />} />
-          <Text>Balance Details</Text>
-          <View style={styles.buttonGroup}>
-            <Text>{this.props.currency}</Text>
-          </View>
-          <View style={styles.priceContainer}>
-            <Text style={styles.priceLeft}>Total Price (USD):</Text>
-            <Text style={styles.priceRight}>${this.props.amountUSD}</Text>
-          </View>
-          <View style={styles.priceContainer}>
-            <Text style={styles.priceLeft}>Total Price (BTC):</Text>
-            <Text style={styles.priceRight}>${this.props.amount}</Text>
-          </View>
-          <View style={styles.qrCodeContainer}>
-            <QRCode value={this.props.url} />
-          </View>
-          <View style={styles.statusContainer}>
-            <Text style={styles.statusText}>{this.props.status}</Text>
-          </View>
+          <Text>Order Details</Text>
+          <OrderDetailsList products={products} />
       </View>
     )
   }
 }
 
-//TODO: where address is saved?
+const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+
 const mapStateToProps = ({ user, orders }) =>
 ({
   user,
-  currency: orders.currency,
-  amountUSD: orders.amountUSD,
-  amount: orders.amount,
-  url: orders.url,
-  status: orders.status
+  order: orders.activeOrder,
+  products: dataSource.cloneWithRows(orders.activeOrder.products),
 })
 
 export default connect(mapStateToProps)(BalanceDetails)

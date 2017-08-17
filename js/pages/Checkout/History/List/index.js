@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { productAddToCart, productRemoveFromCart } from 'actions/orders'
+import { fetchCheckoutHistory } from 'actions/checkout'
 
 import { Images } from 'themes'
 
@@ -30,22 +30,25 @@ const DELETE_INDEX = 2
 const CANCEL_INDEX = 3
 
 class List extends Component {
+  componentWillMount() {
+    this.props.fetchCheckoutHistory(this.props.user)
+  }
   renderIntro() {
     return (
       <View style={styles.intro}>
         <View style={styles.introTextContainer}>
           <Text style={styles.introText}>
-            Your cart
+            You haven&rsquo;t made
           </Text>
           <Text style={styles.introText}>
-            is empty!
+            any transactions!
           </Text>
           <Image source={Images.faq} style={styles.introImage} resizeMode='contain' />
         </View>
-        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('HomeScreen')}>
           <View style={styles.introContent}>
             <Text style={styles.introDescription}>
-              View Products
+              Sell a product
             </Text>
             <Image source={Images.close} style={styles.arrow} resizeMode='contain' />
           </View>
@@ -66,7 +69,7 @@ class List extends Component {
   renderList() {
     return <ListView key='items-list'
               style={styles.list}
-              dataSource={this.props.products}
+              dataSource={this.props.history}
               renderRow={this.renderRow.bind(this)}
               keyboardDismissMode='on-drag'
               keyboardShouldPersistTaps='always'
@@ -78,7 +81,7 @@ class List extends Component {
     let content
     if(this.props.isLoading) {
       content = <Loader />
-    } else if(this.props.products.getRowCount() > 0) {
+    } else if(this.props.history.getRowCount() > 0) {
       content = this.renderList()
     } else {
       content = this.renderIntro()
@@ -94,20 +97,19 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
-const mapStateToProps = ({ orders }) =>
+const mapStateToProps = ({ checkout, user }) =>
 ({
-  isLoading: orders.cart.isLoading,
-  products: dataSource.cloneWithRows(orders.cart.products),
+  isLoading: checkout.history.isLoading,
+  history: dataSource.cloneWithRows(checkout.history.list),
+  user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  productRemoveFromCart: product => {
-    Alert.alert(product.name, 'Are you sure you want to remove this product?', [
-      { text: 'Yes', onPress: () => dispatch(productRemoveFromCart(product)) },
-      { text: 'No' },
-    ])
-  }
+  fetchCheckoutHistory: user => dispatch(fetchCheckoutHistory(user)),
 })
 
-export default connect(mapStateToProps)(List)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List)

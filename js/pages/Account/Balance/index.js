@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {
   View,
   StyleSheet,
@@ -6,37 +6,57 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
-import { removeBalance } from 'actions/withdraw'
+import { fetchOrders, setActiveOrder } from 'actions/orders'
 
 import Header from 'components/Header'
+import Loader from 'components/Loader'
 
 import BalanceList from './List'
 import BalanceIntro from './Intro'
 import styles from './Styles'
 
-const BalanceInfo = ({ isLoading, balanceInfo, navigation }) =>
-  <View style={styles.container}>
-    <Header
-      left={<Header.BackButton to={() => navigation.goBack()} />}
-      center={<Header.Text>Balance</Header.Text>}
-    />
-    { balanceInfo.getRowCount() ? <BalanceList isLoading={isLoading} balanceInfo={balanceInfo} navigation={navigation} />
-    : <BalanceIntro navigation={navigation} /> }
-  </View>
+class BalanceInfo extends Component {
+  componentWillMount() {
+    console.log(this.props);
+    const { user, fetchOrders } = this.props
+    fetchOrders(user)
+  }
 
-const firstIfExists = o => (o && o.length && o[0]) || { source: { data: [] } }
-const makeBalanceRows = user => firstIfExists(user.balance).source.data.filter(({object}) => object === 'bank_account')
-const dataSource = new ListView.DataSource({
-  rowHasChanged: (row1, row2) => row1 !== row2,
-  sectionHeaderHasChanged : (s1, s2) => s1 !== s2
+  render() {
+    const { isLoading, orders, setActiveOrder, navigation } = this.props
+    if(isLoading) {
+      return <Loader />
+    }
+    return (
+      <View style={styles.container}>
+        <Header
+          left={<Header.BackButton to={() => navigation.goBack()} />}
+          center={<Header.Text>Balance</Header.Text>}
+        />
+        { orders.getRowCount() ? <BalanceList orders={orders} setActiveOrder={setActiveOrder} />
+        : <BalanceIntro navigation={navigation} /> }
+      </View>
+    )
+  }
+}
+
+
+const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
+
+const mapStateToProps = ({ user, orders }) =>
+({
+  isLoading: orders.history.isLoading,
+  orders: dataSource.cloneWithRows(orders.history.list),
+  user
 })
 
-const mapStateToProps = ({ user, withdraw }) =>
+const mapDispatchToProps = dispatch =>
 ({
-  isLoading: withdraw.isLoading,
-  balanceInfo: dataSource.cloneWithRowsAndSections(makeBalanceRows(user))
+  fetchOrders: user => dispatch(fetchOrders(user)),
+  setActiveOrder: order => dispatch(setActiveOrder(order)),
 })
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(BalanceInfo)

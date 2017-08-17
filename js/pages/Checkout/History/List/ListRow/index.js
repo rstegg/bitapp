@@ -15,24 +15,20 @@ import styles from './Styles'
 const itemImage = path(['item', 'image'])
 const itemName = path(['item', 'name'])
 
-const ListRow = ({ product, onSelect, onOptionsBtnPress }) =>
+const ListRow = ({ transaction, onSelect, onOptionsBtnPress }) =>
   <View style={styles.listRow}>
     <TouchableOpacity onPress={onSelect}>
       <View style={styles.checkoutRow}>
         <View style={styles.info}>
-          <Image source={itemImage(product) ? { uri: itemImage(product) } : Images.productPlaceholder} style={styles.image} resizeMode='cover' />
           <View style={styles.infoText}>
-            <Text numberOfLines={1} style={styles.name}>{itemName(product)}</Text>
-            <Text numberOfLines={1} style={styles.price}>Price: ${product.unitPrice}</Text>
+            <Text numberOfLines={1} style={styles.name}>Currency: {transaction.currency}</Text>
+            <Text numberOfLines={1} style={styles.price}>Status: {transaction.status}</Text>
           </View>
           <View style={styles.detailsText}>
-            <Text numberOfLines={1} style={styles.quantity}>{product.quantity} {product.unit}</Text>
-            <Text numberOfLines={1} style={styles.total}>Total: ${product.quantity * product.unitPrice}</Text>
+            <Text numberOfLines={1} style={styles.price}>Amount (USD): ${transaction.amountUSD}</Text>
+            <Text numberOfLines={1} style={styles.price}>Amount (BTC): {transaction.amount}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.options} onPress={onOptionsBtnPress}>
-          <IonIcon name='md-more' style={styles.optionsIcon} />
-        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   </View>

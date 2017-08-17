@@ -41,6 +41,12 @@ export default (state, action) => {
         state
       )
       break
+    case 'SET_ACTIVE_ORDER':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'AccountBalanceDetailsScreen' }),
+        state
+      )
+      break
     case 'LOGOUT':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.reset({

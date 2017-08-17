@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { productAddToCart, productRemoveFromCart } from 'actions/orders'
+import { productAddToCart, productRemoveFromCart } from 'actions/checkout'
 
 import { Images } from 'themes'
 
@@ -94,10 +94,10 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
-const mapStateToProps = ({ orders }) =>
+const mapStateToProps = ({ checkout }) =>
 ({
-  isLoading: orders.cart.isLoading,
-  products: dataSource.cloneWithRows(orders.cart.products),
+  isLoading: checkout.cart.isLoading,
+  products: dataSource.cloneWithRows(checkout.cart.products),
 })
 
 const mapDispatchToProps = dispatch =>

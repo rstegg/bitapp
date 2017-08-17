@@ -8,16 +8,16 @@ import {
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
-import BalanceRow from './ListRow'
+import BalanceDetailsRow from './ListRow'
 import styles from './Styles'
 
-const BalanceList = ({ orders, setActiveOrder }) =>
+const BalanceDetailsList = ({ products, navigation }) =>
   <View style={styles.container}>
     <ListView
       key='withdraw-info-list'
       style={styles.listView}
-      dataSource={orders}
-      renderRow={order => <BalanceRow order={order} onPress={() => setActiveOrder(order)} />}
+      dataSource={products}
+      renderRow={(product, sectionId, rowId) => <BalanceDetailsRow product={product} />}
       keyboardDismissMode='on-drag'
       keyboardShouldPersistTaps='always'
       showsVerticalScrollIndicator={false}
@@ -26,4 +26,4 @@ const BalanceList = ({ orders, setActiveOrder }) =>
     />
   </View>
 
-export default BalanceList
+export default BalanceDetailsList

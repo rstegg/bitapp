@@ -6,7 +6,7 @@ import { length } from 'ramda'
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
-import { checkoutSubmit } from 'actions/orders'
+import { checkoutSubmit } from 'actions/checkout'
 
 import { Images } from 'themes'
 
@@ -43,10 +43,10 @@ class ReviewCheckout extends Component {
 }
 
 
-const mapStateToProps = ({ user, orders }) =>
+const mapStateToProps = ({ user, checkout }) =>
 ({
-  cart: orders.cart,
-  isLoading: orders.cart.isLoading,
+  cart: checkout.cart,
+  isLoading: checkout.cart.isLoading,
   user
 })
 

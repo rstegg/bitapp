@@ -14,7 +14,7 @@ import styles from './Styles'
 
 import { createProduct } from 'actions/products'
 
-class CheckoutSuccess extends Component {
+class BalanceDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -39,9 +39,9 @@ class CheckoutSuccess extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.HomeButton to={() => navigation.navigate('HomeScreen')} />}
+          left={<Header.BackButton to={() => navigation.goBack()} />}
           center={<Header.Logo />} />
-          <Text>Checkout</Text>
+          <Text>Balance Details</Text>
           <View style={styles.buttonGroup}>
             <Text>{this.props.currency}</Text>
           </View>
@@ -75,4 +75,4 @@ const mapStateToProps = ({ user, checkout }) =>
   status: checkout.status
 })
 
-export default connect(mapStateToProps)(CheckoutSuccess)
+export default connect(mapStateToProps)(BalanceDetails)

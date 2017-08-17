@@ -1,75 +1,40 @@
 const initialState = {
-  cart: {
+  history: {
     isLoading: false,
-    products: [],
+    list: [],
+    active: {}
   },
-  orderId: '',
-  address: '',
-  totalPrice: '',
-  checkoutStatus: '',
-  url: ''
+  activeOrder: {},
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-  case 'ADD_TO_CART':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        products: [ ...state.cart.products, action.payload.product ]
-      }
-    })
-  case 'CHECKOUT_SUBMIT':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        isLoading: true
-      }
-    })
-  case 'CHECKOUT_SUCCESS':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        isLoading: false,
-      },
-      orderId: action.payload.order.id
-    })
-  case 'CHECKOUT_FAILURE':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        isLoading: false
-      }
-    })
-  case 'CURRENCY_SUBMIT':
-    return Object.assign({}, state, {
-      isLoading: true
-    })
-  case 'CURRENCY_SUCCESS':
-    return Object.assign({}, state, {
-      isLoading: false,
-      currency: action.payload.payment.currency,
-      amountUSD: action.payload.payment.amountUSD,
-      amount: action.payload.payment.amount,
-      url: action.payload.payment.url,
-      status: action.payload.payment.status,
-    })
-  case 'CURRENCY_FAILURE':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        isLoading: false
-      }
-    })
-  case 'PRODUCT_BUY_NOW':
-  case 'PRODUCT_ADD_TO_CART':
-    return Object.assign({}, state, {
-      cart: [ ...state.cart, action.payload.product ]
-    })
-  case 'PRODUCT_REMOVE_FROM_CART':
-    return Object.assign({}, state, {
-      cart: [ ...state.cart.slice(0, state.cart.indexOf(action.payload.product)), ...state.cart.slice(state.cart.indexOf(action.payload.product) + 1) ]
-    })
+    case 'FETCH_ORDERS':
+      return Object.assign({}, state, {
+        history: {
+          ...state.history,
+          isLoading: true
+        }
+      })
+    case 'FETCH_ORDERS_SUCCESS':
+      return Object.assign({}, state, {
+        history: {
+          ...state.history,
+          isLoading: false,
+          list: action.payload.orders
+        }
+      })
+    case 'FETCH_ORDERS_FAILURE':
+      return Object.assign({}, state, {
+        history: {
+          ...state.history,
+          isLoading: false
+        }
+      })
+    case 'SET_ACTIVE_ORDER':
+      return Object.assign({}, state, {
+        activeOrder: action.payload.order
+      })
   default:
     return state
   }
