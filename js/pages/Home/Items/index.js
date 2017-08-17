@@ -23,7 +23,7 @@ class Items extends Component {
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
       <Image
-        source={Images.api}
+        source={Images.itemIcon}
         style={[styles.icon, {tintColor: tintColor}]}
       />
     ),
@@ -38,7 +38,7 @@ class Items extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.AccountButton to={() => navigation.navigate('DrawerOpen')} />}
+          left={<Header.AccountButton to={() => navigation.navigate('AccountScreen')} />}
           center={<Header.Logo />}
           right={<Header.CartButton to={() => navigation.navigate('CheckoutScreen')}/>} />
         <View style={styles.section}>

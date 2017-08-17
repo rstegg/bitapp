@@ -4,6 +4,8 @@ const initialState = {
   isLoading: false,
   signupPage: 'signupPhone',
   phone: '',
+  banks: [],
+  balance: [],
   errors: {}
 }
 

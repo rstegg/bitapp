@@ -6,6 +6,15 @@ import LoginForgot from 'pages/Login/Forgot'
 import SignupPhone from 'pages/Signup/Phone'
 import SignupVerify from 'pages/Signup/Verify'
 import SignupSuccess from 'pages/Signup/Success'
+
+import Account from 'pages/Account'
+import AccountProfile from 'pages/Account/Profile'
+import AccountWithdraw from 'pages/Account/Withdraw'
+import AccountLinkBank from 'pages/Account/Withdraw/LinkBank'
+import AccountBalance from 'pages/Account/Balance'
+import AccountBalanceDetails from 'pages/Account/Balance/Details'
+import AccountSupport from 'pages/Account/Support'
+
 import CreateItem from 'pages/Item/Create'
 import CreateProduct from 'pages/Product/Create'
 import AddToCart from 'pages/Product/AddToCart'
@@ -25,6 +34,13 @@ const PrimaryNav = StackNavigator({
   SignupVerifyScreen: { screen: SignupVerify },
   SignupSuccessScreen: { screen: SignupSuccess },
   HomeScreen: { screen: ReduxHomeTabNav },
+  AccountScreen: { screen: Account },
+  AccountProfileScreen: { screen: AccountProfile },
+  AccountWithdrawScreen: { screen: AccountWithdraw },
+  AccountLinkBankScreen: { screen: AccountLinkBank },
+  AccountBalanceScreen: { screen: AccountBalance },
+  AccountBalanceDetailsScreen: { screen: AccountBalanceDetails },
+  AccountSupportScreen: { screen: AccountSupport },
   CreateItemScreen: { screen: CreateItem },
   CreateProductScreen: { screen: CreateProduct },
   AddToCartScreen: { screen: AddToCart },

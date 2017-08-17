@@ -23,7 +23,7 @@ const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, pas
       secureTextEntry={password} />
   </View>
 
-const SignupPhoneForm = ({ handleSubmit, submitting }) =>
+const SignupPhoneForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.signupScreen}>
     <SignupField name='phone' keyboardType='phone-pad' label='Phone' autoFocus />
   </View>

@@ -41,6 +41,17 @@ export default (state, action) => {
         state
       )
       break
+    case 'LOGOUT':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'LaunchScreen' })
+          ]
+        }),
+        state
+      )
+      break
     default:
       newState = PrimaryNav.router.getStateForAction(action, state)
   }

@@ -10,6 +10,7 @@ import user from './reducers/user'
 import items from './reducers/items'
 import products from './reducers/products'
 import orders from './reducers/orders'
+import withdraw from './reducers/withdraw'
 
 import authEpics from './epics/auth'
 import itemsEpics from './epics/items'
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   items,
   products,
   orders,
+  withdraw,
   nav,
   homeTab,
   checkoutTab,

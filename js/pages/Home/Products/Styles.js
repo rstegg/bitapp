@@ -25,6 +25,10 @@ export default StyleSheet.create({
   centered: {
     alignItems: 'center'
   },
+  headerText: {
+    fontSize: 18,
+    marginVertical: 10,
+  },
   icon: {
     width: 26,
     height: 26,

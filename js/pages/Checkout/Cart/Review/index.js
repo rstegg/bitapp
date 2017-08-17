@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { length } from 'ramda'
 
@@ -8,10 +8,23 @@ import Text from 'components/BitKitText'
 
 import { checkoutSubmit } from 'actions/orders'
 
+import { Images } from 'themes'
+
 import CheckoutList from './List'
 import styles from './Styles'
 
 class ReviewCheckout extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Cart',
+    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={Images.cartIcon}
+        style={[styles.icon, { tintColor }]}
+      />
+    ),
+  }
+
   render() {
     const { cart, user, isLoading, checkoutSubmit, navigation } = this.props
     return (

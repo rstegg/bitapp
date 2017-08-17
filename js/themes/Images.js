@@ -23,10 +23,20 @@ const images = {
   backButton: require('../Images/arrow-back.png'),
   forwardButton: require('../Images/arrow-forward.png'),
   closeButton: require('../Images/Icons/close-button.png'),
+  productIcon: require('../Images/product-icon.png'),
   productPlaceholder: require('../Images/product-placeholder.png'),
+  cartIcon: require('../Images/cart-icon.png'),
+  historyIcon: require('../Images/history-icon.png'),
+  itemIcon: require('../Images/item-icon.png'),
   itemPlaceholder: require('../Images/item-placeholder.png'),
   largePlus: require('../Images/LargePlus.png'),
   headerLogo: require('../Images/header-logo.png'),
+  profilePlaceholder: require('../Images/profile-placeholder.png'),
+  dropdownCancel: require('../Images/Dropdown/cancel.png'),
+  dropdownInfo: require('../Images/Dropdown/info.png'),
+  dropdownWarn: require('../Images/Dropdown/warn.png'),
+  dropdownError: require('../Images/Dropdown/error.png'),
+  dropdownNotification: require('../Images/cloud-56x56.png'),
 }
 
 export default images

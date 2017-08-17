@@ -22,7 +22,9 @@ const colors = {
   border: '#483F53',
   banner: '#5F3E63',
   orange: '#F8A64D',
+  teal: '#257A91',
   lightGrey: '#999',
+  red: '#B33A3A',
   text: '#414142'
 }
 

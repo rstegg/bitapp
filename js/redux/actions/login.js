@@ -41,3 +41,8 @@ export const loginForgotFailure = res =>
 ({
   type: 'LOGIN_FORGOT_FAILURE'
 })
+
+export const logout = () =>
+({
+  type: 'LOGOUT'
+})
