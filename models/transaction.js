@@ -1,6 +1,6 @@
 'use strict'
 module.exports = function(sequelize, DataTypes) {
-  var Payment = sequelize.define('payment', {
+  var Transaction = sequelize.define('transaction', {
     url: DataTypes.STRING,
     currency: DataTypes.STRING,
     amountUSD: DataTypes.DECIMAL,
@@ -9,10 +9,10 @@ module.exports = function(sequelize, DataTypes) {
     amount: DataTypes.DECIMAL
   })
 
-  Payment.associate = function(models) {
-    Payment.belongsTo(models.user)
-    Payment.belongsTo(models.order)
+  Transaction.associate = function(models) {
+    Transaction.belongsTo(models.user)
+    Transaction.belongsTo(models.order)
   }
 
-  return Payment
+  return Transaction
 }

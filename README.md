@@ -20,11 +20,11 @@
   - App adds as many items as the clerk wants to cart
 - User decides to checkout at some point
   - App shows the coin selection menu
-  - App request a payment to server
-  - Server replies with bitcoinURL, amountUSD, amountCurrency, and payment request id
+  - App request a transaction to server
+  - Server replies with bitcoinURL, amountUSD, amountCurrency, and transaction request id
   - App shows the bitcoinURL as a qrCode
   - Buyer scans and pays
-  - App monitors the transaction until the payment is safe and user
+  - App monitors the transaction until the transaction is safe and user
   can leave
 
 
@@ -36,8 +36,8 @@
 -  **post** `/product/search/code`
   - **params** code: AlphaNumeric code
   - **returns** one product that have the exact code
--  **post** `/payment/request`
+-  **post** `/transaction/request`
   - **params**  
     - **currency** LTC | BTC
     - **order** Array of {product, quantity}
-  - **returns** {order, payment }
+  - **returns** {order, transaction }

@@ -2,8 +2,8 @@ const router = require('express').Router()
 const passport = require('passport')
 const { path, isNil } = require('ramda')
 
-const createPayment = require('./create')
-const getPayments = require('./getAll')
+const createTransaction = require('./create')
+const getTransactions = require('./getAll')
 
 const validateBody = require('../middleware/validate-body')
 const validateParams = require('../middleware/validate-params')
@@ -15,9 +15,9 @@ module.exports =
   router
     .use(passport.authenticate('jwt', { session: false }))
     .get('/',
-      getPayments
+      getTransactions
     )
     .post('/',
       validateBody(validItem),
-      createPayment
+      createTransaction
     )

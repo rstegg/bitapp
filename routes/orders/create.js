@@ -7,7 +7,8 @@ const orderDetailAttrs = ['unitPrice','quantity','total']
 
 module.exports = (req, res) =>
   product.findAll({
-    where: { id: { $in: pluck('id', req.body.products) }, userId: req.user.id }
+    where: { id: { $in: pluck('id', req.body.products) }, userId: req.user.id },
+    raw: true
   })
   .then(products => {
     const quantities = pluck('quantity', req.body.products)
@@ -18,7 +19,7 @@ module.exports = (req, res) =>
     const totalUSD = sum(totals)
 
     const productsWithDetails = products.map((product, i) => Object.assign({}, product, { quantity: quantities[i], total: totals[i] }))
-
+    console.log(productsWithDetails);
     return order.create({
        totalUSD,
        products: productsWithDetails,

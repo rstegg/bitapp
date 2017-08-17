@@ -2,13 +2,16 @@ const P = require('bluebird')
 const Models = require('../../models')
 const bitapi = require('../../services/bitapi')
 const { merge } = require('ramda')
-const { payment, order } = Models
+const { transaction, order } = Models
 /**
  * products {orderId, currency}
  */
 
 module.exports = (req, res) =>
-  order.findById(req.body.orderId)
+  order.findOne({
+    where: { id: req.body.orderId, userId: req.user.id },
+    raw: true
+  })
     .then(foundOrder => {
       const orderObj = {
         status: 'pending',
@@ -20,7 +23,7 @@ module.exports = (req, res) =>
       const requestObj = bitapi.startPayment(1, req.body.currency, foundOrder.totalUSD)
 
       return requestObj
-        .then(newRequest => payment.create(merge(orderObj, newRequest)))
+        .then(newRequest => transaction.create(merge(orderObj, newRequest)))
     })
-    .then(newPayment => { console.log(newPayment); res.json({ payment: newPayment }) })
+    .then(newTransaction => { console.log(newTransaction); res.json({ transaction: newTransaction }) })
     .catch(errors => { console.log(errors); res.status(400).json({ errors }) })
