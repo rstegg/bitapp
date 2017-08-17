@@ -24,7 +24,7 @@ module.exports = {
 
     const address =  models.Account
       .findOne({where: {id: accountId}})
-      .then((acc)=> acc.nextAddress(currency))
+      .then((acc) => acc.nextAddress(currency))
 
     const amount = convert(currency, amountUSD)
     return P.join(amount, address,

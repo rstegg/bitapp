@@ -4,7 +4,7 @@ const bitcore = require("bitcore-lib")
 
 const runner = require('./electrum')
 
-const {Transaction, HDPrivateKey, Networks } = bitcore
+const { Transaction, HDPrivateKey, Networks } = bitcore
 
 const litecoin = require('./litecoin-net')
 const bitcoin = Networks.livenet
