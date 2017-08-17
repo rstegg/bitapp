@@ -6,14 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       unique: true
     },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    salt: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
+    password: DataTypes.STRING,
     verified: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
@@ -23,10 +16,8 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: false
     },
     verifyCode: DataTypes.STRING,
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true
-    }
+    name: DataTypes.STRING,
+    image: DataTypes.STRING
   })
 
   User.associate = (models) => {

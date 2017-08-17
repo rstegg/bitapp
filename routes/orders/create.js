@@ -1,15 +1,17 @@
 const Models = require('../../models')
-const { order, product, orderDetail } = Models
+const { product, item, order } = Models
 const { sum, compose, splitEvery, unnest, map, product: prod, pluck, zip, zipObj } = require('ramda')
 const P = require('bluebird')
-
-const orderDetailAttrs = ['unitPrice','quantity','total']
 
 module.exports = (req, res) =>
   product.findAll({
     where: { id: { $in: pluck('id', req.body.products) }, userId: req.user.id },
-    raw: true
+    include: [ {
+      model: item,
+      attributes: [ 'name', 'description', 'image' ]
+    } ]
   })
+  .then(products => products.map(product => product.toJSON()))
   .then(products => {
     const quantities = pluck('quantity', req.body.products)
 
@@ -19,7 +21,7 @@ module.exports = (req, res) =>
     const totalUSD = sum(totals)
 
     const productsWithDetails = products.map((product, i) => Object.assign({}, product, { quantity: quantities[i], total: totals[i] }))
-    console.log(productsWithDetails);
+
     return order.create({
        totalUSD,
        products: productsWithDetails,
