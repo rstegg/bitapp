@@ -1,7 +1,7 @@
 const Models = require('../../models')
 const { item } = Models
 
-const productParams = [ 'name', 'description', 'image' ]
+const itemAttrs = [ 'id', 'name', 'description', 'image' ]
 
 module.exports = (req, res) =>
   item.getItemsByUser(req.user)

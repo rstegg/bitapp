@@ -6,7 +6,7 @@ const itemParams = [ 'name', 'description', 'image' ]
 
 module.exports = (req, res) =>
   item.update(
-    pick(itemParams, req.body),
+    pick(itemParams, req.body.item),
     { where: { userId: req.user.id, id: req.params.id }, returning: true, raw: true }
   )
     .then(([ n, [ item ] ]) => !item ? Promise.reject('bad item') : item)

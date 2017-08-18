@@ -6,7 +6,7 @@ const productParams = [ 'unit', 'unitPrice' ]
 
 module.exports = (req, res) =>
   product.update(
-    pick(productParams, req.body),
+    pick(productParams, req.body.product),
     { where: { userId: req.user.id, id: req.params.id }, returning: true, raw: true }
   )
     .then(([ n, [ product ] ]) => !product ? Promise.reject('bad product') : product)

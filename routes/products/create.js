@@ -5,7 +5,7 @@ module.exports = (req, res) =>
   product.create({
     code: req.body.product.code,
     unit: req.body.product.unit,
-    unitPrice: req.body.product.price,
+    unitPrice: req.body.product.unitPrice,
     itemId: req.body.item.id,
     userId: req.user.id,
   })
