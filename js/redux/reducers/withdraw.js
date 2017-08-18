@@ -14,6 +14,8 @@ export default (state = initialState, action) => {
     case 'REMOVE_WITHDRAWAL_BANK_ACCOUNT_SUCCESS':
     case 'CREATE_STRIPE_TOKEN_FAILURE':
       return {...state, ...action.payload, isLoading: false}
+    case 'LOGOUT':
+      return initialState
     default:
       return state
   }

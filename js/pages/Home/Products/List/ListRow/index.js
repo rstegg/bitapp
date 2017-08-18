@@ -23,12 +23,9 @@ const ListRow = ({ product, onSelect, onOptionsBtnPress }) =>
         <View style={styles.info}>
           <Image source={itemImage(product) ? { uri: itemImage(product) } : Images.productPlaceholder} style={styles.image} resizeMode='cover' />
           <View style={styles.infoText}>
-            <Text numberOfLines={1} style={styles.name}>{product.unit}</Text>
-            <Text numberOfLines={1} style={styles.details}>${product.unitPrice}</Text>
-          </View>
-          <View style={styles.infoText}>
             <Text numberOfLines={1} style={styles.name}>{itemName(product)}</Text>
             <Text numberOfLines={1} style={styles.details}>{itemDescr(product)}</Text>
+            <Text numberOfLines={1} style={styles.unit}>${product.unitPrice} per {product.unit}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.options} onPress={onOptionsBtnPress}>

@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       return { ...state, itemsList: { isLoading: false, items: [], errors: action.payload.errors } }
 
     case 'SEARCH_ITEMS':
-      return { ...state, keyword: action.payload.keyword, itemsList: { isLoading: true } }
+      return { ...state, keyword: action.payload.keyword }
     case 'SEARCH_ITEMS_SUCCESS':
       return { ...state, itemsList: { isLoading: false, items: action.payload.items } }
     case 'SEARCH_ITEMS_FAILURE':
@@ -93,6 +93,9 @@ export default (state = initialState, action) => {
 
     case 'DELETE_ITEM':
       return { ...state, itemsList: { isLoading: false, items: state.itemsList.items.filter(item => item.id != action.payload.item.id) } }
+
+    case 'LOGOUT':
+      return initialState
 
     default:
       return state

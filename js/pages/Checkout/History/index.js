@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { length } from 'ramda'
-
+import { NavigationActions } from 'react-navigation'
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
@@ -12,6 +12,13 @@ import { Images } from 'themes'
 
 import HistoryList from './List'
 import styles from './Styles'
+
+const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'HomeScreen' })
+  ]
+}))
 
 class CheckoutHistory extends Component {
   static navigationOptions = {
@@ -30,7 +37,7 @@ class CheckoutHistory extends Component {
     return (
       <View>
         <Header
-          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
+          left={<Header.BackButton text='Back' to={() => navigateToHome(navigation)} />}
           center={<Header.Logo />} />
         <View style={styles.centered}>
           <Text style={styles.headerText}>Checkout History</Text>

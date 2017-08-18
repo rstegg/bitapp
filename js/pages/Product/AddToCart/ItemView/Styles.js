@@ -4,9 +4,12 @@ import { Colors } from 'themes'
 export default StyleSheet.create({
   listRow: {
     height: 80,
-    marginBottom: 10,
+    margin: 10,
     borderWidth: 1,
+    borderRadius: 5,
+    overflow: 'hidden',
     borderColor: Colors.grey,
+    backgroundColor: 'white',
   },
   itemRow: {
     flexGrow: 1,

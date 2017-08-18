@@ -12,8 +12,6 @@ import { Images, Metrics } from 'themes'
 
 import styles from './Styles'
 
-import { createProduct } from 'actions/products'
-
 class BalanceDetails extends Component {
   constructor(props) {
     super(props)
@@ -32,32 +30,37 @@ class BalanceDetails extends Component {
     this.refs[nextField].focus()
   }
   render() {
-    const { user, navigation } = this.props
+    const { user, transaction, navigation } = this.props
     if(this.state.renderPlaceholderOnly) {
       return <Loader />
     }
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.BackButton to={() => navigation.goBack()} />}
-          center={<Header.Logo />} />
-          <Text>Balance Details</Text>
-          <View style={styles.buttonGroup}>
-            <Text>{this.props.currency}</Text>
-          </View>
-          <View style={styles.priceContainer}>
-            <Text style={styles.priceLeft}>Total Price (USD):</Text>
-            <Text style={styles.priceRight}>${this.props.amountUSD}</Text>
-          </View>
-          <View style={styles.priceContainer}>
-            <Text style={styles.priceLeft}>Total Price (BTC):</Text>
-            <Text style={styles.priceRight}>${this.props.amount}</Text>
-          </View>
-          <View style={styles.qrCodeContainer}>
-            <QRCode value={this.props.url} />
-          </View>
-          <View style={styles.statusContainer}>
-            <Text style={styles.statusText}>{this.props.status}</Text>
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
+          center={<Header.Text>Checkout</Header.Text>} />
+          <View style={styles.innerContainer}>
+            <View style={styles.currencyContainer}>
+              <Text style={styles.currencyLabel}>Currency: </Text>
+              <Text style={styles.currencyText}>{transaction.currency}</Text>
+            </View>
+            <View style={styles.priceOuterContainer}>
+              <View style={styles.priceContainer}>
+                <Text style={styles.priceLeft}>Total Price (USD): </Text>
+                <Text style={styles.priceRight}>${transaction.amountUSD}</Text>
+              </View>
+              <View style={styles.priceContainer}>
+                <Text style={styles.priceLeft}>Total Price (BTC): </Text>
+                <Text style={styles.priceRight}>{transaction.amount}</Text>
+              </View>
+            </View>
+            <View style={styles.qrCodeContainer}>
+              <QRCode value={transaction.url} size={300} />
+            </View>
+            <View style={styles.statusContainer}>
+              <Text style={styles.statusLabel}>Status: </Text>
+              <Text style={styles.statusText}>{transaction.status}</Text>
+            </View>
           </View>
       </View>
     )
@@ -68,11 +71,7 @@ class BalanceDetails extends Component {
 const mapStateToProps = ({ user, checkout }) =>
 ({
   user,
-  currency: checkout.currency,
-  amountUSD: checkout.amountUSD,
-  amount: checkout.amount,
-  url: checkout.url,
-  status: checkout.status
+  transaction: checkout.history.active
 })
 
 export default connect(mapStateToProps)(BalanceDetails)

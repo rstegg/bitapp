@@ -80,7 +80,7 @@ class AddToCart extends Component {
           </View>
           <AddToCartForm onSubmit={values => addToCart({...product, ...values})} />
           <View style={styles.totalPriceContainer}>
-            <Text style={styles.totalPriceContainer}>Total: ${quantity * product.unitPrice || 0}</Text>
+            <Text style={styles.totalPriceLabel}>Total: </Text><Text style={styles.totalPrice}>${quantity * product.unitPrice || 0}</Text>
           </View>
       </View>
     )

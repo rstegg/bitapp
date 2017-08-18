@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   Alert,
+  ActionSheetIOS,
   Image,
   ListView,
   TouchableOpacity,
@@ -11,23 +12,22 @@ import { connect } from 'react-redux'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { productAddToCart, productRemoveFromCart } from 'actions/checkout'
+import { removeProductFromCart, openEditProductModal, closeEditProductModal } from 'actions/checkout'
 
 import { Images } from 'themes'
 
+import EditProductModal from './EditProductModal'
 import ListRow from './ListRow'
 import styles from './Styles'
 
 const OPTIONS = [
   'Edit',
-  'Duplicate',
   'Delete',
   'Cancel',
 ]
 const EDIT_INDEX = 0
-const DUPLICATE_INDEX = 1
-const DELETE_INDEX = 2
-const CANCEL_INDEX = 3
+const DELETE_INDEX = 1
+const CANCEL_INDEX = 2
 
 class List extends Component {
   renderIntro() {
@@ -55,12 +55,31 @@ class List extends Component {
     )
   }
 
+  selectOptions(product) {
+    ActionSheetIOS.showActionSheetWithOptions({
+      options: OPTIONS,
+      cancelButtonIndex: CANCEL_INDEX,
+      destructiveButtonIndex: DELETE_INDEX,
+    },
+    (buttonIndex) => {
+      switch(buttonIndex) {
+        case DELETE_INDEX:
+          this.props.removeProductFromCart(product)
+          break
+        case EDIT_INDEX:
+          this.props.openEditProductModal(product)
+          break
+      }
+    })
+  }
+
   renderRow(product) {
+    console.log(product);
     return <ListRow
             key={product.id}
             product={product}
             onSelect={() => {}}
-            onOptionsBtnPress={() => {}} />
+            onOptionsBtnPress={() => this.selectOptions(product)} />
   }
 
   renderList() {
@@ -87,6 +106,7 @@ class List extends Component {
     return (
       <View style={styles.container}>
         {content}
+        <EditProductModal closeModal={() => this.props.closeEditProductModal()} />
       </View>
     )
   }
@@ -97,17 +117,23 @@ const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1
 const mapStateToProps = ({ checkout }) =>
 ({
   isLoading: checkout.cart.isLoading,
+  editProductOpen: checkout.cart.editProductOpen,
   products: dataSource.cloneWithRows(checkout.cart.products),
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  productRemoveFromCart: product => {
+  removeProductFromCart: product => {
     Alert.alert(product.name, 'Are you sure you want to remove this product?', [
-      { text: 'Yes', onPress: () => dispatch(productRemoveFromCart(product)) },
+      { text: 'Yes', onPress: () => dispatch(removeProductFromCart(product)) },
       { text: 'No' },
     ])
-  }
+  },
+  openEditProductModal: product => dispatch(openEditProductModal(product)),
+  closeEditProductModal: () => dispatch(closeEditProductModal()),
 })
 
-export default connect(mapStateToProps)(List)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List)

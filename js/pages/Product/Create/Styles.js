@@ -4,8 +4,7 @@ import { Metrics, BaseStyles, Colors } from 'themes'
 export default StyleSheet.create({
   ...BaseStyles.screen,
   createForm: {
-    flexGrow: 1,
-    backgroundColor: Colors.lightGrey
+    flexGrow: 1
   },
   addImage: {
     flexGrow: 1

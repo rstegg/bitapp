@@ -6,7 +6,7 @@ export default StyleSheet.create({
   container: {
     flexGrow: 1,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'flex-start'
   },
   introInstructions: {
     flexGrow: 1,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
     color: Colors.darkGrey
   },
   actionButton: {
-    backgroundColor: '#F36D36',
+    backgroundColor: Colors.orange,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15

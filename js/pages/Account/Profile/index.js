@@ -79,7 +79,7 @@ class Edit extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.BackButton to={() => navigation.goBack()} />}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
           center={<Header.Text>Profile</Header.Text>}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveUser()}/>}
         />

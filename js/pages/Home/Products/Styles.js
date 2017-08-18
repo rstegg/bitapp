@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...BaseStyles.screen,
   loginScreen: {
     flexGrow: 1,
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.background,
     height: Metrics.screenHeight,
   },
   inputGroup: {

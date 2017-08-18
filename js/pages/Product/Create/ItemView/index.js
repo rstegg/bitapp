@@ -14,8 +14,8 @@ import styles from './Styles'
 const ItemView = ({ item }) =>
   <View style={styles.listRow}>
     <View style={styles.itemRow}>
+      <Image source={item.image ? { uri: item.image } : Images.itemPlaceholder} style={styles.image} resizeMode='cover' />
       <View style={styles.info}>
-        <Image source={item.image ? { uri: item.image } : Images.itemPlaceholder} style={styles.image} resizeMode='cover' />
         <View style={styles.infoText}>
           <Text numberOfLines={1} style={styles.name}>{item.name}</Text>
           <Text numberOfLines={1} style={styles.details}>{item.description}</Text>

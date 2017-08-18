@@ -8,11 +8,12 @@ import {
   View
 } from 'react-native'
 import { connect } from 'react-redux'
+import { length } from 'ramda'
 
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { fetchProducts, setActiveProduct, duplicateProduct, deleteProduct } from 'actions/products'
+import { fetchProducts, setActiveProduct, duplicateProduct, deleteProduct, viewItems } from 'actions/products'
 
 import { Images } from 'themes'
 
@@ -86,6 +87,30 @@ class List extends Component {
     )
   }
 
+  renderIntroWithItems() {
+    return (
+      <TouchableOpacity onPress={() => this.props.viewItems()} style={styles.intro}>
+        <View>
+          <View style={styles.introTextContainer}>
+            <Text style={styles.introText}>
+              You don&rsquo;t have
+            </Text>
+            <Text style={styles.introText}>
+              any products
+            </Text>
+            <Image source={Images.faq} style={styles.introImage} resizeMode='contain' />
+          </View>
+          <View style={styles.introContent}>
+            <Text style={styles.introDescription}>
+              View your items
+            </Text>
+            <Image source={Images.chevronRight} style={styles.arrow} resizeMode='contain' />
+          </View>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
   renderRow(product) {
     return <ListRow
             key={product.id}
@@ -116,6 +141,8 @@ class List extends Component {
                 </View>
     } else if(this.props.products.getRowCount() > 0) {
       content = this.renderList()
+    } else if(length(this.props.items)) {
+      content = this.renderIntroWithItems()
     } else {
       content = this.renderIntro()
     }
@@ -130,11 +157,12 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
-const mapStateToProps = ({ products, user }) =>
+const mapStateToProps = ({ products, items, user }) =>
 ({
   isLoading: products.productsList.isLoading,
   isDuplicateLoading: products.duplicateProduct.isLoading,
   products: dataSource.cloneWithRows(products.productsList.products),
+  items: items.itemsList.items,
   user
 })
 
@@ -148,7 +176,8 @@ const mapDispatchToProps = dispatch =>
       { text: 'No' },
     ])
   },
-  duplicateProduct: product => dispatch(duplicateProduct(product))
+  duplicateProduct: product => dispatch(duplicateProduct(product)),
+  viewItems: () => dispatch(viewItems()),
 })
 
 export default connect(

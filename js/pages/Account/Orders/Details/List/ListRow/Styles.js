@@ -1,81 +1,100 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, Colors } from 'themes'
+import { Metrics, BaseStyles, Colors } from 'themes'
 
 export default StyleSheet.create({
+  ...BaseStyles.screen,
   listRow: {
-    flex: 1,
+    flexGrow: 1,
+    flexDirection: 'row',
     marginBottom: 10,
     borderWidth: 1,
     borderRadius: 5,
     overflow: 'hidden',
     borderColor: Colors.grey,
     backgroundColor: 'white',
-  },
-  checkoutRow: {
-    flex: 1,
-    flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  image: {
+    width: 78,
+    height: 78,
     alignItems: 'center',
   },
-  textContainer: {
+  info: {
+    flexGrow: 1,
+    flexBasis: 1,
     flexDirection: 'row',
   },
-  infoText: {
+  productInfo: {
+    flex: 1,
     paddingLeft: 20,
     justifyContent: 'center'
   },
-  amountContainer: {
-    paddingHorizontal: 20,
-    justifyContent: 'center'
-  },
-  currencyContainer: {
+  nameContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  currencyLabel: {
+  nameLabel: {
+    flex: 0.5,
     fontSize: 12,
     padding: 5,
   },
-  currencyText: {
+  nameText: {
+    flex: 1,
     fontSize: 12,
     padding: 5,
     fontWeight: 'bold'
   },
-  statusContainer: {
+  priceContainer: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  statusLabel: {
+  priceLabel: {
+    flex: 1,
     fontSize: 12,
     padding: 5,
   },
-  statusText: {
+  priceText: {
+    flex: 0.5,
     fontSize: 12,
     padding: 5,
     fontWeight: 'bold'
   },
-  totalUSDContainer: {
+  orderInfo: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderLeftWidth: 1,
+  },
+  quantityContainer: {
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  totalUSDLabel: {
+  quantityLabel: {
     fontSize: 12,
     padding: 5,
   },
-  totalUSDText: {
+  quantityText: {
     fontSize: 12,
     padding: 5,
     fontWeight: 'bold'
   },
-  dateContainer: {
+  totalContainer: {
+    flex: 0.5,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center'
   },
-  dateLabel: {
+  totalLabel: {
     fontSize: 12,
     padding: 5,
   },
-  dateText: {
+  totalText: {
     fontSize: 12,
     padding: 5,
     fontWeight: 'bold'
@@ -87,4 +106,4 @@ export default StyleSheet.create({
     fontSize: 20,
     color: Colors.grey
   }
-})
+});

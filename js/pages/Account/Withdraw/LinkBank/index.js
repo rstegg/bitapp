@@ -20,7 +20,7 @@ import styles from './Styles'
 const LinkBank = ({ isLoading, saveBank, linkBankAccount, navigation }) =>
   <View style={styles.container}>
     <Header
-      left={<Header.BackButton to={() => navigation.goBack()} />}
+      left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
       center={<Header.Text>Link Bank Account</Header.Text>}
       right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => saveBank()}/>}
       />

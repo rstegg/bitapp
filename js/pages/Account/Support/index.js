@@ -31,7 +31,7 @@ export default class Support extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.BackButton to={() => this.props.navigation.goBack()} />}
+          left={<Header.BackButton text='Back' to={() => this.props.navigation.goBack()} />}
           center={<Header.Text>Support</Header.Text>} />
 
         <View style={styles.contentContainer}>

@@ -18,7 +18,7 @@ import styles from './Styles'
 const WithdrawalInfo = ({ isLoading, withdrawalInfo, handleRemove, navigation }) =>
   <View style={styles.container}>
     <Header
-      left={<Header.BackButton to={() => navigation.goBack()} />}
+      left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
       center={<Header.Text>Withdrawal Info</Header.Text>}
     />
     { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={handleRemove} navigation={navigation} />

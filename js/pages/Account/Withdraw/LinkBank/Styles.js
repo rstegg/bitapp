@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     flexGrow: 1,
     flexDirection: 'column',
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.background,
   },
   inputGroup: {
     backgroundColor: 'white',

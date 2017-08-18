@@ -1,3 +1,11 @@
+export const setActiveTransaction = transaction =>
+({
+  type: 'SET_ACTIVE_TRANSACTION',
+  payload: {
+    transaction
+  }
+})
+
 export const fetchCheckoutHistory = user =>
 ({
   type: 'FETCH_CHECKOUT_HISTORY',
@@ -10,7 +18,7 @@ export const fetchCheckoutHistorySuccess = res =>
 ({
   type: 'FETCH_CHECKOUT_HISTORY_SUCCESS',
   payload: {
-    history: res.body.payments
+    history: res.body.transactions
   }
 })
 
@@ -46,12 +54,12 @@ export const removeProductFromCart = product =>
   }
 })
 
-export const editCartProduct = (productId, product) =>
+export const editCartProduct = (product, quantity) =>
 ({
   type: 'EDIT_CART_PRODUCT',
   payload: {
-    productId,
-    product
+    product,
+    quantity
   }
 })
 
@@ -94,7 +102,7 @@ export const currencySuccess = res =>
 ({
   type: 'CURRENCY_SUCCESS',
   payload: {
-    payment: res.body.payment
+    transaction: res.body.transaction
   }
 })
 
@@ -104,4 +112,17 @@ export const currencyFailure = res =>
   payload: {
     error: res.body.error
   }
+})
+
+export const openEditProductModal = product =>
+({
+  type: 'OPEN_EDIT_PRODUCT_MODAL',
+  payload: {
+    product
+  }
+})
+
+export const closeEditProductModal = () =>
+({
+  type: 'CLOSE_EDIT_PRODUCT_MODAL'
 })

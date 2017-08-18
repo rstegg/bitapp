@@ -106,6 +106,7 @@ class List extends Component {
   }
 
   render() {
+    console.log(this.props.items);
     let content
     if(this.props.isLoading) {
       content = <Loader />
@@ -130,11 +131,14 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
+const filterWithKeyword = (items, keyword) => !!keyword ? items.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase())) : items
+
 const mapStateToProps = ({ items, user }) =>
 ({
   isLoading: items.itemsList.isLoading,
   isDuplicateLoading: items.duplicateItem.isLoading,
-  items: dataSource.cloneWithRows(items.itemsList.items),
+  keyword: items.keyword,
+  items: dataSource.cloneWithRows(filterWithKeyword(items.itemsList.items, items.keyword)),
   user
 })
 

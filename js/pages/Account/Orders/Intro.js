@@ -20,7 +20,7 @@ const navigateToHome = navigation =>
     })
   )
 
-const BalanceIntro = ({ navigation }) =>
+const OrdersIntro = ({ navigation }) =>
   <View style={styles.container}>
     <View style={styles.introInstructions}>
       <View style={styles.introTextContainer}>
@@ -34,4 +34,4 @@ const BalanceIntro = ({ navigation }) =>
     </TouchableOpacity>
   </View>
 
-export default BalanceIntro
+export default OrdersIntro

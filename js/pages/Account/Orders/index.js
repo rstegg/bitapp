@@ -11,11 +11,11 @@ import { fetchOrders, setActiveOrder } from 'actions/orders'
 import Header from 'components/Header'
 import Loader from 'components/Loader'
 
-import BalanceList from './List'
-import BalanceIntro from './Intro'
+import OrdersList from './List'
+import OrdersIntro from './Intro'
 import styles from './Styles'
 
-class BalanceInfo extends Component {
+class OrderHistory extends Component {
   componentWillMount() {
     console.log(this.props);
     const { user, fetchOrders } = this.props
@@ -30,11 +30,11 @@ class BalanceInfo extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.BackButton to={() => navigation.goBack()} />}
-          center={<Header.Text>Balance</Header.Text>}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
+          center={<Header.Text>Orders</Header.Text>}
         />
-        { orders.getRowCount() ? <BalanceList orders={orders} setActiveOrder={setActiveOrder} />
-        : <BalanceIntro navigation={navigation} /> }
+        { orders.getRowCount() ? <OrdersList orders={orders} setActiveOrder={setActiveOrder} />
+        : <OrdersIntro navigation={navigation} /> }
       </View>
     )
   }
@@ -59,4 +59,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(BalanceInfo)
+)(OrderHistory)

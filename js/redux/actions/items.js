@@ -52,6 +52,11 @@ export const searchItemsFailure = errors =>
   }
 })
 
+export const clearSearchItems = () =>
+({
+  type: 'CLEAR_SEARCH_ITEMS'
+})
+
 export const createItem = (item, user) =>
 ({
   type: 'CREATE_ITEM',

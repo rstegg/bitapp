@@ -11,16 +11,19 @@ import Account from 'pages/Account'
 import AccountProfile from 'pages/Account/Profile'
 import AccountWithdraw from 'pages/Account/Withdraw'
 import AccountLinkBank from 'pages/Account/Withdraw/LinkBank'
-import AccountBalance from 'pages/Account/Balance'
-import AccountBalanceDetails from 'pages/Account/Balance/Details'
+import AccountOrders from 'pages/Account/Orders'
+import AccountOrdersDetails from 'pages/Account/Orders/Details'
 import AccountSupport from 'pages/Account/Support'
 
 import CreateItem from 'pages/Item/Create'
 import CreateProduct from 'pages/Product/Create'
+
 import AddToCart from 'pages/Product/AddToCart'
 import CheckoutReview from 'pages/Checkout/Cart/Review'
 import CheckoutSuccess from 'pages/Checkout/Cart/Success'
 import CheckoutCoinSelect from 'pages/Checkout/Cart/CoinSelect'
+import CheckoutHistoryDetails from 'pages/Checkout/History/Details'
+
 import ReduxHomeTabNav from 'navigation/ReduxHomeTabNav'
 import ReduxCheckoutTabNav from 'navigation/ReduxCheckoutTabNav'
 
@@ -38,8 +41,8 @@ const PrimaryNav = StackNavigator({
   AccountProfileScreen: { screen: AccountProfile },
   AccountWithdrawScreen: { screen: AccountWithdraw },
   AccountLinkBankScreen: { screen: AccountLinkBank },
-  AccountBalanceScreen: { screen: AccountBalance },
-  AccountBalanceDetailsScreen: { screen: AccountBalanceDetails },
+  AccountOrdersScreen: { screen: AccountOrders },
+  AccountOrdersDetailsScreen: { screen: AccountOrdersDetails },
   AccountSupportScreen: { screen: AccountSupport },
   CreateItemScreen: { screen: CreateItem },
   CreateProductScreen: { screen: CreateProduct },
@@ -47,6 +50,7 @@ const PrimaryNav = StackNavigator({
   CheckoutScreen: { screen: ReduxCheckoutTabNav },
   CheckoutCoinSelectScreen: { screen: CheckoutCoinSelect },
   CheckoutSuccessScreen: { screen: CheckoutSuccess },
+  CheckoutHistoryDetailsScreen: { screen: CheckoutHistoryDetails },
 }, {
   headerMode: 'none',
   initialRouteName: 'LaunchScreen',

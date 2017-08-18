@@ -20,6 +20,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+  case 'SEARCH_PRODUCTS':
+    return { ...state, productsList: { ...state.productsList, products: state.productsList.products.filter(product => product.item.name.contains(action.payload.keyword) ) } }
   case 'CREATE_PRODUCT':
   case 'UPDATE_PRODUCT':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: true } }
@@ -71,6 +73,9 @@ export default (state = initialState, action) => {
         products: state.productsList[id].products.filter(product => product.id != id)
       }
     }
+
+  case 'LOGOUT':
+    return initialState
 
   default:
     return state

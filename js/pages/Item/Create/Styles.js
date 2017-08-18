@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...BaseStyles.screen,
   createForm: {
     flexGrow: 1,
-    backgroundColor: Colors.lightGrey
+    backgroundColor: Colors.background
   },
   addImage: {
     flexGrow: 1

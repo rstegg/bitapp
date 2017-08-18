@@ -30,7 +30,7 @@ export default StyleSheet.create({
   sectionHeader: {
     padding: 10,
     alignItems: 'flex-start',
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.background,
   },
   button: {
     flexDirection: 'row',

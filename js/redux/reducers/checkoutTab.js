@@ -16,6 +16,16 @@ export default (state, action) => {
     //     state
     //   )
     //   break
+    case 'LOGOUT':
+      newState = CheckoutTabNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'CheckoutReviewScreen' })
+          ]
+        }),
+        state
+      )
     default:
       newState = CheckoutTabNav.router.getStateForAction(action, state)
   }

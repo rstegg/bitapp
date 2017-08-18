@@ -21,7 +21,7 @@ import { Images, Metrics } from 'themes'
 import OrderDetailsList from './List'
 import styles from './Styles'
 
-class BalanceDetails extends Component {
+class OrderDetails extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -49,9 +49,8 @@ class BalanceDetails extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.BackButton to={() => navigation.goBack()} />}
-          center={<Header.Logo />} />
-          <Text>Order Details</Text>
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
+          center={<Header.Text>Order Details</Header.Text>} />
           <OrderDetailsList products={products} />
       </View>
     )
@@ -67,4 +66,4 @@ const mapStateToProps = ({ user, orders }) =>
   products: dataSource.cloneWithRows(orders.activeOrder.products),
 })
 
-export default connect(mapStateToProps)(BalanceDetails)
+export default connect(mapStateToProps)(OrderDetails)

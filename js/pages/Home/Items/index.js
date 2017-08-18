@@ -15,7 +15,7 @@ import { resetNewItem } from 'actions/items'
 import ItemsList from './List'
 import styles from './Styles'
 
-import { searchItems } from 'actions/items'
+import { searchItems, clearSearchItems } from 'actions/items'
 
 class Items extends Component {
   static navigationOptions = {
@@ -34,7 +34,7 @@ class Items extends Component {
   }
 
   render() {
-    const { isLoading, navigation, searchItems, clearSearch, keyword, user } = this.props
+    const { isLoading, navigation, searchItems, clearSearchItems, keyword, user } = this.props
     return (
       <View style={styles.container}>
         <Header
@@ -43,7 +43,7 @@ class Items extends Component {
           right={<Header.CartButton to={() => navigation.navigate('CheckoutScreen')}/>} />
         <View style={styles.section}>
           <View style={styles.centered}>
-            <SearchBar onSearch={keyword => searchItems(keyword, user)} onCancel={clearSearch} searchTerm={keyword} />
+            <SearchBar onSearch={keyword => searchItems(keyword, user)} onCancel={clearSearchItems} searchTerm={keyword} />
           </View>
         </View>
         <ItemsList navigation={navigation} />
@@ -72,7 +72,9 @@ const mapStateToProps = ({ user, items, products }) =>
 const mapDispatchToProps = dispatch =>
 ({
   onSubmit: () => dispatch(submit('searchItem')),
-  resetNewItem: () => dispatch(resetNewItem())
+  resetNewItem: () => dispatch(resetNewItem()),
+  searchItems: (keyword, user) => dispatch(searchItems(keyword, user)),
+  clearSearchItems: () => dispatch(clearSearchItems()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Items)

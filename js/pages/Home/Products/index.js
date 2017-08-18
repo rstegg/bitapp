@@ -34,6 +34,9 @@ class Products extends Component {
 
   render() {
     const { isLoading, navigation } = this.props
+    if(isLoading) {
+      return <Loader />
+    }
     return (
       <View style={styles.container}>
         <Header
@@ -51,18 +54,13 @@ class Products extends Component {
   }
 }
 
-
-
 const mapStateToProps = ({ user, products }) =>
 ({
-  errors: user.errors,
-  isLoading: user.isLoading,
-  product: products.newProduct
+  isLoading: products.isLoading,
 })
 
 const mapDispatchToProps = dispatch =>
 ({
-  onSubmit: () => dispatch(submit('searchProduct')),
   resetNewProduct: () => dispatch(resetNewProduct()),
 })
 

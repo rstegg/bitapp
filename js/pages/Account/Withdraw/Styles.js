@@ -30,7 +30,7 @@ export default StyleSheet.create({
     color: Colors.darkGrey
   },
   actionButton: {
-    backgroundColor: '#F36D36',
+    backgroundColor: Colors.orange,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 15

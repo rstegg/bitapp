@@ -7,14 +7,12 @@ export default StyleSheet.create({
     height: 80,
     marginBottom: 10,
     borderWidth: 1,
+    borderRadius: 5,
+    overflow: 'hidden',
     borderColor: Colors.grey,
+    backgroundColor: 'white',
   },
   itemRow: {
-    flexGrow: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  productRow: {
     flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -30,17 +28,21 @@ export default StyleSheet.create({
     flexDirection: 'row',
   },
   infoText: {
-    flexGrow: 1,
-    padding: 10,
+    flex: 1,
+    paddingVertical: 5,
     paddingHorizontal: 15,
   },
   name: {
+    flex: 1,
     fontSize: 18,
     padding: 5,
+    fontWeight: 'bold',
   },
   details: {
+    flex: 1,
     fontSize: 14,
     padding: 5,
+    fontWeight: '100',
   },
   options: {
     padding: 10,

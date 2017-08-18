@@ -3,6 +3,11 @@ export const resetNewProduct = () =>
   type: 'RESET_NEW_PRODUCT'
 })
 
+export const viewItems = () =>
+({
+  type: 'VIEW_ITEMS'
+})
+
 export const fetchProducts = user =>
 ({
   type: 'FETCH_PRODUCTS',

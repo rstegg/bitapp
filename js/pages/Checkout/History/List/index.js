@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { fetchCheckoutHistory } from 'actions/checkout'
+import { fetchCheckoutHistory, setActiveTransaction } from 'actions/checkout'
 
 import { Images } from 'themes'
 
@@ -58,11 +58,11 @@ class List extends Component {
     )
   }
 
-  renderRow(product) {
+  renderRow(transaction) {
     return <ListRow
-            key={product.id}
-            product={product}
-            onSelect={() => {}}
+            key={transaction.id}
+            transaction={transaction}
+            onSelect={() => this.props.setActiveTransaction(transaction)}
             onOptionsBtnPress={() => {}} />
   }
 
@@ -107,6 +107,7 @@ const mapStateToProps = ({ checkout, user }) =>
 const mapDispatchToProps = dispatch =>
 ({
   fetchCheckoutHistory: user => dispatch(fetchCheckoutHistory(user)),
+  setActiveTransaction: transaction => dispatch(setActiveTransaction(transaction)),
 })
 
 export default connect(

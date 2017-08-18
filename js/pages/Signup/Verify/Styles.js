@@ -6,7 +6,7 @@ export default StyleSheet.create({
   signupScreen: {
     flexGrow: 1,
     alignItems: 'center',
-    backgroundColor: Colors.lightGrey,
+    backgroundColor: Colors.background,
     width: Metrics.screenWidth,
     height: Metrics.screenHeight,
   },

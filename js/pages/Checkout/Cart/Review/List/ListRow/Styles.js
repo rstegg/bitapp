@@ -7,14 +7,12 @@ export default StyleSheet.create({
     height: 80,
     marginBottom: 10,
     borderWidth: 1,
+    borderRadius: 5,
+    overflow: 'hidden',
     borderColor: Colors.grey,
+    backgroundColor: 'white',
   },
   checkoutRow: {
-    flexGrow: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  productRow: {
     flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -34,12 +32,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  detailsText: {
-    flex: 0.5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-  },
   name: {
     fontSize: 12,
     padding: 5,
@@ -47,6 +39,11 @@ export default StyleSheet.create({
   price: {
     fontSize: 12,
     padding: 5,
+  },
+  detailsText: {
+    flex: 0.5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   quantity: {
     fontSize: 12,

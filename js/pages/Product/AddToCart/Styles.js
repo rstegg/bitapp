@@ -4,8 +4,8 @@ import { Metrics, BaseStyles, Colors } from 'themes'
 export default StyleSheet.create({
   ...BaseStyles.screen,
   createForm: {
-    flexGrow: 1,
-    backgroundColor: Colors.lightGrey
+    marginBottom: 10,
+    backgroundColor: Colors.background
   },
   unitPriceContainer: {
     flex: 1,
@@ -22,8 +22,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginBottom: 50,
   },
+  totalPriceLabel: {
+    fontSize: 24,
+  },
   totalPrice: {
-    fontSize: 24
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   addImage: {
     flexGrow: 1

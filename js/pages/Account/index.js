@@ -45,11 +45,11 @@ class Account extends Component {
     return (
       <View style={styles.container}>
         <Header
-          left={<Header.BackButton to={() => navigation.goBack()}/>}
+          left={<Header.BackButton text='Back' to={() => navigation.goBack()}/>}
           center={<Header.Text>Account</Header.Text>}
         />
         <AccountListItem text='Profile' icon='user' onPress={() => navigation.navigate('AccountProfileScreen')} />
-        <AccountListItem text='Balance' icon='credit-card' onPress={() => navigation.navigate('AccountBalanceScreen')} />
+        <AccountListItem text='Orders' icon='credit-card' onPress={() => navigation.navigate('AccountOrdersScreen')} />
         <AccountListItem text='Withdrawal Info' icon='bank' onPress={() => navigation.navigate('AccountWithdrawScreen')} />
         <AccountListItem text='Support' icon='info-circle' onPress={() => navigation.navigate('AccountSupportScreen')} />
         <AccountLogoutItem onPress={() => handleLogout()} />

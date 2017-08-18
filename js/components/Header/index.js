@@ -34,7 +34,7 @@ Header.MenuButton = ({ openDrawer }) =>
 
 Header.HomeButton = ({ to }) =>
    <TouchableOpacity onPress={to} style={styles.iconButton}>
-      <Image source={Images.home} style={styles.imageButton} resizeMode='contain' />
+      <FontAwesome name='home' style={styles.viewButton} resizeMode='contain' />
     </TouchableOpacity>
 
 Header.CartButton = ({ to }) =>

@@ -35,6 +35,8 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         activeOrder: action.payload.order
       })
+    case 'LOGOUT':
+      return initialState
   default:
     return state
   }

@@ -11,9 +11,9 @@ const api = {
   checkout: ({ products, user }) =>
     post('orders', { products }, user.token),
   currency: ({ currency, orderId, user }) =>
-    post('payments', { currency, orderId }, user.token),
+    post('transactions', { currency, orderId }, user.token),
   history: ({ user }) =>
-    get('payments', user.token),
+    get('transactions', user.token),
 }
 
 const fetchCheckoutHistory = action$ =>

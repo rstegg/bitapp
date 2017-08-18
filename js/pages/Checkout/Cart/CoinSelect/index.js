@@ -34,7 +34,7 @@ class CoinSelect extends Component {
 const mapStateToProps = ({ user, checkout }) =>
 ({
   user,
-  orderId: checkout.orderId
+  orderId: checkout.cart.active.orderId
 })
 
 const mapDispatchToProps = dispatch =>
