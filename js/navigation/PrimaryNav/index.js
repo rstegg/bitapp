@@ -17,6 +17,8 @@ import AccountSupport from 'pages/Account/Support'
 
 import CreateItem from 'pages/Item/Create'
 import CreateProduct from 'pages/Product/Create'
+import EditItem from 'pages/Item/Edit'
+import EditProduct from 'pages/Product/Edit'
 
 import AddToCart from 'pages/Product/AddToCart'
 import CheckoutReview from 'pages/Checkout/Cart/Review'
@@ -46,6 +48,8 @@ const PrimaryNav = StackNavigator({
   AccountSupportScreen: { screen: AccountSupport },
   CreateItemScreen: { screen: CreateItem },
   CreateProductScreen: { screen: CreateProduct },
+  EditItemScreen: { screen: EditItem },
+  EditProductScreen: { screen: EditProduct },
   AddToCartScreen: { screen: AddToCart },
   CheckoutScreen: { screen: ReduxCheckoutTabNav },
   CheckoutCoinSelectScreen: { screen: CheckoutCoinSelect },

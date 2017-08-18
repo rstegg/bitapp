@@ -91,21 +91,21 @@ export const setActiveProduct = product =>
   }
 })
 
-export const updateProduct = product =>
+export const editProduct = product =>
 ({
-   type: 'UPDATE_PRODUCT',
+   type: 'EDIT_PRODUCT',
    payload: { product }
 })
 
-export const updateProductSuccess = product =>
+export const editProductSuccess = product =>
 ({
-   type: 'UPDATE_PRODUCT_SUCCESS',
+   type: 'EDIT_PRODUCT_SUCCESS',
    payload: { product }
 })
 
-export const updateProductFailure = errors =>
+export const editProductFailure = errors =>
 ({
-   type: 'UPDATE_PRODUCT_FAILURE',
+   type: 'EDIT_PRODUCT_FAILURE',
    payload: { errors }
 })
 

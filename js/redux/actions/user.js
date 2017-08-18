@@ -1,20 +1,20 @@
-export const updateProfile = user =>
+export const editProfile = user =>
 ({
-  type: 'UPDATE_PROFILE',
+  type: 'EDIT_PROFILE',
   payload: {
     user
   }
 })
 
-export const updateProfileSuccess = res =>
+export const editProfileSuccess = res =>
 ({
-  type: 'UPDATE_PROFILE_SUCCESS',
+  type: 'EDIT_PROFILE_SUCCESS',
   payload: {
     user: res.body.user
   }
 })
 
-export const updateProfileFailure = res =>
+export const editProfileFailure = res =>
 ({
-  type: 'UPDATE_PROFILE_FAILURE'
+  type: 'EDIT_PROFILE_FAILURE'
 })

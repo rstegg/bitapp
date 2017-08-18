@@ -4,10 +4,22 @@ import { NavigationActions } from 'react-navigation'
 export default (state, action) => {
   let newState
   switch(action.type) {
+    case 'EDIT_ITEM':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'EditItemScreen' }),
+        state
+      )
+      break
+    case 'EDIT_PRODUCT':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.navigate({ routeName: 'EditProductScreen' }),
+        state
+      )
+      break
     case 'CREATE_ITEM_SUCCESS':
-    case 'UPDATE_ITEM_SUCCESS':
+    case 'EDIT_ITEM_SUCCESS':
     case 'CREATE_PRODUCT_SUCCESS':
-    case 'UPDATE_PRODUCT_SUCCESS':
+    case 'EDIT_PRODUCT_SUCCESS':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.reset({
           index: 0,

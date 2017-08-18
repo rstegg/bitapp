@@ -23,14 +23,14 @@ export default (state = initialState, action) => {
   case 'SEARCH_PRODUCTS':
     return { ...state, productsList: { ...state.productsList, products: state.productsList.products.filter(product => product.item.name.contains(action.payload.keyword) ) } }
   case 'CREATE_PRODUCT':
-  case 'UPDATE_PRODUCT':
+  case 'EDIT_PRODUCT':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: true } }
   case 'CREATE_PRODUCT_SUCCESS':
     return { ...state, newProduct: { ...action.payload.product, isLoading: false } }
-  case 'UPDATE_PRODUCT_SUCCESS':
+  case 'EDIT_PRODUCT_SUCCESS':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
   case 'CREATE_PRODUCT_FAILURE':
-  case 'UPDATE_PRODUCT_FAILURE':
+  case 'EDIT_PRODUCT_FAILURE':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
 
   case 'FETCH_PRODUCTS':
@@ -56,7 +56,7 @@ export default (state = initialState, action) => {
     return { ...state, newProduct: initialState.newProduct }
   case 'SET_ACTIVE_PRODUCT':
     return { ...state, activeProduct: action.payload.product }
-  case 'UPDATE_ACTIVE_PRODUCT':
+  case 'EDIT_ACTIVE_PRODUCT':
     return { ...state,
       activeProduct: { ...state.activeProduct, ...action.payload.product }
     }

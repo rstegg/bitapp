@@ -6,14 +6,14 @@ export default (state, action) => {
   switch(action.type) {
     case 'VIEW_ITEMS':
     case 'CREATE_ITEM_SUCCESS':
-    case 'UPDATE_ITEM_SUCCESS':
+    case 'EDIT_ITEM_SUCCESS':
       newState = HomeTabNav.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'ItemsScreen' }),
         state
       )
       break
     case 'CREATE_PRODUCT_SUCCESS':
-    case 'UPDATE_PRODUCT_SUCCESS':
+    case 'EDIT_PRODUCT_SUCCESS':
       newState = HomeTabNav.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'ProductsScreen' }),
         state

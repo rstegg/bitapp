@@ -90,21 +90,21 @@ export const setActiveItem = (item, user) =>
   }
 })
 
-export const updateItem = (item, user) =>
+export const editItem = (item, user) =>
 ({
-   type: 'UPDATE_ITEM',
+   type: 'EDIT_ITEM',
    payload: { item, user }
 })
 
-export const updateItemSuccess = res =>
+export const editItemSuccess = res =>
 ({
-   type: 'UPDATE_ITEM_SUCCESS',
+   type: 'EDIT_ITEM_SUCCESS',
    payload: { item: res.body.item }
 })
 
-export const updateItemFailure = errors =>
+export const editItemFailure = errors =>
 ({
-   type: 'UPDATE_ITEM_FAILURE',
+   type: 'EDIT_ITEM_FAILURE',
    payload: { errors }
 })
 

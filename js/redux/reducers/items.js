@@ -58,10 +58,10 @@ export default (state = initialState, action) => {
     case 'SET_ACTIVE_ITEM':
       return { ...state, activeItem: action.payload.item }
 
-    case 'UPDATE_ITEM':
+    case 'EDIT_ITEM':
       return { ...state, activeItem: { ...state.item, isLoading: true, errors: { } } }
-    case 'UPDATE_ITEM_SUCCESS':
-    case 'UPDATE_ITEM_FAILURE':
+    case 'EDIT_ITEM_SUCCESS':
+    case 'EDIT_ITEM_FAILURE':
       return { ...state, activeItem: { ...action.payload.item, isLoading: false} }
 
       /* new item image */
@@ -77,7 +77,7 @@ export default (state = initialState, action) => {
       return { ...state, newItem: { ...state.newItem, image: null, isImageLoading: false } }
     case 'REMOVE_NEW_ITEM_IMAGE_FAILURE':
       return { ...state, newItem: { ...state.newItem, isImageLoading: false } }
-      /* update item image */
+      /* edit item image */
     case 'UPLOAD_ACTIVE_ITEM_IMAGE':
       return { ...state, activeItem: { ...state.activeItem, isImageLoading: true } }
     case 'UPLOAD_ACTIVE_ITEM_IMAGE_SUCCESS':

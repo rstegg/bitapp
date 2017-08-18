@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker'
 import DropdownAlert from 'components/DropdownAlert'
 
-import { updateProfile, resetUserUpdate } from 'actions/user'
+import { editProfile, resetUserUpdate } from 'actions/user'
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -32,7 +32,7 @@ class Edit extends Component {
   componentWillUpdate(nextProps) {
     if(nextProps.user.isUpdated) {
       this.props.resetUserUpdate()
-      this.dropdownSuccess.alertWithType('info', 'Success', 'Profile updated.')
+      this.dropdownSuccess.alertWithType('info', 'Success', 'Profile editd.')
     }
   }
 
@@ -52,7 +52,7 @@ class Edit extends Component {
         } else {
           source = response.uri
         }
-        this.props.updateProfileImage(source, user)
+        this.props.editProfileImage(source, user)
       }
     })
   }
@@ -100,7 +100,7 @@ class Edit extends Component {
             <Text>ACCOUNT DETAILS</Text>
           </View>
 
-          <AccountProfileForm onSubmit={values => updateProfile({...values, image: user.image || ''})} />
+          <AccountProfileForm onSubmit={values => editProfile({...values, image: user.image || ''})} />
 
         </ScrollView>
         <DropdownAlert ref={ref => this.dropdownSuccess = ref} />
@@ -117,8 +117,8 @@ const mapStateToProps = ({ user }) =>
 const mapDispatchToProps = dispatch =>
 ({
   saveUser: () => dispatch(submit('accountProfile')),
-  updateProfile: user => dispatch(updateProfile(user)),
-  updateProfileImage: (source, user) => dispatch(updateProfileImage(source, user)),
+  editProfile: user => dispatch(editProfile(user)),
+  editProfileImage: (source, user) => dispatch(editProfileImage(source, user)),
   resetUserUpdate: () => dispatch(resetUserUpdate()),
 })
 
