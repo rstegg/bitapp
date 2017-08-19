@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       totalUSD: Sequelize.DECIMAL,
-      products: Sequelize.JSONB,
+      products: Sequelize.ARRAY(Sequelize.JSONB),
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,

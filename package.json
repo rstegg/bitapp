@@ -6,9 +6,8 @@
   "scripts": {
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon .",
-    "test": "jest"
+    "test": "jest",
+    "dev": "nodemon ."
   },
   "author": "",
   "license": "ISC",

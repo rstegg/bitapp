@@ -6,6 +6,7 @@ const products = require('./products')
 const images = require('./images')
 const orders = require('./orders')
 const transactions = require('./transactions')
+const balance = require('./balance')
 
 module.exports =
   router
@@ -15,3 +16,4 @@ module.exports =
     .use('/images', images)
     .use('/orders', orders)
     .use('/transactions', transactions)
+    .use('/balance', balance)

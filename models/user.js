@@ -17,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     verifyCode: DataTypes.STRING,
     name: DataTypes.STRING,
-    image: DataTypes.STRING
+    accountId: DataTypes.INTEGER,
+    image: DataTypes.STRING,
   })
 
   User.associate = (models) => {
