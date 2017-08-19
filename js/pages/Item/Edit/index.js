@@ -75,7 +75,7 @@ class CreateItem extends Component {
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveItem()} />} />
 
-        <CreateItemForm onSubmit={values => editItem({...values, id: item.id, image: item.image}, user)} />
+        <CreateItemForm onSubmit={values => editItem({...values, image: item.image}, user)} />
 
         <View style={{flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
 

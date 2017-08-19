@@ -18,6 +18,7 @@ import itemsEpics from './epics/items'
 import productsEpics from './epics/products'
 import checkoutEpics from './epics/checkout'
 import ordersEpics from './epics/orders'
+import withdrawEpics from './epics/withdraw'
 
 const rootReducer = combineReducers({
   user,
@@ -38,6 +39,7 @@ const rootEpic = combineEpics(
   productsEpics,
   checkoutEpics,
   ordersEpics,
+  withdrawEpics,
 )
 
 export default () =>

@@ -55,6 +55,7 @@ export default (state = initialState, action) => {
     case 'DUPLICATE_ITEM_FAILURE':
       return { ...state, duplicateItem: {  isLoading: false } }
 
+    case 'OPEN_EDIT_ITEM':
     case 'SET_ACTIVE_ITEM':
       return { ...state, activeItem: action.payload.item }
 

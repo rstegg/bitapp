@@ -13,7 +13,7 @@ import { length } from 'ramda'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { fetchProducts, setActiveProduct, duplicateProduct, deleteProduct, viewItems } from 'actions/products'
+import { fetchProducts, setActiveProduct, openEditProduct, duplicateProduct, deleteProduct, viewItems } from 'actions/products'
 
 import { Images } from 'themes'
 
@@ -56,8 +56,7 @@ class List extends Component {
           this.props.deleteProduct(product)
           break
         case EDIT_INDEX:
-          this.props.setActiveProduct(product)
-          this.props.navigation.navigate('EditProduct')
+          this.props.openEditProduct(product)
           break
       }
     })
@@ -170,6 +169,7 @@ const mapDispatchToProps = dispatch =>
 ({
   fetchProducts: user => dispatch(fetchProducts(user)),
   setActiveProduct: product => dispatch(setActiveProduct(product)),
+  openEditProduct: product => dispatch(openEditProduct(product)),
   deleteProduct: product => {
     Alert.alert(product.name, 'Are you sure you want to delete this product?', [
       { text: 'Yes', onPress: () => dispatch(deleteProduct(product)) },

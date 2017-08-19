@@ -4,13 +4,13 @@ import { NavigationActions } from 'react-navigation'
 export default (state, action) => {
   let newState
   switch(action.type) {
-    case 'EDIT_ITEM':
+    case 'OPEN_EDIT_ITEM':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'EditItemScreen' }),
         state
       )
       break
-    case 'EDIT_PRODUCT':
+    case 'OPEN_EDIT_PRODUCT':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'EditProductScreen' }),
         state

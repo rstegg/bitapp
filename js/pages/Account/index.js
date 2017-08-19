@@ -50,7 +50,7 @@ class Account extends Component {
         />
         <AccountListItem text='Profile' icon='user' onPress={() => navigation.navigate('AccountProfileScreen')} />
         <AccountListItem text='Orders' icon='credit-card' onPress={() => navigation.navigate('AccountOrdersScreen')} />
-        <AccountListItem text='Withdrawal Info' icon='bank' onPress={() => navigation.navigate('AccountWithdrawScreen')} />
+        <AccountListItem text='Withdraw' icon='bank' onPress={() => navigation.navigate('AccountWithdrawScreen')} />
         <AccountListItem text='Support' icon='info-circle' onPress={() => navigation.navigate('AccountSupportScreen')} />
         <AccountLogoutItem onPress={() => handleLogout()} />
     </View>

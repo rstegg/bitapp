@@ -90,10 +90,21 @@ export const setActiveItem = (item, user) =>
   }
 })
 
+export const openEditItem = item =>
+({
+   type: 'OPEN_EDIT_ITEM',
+   payload: {
+     item
+   }
+})
+
 export const editItem = (item, user) =>
 ({
    type: 'EDIT_ITEM',
-   payload: { item, user }
+   payload: {
+     item,
+     user
+   }
 })
 
 export const editItemSuccess = res =>

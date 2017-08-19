@@ -1,3 +1,28 @@
+export const fetchBalance = user =>
+({
+  type: 'FETCH_BALANCE',
+  payload: {
+    user
+  }
+})
+
+export const fetchBalanceSuccess = res =>
+({
+  type: 'FETCH_BALANCE_SUCCESS',
+  payload: {
+    BTC: res.body.BTC,
+    LTC: res.body.LTC
+  }
+})
+
+export const fetchBalanceFailure = res =>
+({
+  type: 'FETCH_WITHDRAW_FAILURE',
+  payload: {
+    error: res.body.error
+  }
+})
+
 export const linkBankAccount = data =>
 ({
   type: 'LINK_WITHDRAWAL_BANK_ACCOUNT',

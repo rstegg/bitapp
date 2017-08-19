@@ -38,6 +38,7 @@ export const put = (endpoint, body, token) =>
     su.put(`${API_HOST}/${endpoint}`)
       .send(body)
       .set('Accept', 'application/json')
+      .set('Authorization', token)
   )
 
 export const remove = (endpoint, token) =>

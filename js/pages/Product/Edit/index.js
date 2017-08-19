@@ -39,10 +39,7 @@ class EditProduct extends Component {
     this.refs[nextField].focus()
   }
   render() {
-    const { user, item, product, editProduct, saveProduct, isLoading, navigation } = this.props
-    if(!item) {
-      navigation.goBack()
-    }
+    const { user, product, editProduct, saveProduct, isLoading, navigation } = this.props
     if(this.state.renderPlaceholderOnly) {
       return <Loader />
     }
@@ -52,26 +49,25 @@ class EditProduct extends Component {
           left={<Header.BackButton text='Back' to={() => navigation.goBack(null)} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveProduct()} />} />
-          <ItemView item={item} />
-          <EditProductForm onSubmit={product => editProduct({...product, id: product.id, unit: product.unit || 'unit'}, item, user)} />
+          <ItemView item={product.item} />
+          <EditProductForm onSubmit={values => editProduct({...values, id: product.id, unit: product.unit || 'unit'}, user)} />
       </View>
     )
   }
 }
 
-const mapStateToProps = ({ user, items, products }) =>
+const mapStateToProps = ({ user, products }) =>
 ({
   errors: products.activeProduct.errors,
   isLoading: products.activeProduct.isLoading,
   product: products.activeProduct,
-  item: items.activeItem,
   user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
   saveProduct: () => dispatch(submit('editProduct')),
-  editProduct: (product, item, user) => dispatch(editProduct(product, item, user))
+  editProduct: (product, user) => dispatch(editProduct(product, user))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProduct)

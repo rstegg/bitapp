@@ -23,9 +23,8 @@ const api = {
 
 const loginSubmit = action$ =>
   action$.ofType('LOGIN_SUBMIT')
-    .mergeMap(action => {console.log(action)
+    .mergeMap(action => {
       return api.login(action.payload)
-        .do(console.log)
         .map(loginSuccess)
         .catch(res => Observable.of(
           loginFailure(getError(res))

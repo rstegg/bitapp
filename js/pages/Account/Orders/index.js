@@ -17,7 +17,6 @@ import styles from './Styles'
 
 class OrderHistory extends Component {
   componentWillMount() {
-    console.log(this.props);
     const { user, fetchOrders } = this.props
     fetchOrders(user)
   }

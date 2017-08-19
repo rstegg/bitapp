@@ -44,7 +44,7 @@ const UnitPicker = ({ name, defaultValue, label }) =>
 const EditProductForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
     <UnitPicker name='unit' label='Unit' defaultValue='unit' label='Unit Type' />
-    <EditProductField name='price' label='Price per unit' prefix='$' />
+    <EditProductField name='unitPrice' label='Price per unit' prefix='$' />
   </View>
 
 const ConnectedEditProductForm = reduxForm({

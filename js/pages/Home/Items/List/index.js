@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 import Text from 'components/BitKitText'
 import Loader from 'components/Loader'
 
-import { fetchItems, setActiveItem, duplicateItem, deleteItem } from 'actions/items'
+import { fetchItems, setActiveItem, openEditItem, duplicateItem, deleteItem } from 'actions/items'
 
 import { Images } from 'themes'
 
@@ -41,6 +41,7 @@ class List extends Component {
   }
 
   selectOptions(item) {
+    console.log(item);
     ActionSheetIOS.showActionSheetWithOptions({
       options: OPTIONS,
       cancelButtonIndex: CANCEL_INDEX,
@@ -55,8 +56,7 @@ class List extends Component {
           this.props.deleteItem(item)
           break
         case EDIT_INDEX:
-          this.props.setActiveItem(item)
-          this.props.navigation.navigate('EditItem')
+          this.props.openEditItem(item)
           break
       }
     })
@@ -106,7 +106,6 @@ class List extends Component {
   }
 
   render() {
-    console.log(this.props.items);
     let content
     if(this.props.isLoading) {
       content = <Loader />
@@ -146,6 +145,7 @@ const mapDispatchToProps = dispatch =>
 ({
   fetchItems: user => dispatch(fetchItems(user)),
   setActiveItem: item => dispatch(setActiveItem(item)),
+  openEditItem: item => dispatch(openEditItem(item)),
   deleteItem: item => {
     Alert.alert(item.name, 'Are you sure you want to delete this item?', [
       {text: 'Yes', onPress: () =>dispatch(deleteItem(item)) },

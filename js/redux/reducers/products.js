@@ -54,6 +54,7 @@ export default (state = initialState, action) => {
     return { ...state, activeProduct: initialState.activeProduct }
   case 'RESET_NEW_PRODUCT':
     return { ...state, newProduct: initialState.newProduct }
+  case 'OPEN_EDIT_PRODUCT':
   case 'SET_ACTIVE_PRODUCT':
     return { ...state, activeProduct: action.payload.product }
   case 'EDIT_ACTIVE_PRODUCT':
