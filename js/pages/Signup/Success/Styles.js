@@ -5,7 +5,6 @@ export default StyleSheet.create({
   ...BaseStyles.screen,
   signupScreen: {
     flexGrow: 1,
-    backgroundColor: Colors.background,
     height: Metrics.screenHeight,
   },
   inputGroup: {

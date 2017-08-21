@@ -7,33 +7,25 @@ import {
   Alert
 } from 'react-native'
 import { connect } from 'react-redux'
-import { fetchBalance, removeBankAccount } from 'actions/withdraw'
+import { removeBankAccount } from 'actions/withdraw'
 
 import Header from 'components/Header'
 
 import BankAccountList from './List'
 import BankAccountIntro from './Intro'
+import BalanceInfo from './Balance'
 import styles from './Styles'
 
-class Withdraw extends Component {
-  componentWillMount() {
-    const { fetchBalance, user } = this.props
-    fetchBalance(user)
-  }
-  render() {
-    const { isLoading, withdrawalInfo, handleRemove, navigation, user } = this.props
-    return (
-      <View style={styles.container}>
-        <Header
-          left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
-          center={<Header.Text>Withdraw</Header.Text>}
-        />
-        { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={handleRemove} navigation={navigation} />
-        : <BankAccountIntro navigation={navigation} /> }
-      </View>
-    )
-  }
-}
+const Withdraw = ({ isLoading, withdrawalInfo, handleRemove, navigation, user }) =>
+  <View style={styles.container}>
+    <Header
+      left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
+      center={<Header.Text>Withdraw</Header.Text>}
+    />
+    <BalanceInfo />
+    { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={handleRemove} navigation={navigation} />
+    : <BankAccountIntro navigation={navigation} /> }
+  </View>
 
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
@@ -41,7 +33,8 @@ const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1
 const mapStateToProps = ({ user, withdraw }) =>
 ({
   isLoading: withdraw.isLoading,
-  withdrawalInfo: dataSource.cloneWithRows(user.banks),
+  balance: withdraw.balance,
+  withdrawalInfo: dataSource.cloneWithRows(withdraw.banks.list),
   user
 })
 
@@ -57,8 +50,7 @@ const confirmRemove = ({type, onConfirm}) =>
 
 const mapDispatchToProps = dispatch =>
 ({
-  handleRemove: (bank, user) => confirmRemove({ type: 'bank', onConfirm: () => dispatch(removeBankAccount(bank, user)) }),
-  fetchBalance: user => dispatch(fetchBalance(user))
+  handleRemove: (bank, user) => confirmRemove({ type: 'bank', onConfirm: () => dispatch(removeBankAccount(bank, user)) })
 })
 
 export default connect(

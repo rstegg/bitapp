@@ -2,6 +2,7 @@ import { combineEpics } from 'redux-observable'
 import {
   fetchBalanceSuccess,
   createWithdrawSuccess,
+  linkBankAccountSuccess,
 } from 'actions/withdraw'
 import { Observable } from 'rxjs/Rx'
 import { get, post, imagePost, put, remove } from './helpers/req'
@@ -11,6 +12,8 @@ const api = {
     get('balance', user.token),
   withdraw: ({ user, bank, amount }) =>
     post('balance/withdraw', { bank, amount }, user.token),
+  linkBank: ({ user, bank }) =>
+    post('balance/bank', { bank }, user.token),
 }
 
 const fetchBalance = action$ =>
@@ -19,7 +22,18 @@ const fetchBalance = action$ =>
       api.balance(action.payload)
         .map(fetchBalanceSuccess)
         .catch(error => Observable.of({
-          type: 'FETCH_WITHDRAW_FAILURE',
+          type: 'FETCH_BALANCE_FAILURE',
+          payload: { error }
+        }))
+      )
+
+const linkBankAccount = action$ =>
+  action$.ofType('LINK_BANK_ACCOUNT')
+    .mergeMap(action =>
+      api.linkBank(action.payload)
+        .map(linkBankAccountSuccess)
+        .catch(error => Observable.of({
+          type: 'LINK_BANK_ACCOUNT_FAILURE',
           payload: { error }
         }))
       )
@@ -37,5 +51,6 @@ const createWithdraw = action$ =>
 
 export default combineEpics(
   fetchBalance,
-  createWithdraw
+  linkBankAccount,
+  createWithdraw,
 )

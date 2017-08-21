@@ -17,7 +17,7 @@ import { linkBankAccount } from 'actions/withdraw'
 import LinkBankForm from './Form'
 import styles from './Styles'
 
-const LinkBank = ({ isLoading, saveBank, linkBankAccount, navigation }) =>
+const LinkBank = ({ user, isLoading, saveBank, linkBankAccount, navigation }) =>
   <View style={styles.container}>
     <Header
       left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
@@ -25,20 +25,21 @@ const LinkBank = ({ isLoading, saveBank, linkBankAccount, navigation }) =>
       right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => saveBank()}/>}
       />
       <ScrollView style={{flexGrow: 1,}}>
-        <LinkBankForm onSubmit={values => linkBankAccount(values)} />
+        <LinkBankForm onSubmit={values => linkBankAccount(values, user)} />
       </ScrollView>
   </View>
 
-const mapStateToProps = ({ withdraw }) =>
+const mapStateToProps = ({ withdraw, user }) =>
 ({
   withdraw,
   isLoading: withdraw.isLoading,
+  user
 })
 
 const mapDispatchToProps = dispatch =>
 ({
   saveBank: () => dispatch(submit('linkBank')),
-  linkBankAccount: bank => dispatch(linkBankAccount(bank)),
+  linkBankAccount: (bank, user) => dispatch(linkBankAccount(bank, user)),
 })
 
 export default connect(

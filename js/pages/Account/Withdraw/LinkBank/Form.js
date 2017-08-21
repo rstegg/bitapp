@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import TextField from 'components/TextField'
 
 import styles from './Styles'
+import validate from './validators'
 
 const LinkBankField = ({ name, autoFocus, label, style, inputStyle, ...rest }) =>
   <View style={styles.inputGroup}>
@@ -26,5 +27,6 @@ const AccountProfileForm = ({ handleSubmit, submitting }) =>
   </View>
 
 export default reduxForm({
-  form: 'linkBank'
+  form: 'linkBank',
+  validate
 })(AccountProfileForm)

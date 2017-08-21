@@ -11,7 +11,7 @@ export const fetchBalanceSuccess = res =>
   type: 'FETCH_BALANCE_SUCCESS',
   payload: {
     BTC: res.body.BTC,
-    LTC: res.body.LTC
+    LTC: res.body.LTC,
   }
 })
 
@@ -23,25 +23,26 @@ export const fetchBalanceFailure = res =>
   }
 })
 
-export const linkBankAccount = data =>
+export const linkBankAccount = (bank, user) =>
 ({
-  type: 'LINK_WITHDRAWAL_BANK_ACCOUNT',
+  type: 'LINK_BANK_ACCOUNT',
   payload: {
-    data
+    bank,
+    user
   }
 })
 
 export const linkBankAccountSuccess = res =>
 ({
-  type: 'LINK_WITHDRAWAL_BANK_ACCOUNT_SUCCESS',
+  type: 'LINK_BANK_ACCOUNT_SUCCESS',
   payload: {
-
+    banks: res.body.user.banks,
   }
 })
 
 export const linkBankAccountFailure = error =>
 ({
-  type: 'LINK_WITHDRAWAL_BANK_ACCOUNT_FAILURE',
+  type: 'LINK_BANK_ACCOUNT_FAILURE',
   payload: {
     error
   }
@@ -49,7 +50,7 @@ export const linkBankAccountFailure = error =>
 
 export const removeBankAccount = bankId =>
 ({
-  type: 'REMOVE_WITHDRAWAL_BANK_ACCOUNT',
+  type: 'REMOVE_BANK_ACCOUNT',
   payload: {
     bankId
   }
@@ -57,7 +58,7 @@ export const removeBankAccount = bankId =>
 
 export const removeBankAccountSuccess = res =>
 ({
-  type: 'REMOVE_WITHDRAWAL_BANK_ACCOUNT_SUCCESS',
+  type: 'REMOVE_BANK_ACCOUNT_SUCCESS',
   payload: {
     bankId: res.body.bankId
   }
@@ -65,7 +66,7 @@ export const removeBankAccountSuccess = res =>
 
 export const removeBankAccountFailure = res =>
 ({
-  type: 'REMOVE_WITHDRAWAL_BANK_ACCOUNT_FAILURE',
+  type: 'REMOVE_BANK_ACCOUNT_FAILURE',
   payload: {
     bankId: res.body.bankId
   }

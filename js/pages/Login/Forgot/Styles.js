@@ -5,7 +5,6 @@ export default StyleSheet.create({
   ...BaseStyles.screen,
   loginScreen: {
     flexGrow: 1,
-    backgroundColor: Colors.background,
     height: Metrics.screenHeight,
   },
   inputGroup: {
@@ -21,11 +20,5 @@ export default StyleSheet.create({
     paddingBottom: 20,
     paddingHorizontal: 20,
     color: Colors.teal,
-  },
-  tinafey: {
-    padding: 30,
-    fontSize: 18,
-    alignSelf: 'center',
-    color: Colors.lightBlue,
   }
 })

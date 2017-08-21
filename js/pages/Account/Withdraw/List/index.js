@@ -11,14 +11,13 @@ import Text from 'components/BitKitText'
 import BankAccountRow from './ListRow'
 import styles from './Styles'
 
-const BankAccountList = ({ withdrawalInfo, handleRemove, navigation }) =>
+const BankAccountList = ({ withdrawalInfo, handleRemove, isLoading, navigation }) =>
   <View style={styles.container}>
     <ListView
       key='withdraw-info-list'
       style={styles.listView}
       dataSource={withdrawalInfo}
       renderRow={(rowData, sectionId, rowId) => <BankAccountRow data={rowData} isLoading={isLoading} onPressTrash={() => handleRemove(rowData)}/>}
-      renderSectionHeader={ (data, id) => <Header.Text style={{margin: 5, textAlign: 'left'}}>{'Bank Account(s)'}</Header.Text> }
       keyboardDismissMode='on-drag'
       keyboardShouldPersistTaps='always'
       showsVerticalScrollIndicator={false}
