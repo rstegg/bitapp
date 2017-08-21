@@ -2,8 +2,9 @@ const router = require('express').Router()
 const passport = require('passport')
 const { path, isNil } = require('ramda')
 
-const startWithdraw = require('./withdraw')
 const getBalance = require('./get')
+const linkBank = require('./bank')
+const startWithdraw = require('./withdraw')
 
 const validateBody = require('../middleware/validate-body')
 const validateParams = require('../middleware/validate-params')
@@ -16,6 +17,9 @@ module.exports =
     .use(passport.authenticate('jwt', { session: false }))
     .get('/',
       getBalance
+    )
+    .post('/bank',
+      linkBank
     )
     .post('/withdraw',
       startWithdraw

@@ -18,6 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     verifyCode: DataTypes.STRING,
     name: DataTypes.STRING,
     accountId: DataTypes.INTEGER,
+    banks: DataTypes.ARRAY(DataTypes.JSONB),
     image: DataTypes.STRING,
   })
 
