@@ -140,13 +140,18 @@ export const deleteItemFailure = errors =>
 export const duplicateItem = (item, user) =>
 ({
   type: 'DUPLICATE_ITEM',
-  payload: { item, user }
+  payload: {
+    item,
+    user
+  }
 })
 
 export const duplicateItemSuccess = res =>
 ({
   type: 'DUPLICATE_ITEM_SUCCESS',
-  payload: { item: res.body.item }
+  payload: {
+    item: res.body.item
+  }
 })
 
 export const duplicateItemFailure = errors =>

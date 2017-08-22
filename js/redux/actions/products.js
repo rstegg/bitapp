@@ -117,10 +117,10 @@ export const editProductFailure = errors =>
    payload: { errors }
 })
 
-export const deleteProduct = product =>
+export const deleteProduct = (product, user) =>
 ({
   type: 'DELETE_PRODUCT',
-  payload: { product }
+  payload: { product, user }
 })
 
 export const deleteProductSuccess = product =>
@@ -135,16 +135,22 @@ export const deleteProductFailure = errors =>
   payload: { errors }
 })
 
-export const duplicateProduct = product =>
+export const duplicateProduct = (product, item, user) =>
 ({
   type: 'DUPLICATE_PRODUCT',
-  payload: { product }
+  payload: {
+    product,
+    item,
+    user
+  }
 })
 
-export const duplicateProductSuccess = product =>
+export const duplicateProductSuccess = res =>
 ({
   type: 'DUPLICATE_PRODUCT_SUCCESS',
-  payload: { product }
+  payload: {
+    product: res.body.product
+  }
 })
 
 export const duplicateProductFailure = errors =>

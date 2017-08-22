@@ -41,7 +41,7 @@ class List extends Component {
   }
 
   selectOptions(item) {
-    console.log(item);
+    const { user } = this.props
     ActionSheetIOS.showActionSheetWithOptions({
       options: OPTIONS,
       cancelButtonIndex: CANCEL_INDEX,
@@ -50,10 +50,10 @@ class List extends Component {
     (buttonIndex) => {
       switch(buttonIndex) {
         case DUPLICATE_INDEX:
-          this.props.duplicateItem(item)
+          this.props.duplicateItem(item, user)
           break
         case DELETE_INDEX:
-          this.props.deleteItem(item)
+          this.props.deleteItem(item, user)
           break
         case EDIT_INDEX:
           this.props.openEditItem(item)
@@ -146,13 +146,13 @@ const mapDispatchToProps = dispatch =>
   fetchItems: user => dispatch(fetchItems(user)),
   setActiveItem: item => dispatch(setActiveItem(item)),
   openEditItem: item => dispatch(openEditItem(item)),
-  deleteItem: item => {
+  deleteItem: (item, user) => {
     Alert.alert(item.name, 'Are you sure you want to delete this item?', [
-      {text: 'Yes', onPress: () =>dispatch(deleteItem(item)) },
+      {text: 'Yes', onPress: () => dispatch(deleteItem(item, user)) },
       {text: 'No'},
     ])
   },
-  duplicateItem: item => dispatch(duplicateItem(item))
+  duplicateItem: (item, user) => dispatch(duplicateItem(item, user))
 })
 
 export default connect(

@@ -50,7 +50,18 @@ export default (state = initialState, action) => {
 
     case 'DUPLICATE_ITEM':
       return { ...state, duplicateItem: {  isLoading: true } }
+
     case 'DUPLICATE_ITEM_SUCCESS':
+      return { ...state,
+        itemsList: {
+          ...state.itemsList,
+          items: [ ...state.itemsList.items, action.payload.item ]
+        },
+        duplicateItem: {
+          ...state.duplicateItem,
+          isLoading: false
+        }
+      }
       return { ...state, duplicateItem: {  isLoading: false, errors: { } } }
     case 'DUPLICATE_ITEM_FAILURE':
       return { ...state, duplicateItem: {  isLoading: false } }

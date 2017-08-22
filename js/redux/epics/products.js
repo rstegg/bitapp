@@ -5,6 +5,7 @@ import {
   createProductSuccess,
   editProductSuccess,
   deleteProductSuccess,
+  duplicateProductSuccess,
 } from 'actions/products'
 import { Observable } from 'rxjs/Rx'
 import { get, post, imagePost, put, remove } from './helpers/req'
@@ -14,14 +15,16 @@ const api = {
     get('products', user.token),
   createProduct: ({ product, item, user }) =>
     post('products', { product, item }, user.token),
+  duplicateProduct: ({ product, item, user }) =>
+    post('products', { product, item }, user.token),
   editProduct: ({ product, user }) =>
     put(`products/${product.id}`, { product }, user.token),
   searchProducts: ({ keyword }) =>
     put('products/search/keyword', { keyword }, user.token),
   searchCodeProducts: ({ code }) =>
     put('products/search/code', { code }, user.token),
-  deleteProduct: ({ productId, user }) =>
-    remove(`products/${productId}`, user.token)
+  deleteProduct: ({ product, user }) =>
+    remove(`products/${product.id}`, user.token)
 }
 
 const fetchProducts = action$ =>
@@ -57,6 +60,17 @@ const createProduct = action$ =>
         }))
       )
 
+const duplicateProduct = action$ =>
+  action$.ofType('DUPLICATE_PRODUCT')
+    .mergeMap(action =>
+      api.createProduct(action.payload)
+        .map(duplicateProductSuccess)
+        .catch(error => Observable.of({
+          type: 'DUPLICATE_PRODUCT_FAILURE',
+          payload: { error }
+        }))
+      )
+
 const editProduct = action$ =>
   action$.ofType('EDIT_PRODUCT')
     .mergeMap(action =>
@@ -82,6 +96,7 @@ const deleteProduct = action$ =>
 export default combineEpics(
   fetchProducts,
   createProduct,
+  duplicateProduct,
   editProduct,
   deleteProduct
 )

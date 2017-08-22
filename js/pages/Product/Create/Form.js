@@ -45,7 +45,7 @@ const UnitPicker = ({ name, defaultValue, label }) =>
 const CreateProductForm = ({ handleSubmit, submitting }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
     <UnitPicker name='unit' label='Unit' defaultValue='unit' label='Unit Type' />
-    <CreateProductField name='price' label='Price per unit' prefix='$' />
+    <CreateProductField name='unitPrice' label='Price per unit' prefix='$' />
   </View>
 
 export default reduxForm({

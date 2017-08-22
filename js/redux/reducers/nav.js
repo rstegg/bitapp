@@ -19,6 +19,8 @@ export default (state, action) => {
     case 'CREATE_ITEM_SUCCESS':
     case 'EDIT_ITEM_SUCCESS':
     case 'CREATE_PRODUCT_SUCCESS':
+    case 'DUPLICATE_PRODUCT_SUCCESS':
+    case 'DUPLICATE_ITEM_SUCCESS':
     case 'EDIT_PRODUCT_SUCCESS':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.reset({

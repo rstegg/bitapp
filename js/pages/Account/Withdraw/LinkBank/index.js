@@ -25,7 +25,7 @@ const LinkBank = ({ user, isLoading, saveBank, linkBankAccount, navigation }) =>
       right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => saveBank()}/>}
       />
       <ScrollView style={{flexGrow: 1,}}>
-        <LinkBankForm onSubmit={values => linkBankAccount(values, user)} />
+        <LinkBankForm onSubmit={bank => linkBankAccount(bank, user)} />
       </ScrollView>
   </View>
 

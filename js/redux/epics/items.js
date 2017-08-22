@@ -2,6 +2,7 @@ import { combineEpics } from 'redux-observable'
 import {
   fetchItemsSuccess,
   createItemSuccess,
+  duplicateItemSuccess,
   editItemSuccess,
   deleteItemSuccess,
   uploadItemImageSuccess,
@@ -17,16 +18,18 @@ const api = {
     get('items', user.token),
   createItem: ({ item, user }) =>
     post('items', { item }, user.token),
+  duplicateItem: ({ item, user }) =>
+    post('items', { item }, user.token),
   editItem: ({ item, user }) =>
     put(`items/${item.id}`, { item }, user.token),
-  deleteItem: ({ itemId, user }) =>
-    remove(`items/${itemId}`, user.token),
+  deleteItem: ({ item, user }) =>
+    remove(`items/${item.id}`, user.token),
   uploadNewItemImage: ({ image, user }) =>
     imagePost('images', image, user.token),
-  uploadActiveItemImage: ({ image, itemId, user }) =>
-    imagePost(`images/${itemId}`, image, user.token),
-  removeActiveItemImage: ({ itemId, user }) =>
-    remove(`images/${itemId}`, user.token),
+  uploadActiveItemImage: ({ image, item, user }) =>
+    imagePost(`images/${item.id}`, image, user.token),
+  removeActiveItemImage: ({ item, user }) =>
+    remove(`images/${item.id}`, user.token),
 }
 
 const fetchItems = action$ =>
@@ -47,6 +50,17 @@ const createItem = action$ =>
         .map(createItemSuccess)
         .catch(error => Observable.of({
           type: 'CREATE_ITEM_FAILURE',
+          payload: { error }
+        }))
+      )
+
+const duplicateItem = action$ =>
+  action$.ofType('DUPLICATE_ITEM')
+    .mergeMap(action =>
+      api.duplicateItem(action.payload)
+        .map(duplicateItemSuccess)
+        .catch(error => Observable.of({
+          type: 'DUPLICATE_ITEM_FAILURE',
           payload: { error }
         }))
       )
@@ -120,6 +134,7 @@ const removeActiveItemImage = action$ =>
 export default combineEpics(
   fetchItems,
   createItem,
+  duplicateItem,
   editItem,
   deleteItem,
   uploadNewItemImage,

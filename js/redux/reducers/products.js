@@ -27,6 +27,8 @@ export default (state = initialState, action) => {
     return { ...state, activeProduct: { ...action.payload.product, isLoading: true } }
   case 'CREATE_PRODUCT_SUCCESS':
     return { ...state, newProduct: { ...action.payload.product, isLoading: false } }
+  case 'DUPLICATE_PRODUCT_SUCCESS':
+    return { ...state, duplicateProduct: { ...state.duplicateProduct, isLoading: false } }
   case 'EDIT_PRODUCT_SUCCESS':
     return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
   case 'CREATE_PRODUCT_FAILURE':
@@ -67,11 +69,9 @@ export default (state = initialState, action) => {
     }
 
   case 'DELETE_PRODUCT':
-    const { id } = action.payload.product
-
     return { ...state, productsList: {
         isLoading: false,
-        products: state.productsList[id].products.filter(product => product.id != id)
+        products: state.productsList.products.filter(product => product.id != action.payload.product.id)
       }
     }
 

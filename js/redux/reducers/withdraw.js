@@ -20,6 +20,13 @@ export default (state = initialState, action) => {
           isLoading: action.payload.bankId
         }
       }
+    case 'LINK_BANK_ACCOUNT':
+      return {...state,
+        banks: {
+          ...state.banks,
+          isLoading: true
+        }
+      }
     case 'LINK_BANK_ACCOUNT_SUCCESS':
       return {...state,
         banks: {
