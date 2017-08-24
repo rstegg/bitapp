@@ -33,4 +33,8 @@ const convert = (currency, amountUSD) =>
       Math.floor,
       R.divide(R.__, 10e8)))
 
+convert.convertToUSD = (currency, amount) =>
+  getPrice(pairs[currency])
+    .then(R.multiply(amount))
+
 module.exports = convert
