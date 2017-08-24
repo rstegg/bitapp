@@ -22,6 +22,13 @@ export default StyleSheet.create({
     width: 70,
     height: 70,
   },
+  section: {
+    flex: 0.2,
+    margin: 5,
+    padding: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   inputGroup: {
     backgroundColor: 'white',
     padding: 5,

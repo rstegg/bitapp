@@ -36,7 +36,7 @@ const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1
 
 const mapStateToProps = ({ user, withdraw }) =>
 ({
-  isLoading: withdraw.isLoading,
+  isLoading: withdraw.balance.isLoading,
   balance: withdraw.balance,
   withdrawalInfo: dataSource.cloneWithRows(withdraw.banks.list),
   user

@@ -35,31 +35,6 @@ class AddToCart extends Component {
     })
   }
 
-  selectOptions(product) {
-    ActionSheetIOS.showActionSheetWithOptions({
-      options: OPTIONS,
-      cancelButtonIndex: CANCEL_INDEX,
-      destructiveButtonIndex: DELETE_INDEX,
-    },
-    (buttonIndex) => {
-      switch(buttonIndex) {
-        case DUPLICATE_INDEX:
-          this.props.duplicateItem(product)
-          break
-        case DELETE_INDEX:
-          this.props.deleteItem(product)
-          break
-        case EDIT_INDEX:
-          this.props.setActiveItem(product)
-          this.props.navigation.navigate('EditItem')
-          break
-      }
-    })
-  }
-
-  focusNextField(nextField) {
-    this.refs[nextField].focus()
-  }
   render() {
     const { user, product, quantity, addToCart, saveToCart, isLoading, navigation } = this.props
     if(!product) {
@@ -74,13 +49,11 @@ class AddToCart extends Component {
           left={<Header.BackButton text='Back' to={() => navigation.goBack(null)} />}
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveToCart()} />} />
-          <ItemView item={product.item} onOptionsBtnPress={() => this.selectOptions(product.item)} />
-          <View style={styles.unitPriceContainer}>
-            <Text style={styles.unitPrice}>${product.unitPrice} per {product.unit}</Text>
-          </View>
-          <AddToCartForm onSubmit={values => addToCart({...product, ...values})} />
+          <ItemView product={product} />
+          <AddToCartForm product={product} onSubmit={values => addToCart({...product, ...values})} />
           <View style={styles.totalPriceContainer}>
-            <Text style={styles.totalPriceLabel}>Total: </Text><Text style={styles.totalPrice}>${quantity * product.unitPrice || 0}</Text>
+            <Text style={styles.totalPriceLabel}>Total: </Text>
+            <Text style={styles.totalPrice}>${quantity * product.unitPrice || 0}</Text>
           </View>
       </View>
     )

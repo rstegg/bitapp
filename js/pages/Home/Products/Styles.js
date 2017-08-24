@@ -8,6 +8,13 @@ export default StyleSheet.create({
     backgroundColor: Colors.background,
     height: Metrics.screenHeight,
   },
+  section: {
+    flex: 0.1,
+    margin: 5,
+    padding: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   inputGroup: {
     backgroundColor: 'white',
     padding: 5,

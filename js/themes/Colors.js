@@ -1,6 +1,6 @@
 const colors = {
   background: '#FEFEFE',
-  header: '#4d9ff8',
+  header: '#F8A64D',
   headerLT: '#F7F7F8',
   buttonBackground: '#F7F7F8',
   clear: 'rgba(0,0,0,0)',
@@ -24,10 +24,12 @@ const colors = {
   eggplant: '#251a34',
   border: '#483F53',
   banner: '#5F3E63',
-  orange: '#F8A64D',
+  // orange: '#F8A64D',
+  orange: '#3D7FC6',
+  blue: '#3D7FC6',
+  // blue: '#3D7FC6',
   teal: '#257A91',
   lightGrey: '#999',
-  blue: '#3D7FC6',
   red: '#B33A3A',
   text: '#414142'
 }

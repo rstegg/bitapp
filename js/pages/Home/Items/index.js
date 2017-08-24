@@ -43,6 +43,7 @@ class Items extends Component {
           right={<Header.CartButton to={() => navigation.navigate('CheckoutScreen')}/>} />
         <View style={styles.section}>
           <View style={styles.centered}>
+            <Text style={styles.subtitle}>Select an item to create a product</Text>
             <SearchBar onSearch={keyword => searchItems(keyword, user)} onCancel={clearSearchItems} searchTerm={keyword} />
           </View>
         </View>

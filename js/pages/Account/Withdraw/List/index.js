@@ -4,9 +4,6 @@ import {
   ListView,
 } from 'react-native'
 
-import Header from 'components/Header'
-import Text from 'components/BitKitText'
-
 import BankAccountRow from './ListRow'
 import styles from './Styles'
 

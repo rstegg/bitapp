@@ -73,11 +73,13 @@ export default class Affix extends PureComponent {
       case 'prefix':
         containerStyle.paddingRight = 8
         textStyle.textAlign = 'left'
+        textStyle.fontFamily = 'Agenda'
         break
 
       case 'suffix':
         containerStyle.paddingLeft = 8
         textStyle.textAlign = 'right'
+        textStyle.fontFamily = 'Agenda'
         break
     }
 

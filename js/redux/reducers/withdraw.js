@@ -48,8 +48,12 @@ export default (state = initialState, action) => {
           isLoading: action.payload.bankId
         }
       }
+    case 'FETCH_BALANCE':
+      return {...state, balance: { ...state.balance, isLoading: true } }
     case 'FETCH_BALANCE_SUCCESS':
       return {...state, balance: { BTC: action.payload.BTC, LTC: action.payload.LTC, isLoading: false } }
+    case 'FETCH_BALANCE_FAILURE':
+      return {...state, balance: { ...state.balance, isLoading: false } }
     case 'LOGOUT':
       return initialState
     default:

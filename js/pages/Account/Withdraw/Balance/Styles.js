@@ -9,6 +9,11 @@ export default StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center'
   },
+  balanceLoader: {
+    position: 'relative',
+    alignSelf: 'center',
+    top: 50,
+  },
   balanceLabel: {
     fontSize: 18,
     fontWeight: 'bold'

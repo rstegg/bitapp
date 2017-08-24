@@ -19,6 +19,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
+    flex: 1,
     flexDirection: 'row',
   },
   infoText: {
@@ -82,7 +83,8 @@ export default StyleSheet.create({
     fontWeight: 'bold'
   },
   chevronContainer: {
-    paddingHorizontal: 10
+    flex: 0.05,
+    marginRight: 10
   },
   chevronRight: {
     fontSize: 20,

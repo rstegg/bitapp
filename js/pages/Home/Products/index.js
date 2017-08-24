@@ -45,7 +45,7 @@ class Products extends Component {
           right={<Header.CartButton to={() => navigation.navigate('CheckoutScreen')}/>} />
         <View style={styles.section}>
           <View style={styles.centered}>
-            <SearchBar onSearch={console.log} onCancel={console.log} searchTerm={'abc'} />
+            <Text style={styles.subtitle}>Select a product to add to cart</Text>
           </View>
         </View>
         <ProductsList navigation={navigation} />

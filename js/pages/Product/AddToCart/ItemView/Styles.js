@@ -3,6 +3,7 @@ import { Colors } from 'themes'
 
 export default StyleSheet.create({
   listRow: {
+    flex: 1,
     height: 80,
     margin: 10,
     borderWidth: 1,
@@ -15,6 +16,7 @@ export default StyleSheet.create({
     flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   productRow: {
     flexGrow: 1,
@@ -41,6 +43,10 @@ export default StyleSheet.create({
     padding: 5,
   },
   details: {
+    fontSize: 14,
+    padding: 5,
+  },
+  unitPrice: {
     fontSize: 14,
     padding: 5,
   },

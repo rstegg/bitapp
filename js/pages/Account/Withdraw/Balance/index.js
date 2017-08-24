@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { fetchBalance } from 'actions/withdraw'
 
 import Text from 'components/BitKitText'
+import Loader from 'components/Loader'
 
 import styles from './Styles'
 
@@ -21,7 +22,7 @@ class Balance extends Component {
   render() {
     const { isLoading, balanceBTC, balanceLTC, } = this.props
     if(isLoading) {
-      return <Loader />
+      return <Loader style={styles.balanceLoader} />
     }
     return (
       <View style={styles.container}>

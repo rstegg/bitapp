@@ -24,13 +24,12 @@ export default StyleSheet.create({
   },
   totalPriceLabel: {
     fontSize: 24,
+    color: 'white',
   },
   totalPrice: {
     fontSize: 24,
+    color: 'white',
     fontWeight: 'bold',
-  },
-  addImage: {
-    flexGrow: 1
   },
   inputGroup: {
     backgroundColor: 'white',
@@ -51,14 +50,6 @@ export default StyleSheet.create({
     width: 78,
     height: 78,
     alignSelf: 'center',
-  },
-  forgot: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    paddingBottom: 20,
-    paddingHorizontal: 20,
-    color: Colors.teal,
   },
   centered: {
     alignItems: 'center'

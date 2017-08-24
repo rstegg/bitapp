@@ -42,9 +42,9 @@ const UnitPicker = ({ name, defaultValue, label }) =>
       labelStyle={{fontSize: 12, color: '#ccc'}} />
   </View>
 
-const AddToCartForm = ({ handleSubmit, submitting, quantity }) =>
+const AddToCartForm = ({ handleSubmit, submitting, quantity, product }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
-    <CreateProductField name='quantity' label='Quantity' />
+    <CreateProductField name='quantity' label='Quantity' suffix={`× $${product.unitPrice}`} />
   </View>
 
 export default reduxForm({
