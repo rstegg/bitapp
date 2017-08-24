@@ -28,7 +28,11 @@ module.exports ={
           unconfirmed: R.sum(unconfirmed),
           confirmedUSD: R.sum(confirmedUSD),
           unconfirmedUSD: R.sum(unconfirmedUSD),
+<<<<<<< HEAD
           detail: balances
+=======
+          detail:balances
+>>>>>>> 74f263b23f9084df13bb3398adb67fdc7814eedd
         }
       })
   }
