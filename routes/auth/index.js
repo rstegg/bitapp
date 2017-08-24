@@ -10,6 +10,8 @@ const verify = require('./verify')
 const validateBody = require('../middleware/validate-body')
 const validFields = require('../middleware/valid-fields')
 
+const hashPassword = require('../middleware/hash-password')
+
 const validField = p => obj => !isNil(path([ p ], obj))
 
 module.exports =
@@ -24,6 +26,7 @@ module.exports =
     )
     .post('/signup',
       validateBody(validFields([ 'name', 'password' ], 'user')),
+      hashPassword,
       signup
     )
     .post('/login',

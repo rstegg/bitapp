@@ -2,10 +2,7 @@ const ItemAttributes = [ 'id', 'name', 'description', 'image' ]
 
 module.exports = function(sequelize, DataTypes) {
   const Item = sequelize.define('item', {
-    name: {
-      type: DataTypes.STRING,
-      unique: true
-    },
+    name: DataTypes.STRING,
     description: {
       type: DataTypes.STRING,
       allowNull: true

@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       where: { userId: user.id },
       include: [ {
         model: Item,
-        attributes: [ 'name', 'description', 'image' ]
+        attributes: [ 'id', 'name', 'description', 'image' ]
       } ],
       attributes: ProductAttributes
     })
@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
       where: { userId: user.id, code },
       include: [ {
         model: Item,
-        attributes: [ 'name', 'description', 'image' ]
+        attributes: [ 'id', 'name', 'description', 'image' ]
       } ],
       attributes: ProductAttributes
     })

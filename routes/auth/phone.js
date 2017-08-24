@@ -1,23 +1,6 @@
 const Models = require('../../models')
 const twilio = require('../../services/twilio')
-const { length } = require('ramda')
-
-const validatePhone = p =>
-  new Promise((resolve, reject) => {
-    const phone = p.trim().replace(/^\D+/g, '').replace(/ /g,'')
-    if (phone.startsWith('1')) {
-      if (length(phone) === 11) {
-        resolve('+' + phone)
-      }
-      reject('bad number')
-    }
-    if (length(phone) === 10) {
-      resolve('+1' + phone)
-    }
-    reject('bad number')
-  })
-
-
+const validatePhone = require('./helpers/validatePhone')
 
 module.exports = (req, res) =>
   validatePhone(req.body.phone)

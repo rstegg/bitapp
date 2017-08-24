@@ -12,18 +12,17 @@ module.exports = (req, res) =>
     where: { id: req.body.orderId, userId: req.user.id },
     raw: true
   })
-    .then(foundOrder => {
+    .then(validOrder => {
       const orderObj = {
         status: 'pending',
         userId: req.user.id,
-        orderId: foundOrder.id,
+        orderId: validOrder.id,
         currency: req.body.currency,
-        amountUSD: foundOrder.totalUSD,
+        amountUSD: validOrder.totalUSD,
       }
-      const requestObj = bitapi.startPayment(1, req.body.currency, foundOrder.totalUSD)
-
-      return requestObj
-        .then(newRequest => transaction.create(merge(orderObj, newRequest)))
+      const requestObj = bitapi.startPayment(req.user.accountId, req.body.currency, validOrder.totalUSD)
+      return Promise.all([ requestObj, orderObj ])
     })
-    .then(newTransaction => { console.log(newTransaction); res.json({ transaction: newTransaction }) })
+    .then(([ newRequest, orderObj ]) => transaction.create(merge(orderObj, newRequest)))
+    .then(transaction => res.json({ transaction }))
     .catch(errors => { console.log(errors); res.status(400).json({ errors }) })
