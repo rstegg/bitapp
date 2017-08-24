@@ -36,7 +36,7 @@ const makeArguments =
     }
 
     if(!validateSpec(spec, params)){
-      throw new Error("Error in type validation for some parameters!!!")
+      throw new Error(`Error in type validation for params ${JSON.stringify(params)}`)
     }
 
     return pick(keys(spec), params)
