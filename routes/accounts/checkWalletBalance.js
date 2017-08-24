@@ -15,7 +15,7 @@ module.exports ={
     )
 
     const addresses = models.Address
-      .findAll({where:{accountId, currency }, raw: true })
+      .findAll({ where:{ accountId, currency }, raw: true })
 
     return P.map(addresses, check)
       .then((balances)=>{
@@ -28,7 +28,7 @@ module.exports ={
           unconfirmed: R.sum(unconfirmed),
           confirmedUSD: R.sum(confirmedUSD),
           unconfirmedUSD: R.sum(unconfirmedUSD),
-          detail:balances
+          detail: balances
         }
       })
   }
