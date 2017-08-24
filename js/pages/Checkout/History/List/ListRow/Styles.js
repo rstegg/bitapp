@@ -4,7 +4,6 @@ import { Metrics, Colors } from 'themes'
 export default StyleSheet.create({
   listRow: {
     flex: 1,
-    height: 80,
     marginBottom: 10,
     borderWidth: 1,
     borderRadius: 5,

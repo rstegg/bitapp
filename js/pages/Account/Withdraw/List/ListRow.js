@@ -6,14 +6,14 @@ import ActionButton from 'components/ActionButton'
 
 import styles from './Styles'
 
-const BankAccountRow = ({data, isLoading, onPressTrash}) =>
+const BankAccountRow = ({account, isLoading, onPressTrash}) =>
   <View style={styles.container}>
     <View style={styles.row}>
       <FontAwesome style={styles.icon} name={'bank'} />
-      <Text style={styles.text}>{data.bank_name} *****{data.last4}</Text>
+      <Text style={styles.text}>{account.bankName} *****{account.last4}</Text>
     </View>
-    { data.default_for_currency ? null : (
-      <ActionButton isLoading={isLoading === data.id} style={styles.row} onPress={onPressTrash}>
+    { account.default_for_currency ? null : (
+      <ActionButton isLoading={isLoading === account.id} style={styles.row} onPress={onPressTrash}>
         <FontAwesome name={'trash'} style={styles.icon} />
       </ActionButton>
     )}

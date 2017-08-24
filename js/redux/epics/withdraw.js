@@ -10,10 +10,10 @@ import { get, post, imagePost, put, remove } from './helpers/req'
 const api = {
   balance: ({ user }) =>
     get('balance', user.token),
-  withdraw: ({ user, bank, amount }) =>
-    post('balance/withdraw', { bank, amount }, user.token),
   linkBank: ({ user, bank }) =>
     post('balance/bank', { bank }, user.token),
+  withdraw: ({ user, bank, amount }) =>
+    post('balance/withdraw', { bank, amount }, user.token),
 }
 
 const fetchBalance = action$ =>
@@ -44,7 +44,7 @@ const createWithdraw = action$ =>
       api.withdraw(action.payload)
         .map(createWithdrawSuccess)
         .catch(error => Observable.of({
-          type: 'FETCH_CHECKOUT_HISTORY_FAILURE',
+          type: 'CREATE_WITHDRAW_FAILURE',
           payload: { error }
         }))
       )

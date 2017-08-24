@@ -37,11 +37,11 @@ class LaunchScreen extends Component {
           </View>
 
           <View style={styles.bottomContainer}>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('SignupPhoneScreen')}>
-              <Image source={Images.signupButton} style={styles.buttonImage} />
-            </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('LoginScreen')}>
               <Image source={Images.loginButton} style={styles.buttonImage}  />
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('SignupPhoneScreen')}>
+              <Image source={Images.signupButton} style={styles.buttonImage} />
             </TouchableOpacity>
           </View>
       </View>

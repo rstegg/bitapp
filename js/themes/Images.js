@@ -2,6 +2,8 @@
 const images = {
   logo: require('../Images/logo.png'),
   clearLogo: require('../Images/top_logo.png'),
+  btcButton: require('../Images/btcButton.png'),
+  ltcButton: require('../Images/ltcButton.png'),
   launch: require('../Images/launch-logo.png'),
   ready: require('../Images/your-app.png'),
   ignite: require('../Images/ignite_logo.png'),

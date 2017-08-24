@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
@@ -7,6 +7,8 @@ import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
 import { currencySubmit } from 'actions/checkout'
+
+import { Images } from 'themes'
 
 import styles from './Styles'
 
@@ -19,11 +21,11 @@ class CoinSelect extends Component {
           left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
           center={<Header.Logo />} />
         <View style={styles.buttonGroup}>
-          <TouchableOpacity onPress={() => currencySubmit('BTC', orderId, user)}>
-            <Text>BTC</Text>
+          <TouchableOpacity onPress={() => currencySubmit('BTC', orderId, user)} style={styles.imageButtonContainer}>
+            <Image source={Images.btcButton} style={styles.imageButton} resizeMode='contain' />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => currencySubmit('LTC', orderId, user)}>
-            <Text>LTC</Text>
+          <TouchableOpacity onPress={() => currencySubmit('LTC', orderId, user)} style={styles.imageButtonContainer}>
+            <Image source={Images.ltcButton} style={styles.imageButton} resizeMode='contain' />
           </TouchableOpacity>
         </View>
       </View>

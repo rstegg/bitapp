@@ -20,15 +20,13 @@ export default StyleSheet.create({
     resizeMode: 'contain'
   },
   buttonImage: {
-    height: Metrics.images.large,
     width: Metrics.screenWidth,
-    resizeMode: 'contain'
+    resizeMode: 'cover'
   },
   centered: {
     alignItems: 'center'
   },
   buttonContainer: {
-    marginTop: Metrics.doubleSection,
     alignItems: 'center'
   }
 })

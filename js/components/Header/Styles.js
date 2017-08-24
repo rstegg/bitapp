@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F7F7F8',
+    backgroundColor: Colors.header,
   },
   logo: {
     maxWidth: 150,

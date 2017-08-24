@@ -1,5 +1,8 @@
 const colors = {
   background: '#FEFEFE',
+  header: '#4d9ff8',
+  headerLT: '#F7F7F8',
+  buttonBackground: '#F7F7F8',
   clear: 'rgba(0,0,0,0)',
   facebook: '#3b5998',
   transparent: 'rgba(0,0,0,0)',
@@ -24,6 +27,7 @@ const colors = {
   orange: '#F8A64D',
   teal: '#257A91',
   lightGrey: '#999',
+  blue: '#3D7FC6',
   red: '#B33A3A',
   text: '#414142'
 }

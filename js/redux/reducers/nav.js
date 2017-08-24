@@ -16,6 +16,39 @@ export default (state, action) => {
         state
       )
       break
+    case 'SIGNUP_PHONE_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'SignupVerifyScreen' })
+          ]
+        }),
+        state
+      )
+      break
+    case 'SIGNUP_VERIFY_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'SignupSuccessScreen' })
+          ]
+        }),
+        state
+      )
+      break
+    case 'SIGNUP_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'HomeScreen' })
+          ]
+        }),
+        state
+      )
+      break
     case 'CREATE_ITEM_SUCCESS':
     case 'EDIT_ITEM_SUCCESS':
     case 'CREATE_PRODUCT_SUCCESS':
@@ -40,7 +73,12 @@ export default (state, action) => {
       break
     case 'CHECKOUT_SUCCESS':
       newState = PrimaryNav.router.getStateForAction(
-        NavigationActions.navigate({ routeName: 'CheckoutCoinSelectScreen' }),
+        NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'CheckoutCoinSelectScreen' })
+          ]
+        }),
         state
       )
       break
@@ -64,6 +102,12 @@ export default (state, action) => {
     case 'SET_ACTIVE_ORDER':
       newState = PrimaryNav.router.getStateForAction(
         NavigationActions.navigate({ routeName: 'AccountOrdersDetailsScreen' }),
+        state
+      )
+      break
+    case 'LINK_BANK_ACCOUNT_SUCCESS':
+      newState = PrimaryNav.router.getStateForAction(
+        NavigationActions.back(),
         state
       )
       break

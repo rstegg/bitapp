@@ -9,7 +9,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import styles from './Styles'
 
-const BankAccountIntro = ({ navigation }) =>
+const BankAccountIntro = () =>
   <View style={styles.container}>
     <View style={styles.introInstructions}>
       <View style={styles.introTextContainer}>
@@ -18,9 +18,6 @@ const BankAccountIntro = ({ navigation }) =>
       </View>
       <FontAwesome name='university' style={styles.introIcon} />
     </View>
-    <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('AccountLinkBankScreen')}>
-      <Text style={styles.actionButtonText}>Add Bank Account</Text>
-    </TouchableOpacity>
   </View>
 
 export default BankAccountIntro

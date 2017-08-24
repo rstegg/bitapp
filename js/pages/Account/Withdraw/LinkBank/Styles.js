@@ -11,6 +11,22 @@ export default StyleSheet.create({
     marginBottom: 2,
     paddingHorizontal: 20,
   },
+  inputFieldGroupContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 2,
+  },
+  inputFieldGroup: {
+    flexGrow: 1,
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+  },
+  inputFieldGroupLast: {
+    flexGrow: 0.5,
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    marginLeft: 2,
+  },
   helpLink: {
     marginTop: -60,
     marginRight: -20,

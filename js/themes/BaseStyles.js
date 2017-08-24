@@ -23,8 +23,7 @@ const BaseStyles = {
     },
     container: {
       flex: 1,
-      paddingTop: Metrics.baseMargin,
-      backgroundColor: Colors.transparent
+      backgroundColor: Colors.blue
     },
     section: {
       margin: Metrics.section,
@@ -49,8 +48,7 @@ const BaseStyles = {
       color: Colors.text
     },
     bottomContainer: {
-      margin: Metrics.smallMargin,
-      marginBottom: Metrics.doubleSection,
+      
     },
   },
   darkLabelContainer: {

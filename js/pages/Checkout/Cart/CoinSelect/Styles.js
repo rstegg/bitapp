@@ -9,38 +9,21 @@ export default StyleSheet.create({
     width: Metrics.screenWidth,
     backgroundColor: Colors.transparent,
     justifyContent: 'space-around',
-    paddingVertical: 25,
+    marginVertical: 25,
   },
-  addressContainer: {
-    paddingBottom: Metrics.baseMargin
+  imageButtonContainer: {
+    flex: 1,
+    height: Metrics.screenHeight / 6,
+    padding: 50,
+    margin: 20,
+    backgroundColor: Colors.buttonBackground,
+    borderWidth: 1,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  addressLeft: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  addressRight: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  priceContainer: {
-    paddingBottom: Metrics.baseMargin
-  },
-  priceLeft: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  priceRight: {
-    borderStyle: 'solid',
-    borderWidth: 1
-  },
-  qrCodeContainer: {
-    alignItems: 'center'
-  },
-  statusContainer: {
-    marginTop: Metrics.doubleSection,
-    alignItems: 'center'
-  },
-  statusText: {
-    fontSize: 16,
+  imageButton: {
+    position: 'relative',
+    width: Metrics.screenWidth / 3,
   }
 })

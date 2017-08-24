@@ -12,6 +12,9 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
   case 'SIGNUP_PHONE_SUBMIT':
+  case 'SIGNUP_VERIFY_SUBMIT':
+  case 'SIGNUP_SUBMIT':
+  case 'LOGIN_SUBMIT':
     return Object.assign({}, state, {
       error: null,
       isLoading: true
@@ -19,22 +22,12 @@ export default (state = initialState, action) => {
   case 'SIGNUP_PHONE_SUCCESS':
     return Object.assign({}, state, {
       isLoading: false,
-      signupPage: 'signupVerify',
       phone: action.payload.phone
-    })
-  case 'SIGNUP_VERIFY_SUBMIT':
-  case 'LOGIN_SUBMIT':
-  case 'SIGNUP_SUBMIT':
-    return Object.assign({}, state, {
-      error: null,
-      isLoading: true,
-      signupPage: 'signupCode'
     })
   case 'SIGNUP_VERIFY_SUCCESS':
     return Object.assign({}, state, {
       error: null,
-      isLoading: false,
-      signupPage: 'signupSuccess'
+      isLoading: false
     })
   case 'SIGNUP_SUCCESS':
     return Object.assign({}, state, {
@@ -42,12 +35,6 @@ export default (state = initialState, action) => {
       token: 'JWT ' + action.payload.token,
       isRegistered: true,
       error: null,
-      isLoading: false,
-      signupPage: 'signupComplete'
-    })
-  case 'SIGNUP_FAILURE':
-    return Object.assign({}, state, {
-      error: 'Something went wrong.',
       isLoading: false
     })
   case 'LOGIN_SUCCESS':
@@ -56,6 +43,11 @@ export default (state = initialState, action) => {
       isAuthenticated: true,
       token: 'JWT ' + action.payload.token,
       error: null,
+      isLoading: false
+    })
+  case 'SIGNUP_FAILURE':
+    return Object.assign({}, state, {
+      error: 'Something went wrong.',
       isLoading: false
     })
   case 'LOGIN_FAILURE':

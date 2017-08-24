@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import { removeBankAccount } from 'actions/withdraw'
 
 import Header from 'components/Header'
+import Text from 'components/BitKitText'
 
 import BankAccountList from './List'
 import BankAccountIntro from './Intro'
@@ -23,8 +24,11 @@ const Withdraw = ({ isLoading, withdrawalInfo, handleRemove, navigation, user })
       center={<Header.Text>Withdraw</Header.Text>}
     />
     <BalanceInfo />
-    { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={handleRemove} navigation={navigation} />
-    : <BankAccountIntro navigation={navigation} /> }
+    { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={handleRemove} />
+    : <BankAccountIntro /> }
+    <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('AccountLinkBankScreen')}>
+      <Text style={styles.actionButtonText}>Add Bank Account</Text>
+    </TouchableOpacity>
   </View>
 
 
