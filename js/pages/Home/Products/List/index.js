@@ -127,7 +127,8 @@ class List extends Component {
               keyboardDismissMode='on-drag'
               keyboardShouldPersistTaps='always'
               showsVerticalScrollIndicator={false}
-              removeClippedSubviews={false} />
+              removeClippedSubviews={false}
+              renderSeparator={() => <View style={styles.divider}></View>} />
   }
 
   render() {

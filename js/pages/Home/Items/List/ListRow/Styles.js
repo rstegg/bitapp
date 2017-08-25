@@ -6,11 +6,8 @@ export default StyleSheet.create({
     flexGrow: 1,
     height: 80,
     marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 5,
     overflow: 'hidden',
     borderColor: Colors.grey,
-    backgroundColor: 'white',
   },
   itemRow: {
     flexGrow: 1,

@@ -24,6 +24,7 @@ const colors = {
   eggplant: '#251a34',
   border: '#483F53',
   banner: '#5F3E63',
+  divider:  'rgba(0, 0, 0, 0.25)',
   // orange: '#F8A64D',
   orange: '#3D7FC6',
   blue: '#3D7FC6',

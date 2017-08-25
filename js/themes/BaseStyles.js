@@ -23,7 +23,7 @@ const BaseStyles = {
     },
     container: {
       flex: 1,
-      backgroundColor: Colors.blue
+      backgroundColor: Colors.transparent
     },
     section: {
       margin: Metrics.section,
@@ -47,8 +47,15 @@ const BaseStyles = {
       fontSize: 14,
       color: Colors.text
     },
+    divider: {
+      position: 'relative',
+      left: 80,
+      height: 1,
+      maxWidth: Metrics.screenWidth / 1.5,
+      backgroundColor: Colors.divider,
+    },
     bottomContainer: {
-      
+
     },
   },
   darkLabelContainer: {

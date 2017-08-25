@@ -11,7 +11,6 @@ export default StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
     borderColor: Colors.grey,
-    backgroundColor: 'white',
     justifyContent: 'space-between',
   },
   image: {

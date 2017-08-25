@@ -1,15 +1,14 @@
 import { StyleSheet } from 'react-native'
 
-import { Colors, Metrics } from 'themes'
+import { BaseStyles, Colors, Metrics } from 'themes'
 
 export default StyleSheet.create({
+  ...BaseStyles.screen,
   container: {
     flexGrow: 1,
   },
   list: {
-    flexGrow: 1,
-    paddingTop: 10,
-    marginHorizontal: 10,
+    flexGrow: 1
   },
   duplicateLoading: {
     position: 'absolute',

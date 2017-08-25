@@ -10,7 +10,6 @@ export default StyleSheet.create({
     borderRadius: 5,
     overflow: 'hidden',
     borderColor: Colors.grey,
-    backgroundColor: 'white',
   },
   checkoutRow: {
     flexGrow: 1,
