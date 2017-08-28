@@ -3,11 +3,10 @@ import { View } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
 
 import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
 
 import styles from './Styles'
 
-const LoginField = ({ name, autoFocus, keyboardType, label, password, forgotButton }) =>
+const LoginField = ({ name, autoFocus, keyboardType, label, password }) =>
   <View style={styles.inputGroup}>
     <Field
       component={TextField}
@@ -21,7 +20,7 @@ const LoginField = ({ name, autoFocus, keyboardType, label, password, forgotButt
       secureTextEntry={password} />
   </View>
 
-const LoginForm = ({ handleSubmit, submitting, navigation }) =>
+const LoginForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.loginScreen}>
     <LoginField name='phone' autoFocus keyboardType='phone-pad' label='Phone' />
   </View>

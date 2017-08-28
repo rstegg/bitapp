@@ -89,12 +89,12 @@ export default class Label extends PureComponent {
     let color = restricted?
       errorColor:
       focus.interpolate({
-        inputRange: [-1, 0, 1],
-        outputRange: [errorColor, baseColor, tintColor],
+        inputRange: [ -1, 0, 1 ],
+        outputRange: [ errorColor, baseColor, tintColor ],
       })
 
     let top = input.interpolate({
-      inputRange: [0, 1],
+      inputRange: [ 0, 1 ],
       outputRange: [
         baseSize + fontSize * 0.25,
         baseSize - basePadding - activeFontSize,
@@ -103,8 +103,8 @@ export default class Label extends PureComponent {
 
     let textStyle = {
       fontSize: input.interpolate({
-        inputRange: [0, 1],
-        outputRange: [fontSize, activeFontSize],
+        inputRange: [ 0, 1 ],
+        outputRange: [ fontSize, activeFontSize ],
       }),
 
       color,
@@ -117,7 +117,7 @@ export default class Label extends PureComponent {
 
     return (
       <Animated.View style={containerStyle}>
-        <Animated.Text style={[style, textStyle]} {...props}>
+        <Animated.Text style={[ style, textStyle ]} {...props}>
           {children}
         </Animated.Text>
       </Animated.View>

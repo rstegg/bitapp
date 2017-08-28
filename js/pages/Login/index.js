@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Keyboard, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 import { NavigationActions } from 'react-navigation'
@@ -7,11 +7,7 @@ import { NavigationActions } from 'react-navigation'
 import { loginSubmit } from 'actions/login'
 
 import Header from 'components/Header'
-import ErrorMessage from 'components/ErrorMessage'
-import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
 
-import { Colors } from 'themes'
 import styles from './Styles'
 import LoginForm from './Form'
 
@@ -25,13 +21,13 @@ const navigateToHome = navigation => navigation.dispatch(NavigationActions.reset
 class Login extends Component {
   componentWillMount() {
     const { navigation, user } = this.props
-    if(user.isAuthenticated) {
+    if (user.isAuthenticated) {
       navigateToHome(navigation)
     }
   }
   componentWillUpdate(nextProps) {
     const { navigation, user } = nextProps
-    if(user.isAuthenticated) {
+    if (user.isAuthenticated) {
       navigateToHome(navigation)
     }
   }
@@ -52,17 +48,17 @@ class Login extends Component {
 }
 
 const mapStateToProps = ({ user }) =>
-({
-  errors: user.errors,
-  isLoading: user.isLoading,
-  user
-})
+  ({
+    errors: user.errors,
+    isLoading: user.isLoading,
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  loginSubmit: user => dispatch(loginSubmit(user)),
-  onSubmit: () => dispatch(submit('login')),
-})
+  ({
+    loginSubmit: user => dispatch(loginSubmit(user)),
+    onSubmit: () => dispatch(submit('login')),
+  })
 
 export default connect(
   mapStateToProps,

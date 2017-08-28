@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
 import styles from './Styles'
 
 export default class BitKitText extends Component {
@@ -17,7 +17,7 @@ export default class BitKitText extends Component {
 
   render() {
     return (
-      <Text ref={component => this._root = component} {...this.props} style={[styles.text, this.props.style]}>
+      <Text ref={component => this._root = component} {...this.props} style={[ styles.text, this.props.style ]}>
         {this.props.children}
       </Text>
     )

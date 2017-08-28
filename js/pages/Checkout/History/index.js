@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { length } from 'ramda'
 import { NavigationActions } from 'react-navigation'
-import Header from 'components/Header'
-import Text from 'components/BitKitText'
 
-import { checkoutSubmit } from 'actions/checkout'
+import Header from 'components/Header'
+import Loader from 'components/Loader'
+import Text from 'components/BitKitText'
 
 import { Images } from 'themes'
 
@@ -27,13 +26,16 @@ class CheckoutHistory extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={Images.historyIcon}
-        style={[styles.icon, { tintColor }]}
+        style={[ styles.icon, { tintColor } ]}
       />
     ),
   }
 
   render() {
-    const { cart, user, isLoading, checkoutSubmit, navigation } = this.props
+    const { isLoading, navigation } = this.props
+    if (isLoading) {
+      return <Loader />
+    }
     return (
       <View>
         <Header
@@ -49,19 +51,9 @@ class CheckoutHistory extends Component {
 }
 
 
-const mapStateToProps = ({ user, checkout }) =>
-({
-  cart: checkout.cart,
-  isLoading: checkout.cart.isLoading,
-  user
-})
+const mapStateToProps = ({ checkout }) =>
+  ({
+    isLoading: checkout.cart.isLoading
+  })
 
-const mapDispatchToProps = dispatch =>
-({
-  checkoutSubmit: (cart, user) => dispatch(checkoutSubmit(cart, user))
-})
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CheckoutHistory)
+export default connect(mapStateToProps)(CheckoutHistory)

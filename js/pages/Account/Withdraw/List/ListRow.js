@@ -6,7 +6,7 @@ import ActionButton from 'components/ActionButton'
 
 import styles from './Styles'
 
-const BankAccountRow = ({account, isLoading, onPressTrash}) =>
+const BankAccountRow = ({ account, isLoading, onPressTrash }) =>
   <View style={styles.container}>
     <View style={styles.row}>
       <FontAwesome style={styles.icon} name={'bank'} />

@@ -1,19 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   View,
+  TouchableHighlight,
   TouchableOpacity,
   Image,
 } from 'react-native'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import Text from 'components/BitKitText'
-import { Images } from 'themes'
+import { Images, Colors } from 'themes'
 
 import styles from './Styles'
 
 const ListRow = ({ item, onSelect, onOptionsBtnPress }) =>
   <View style={styles.listRow}>
-    <TouchableOpacity onPress={onSelect} >
+    <TouchableHighlight underlayColor={Colors.highlight} onPress={onSelect} >
       <View style={styles.itemRow}>
         <View style={styles.info}>
           <Image source={item.image ? { uri: item.image } : Images.itemPlaceholder} style={styles.image} resizeMode='cover' />
@@ -26,7 +27,7 @@ const ListRow = ({ item, onSelect, onOptionsBtnPress }) =>
           <IonIcon name='md-more' style={styles.optionsIcon} />
         </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </TouchableHighlight>
   </View>
 
 export default ListRow

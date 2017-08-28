@@ -3,25 +3,22 @@ import {
   Image,
   View,
   Platform,
-  StyleSheet,
   TouchableOpacity,
 } from 'react-native'
 import { connect } from 'react-redux'
+import { submit } from 'redux-form'
 
 import ImagePicker from 'react-native-image-picker'
 import DropdownAlert from 'components/DropdownAlert'
 
-import { editProfile, resetUserUpdate } from 'actions/user'
+import { editProfile, editProfileImage, resetUserUpdate } from 'actions/user'
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import { Colors, Metrics, Images } from 'themes'
 
-import ActionButton from 'components/ActionButton'
 import Text from 'components/BitKitText'
 import Header from 'components/Header'
-import TextField from 'components/TextField'
-import ErrorMessage from 'components/ErrorMessage'
 import ScrollView from 'components/ScrollView'
 
 import AccountProfileForm from './Form'
@@ -30,13 +27,14 @@ import styles from './Styles'
 class Edit extends Component {
 
   componentWillUpdate(nextProps) {
-    if(nextProps.user.isUpdated) {
+    if (nextProps.user.isUpdated) {
       this.props.resetUserUpdate()
       this.dropdownSuccess.alertWithType('info', 'Success', 'Profile editd.')
     }
   }
 
   _handleImageClick() {
+    const { user } = this.props
     const options = {
       storageOptions: {
         skipBackup: true,
@@ -45,7 +43,7 @@ class Edit extends Component {
     }
 
     ImagePicker.showImagePicker(options, (response) => {
-      if(!response.didCancel && !response.error) {
+      if (!response.didCancel && !response.error) {
         let source
         if (Platform.OS === 'ios') {
           source = response.uri.replace('file://', '')
@@ -59,23 +57,23 @@ class Edit extends Component {
 
   _renderImageIfExists(image) {
     let renderedImage
-    if(image && image.url) {
+    if (image && image.url) {
       renderedImage = <Image
-                        key={image.url}
-                        style={{width: 100, height: 100, borderRadius: 50, alignSelf: 'center',}}
-                        resizeMode='cover'
-                        source={{uri: image.url}} />
+        key={image.url}
+        style={{ width: 100, height: 100, borderRadius: 50, alignSelf: 'center', }}
+        resizeMode='cover'
+        source={{ uri: image.url }} />
     } else {
       renderedImage =  <Image
-                        style={{width: 100, height: 100, alignSelf: 'center',}}
-                        resizeMode='contain'
-                        source={Images.profilePlaceholder} />
+        style={{ width: 100, height: 100, alignSelf: 'center', }}
+        resizeMode='contain'
+        source={Images.profilePlaceholder} />
     }
     return renderedImage
   }
 
   render() {
-    const { user, navigation, isLoading } = this.props
+    const { user, navigation, isLoading, editProfile, saveUser } = this.props
     return (
       <View style={styles.container}>
         <Header
@@ -84,14 +82,14 @@ class Edit extends Component {
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveUser()}/>}
         />
 
-        <ScrollView style={{flexGrow: 1,}}>
-          <View style={{alignItems: 'center', justifyContent: 'center', paddingVertical: 25}}>
+        <ScrollView style={{ flexGrow: 1, }}>
+          <View style={{ alignItems: 'center', justifyContent: 'center', paddingVertical: 25 }}>
             <TouchableOpacity onPress={() => this._handleImageClick()}>
               {this._renderImageIfExists(user.image)}
             </TouchableOpacity>
-            <View style={{position: 'absolute', left: Metrics.screenWidth / 2 + 25, bottom: 35,}}>
-              <View style={{width: 24, height: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.teal, borderRadius: 12,}}>
-                <FontAwesome name='camera' size={15} style={{color: 'white', backgroundColor: 'transparent'}} />
+            <View style={{ position: 'absolute', left: Metrics.screenWidth / 2 + 25, bottom: 35, }}>
+              <View style={{ width: 24, height: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.teal, borderRadius: 12, }}>
+                <FontAwesome name='camera' size={15} style={{ color: 'white', backgroundColor: 'transparent' }} />
               </View>
             </View>
           </View>
@@ -100,7 +98,7 @@ class Edit extends Component {
             <Text>ACCOUNT DETAILS</Text>
           </View>
 
-          <AccountProfileForm onSubmit={values => editProfile({...values, image: user.image || ''})} />
+          <AccountProfileForm onSubmit={values => editProfile({ ...values, image: user.image || '' })} />
 
         </ScrollView>
         <DropdownAlert ref={ref => this.dropdownSuccess = ref} />
@@ -110,17 +108,17 @@ class Edit extends Component {
 }
 
 const mapStateToProps = ({ user }) =>
-({
-  user
-})
+  ({
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  saveUser: () => dispatch(submit('accountProfile')),
-  editProfile: user => dispatch(editProfile(user)),
-  editProfileImage: (source, user) => dispatch(editProfileImage(source, user)),
-  resetUserUpdate: () => dispatch(resetUserUpdate()),
-})
+  ({
+    saveUser: () => dispatch(submit('accountProfile')),
+    editProfile: user => dispatch(editProfile(user)),
+    editProfileImage: (source, user) => dispatch(editProfileImage(source, user)),
+    resetUserUpdate: () => dispatch(resetUserUpdate()),
+  })
 
 export default connect(
   mapStateToProps,

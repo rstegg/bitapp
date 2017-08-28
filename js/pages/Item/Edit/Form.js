@@ -1,17 +1,14 @@
 import React from 'react'
-import { Platform, View } from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 
 import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
-
-import ImagePicker from 'react-native-image-picker'
 
 import styles from './Styles'
 
 const EditItemField = ({ name, autoFocus, label, multiline, lines, style, inputStyle, ...rest }) =>
-  <View style={[styles.inputGroup, style]}>
+  <View style={[ styles.inputGroup, style ]}>
     <Field
       component={TextField}
       name={name}
@@ -25,10 +22,10 @@ const EditItemField = ({ name, autoFocus, label, multiline, lines, style, inputS
       underlineColor='red' />
   </View>
 
-const EditItemForm = ({ handleSubmit, submitting }) =>
+const EditItemForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
     <EditItemField name='name' label='Name' autoFocus lines={1} autoCapitalize='words' />
-    <EditItemField name='description' label='Description' multiline lines={4} style={{height: 200, borderBottomWidth: 0}} inputStyle={{borderBottomWidth: 0}} autoCapitalize='sentences' borderBottomWidth={0} />
+    <EditItemField name='description' label='Description' multiline lines={4} style={{ height: 200, borderBottomWidth: 0 }} inputStyle={{ borderBottomWidth: 0 }} autoCapitalize='sentences' borderBottomWidth={0} />
   </View>
 
 const ConnectedEditItemForm = reduxForm({
@@ -36,8 +33,8 @@ const ConnectedEditItemForm = reduxForm({
 })(EditItemForm)
 
 const mapStateToProps = ({ items }) =>
-({
-  initialValues: items.activeItem
-})
+  ({
+    initialValues: items.activeItem
+  })
 
 export default connect(mapStateToProps)(ConnectedEditItemForm)

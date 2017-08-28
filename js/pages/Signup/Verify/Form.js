@@ -1,7 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 
 import TextField from 'components/TextField'
 
@@ -22,7 +21,7 @@ const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, pas
       secureTextEntry={password} />
   </View>
 
-const SignupVerifyForm = ({ handleSubmit, submitting }) =>
+const SignupVerifyForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.signupScreen}>
     <SignupField name='code' keyboardType='phone-pad' label='Activation Code' autoFocus />
   </View>

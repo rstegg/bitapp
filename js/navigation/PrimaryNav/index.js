@@ -21,7 +21,6 @@ import EditItem from 'pages/Item/Edit'
 import EditProduct from 'pages/Product/Edit'
 
 import AddToCart from 'pages/Product/AddToCart'
-import CheckoutReview from 'pages/Checkout/Cart/Review'
 import CheckoutSuccess from 'pages/Checkout/Cart/Success'
 import CheckoutCoinSelect from 'pages/Checkout/Cart/CoinSelect'
 import CheckoutHistoryDetails from 'pages/Checkout/History/Details'

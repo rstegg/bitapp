@@ -6,7 +6,7 @@ import Line from '.'
 
 /* eslint-env jest */
 
-[{ type: 'solid', color: 'black' }, { type: 'dotted', color: 'grey' }]
+[ { type: 'solid', color: 'black' }, { type: 'dotted', color: 'grey' } ]
   .forEach(({ type, color }) => {
     it(`renders ${type} ${color} line`, () => {
       let line = renderer

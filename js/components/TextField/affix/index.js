@@ -70,22 +70,22 @@ export default class Affix extends PureComponent {
     }
 
     switch (type) {
-      case 'prefix':
-        containerStyle.paddingRight = 8
-        textStyle.textAlign = 'left'
-        textStyle.fontFamily = 'Agenda'
-        break
+    case 'prefix':
+      containerStyle.paddingRight = 8
+      textStyle.textAlign = 'left'
+      textStyle.fontFamily = 'Agenda'
+      break
 
-      case 'suffix':
-        containerStyle.paddingLeft = 8
-        textStyle.textAlign = 'right'
-        textStyle.fontFamily = 'Agenda'
-        break
+    case 'suffix':
+      containerStyle.paddingLeft = 8
+      textStyle.textAlign = 'right'
+      textStyle.fontFamily = 'Agenda'
+      break
     }
 
     return (
-      <Animated.View style={[styles.container, containerStyle]}>
-        <Animated.Text style={[style, textStyle]}>{children}</Animated.Text>
+      <Animated.View style={[ styles.container, containerStyle ]}>
+        <Animated.Text style={[ style, textStyle ]}>{children}</Animated.Text>
       </Animated.View>
     )
   }

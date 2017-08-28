@@ -48,16 +48,16 @@ class List extends Component {
       destructiveButtonIndex: DELETE_INDEX,
     },
     (buttonIndex) => {
-      switch(buttonIndex) {
-        case DUPLICATE_INDEX:
-          this.props.duplicateItem(item, user)
-          break
-        case DELETE_INDEX:
-          this.props.deleteItem(item, user)
-          break
-        case EDIT_INDEX:
-          this.props.openEditItem(item)
-          break
+      switch (buttonIndex) {
+      case DUPLICATE_INDEX:
+        this.props.duplicateItem(item, user)
+        break
+      case DELETE_INDEX:
+        this.props.deleteItem(item, user)
+        break
+      case EDIT_INDEX:
+        this.props.openEditItem(item)
+        break
       }
     })
   }
@@ -88,34 +88,34 @@ class List extends Component {
 
   renderRow(item) {
     return <ListRow
-            key={item.id}
-            item={item}
-            onSelect={() => this.selectItem(item)}
-            onOptionsBtnPress={() => this.selectOptions(item)} />
+      key={item.id}
+      item={item}
+      onSelect={() => this.selectItem(item)}
+      onOptionsBtnPress={() => this.selectOptions(item)} />
   }
 
   renderList() {
     return <ListView key='items-list'
-              style={styles.list}
-              dataSource={this.props.items}
-              renderRow={this.renderRow.bind(this)}
-              keyboardDismissMode='on-drag'
-              keyboardShouldPersistTaps='always'
-              showsVerticalScrollIndicator={false}
-              removeClippedSubviews={false}
-              renderSeparator={() => <View style={styles.divider}></View>} />
+      style={styles.list}
+      dataSource={this.props.items}
+      renderRow={this.renderRow.bind(this)}
+      keyboardDismissMode='on-drag'
+      keyboardShouldPersistTaps='always'
+      showsVerticalScrollIndicator={false}
+      removeClippedSubviews={false}
+      renderSeparator={() => <View style={styles.divider}></View>} />
   }
 
   render() {
     let content
-    if(this.props.isLoading) {
+    if (this.props.isLoading) {
       content = <Loader />
-    } else if(this.props.isDuplicateLoading) {
-      content = <View style={{flexGrow: 1,}}>
-                  <Text style={styles.duplicateLoading}>Duplicating item...</Text>
-                  <Loader />
-                </View>
-    } else if(this.props.items.getRowCount() > 0) {
+    } else if (this.props.isDuplicateLoading) {
+      content = <View style={{ flexGrow: 1, }}>
+        <Text style={styles.duplicateLoading}>Duplicating item...</Text>
+        <Loader />
+      </View>
+    } else if (this.props.items.getRowCount() > 0) {
       content = this.renderList()
     } else {
       content = this.renderIntro()
@@ -131,30 +131,30 @@ class List extends Component {
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
-const filterWithKeyword = (items, keyword) => !!keyword ? items.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase())) : items
+const filterWithKeyword = (items, keyword) => keyword ? items.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase())) : items
 
 const mapStateToProps = ({ items, user }) =>
-({
-  isLoading: items.itemsList.isLoading,
-  isDuplicateLoading: items.duplicateItem.isLoading,
-  keyword: items.keyword,
-  items: dataSource.cloneWithRows(filterWithKeyword(items.itemsList.items, items.keyword)),
-  user
-})
+  ({
+    isLoading: items.itemsList.isLoading,
+    isDuplicateLoading: items.duplicateItem.isLoading,
+    keyword: items.keyword,
+    items: dataSource.cloneWithRows(filterWithKeyword(items.itemsList.items, items.keyword)),
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  fetchItems: user => dispatch(fetchItems(user)),
-  setActiveItem: item => dispatch(setActiveItem(item)),
-  openEditItem: item => dispatch(openEditItem(item)),
-  deleteItem: (item, user) => {
-    Alert.alert(item.name, 'Are you sure you want to delete this item?', [
-      {text: 'Yes', onPress: () => dispatch(deleteItem(item, user)) },
-      {text: 'No'},
-    ])
-  },
-  duplicateItem: (item, user) => dispatch(duplicateItem(item, user))
-})
+  ({
+    fetchItems: user => dispatch(fetchItems(user)),
+    setActiveItem: item => dispatch(setActiveItem(item)),
+    openEditItem: item => dispatch(openEditItem(item)),
+    deleteItem: (item, user) => {
+      Alert.alert(item.name, 'Are you sure you want to delete this item?', [
+        { text: 'Yes', onPress: () => dispatch(deleteItem(item, user)) },
+        { text: 'No' },
+      ])
+    },
+    duplicateItem: (item, user) => dispatch(duplicateItem(item, user))
+  })
 
 export default connect(
   mapStateToProps,

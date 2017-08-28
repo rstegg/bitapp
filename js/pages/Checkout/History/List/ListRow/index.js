@@ -1,25 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   View,
-  TouchableOpacity,
-  Image,
+  TouchableHighlight,
 } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { path } from 'ramda'
 import { format } from 'date-fns'
+
 import Text from 'components/BitKitText'
-import { Images } from 'themes'
+import { Colors } from 'themes'
 
 import styles from './Styles'
 
-const itemImage = path(['item', 'image'])
-const itemName = path(['item', 'name'])
-
 const formatDate = date => format(date, 'MMM DD, YYYY hh:mm A')
 
-const ListRow = ({ transaction, onSelect, onOptionsBtnPress }) =>
+const ListRow = ({ transaction, onSelect }) =>
   <View style={styles.listRow}>
-    <TouchableOpacity onPress={onSelect}>
+    <TouchableHighlight underlayColor={Colors.highlight} onPress={onSelect}>
       <View style={styles.checkoutRow}>
         <View style={styles.textContainer}>
           <View style={styles.infoText}>
@@ -42,14 +38,12 @@ const ListRow = ({ transaction, onSelect, onOptionsBtnPress }) =>
               <Text style={styles.totalUSDText}>${transaction.amountUSD}</Text>
             </View>
           </View>
-          <View>
-          </View>
         </View>
         <View style={styles.chevronContainer}>
           <FontAwesome name='chevron-right' style={styles.chevronRight} />
         </View>
       </View>
-    </TouchableOpacity>
+    </TouchableHighlight>
   </View>
 
 export default ListRow

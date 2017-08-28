@@ -6,10 +6,6 @@ import { connect } from 'react-redux'
 import TextField from 'components/TextField'
 import Text from 'components/BitKitText'
 
-import ImagePicker from 'react-native-image-picker'
-
-import { onCreateItemSubmit } from 'actions/items'
-
 import styles from './Styles'
 
 const AccountProfileField = ({ name, autoFocus, autoCapitalize, label, style, inputStyle, ...rest }) =>
@@ -28,12 +24,12 @@ const AccountProfileField = ({ name, autoFocus, autoCapitalize, label, style, in
 const ResetPasswordButton = ({ onPress }) =>
   <Text style={styles.forgot} onPress={onPress}>Change</Text>
 
-const AccountProfileForm = ({ handleSubmit, submitting }) =>
+const AccountProfileForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
     <AccountProfileField name='name' label='Name to appear on orders' autoFocus autoCapitalize='words' />
     <AccountProfileField name='phone' label='Phone' keyboardType='phone-pad' />
     <View style={styles.inputGroup}>
-      <TextField label='Password' secureTextEntry={true} disabled={true} value='**********' meta={{touched: false, error: false}} />
+      <TextField label='Password' secureTextEntry={true} disabled={true} value='**********' meta={{ touched: false, error: false }} />
       <ResetPasswordButton onPress={() => {}} />
     </View>
   </View>
@@ -43,8 +39,8 @@ const ConnectedAccountProfileForm = reduxForm({
 })(AccountProfileForm)
 
 const mapStateToProps = ({ user }) =>
-({
-  initialValues: user
-})
+  ({
+    initialValues: user
+  })
 
 export default connect(mapStateToProps)(ConnectedAccountProfileForm)

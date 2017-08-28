@@ -1,14 +1,9 @@
 import React from 'react'
-import { Platform, View } from 'react-native'
+import { View } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
 
 import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
 import DropdownPicker from 'components/Dropdown'
-
-import ImagePicker from 'react-native-image-picker'
-
-import { onCreateProductSubmit } from 'actions/items'
 
 import styles from './Styles'
 
@@ -38,13 +33,13 @@ const UnitPicker = ({ name, defaultValue, label }) =>
       label={label}
       defaultValue={defaultValue}
       options={unitTypes}
-      textStyle={{fontSize: 18, color: '#666'}}
-      labelStyle={{fontSize: 12, color: '#ccc'}} />
+      textStyle={{ fontSize: 18, color: '#666' }}
+      labelStyle={{ fontSize: 12, color: '#ccc' }} />
   </View>
 
-const CreateProductForm = ({ handleSubmit, submitting }) =>
+const CreateProductForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
-    <UnitPicker name='unit' label='Unit' defaultValue='unit' label='Unit Type' />
+    <UnitPicker name='unit' label='Unit Type' defaultValue='unit' />
     <CreateProductField name='unitPrice' label='Price per unit' prefix='$' />
   </View>
 

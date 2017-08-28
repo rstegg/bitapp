@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
@@ -10,7 +10,7 @@ import styles from './Styles'
 
 import { signupPhoneSubmit } from 'actions/signup'
 
-const SignupPhone = ({ isLoading, navigation, signupPage, signupPhoneSubmit, onSubmit }) =>
+const SignupPhone = ({ isLoading, navigation, signupPhoneSubmit, onSubmit }) =>
   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Header
@@ -23,17 +23,16 @@ const SignupPhone = ({ isLoading, navigation, signupPage, signupPhoneSubmit, onS
 
 
 const mapStateToProps = ({ user }) =>
-({
-  errors: user.errors,
-  isLoading: user.isLoading,
-  signupPage: user.signupPage
-})
+  ({
+    errors: user.errors,
+    isLoading: user.isLoading,
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  onSubmit: () => dispatch(submit('signupPhone')),
-  signupPhoneSubmit: phone => dispatch(signupPhoneSubmit(phone))
-})
+  ({
+    onSubmit: () => dispatch(submit('signupPhone')),
+    signupPhoneSubmit: phone => dispatch(signupPhoneSubmit(phone))
+  })
 
 export default connect(
   mapStateToProps,

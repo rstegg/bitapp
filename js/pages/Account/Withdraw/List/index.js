@@ -1,18 +1,15 @@
 import React from 'react'
-import {
-  View,
-  ListView,
-} from 'react-native'
+import { ListView } from 'react-native'
 
 import BankAccountRow from './ListRow'
 import styles from './Styles'
 
-const BankAccountList = ({ withdrawalInfo, handleRemove, isLoading, navigation }) =>
+const BankAccountList = ({ withdrawalInfo, handleRemove, isLoading }) =>
   <ListView
     key='withdraw-info-list'
     style={styles.listView}
     dataSource={withdrawalInfo}
-    renderRow={(rowData, sectionId, rowId) => <BankAccountRow account={rowData} isLoading={isLoading} onPressTrash={() => handleRemove(rowData)}/>}
+    renderRow={bank => <BankAccountRow account={bank} isLoading={isLoading} onPressTrash={() => handleRemove(bank)}/>}
     keyboardDismissMode='on-drag'
     keyboardShouldPersistTaps='always'
     showsVerticalScrollIndicator={false}

@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { TouchableOpacity, View, Image } from 'react-native'
 import { connect } from 'react-redux'
-import { NavigationActions } from 'react-navigation'
 
 import Header from 'components/Header'
-import Text from 'components/BitKitText'
 
 import { currencySubmit } from 'actions/checkout'
 
@@ -34,15 +32,15 @@ class CoinSelect extends Component {
 }
 
 const mapStateToProps = ({ user, checkout }) =>
-({
-  user,
-  orderId: checkout.cart.active.orderId
-})
+  ({
+    user,
+    orderId: checkout.cart.active.orderId
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  currencySubmit: (currency, orderId, user) => dispatch(currencySubmit(currency, orderId, user))
-})
+  ({
+    currencySubmit: (currency, orderId, user) => dispatch(currencySubmit(currency, orderId, user))
+  })
 
 export default connect(
   mapStateToProps,

@@ -1,16 +1,18 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableHighlight } from 'react-native'
 import Text from 'components/BitKitText'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { format } from 'date-fns'
+
+import { Colors } from 'themes'
 
 import styles from './Styles'
 
 const formatDate = date => format(date, 'MMM DD, YYYY hh:mm A')
 
-const OrderRow = ({ order, isLoading, onPress }) =>
+const OrderRow = ({ order, onSelect }) =>
   <View style={styles.listRow}>
-    <TouchableOpacity onPress={onPress}>
+    <TouchableHighlight underlayColor={Colors.highlight} onPress={onSelect}>
       <View style={styles.orderRow}>
         <FontAwesome name='list-alt' style={styles.icon} />
         <View style={styles.dateContainer}>
@@ -24,7 +26,7 @@ const OrderRow = ({ order, isLoading, onPress }) =>
           <FontAwesome name='chevron-right' style={styles.chevronRight} />
         </View>
       </View>
-    </TouchableOpacity>
+    </TouchableHighlight>
   </View>
 
 export default OrderRow

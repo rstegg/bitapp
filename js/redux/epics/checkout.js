@@ -5,7 +5,7 @@ import {
   currencySuccess,
 } from 'actions/checkout'
 import { Observable } from 'rxjs/Rx'
-import { get, post, imagePost, put, remove } from './helpers/req'
+import { get, post } from './helpers/req'
 
 const api = {
   checkout: ({ products, user }) =>
@@ -25,7 +25,7 @@ const fetchCheckoutHistory = action$ =>
           type: 'FETCH_CHECKOUT_HISTORY_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const checkoutSubmit = action$ =>
   action$.ofType('CHECKOUT_SUBMIT')
@@ -36,7 +36,7 @@ const checkoutSubmit = action$ =>
           type: 'CHECKOUT_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const currencySubmit = action$ =>
   action$.ofType('CURRENCY_SUBMIT')
@@ -47,7 +47,7 @@ const currencySubmit = action$ =>
           type: 'CURRENCY_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 export default combineEpics(
   fetchCheckoutHistory,

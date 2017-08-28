@@ -1,20 +1,18 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   View,
-  TouchableOpacity,
   Image,
 } from 'react-native'
 import { path } from 'ramda'
-import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import Text from 'components/BitKitText'
 import { Images } from 'themes'
 
 import styles from './Styles'
 
-const itemImage = path(['item', 'image'])
-const itemName = path(['item', 'name'])
-const itemDesc = path(['item', 'description'])
+const itemImage = path([ 'item', 'image' ])
+const itemName = path([ 'item', 'name' ])
+const itemDesc = path([ 'item', 'description' ])
 
 const ItemView = ({ product }) =>
   <View style={styles.listRow}>

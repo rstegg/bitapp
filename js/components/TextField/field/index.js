@@ -1,12 +1,10 @@
 import React, { PureComponent } from 'react'
 import {
   View,
-  Text,
   TextInput,
   Animated,
   StyleSheet,
   Platform,
-  ViewPropTypes,
 } from 'react-native'
 
 import Line from '../line'
@@ -111,7 +109,7 @@ export default class TextField extends PureComponent {
   componentWillReceiveProps(props) {
     let { error } = this.state
 
-    if (null != props.value) {
+    if (props.value !== null) {
       this.setState({ text: props.value })
     }
 
@@ -174,7 +172,7 @@ export default class TextField extends PureComponent {
     let { text, receivedFocus } = this.state
     let { value, defaultValue } = this.props
 
-    return (receivedFocus || null != value || null == defaultValue)?
+    return (receivedFocus || value !== null || defaultValue == null)?
       text:
       defaultValue
   }
@@ -193,7 +191,7 @@ export default class TextField extends PureComponent {
   onFocus(event) {
     let { onFocus } = this.props
 
-    if ('function' === typeof onFocus) {
+    if (typeof onFocus === 'function') {
       onFocus(event)
     }
 
@@ -203,7 +201,7 @@ export default class TextField extends PureComponent {
   onBlur(event) {
     let { onBlur } = this.props
 
-    if ('function' === typeof onBlur) {
+    if (typeof onBlur === 'function') {
       onBlur(event)
     }
 
@@ -211,9 +209,9 @@ export default class TextField extends PureComponent {
   }
 
   onChange(event) {
-    let { onChange, multiline } = this.props
+    let { onChange } = this.props
 
-    if ('function' === typeof onChange) {
+    if (typeof onChange === 'function') {
       onChange(event)
     }
 
@@ -224,7 +222,7 @@ export default class TextField extends PureComponent {
 
     this.setState({ text })
 
-    if ('function' === typeof onChangeText) {
+    if (typeof onChangeText === 'function') {
       onChangeText(text)
     }
   }
@@ -233,7 +231,7 @@ export default class TextField extends PureComponent {
     let { onContentSizeChange, fontSize } = this.props
     let { height } = event.nativeEvent.contentSize
 
-    if ('function' === typeof onContentSizeChange) {
+    if (typeof onContentSizeChange === 'function') {
       onContentSizeChange(event)
     }
 
@@ -243,7 +241,7 @@ export default class TextField extends PureComponent {
   renderAccessory() {
     let { renderAccessory } = this.props
 
-    if ('function' !== typeof renderAccessory) {
+    if (typeof renderAccessory !== 'function') {
       return null
     }
 
@@ -263,7 +261,7 @@ export default class TextField extends PureComponent {
       affixTextStyle,
     } = this.props
 
-    if (null == affix) {
+    if (affix == null) {
       return null
     }
 
@@ -314,7 +312,7 @@ export default class TextField extends PureComponent {
       height = props.height
     }
 
-    let defaultVisible = !(receivedFocus || null != value || null == defaultValue)
+    let defaultVisible = !(receivedFocus || value !== null || defaultValue == null)
 
     value = defaultVisible?
       defaultValue:
@@ -326,18 +324,18 @@ export default class TextField extends PureComponent {
 
     let borderBottomColor =
       restricted ? errorColor
-      : focus.interpolate({
-          inputRange: [-1, 0, 1],
-          outputRange: [errorColor, baseColor, tintColor],
+        : focus.interpolate({
+          inputRange: [ -1, 0, 1 ],
+          outputRange: [ errorColor, baseColor, tintColor ],
         })
 
     let borderBottomWidth =
       restricted ? 2
-      : !underlineEnabled ? 0
-      : focus.interpolate({
-        inputRange: [-1, 0, 1],
-        outputRange: [2, StyleSheet.hairlineWidth, 2],
-      })
+        : !underlineEnabled ? 0
+          : focus.interpolate({
+            inputRange: [ -1, 0, 1 ],
+            outputRange: [ 2, StyleSheet.hairlineWidth, 2 ],
+          })
 
     let paddingBottom = 8
     let inputContainerStyle = {
@@ -345,7 +343,7 @@ export default class TextField extends PureComponent {
       paddingBottom,
 
       ...(disabled ? { overflow: 'hidden' }
-          : { borderBottomColor, borderBottomWidth }),
+        : { borderBottomColor, borderBottomWidth }),
 
       ...(props.multiline ? { height: labelHeight + paddingBottom + height }
         : { height: labelHeight + paddingBottom + fontSize * 1.5 }),
@@ -374,15 +372,15 @@ export default class TextField extends PureComponent {
       color: errorColor,
 
       opacity: focus.interpolate({
-        inputRange: [-1, 0, 1],
-        outputRange: [1, 0, 0],
+        inputRange: [ -1, 0, 1 ],
+        outputRange: [ 1, 0, 0 ],
       }),
 
       fontSize: title?
         titleFontSize:
         focus.interpolate({
-          inputRange:  [-1, 0, 1],
-          outputRange: [titleFontSize, 0, 0],
+          inputRange:  [ -1, 0, 1 ],
+          outputRange: [ titleFontSize, 0, 0 ],
         }),
     }
 
@@ -390,8 +388,8 @@ export default class TextField extends PureComponent {
       color: baseColor,
 
       opacity: focus.interpolate({
-        inputRange: [-1, 0, 1],
-        outputRange: [0, 1, 1],
+        inputRange: [ -1, 0, 1 ],
+        outputRange: [ 0, 1, 1 ],
       }),
 
       fontSize: titleFontSize,
@@ -402,8 +400,8 @@ export default class TextField extends PureComponent {
       height: (title || limit)?
         titleFontSize * 2:
         focus.interpolate({
-          inputRange:  [-1, 0, 1],
-          outputRange: [titleFontSize * 2, 8, 8],
+          inputRange:  [ -1, 0, 1 ],
+          outputRange: [ titleFontSize * 2, 8, 8 ],
         }),
     }
 
@@ -443,7 +441,7 @@ export default class TextField extends PureComponent {
 
     return (
       <View {...containerProps}>
-        <Animated.View style={[styles.inputContainer, inputContainerStyle]}>
+        <Animated.View style={[ styles.inputContainer, inputContainerStyle ]}>
           {disabled && <Line type='dotted' color={baseColor} />}
 
           <Label {...labelProps}>{label}</Label>
@@ -452,7 +450,7 @@ export default class TextField extends PureComponent {
             {this.renderAffix('prefix', active, focused)}
 
             <TextInput
-              style={[styles.input, inputStyle, style]}
+              style={[ styles.input, inputStyle, style ]}
               selectionColor={tintColor}
 
               {...props}
@@ -474,8 +472,8 @@ export default class TextField extends PureComponent {
 
         <Animated.View style={helperContainerStyle}>
           <View style={styles.flex}>
-            <Helper style={[errorStyle, titleTextStyle]}>{error}</Helper>
-            <Helper style={[titleStyle, titleTextStyle]}>{title}</Helper>
+            <Helper style={[ errorStyle, titleTextStyle ]}>{error}</Helper>
+            <Helper style={[ titleStyle, titleTextStyle ]}>{title}</Helper>
           </View>
 
           <Counter {...counterProps} />

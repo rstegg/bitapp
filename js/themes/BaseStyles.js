@@ -48,11 +48,11 @@ const BaseStyles = {
       color: Colors.text
     },
     divider: {
-      position: 'relative',
-      left: 80,
+      marginLeft: 80,
+      marginTop: -1,
       height: 1,
-      maxWidth: Metrics.screenWidth / 1.5,
       backgroundColor: Colors.divider,
+      maxWidth: Metrics.screenWidth - 120,
     },
     bottomContainer: {
 

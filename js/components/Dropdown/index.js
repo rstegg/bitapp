@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   Modal,
   Picker,
-  StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View
@@ -25,7 +24,7 @@ export default class DropdownPicker extends Component {
     const { triggerStyle, label, textStyle, labelStyle, input: { onChange, value }, meta: { touched, error, }, options, defaultValue } = this.props
     return (
       <View>
-        <TouchableWithoutFeedback onPress={() => this.setState({showPicker: true})} >
+        <TouchableWithoutFeedback onPress={() => this.setState({ showPicker: true })} >
           <View style={triggerStyle || styles.dropdownButton} >
             {label && <Text style={labelStyle}>{label}</Text>}
             <Text style={textStyle}>{options.find((option) => option.value === (value || defaultValue)).label}</Text>
@@ -34,12 +33,12 @@ export default class DropdownPicker extends Component {
         </TouchableWithoutFeedback>
 
         <Modal visible={this.state.showPicker} transparent={true} animationType='slide'>
-          <TouchableOpacity onPress={() => this.setState({showPicker: false}) }>
+          <TouchableOpacity onPress={() => this.setState({ showPicker: false }) }>
             <View style={styles.overlay}></View>
           </TouchableOpacity>
           <View style={styles.pickerContainer}>
             <View style={styles.pickerControlBar}>
-              <TouchableOpacity onPress={() => this.setState({showPicker: false}) }>
+              <TouchableOpacity onPress={() => this.setState({ showPicker: false }) }>
                 <View>
                   <Text style={styles.primaryBtn}>Done</Text>
                 </View>

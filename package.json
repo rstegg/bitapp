@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "refresh": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
+    "lint": "eslint js",
+    "lint:fix": "eslint js --fix",
     "test": "jest"
   },
   "dependencies": {
@@ -30,9 +32,13 @@
     "superagent": "^3.5.2"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "babel-jest": "20.0.3",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-preset-react-native": "2.1.0",
+    "eslint": "^4.5.0",
+    "eslint-plugin-react": "^7.3.0",
+    "eslint-plugin-react-native": "^3.0.1",
     "jest": "20.0.4",
     "react-test-renderer": "16.0.0-alpha.12",
     "reactotron-react-native": "^1.12.2",

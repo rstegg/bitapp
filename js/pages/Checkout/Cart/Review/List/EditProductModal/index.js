@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import {
   Modal,
-  Picker,
-  StyleSheet,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View
 } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 
 import Text from 'components/BitKitText'
-import ErrorMessage from 'components/ErrorMessage'
 
 import EditProductForm from './Form'
 import styles from './Styles'
@@ -47,16 +43,16 @@ class EditProductModal extends Component {
 }
 
 const mapStateToProps = ({ checkout }) =>
-({
-  isOpen: checkout.cart.isEditing,
-  product: checkout.cart.editing
-})
+  ({
+    isOpen: checkout.cart.isEditing,
+    product: checkout.cart.editing
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  saveProduct: () => dispatch(submit('editCartProduct')),
-  editCartProduct: (product, quantity) => dispatch(editCartProduct(product, quantity)),
-})
+  ({
+    saveProduct: () => dispatch(submit('editCartProduct')),
+    editCartProduct: (product, quantity) => dispatch(editCartProduct(product, quantity)),
+  })
 
 export default connect(
   mapStateToProps,

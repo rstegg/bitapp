@@ -1,18 +1,13 @@
 import React from 'react'
-import { Platform, View } from 'react-native'
+import { View } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
 
 import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
-
-import ImagePicker from 'react-native-image-picker'
-
-import { onCreateItemSubmit } from 'actions/items'
 
 import styles from './Styles'
 
 const CreateItemField = ({ name, autoFocus, label, multiline, lines, style, inputStyle, ...rest }) =>
-  <View style={[styles.inputGroup, style]}>
+  <View style={[ styles.inputGroup, style ]}>
     <Field
       component={TextField}
       name={name}
@@ -26,10 +21,10 @@ const CreateItemField = ({ name, autoFocus, label, multiline, lines, style, inpu
       underlineColor='red' />
   </View>
 
-const CreateItemForm = ({ handleSubmit, submitting }) =>
+const CreateItemForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
     <CreateItemField name='name' label='Name' autoFocus lines={1} autoCapitalize='words' />
-    <CreateItemField name='description' label='Description' multiline lines={4} style={{height: 200, borderBottomWidth: 0}} inputStyle={{borderBottomWidth: 0}} autoCapitalize='sentences' borderBottomWidth={0} />
+    <CreateItemField name='description' label='Description' multiline lines={4} style={{ height: 200, borderBottomWidth: 0 }} inputStyle={{ borderBottomWidth: 0 }} autoCapitalize='sentences' borderBottomWidth={0} />
   </View>
 
 export default reduxForm({

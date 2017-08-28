@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, StatusBar } from 'react-native'
 import ReduxNav from 'navigation/ReduxNav'
-import ReduxPersist from 'config/ReduxPersist'
 
 // Styles
 import styles from './RootStyles'
@@ -26,8 +25,8 @@ class RootContainer extends Component {
 }
 
 const mapStateToProps = ({ user }) =>
-({
-  user
-})
+  ({
+    user
+  })
 
 export default connect(mapStateToProps)(RootContainer)

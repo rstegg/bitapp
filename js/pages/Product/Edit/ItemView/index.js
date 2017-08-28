@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   View,
-  TouchableOpacity,
   Image,
 } from 'react-native'
-import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import Text from 'components/BitKitText'
 import { Images } from 'themes'

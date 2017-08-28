@@ -6,12 +6,15 @@ export default StyleSheet.create({
   listRow: {
     flexGrow: 1,
     flexDirection: 'row',
-    marginBottom: 10,
-    borderWidth: 1,
-    borderRadius: 5,
     overflow: 'hidden',
     borderColor: Colors.grey,
     justifyContent: 'space-between',
+  },
+  verticalDivider: {
+    width: 1,
+    marginVertical: 5,
+    backgroundColor: Colors.divider,
+    maxWidth: Metrics.screenWidth - 120,
   },
   image: {
     width: 78,
@@ -66,7 +69,6 @@ export default StyleSheet.create({
     flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
-    borderLeftWidth: 1,
   },
   quantityContainer: {
     flex: 1,
@@ -105,4 +107,4 @@ export default StyleSheet.create({
     fontSize: 20,
     color: Colors.grey
   }
-});
+})

@@ -19,7 +19,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
   case 'SEARCH_PRODUCTS':
     return { ...state, productsList: { ...state.productsList, products: state.productsList.products.filter(product => product.item.name.contains(action.payload.keyword) ) } }
   case 'CREATE_PRODUCT':
@@ -36,17 +36,17 @@ export default (state = initialState, action) => {
     return { ...state, activeProduct: { ...action.payload.product, isLoading: false } }
 
   case 'FETCH_PRODUCTS':
-    return {...state, productsList: {
-        isLoading: true,
-        products: []
-      }
+    return { ...state, productsList: {
+      isLoading: true,
+      products: []
+    }
     }
 
   case 'FETCH_PRODUCTS_SUCCESS':
-    return {...state, productsList: {
-        isLoading: false,
-        products: action.payload.products,
-      }
+    return { ...state, productsList: {
+      isLoading: false,
+      products: action.payload.products,
+    }
     }
 
 
@@ -70,9 +70,9 @@ export default (state = initialState, action) => {
 
   case 'DELETE_PRODUCT':
     return { ...state, productsList: {
-        isLoading: false,
-        products: state.productsList.products.filter(product => product.id != action.payload.product.id)
-      }
+      isLoading: false,
+      products: state.productsList.products.filter(product => product.id !== action.payload.product.id)
+    }
     }
 
   case 'LOGOUT':

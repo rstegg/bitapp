@@ -25,7 +25,7 @@ export const post = (endpoint, body, token) =>
       .set('Authorization', token)
   )
 
-export const imagePost = (endpoint, body, token) =>
+export const imagePost = (endpoint, image, token) =>
   Observable.from(
     su.post(`${API_HOST}/${endpoint}`)
       .attach('image', image)

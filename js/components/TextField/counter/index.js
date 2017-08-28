@@ -30,7 +30,7 @@ export default class Counter extends PureComponent {
 
     return (
       <View style={styles.container}>
-        <Text style={[styles.text, style, textStyle]}>
+        <Text style={[ styles.text, style, textStyle ]}>
           {count} / {limit}
         </Text>
       </View>

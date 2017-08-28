@@ -1,12 +1,9 @@
-import React, { Component } from 'react'
-import { Keyboard, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
+import React from 'react'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 
 import Header from 'components/Header'
-import ErrorMessage from 'components/ErrorMessage'
-import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
 
 import { loginForgotSubmit } from 'actions/login'
 
@@ -20,22 +17,22 @@ const ForgotPassword = ({ isLoading, navigation, onSubmit }) =>
         left={<Header.TextButton text='Back' onPress={isLoading ? null : () => navigation.goBack()}/>}
         center={<Header.Logo />}
         right={<Header.TextButton text='Submit' isLoading={isLoading} onPress={isLoading ? null : () => onSubmit()} />} />
-      <ForgotPasswordForm navigation={navigation} onSubmit={({phone}) => loginForgotSubmit(phone)} />
+      <ForgotPasswordForm navigation={navigation} onSubmit={({ phone }) => loginForgotSubmit(phone)} />
     </View>
   </TouchableWithoutFeedback>
 
 
 const mapStateToProps = ({ user }) =>
-({
-  errors: user.errors,
-  isLoading: user.isLoading
-})
+  ({
+    errors: user.errors,
+    isLoading: user.isLoading
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  onSubmit: () => dispatch(submit('loginForgot')),
-  loginForgotSubmit: phone => dispatch(loginForgotSubmit(phone))
-})
+  ({
+    onSubmit: () => dispatch(submit('loginForgot')),
+    loginForgotSubmit: phone => dispatch(loginForgotSubmit(phone))
+  })
 
 export default connect(
   mapStateToProps,

@@ -3,8 +3,8 @@ import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { length } from 'ramda'
 import { NavigationActions } from 'react-navigation'
+
 import Header from 'components/Header'
-import Text from 'components/BitKitText'
 
 import { checkoutSubmit } from 'actions/checkout'
 
@@ -27,7 +27,7 @@ class ReviewCheckout extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={Images.cartIcon}
-        style={[styles.icon, { tintColor }]}
+        style={[ styles.icon, { tintColor } ]}
       />
     ),
   }
@@ -48,16 +48,16 @@ class ReviewCheckout extends Component {
 
 
 const mapStateToProps = ({ user, checkout }) =>
-({
-  cart: checkout.cart,
-  isLoading: checkout.cart.isLoading,
-  user
-})
+  ({
+    cart: checkout.cart,
+    isLoading: checkout.cart.isLoading,
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  checkoutSubmit: (cart, user) => dispatch(checkoutSubmit(cart, user))
-})
+  ({
+    checkoutSubmit: (cart, user) => dispatch(checkoutSubmit(cart, user))
+  })
 
 export default connect(
   mapStateToProps,

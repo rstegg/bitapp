@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import {
   View,
-  StyleSheet,
   ListView,
   TouchableOpacity,
   Alert
@@ -24,8 +23,8 @@ const Withdraw = ({ isLoading, withdrawalInfo, handleRemove, navigation, user })
       center={<Header.Text>Withdraw</Header.Text>}
     />
     <BalanceInfo />
-    { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={handleRemove} />
-    : <BankAccountIntro /> }
+    { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={bank => handleRemove(bank, user)} />
+      : <BankAccountIntro /> }
     <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('AccountLinkBankScreen')}>
       <Text style={styles.actionButtonText}>Add Bank Account</Text>
     </TouchableOpacity>
@@ -35,27 +34,26 @@ const Withdraw = ({ isLoading, withdrawalInfo, handleRemove, navigation, user })
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
 const mapStateToProps = ({ user, withdraw }) =>
-({
-  isLoading: withdraw.balance.isLoading,
-  balance: withdraw.balance,
-  withdrawalInfo: dataSource.cloneWithRows(withdraw.banks.list),
-  user
-})
+  ({
+    isLoading: withdraw.banks.isLoading,
+    withdrawalInfo: dataSource.cloneWithRows(withdraw.banks.list),
+    user
+  })
 
-const confirmRemove = ({type, onConfirm}) =>
+const confirmRemove = ({ type, onConfirm }) =>
   Alert.alert(
     'Please Confirm',
     `Are you sure you want to remove this ${type}?`,
     [
-      {text: 'Cancel', style: 'cancel'},
-      {text: 'OK', onPress: onConfirm},
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'OK', onPress: onConfirm },
     ]
   )
 
 const mapDispatchToProps = dispatch =>
-({
-  handleRemove: (bank, user) => confirmRemove({ type: 'bank', onConfirm: () => dispatch(removeBankAccount(bank, user)) })
-})
+  ({
+    handleRemove: (bank, user) => confirmRemove({ type: 'bank', onConfirm: () => dispatch(removeBankAccount(bank, user)) })
+  })
 
 export default connect(
   mapStateToProps,

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { autoRehydrate, persistStore } from 'redux-persist'
 import { createEpicMiddleware } from 'redux-observable'
 import { AsyncStorage } from 'react-native'
@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'remote-redux-devtools'
 
 const persistConfig = {
   storage: AsyncStorage,
-  whitelist: ['user']
+  whitelist: [ 'user' ]
 }
 
 const composeEnhancers = composeWithDevTools({ realtime: true })

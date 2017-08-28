@@ -2,7 +2,6 @@ const initialState = {
   isAuthenticated: false,
   isRegistered: false,
   isLoading: false,
-  signupPage: 'signupPhone',
   phone: '',
   banks: [],
   balance: [],

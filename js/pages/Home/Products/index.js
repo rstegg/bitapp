@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
-import { Image, View, TouchableOpacity } from 'react-native'
+import { Image, View } from 'react-native'
 import { connect } from 'react-redux'
-import { submit } from 'redux-form'
 
 import Header from 'components/Header'
-import ErrorMessage from 'components/ErrorMessage'
-import TextField from 'components/TextField'
+import Loader from 'components/Loader'
 import Text from 'components/BitKitText'
-import SearchBar from 'components/SearchBar'
 
 import { Images } from 'themes'
 
@@ -23,7 +20,7 @@ class Products extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={Images.productIcon}
-        style={[styles.icon, { tintColor }]}
+        style={[ styles.icon, { tintColor } ]}
       />
     ),
   }
@@ -34,7 +31,7 @@ class Products extends Component {
 
   render() {
     const { isLoading, navigation } = this.props
-    if(isLoading) {
+    if (isLoading) {
       return <Loader />
     }
     return (
@@ -54,14 +51,14 @@ class Products extends Component {
   }
 }
 
-const mapStateToProps = ({ user, products }) =>
-({
-  isLoading: products.isLoading,
-})
+const mapStateToProps = ({ products }) =>
+  ({
+    isLoading: products.isLoading,
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  resetNewProduct: () => dispatch(resetNewProduct()),
-})
+  ({
+    resetNewProduct: () => dispatch(resetNewProduct()),
+  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

@@ -5,13 +5,9 @@ import { submit } from 'redux-form'
 import ImagePicker from 'react-native-image-picker'
 
 import Header from 'components/Header'
-import ErrorMessage from 'components/ErrorMessage'
-import TextField from 'components/TextField'
 import Text from 'components/BitKitText'
-import SearchBar from 'components/SearchBar'
 import Loader from 'components/Loader'
 
-import { Images, Metrics } from 'themes'
 import IonIcon from 'react-native-vector-icons/Ionicons'
 
 import CreateItemForm from './Form'
@@ -29,7 +25,7 @@ class CreateItem extends Component {
 
   componentDidMount() {
     InteractionManager.runAfterInteractions(() => {
-     this.setState({renderPlaceholderOnly: false})
+      this.setState({ renderPlaceholderOnly: false })
     })
   }
 
@@ -46,9 +42,9 @@ class CreateItem extends Component {
     }
 
     ImagePicker.showImagePicker(options, response => {
-      if(response.customButton === 'remove') {
+      if (response.customButton === 'remove') {
         removeNewItemImage(item, user)
-      } else if(!response.didCancel && !response.error) {
+      } else if (!response.didCancel && !response.error) {
         let source
         if (Platform.OS === 'ios') {
           source = response.uri.replace('file://', '')
@@ -65,7 +61,7 @@ class CreateItem extends Component {
   }
   render() {
     const { user, item, createItem, saveItem, isLoading, navigation } = this.props
-    if(this.state.renderPlaceholderOnly) {
+    if (this.state.renderPlaceholderOnly) {
       return <Loader />
     }
     return (
@@ -75,9 +71,9 @@ class CreateItem extends Component {
           center={<Header.Logo />}
           right={<Header.TextButton text='Save' isLoading={isLoading} onPress={() => isLoading ? null : saveItem()} />} />
 
-        <CreateItemForm onSubmit={values => createItem({...values, image: item.image}, user)} />
+        <CreateItemForm onSubmit={values => createItem({ ...values, image: item.image }, user)} />
 
-        <View style={{flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
+        <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'flex-start' }}>
 
           <TouchableWithoutFeedback onPress={() => this._handleImageBtnPress()}>
             {
@@ -85,8 +81,8 @@ class CreateItem extends Component {
                 <Image style={styles.image} source={item.image} resizeMode='contain' />
                 :
                 <View style={styles.addImage}>
-                  <IonIcon name='md-image' style={{color: '#AAA', fontSize: 160}} />
-                  <Text style={{textAlign: 'center', color: '#AAA', fontSize: 24, marginTop: -30,}}>Add a Photo</Text>
+                  <IonIcon name='md-image' style={{ color: '#AAA', fontSize: 160 }} />
+                  <Text style={{ textAlign: 'center', color: '#AAA', fontSize: 24, marginTop: -30, }}>Add a Photo</Text>
                 </View>
             }
           </TouchableWithoutFeedback>
@@ -97,20 +93,20 @@ class CreateItem extends Component {
 }
 
 const mapStateToProps = ({ user, items }) =>
-({
-  errors: items.newItem.errors,
-  isLoading: items.newItem.isLoading,
-  isImageLoading: items.newItem.isImageLoading,
-  item: items.newItem,
-  user
-})
+  ({
+    errors: items.newItem.errors,
+    isLoading: items.newItem.isLoading,
+    isImageLoading: items.newItem.isImageLoading,
+    item: items.newItem,
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  saveItem: () => dispatch(submit('createItem')),
-  createItem: (item, user) => dispatch(createItem(item, user)),
-  uploadNewItemImage: (image, user) => dispatch(uploadNewItemImage(image, user)),
-  removeNewItemImage: (item, user) => dispatch(removeNewItemImage(item, user)),
-})
+  ({
+    saveItem: () => dispatch(submit('createItem')),
+    createItem: (item, user) => dispatch(createItem(item, user)),
+    uploadNewItemImage: (image, user) => dispatch(uploadNewItemImage(image, user)),
+    removeNewItemImage: (item, user) => dispatch(removeNewItemImage(item, user)),
+  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateItem)

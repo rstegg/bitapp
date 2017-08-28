@@ -19,15 +19,15 @@ const LoginField = ({ name, autoFocus, keyboardType, label, password, forgotButt
       label={label}
       style={styles.textInput}
       secureTextEntry={password} />
-      {forgotButton}
+    {forgotButton}
   </View>
 
 const ForgotButton = ({ onPress }) =>
   <Text style={styles.forgot} onPress={onPress}>forgot?</Text>
 
-const LoginForm = ({ handleSubmit, submitting, navigation }) =>
+const LoginForm = ({ handleSubmit, navigation }) =>
   <View onSubmit={handleSubmit} style={styles.loginScreen}>
-    <LoginField name='phone' autoFocus onSubmitEditing={() => focusField('password')} keyboardType='phone-pad' label='Phone' />
+    <LoginField name='phone' autoFocus keyboardType='phone-pad' label='Phone' />
     <LoginField name='password' keyboardType='default' label='Password' password
       forgotButton={<ForgotButton onPress={() => navigation.navigate('LoginForgotScreen')}/>} />
   </View>

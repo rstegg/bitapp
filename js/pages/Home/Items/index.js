@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import { submit } from 'redux-form'
 
 import Header from 'components/Header'
-import ErrorMessage from 'components/ErrorMessage'
-import TextField from 'components/TextField'
+import Loader from 'components/Loader'
 import Text from 'components/BitKitText'
 import SearchBar from 'components/SearchBar'
 
@@ -24,7 +23,7 @@ class Items extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={Images.itemIcon}
-        style={[styles.icon, {tintColor: tintColor}]}
+        style={[ styles.icon, { tintColor: tintColor } ]}
       />
     ),
   }
@@ -35,6 +34,9 @@ class Items extends Component {
 
   render() {
     const { isLoading, navigation, searchItems, clearSearchItems, keyword, user } = this.props
+    if (isLoading) {
+      return <Loader />
+    }
     return (
       <View style={styles.container}>
         <Header
@@ -60,22 +62,20 @@ class Items extends Component {
 
 
 
-const mapStateToProps = ({ user, items, products }) =>
-({
-  errors: user.errors,
-  isLoading: user.isLoading,
-  user,
-  keyword: items.keyword,
-  item: items.newItem,
-  product: products.newProduct,
-})
+const mapStateToProps = ({ user, items }) =>
+  ({
+    errors: items.errors,
+    isLoading: items.isLoading,
+    user,
+    keyword: items.keyword
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  onSubmit: () => dispatch(submit('searchItem')),
-  resetNewItem: () => dispatch(resetNewItem()),
-  searchItems: (keyword, user) => dispatch(searchItems(keyword, user)),
-  clearSearchItems: () => dispatch(clearSearchItems()),
-})
+  ({
+    onSubmit: () => dispatch(submit('searchItem')),
+    resetNewItem: () => dispatch(resetNewItem()),
+    searchItems: (keyword, user) => dispatch(searchItems(keyword, user)),
+    clearSearchItems: () => dispatch(clearSearchItems()),
+  })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Items)

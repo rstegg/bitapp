@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
 
-import { Colors, Metrics } from 'themes'
+import { BaseStyles, Colors, Metrics } from 'themes'
 
 export default StyleSheet.create({
+  ...BaseStyles.screen,
   container: {
     flexGrow: 1,
   },

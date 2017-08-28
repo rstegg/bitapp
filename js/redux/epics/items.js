@@ -5,7 +5,7 @@ import {
   duplicateItemSuccess,
   editItemSuccess,
   deleteItemSuccess,
-  uploadItemImageSuccess,
+  uploadNewItemImageSuccess,
   uploadActiveItemImageSuccess,
   removeNewItemImageSuccess,
   removeActiveItemImageSuccess
@@ -41,7 +41,7 @@ const fetchItems = action$ =>
           type: 'FETCH_ITEMS_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const createItem = action$ =>
   action$.ofType('CREATE_ITEM')
@@ -52,7 +52,7 @@ const createItem = action$ =>
           type: 'CREATE_ITEM_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const duplicateItem = action$ =>
   action$.ofType('DUPLICATE_ITEM')
@@ -63,7 +63,7 @@ const duplicateItem = action$ =>
           type: 'DUPLICATE_ITEM_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const editItem = action$ =>
   action$.ofType('EDIT_ITEM')
@@ -74,7 +74,7 @@ const editItem = action$ =>
           type: 'EDIT_ITEM_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const deleteItem = action$ =>
   action$.ofType('DELETE_ITEM')
@@ -85,7 +85,7 @@ const deleteItem = action$ =>
           type: 'DELETE_ITEM_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const uploadNewItemImage = action$ =>
   action$.ofType('UPLOAD_NEW_ITEM_IMAGE')
@@ -96,7 +96,7 @@ const uploadNewItemImage = action$ =>
           type: 'UPLOAD_NEW_ITEM_IMAGE_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const uploadActiveItemImage = action$ =>
   action$.ofType('UPLOAD_ACTIVE_ITEM_IMAGE')
@@ -107,7 +107,7 @@ const uploadActiveItemImage = action$ =>
           type: 'UPLOAD_ACTIVE_ITEM_IMAGE_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const removeNewItemImage = action$ =>
   action$.ofType('REMOVE_NEW_ITEM_IMAGE')
@@ -118,7 +118,7 @@ const removeNewItemImage = action$ =>
           type: 'REMOVE_NEW_ITEM_IMAGE_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const removeActiveItemImage = action$ =>
   action$.ofType('REMOVE_ACTIVE_ITEM_IMAGE')
@@ -129,7 +129,7 @@ const removeActiveItemImage = action$ =>
           type: 'REMOVE_ACTIVE_ITEM_IMAGE_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 export default combineEpics(
   fetchItems,

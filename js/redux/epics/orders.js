@@ -3,7 +3,7 @@ import {
   fetchOrdersSuccess,
 } from 'actions/orders'
 import { Observable } from 'rxjs/Rx'
-import { get, post, imagePost, put, remove } from './helpers/req'
+import { get } from './helpers/req'
 
 const api = {
   orders: ({ user }) =>
@@ -19,7 +19,7 @@ const fetchOrders = action$ =>
           type: 'FETCH_ORDERS_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 export default combineEpics(
   fetchOrders,

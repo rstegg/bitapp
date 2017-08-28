@@ -1,6 +1,6 @@
 const colors = {
   background: '#FEFEFE',
-  header: '#F8A64D',
+  header: '#4DC9F8',
   headerLT: '#F7F7F8',
   buttonBackground: '#F7F7F8',
   clear: 'rgba(0,0,0,0)',
@@ -25,14 +25,32 @@ const colors = {
   border: '#483F53',
   banner: '#5F3E63',
   divider:  'rgba(0, 0, 0, 0.25)',
-  // orange: '#F8A64D',
-  orange: '#3D7FC6',
-  blue: '#3D7FC6',
-  // blue: '#3D7FC6',
+  highlight:  'rgba(0, 0, 0, 0.25)',
+  orange: '#F8A64D',
+  blue: '#1382AB',
   teal: '#257A91',
   lightGrey: '#999',
   red: '#B33A3A',
-  text: '#414142'
+  text: '#414142',
+
+  orange2: '#F8A64D',
+  blue2: '#3D7FC6',
+
+  bitKitLightGrey: '#F6F6F8',
+  bitKitGrey: '#CCCCCC',
+  bitKitDarkGrey: '#666666',
+  bitKitOrange: '#F36D36',
+  bitKitDarkOrange: '#C2572B',
+  bitKitTeal: '#257A91',
+  bitKitLightBlue: '#D0EFF7',
+  bitKitBlue: '#AAE0E4',
+  bitKitDarkBlue: '#257A91',
+
+  lltOrange: '#F1C596',
+  ltOrange: '#FFB769',
+  Orange: '#F8A64D',
+  dkBlue: '#1382AB',
+  ltBlue: '#4DC9F8',
 }
 
 export default colors

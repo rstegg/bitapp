@@ -8,7 +8,7 @@ import {
   duplicateProductSuccess,
 } from 'actions/products'
 import { Observable } from 'rxjs/Rx'
-import { get, post, imagePost, put, remove } from './helpers/req'
+import { get, post, put, remove } from './helpers/req'
 
 const api = {
   fetchProducts: ({ user }) =>
@@ -19,9 +19,9 @@ const api = {
     post('products', { product, item }, user.token),
   editProduct: ({ product, user }) =>
     put(`products/${product.id}`, { product }, user.token),
-  searchProducts: ({ keyword }) =>
+  searchProducts: ({ keyword, user }) =>
     put('products/search/keyword', { keyword }, user.token),
-  searchCodeProducts: ({ code }) =>
+  searchCodeProducts: ({ code, user }) =>
     put('products/search/code', { code }, user.token),
   deleteProduct: ({ product, user }) =>
     remove(`products/${product.id}`, user.token)
@@ -36,7 +36,7 @@ const fetchProducts = action$ =>
           type: 'FETCH_PRODUCTS_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const searchProducts = action$ =>
   action$.ofType('SEARCH_PRODUCTS')
@@ -47,7 +47,7 @@ const searchProducts = action$ =>
           type: 'SEARCH_PRODUCTS_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const createProduct = action$ =>
   action$.ofType('CREATE_PRODUCT')
@@ -58,7 +58,7 @@ const createProduct = action$ =>
           type: 'CREATE_PRODUCT_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const duplicateProduct = action$ =>
   action$.ofType('DUPLICATE_PRODUCT')
@@ -69,7 +69,7 @@ const duplicateProduct = action$ =>
           type: 'DUPLICATE_PRODUCT_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const editProduct = action$ =>
   action$.ofType('EDIT_PRODUCT')
@@ -80,7 +80,7 @@ const editProduct = action$ =>
           type: 'EDIT_PRODUCT_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const deleteProduct = action$ =>
   action$.ofType('DELETE_PRODUCT')
@@ -91,7 +91,7 @@ const deleteProduct = action$ =>
           type: 'DELETE_PRODUCT_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 export default combineEpics(
   fetchProducts,

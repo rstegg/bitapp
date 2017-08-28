@@ -10,7 +10,7 @@ export default class Loader extends Component {
       ref='loader'
       animation='rotate'
       iterationCount='infinite'
-      style={[this.props.style || styles.fullScreenLoader, styles.spinner]} color={this.props.color || Colors.cloud} />
+      style={[ this.props.style || styles.fullScreenLoader, styles.spinner ]} color={this.props.color || Colors.cloud} />
   }
 }
 

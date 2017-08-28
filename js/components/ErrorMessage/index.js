@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Text from 'components/BitKitText'
 import styles from './Styles'
 
-const ErrorMessage = ({ error }) => 
+const ErrorMessage = ({ error }) =>
   error ? <Text style={styles.errorMessage}>{error}</Text>
-  : null
+    : null
 
 export default ErrorMessage

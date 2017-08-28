@@ -1,10 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
 
 import TextField from 'components/TextField'
-import Text from 'components/BitKitText'
 
 import styles from './Styles'
 

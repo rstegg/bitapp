@@ -18,7 +18,7 @@ export default class Line extends PureComponent {
     }
 
     return (
-      <View style={[styles.line, lineStyle]} pointerEvents='none' />
+      <View style={[ styles.line, lineStyle ]} pointerEvents='none' />
     )
   }
 }

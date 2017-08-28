@@ -31,7 +31,7 @@ const LinkBankGroupField = ({ name, autoFocus, label, style, inputStyle, last, .
       containerStyle={inputStyle} />
   </View>
 
-const AccountProfileForm = ({ handleSubmit, submitting }) =>
+const AccountProfileForm = ({ handleSubmit }) =>
   <View onSubmit={handleSubmit} style={styles.createForm}>
     <LinkBankField name='recipientName' label='Recipient name' autoFocus />
     <LinkBankField name='address' label='Address 1' />

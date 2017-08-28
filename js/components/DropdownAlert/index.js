@@ -6,7 +6,7 @@ import {
   Platform, Dimensions, Image, PanResponder
 } from 'react-native'
 
-import { Colors, Images } from 'themes'
+import { Images } from 'themes'
 
 const DEFAULT_IMAGE_DIMENSIONS = 36
 const WINDOW = Dimensions.get('window')
@@ -141,15 +141,15 @@ export default class DropdownAlert extends Component {
     }
     if (this.state.isOpen == false) {
       this.setState({
-        type: type,
-        message: message,
-        title: title,
+        type,
+        message,
+        title,
         isOpen: true,
         topValue: 0
       })
     }
     this.animate(1)
-     if (this.props.closeInterval > 1) {
+    if (this.props.closeInterval > 1) {
       closeTimeoutId = setTimeout(function() {
         this.onClose()
       }.bind(this), this.props.closeInterval)
@@ -157,7 +157,7 @@ export default class DropdownAlert extends Component {
   }
   dismiss(onDismiss) {
     if (this.state.isOpen) {
-      if (closeTimeoutId != null) {
+      if (closeTimeoutId !== null) {
         clearTimeout(closeTimeoutId)
       }
       this.animate(0)
@@ -185,7 +185,7 @@ export default class DropdownAlert extends Component {
     this.dismiss(this.props.onCancel)
   }
   animate(toValue) {
-    Animated.spring (
+    Animated.spring(
       this.state.animationValue, {
         toValue: toValue,
         duration: this.state.duration,
@@ -193,14 +193,15 @@ export default class DropdownAlert extends Component {
       }
     ).start()
   }
+
   onLayoutEvent(event) {
-    var {x, y, width, height} = event.nativeEvent.layout
+    var { height } = event.nativeEvent.layout
     var actualStartDelta = this.state.startDelta
     var actualEndDelta = this.state.endDelta
     // Prevent it from going off screen.
     if (this.props.startDelta < 0) {
       var delta = 0 - height
-      if (delta != this.props.startDelta) {
+      if (delta !== this.props.startDelta) {
         actualStartDelta = delta
       }
     } else if (this.props.startDelta > WINDOW.height) {
@@ -215,28 +216,27 @@ export default class DropdownAlert extends Component {
     if (heightDelta < 0) {
       actualEndDelta = this.props.endDelta + heightDelta
     }
-    if (actualStartDelta != this.state.startDelta || actualEndDelta != this.state.endDelta) {
+    if (actualStartDelta !== this.state.startDelta || actualEndDelta !== this.state.endDelta) {
       this.setState({
         startDelta: actualStartDelta,
         endDelta: actualEndDelta
       })
     }
   }
+
   validateType(type) {
     if (type.length === 0 || type === null) {
-      console.warn('Missing DropdownAlert type. Available types: info, warn, error or custom')
       return false
     }
-    if (type != 'info' && type != 'warn' && type != 'error' && type != 'notification' && type != 'custom') {
-      console.warn('Invalid DropdownAlert type. Available types: info, warn, error or custom')
+    if (type !== 'info' && type !== 'warn' && type !== 'error' && type !== 'notification' && type !== 'custom') {
       return false
     }
     return true
   }
-  handleStartShouldSetPanResponder(e: Object, gestureState: Object): boolean {
+  handleStartShouldSetPanResponder() {
     return true
   }
-  handleMoveShouldSetPanResponder(e: Object, gestureState: Object): boolean {
+  handleMoveShouldSetPanResponder() {
     return true
   }
   handlePanResponderMove(e: Object, gestureState: Object) {
@@ -253,27 +253,27 @@ export default class DropdownAlert extends Component {
     }
   }
   renderText(type, text, style, numberOfLines) {
-    if (text != null) {
+    if (text !== null) {
       if (text.length) {
-        let textStyle = style;
-        if(type === 'notification') {
-          textStyle = {...style, color: '#666'}
+        let textStyle = style
+        if (type === 'notification') {
+          textStyle = { ...style, color: '#666' }
         }
         if (Platform.OS === 'android') { // Using numberOfLines for Android causes a crash.
           return (
             <Text style={textStyle}>{text}</Text>
           )
-        } else {
-          return (
-            <Text style={textStyle} numberOfLines={numberOfLines}>{text}</Text>
-          )
         }
+        return (
+          <Text style={textStyle} numberOfLines={numberOfLines}>{text}</Text>
+        )
+
       }
     }
     return null
   }
   renderImage(source, style) {
-    if (source != null) {
+    if (source !== null) {
       if (typeof source === 'number') {
         return (
           <Image style={style} source={source} />
@@ -286,7 +286,7 @@ export default class DropdownAlert extends Component {
           style['height'] = DEFAULT_IMAGE_DIMENSIONS
         }
         return (
-          <Image style={style} source={{uri: source}} />
+          <Image style={style} source={{ uri: source }} />
         )
       }
     }
@@ -297,7 +297,7 @@ export default class DropdownAlert extends Component {
       return (
         <StatusBar backgroundColor={backgroundColor} />
       )
-    } else if (type != 'custom') {
+    } else if (type !== 'custom') {
       return (
         <StatusBar barStyle='light-content' />
       )
@@ -305,9 +305,9 @@ export default class DropdownAlert extends Component {
     return null
   }
   renderButton(source, style, onPress, underlayColor, isRendered) {
-    if (source != null && isRendered) {
+    if (source !== null && isRendered) {
       return (
-        <TouchableOpacity style={{alignSelf: style.alignSelf, width: style.width, height: style.height}} onPress={onPress} underlayColor={underlayColor}>
+        <TouchableOpacity style={{ alignSelf: style.alignSelf, width: style.width, height: style.height }} onPress={onPress} underlayColor={underlayColor}>
           {this.renderImage(source, style)}
         </TouchableOpacity>
       )
@@ -315,65 +315,65 @@ export default class DropdownAlert extends Component {
     return null
   }
   dragResponders() {
-    return {...panResponder.panHandlers}
+    return { ...panResponder.panHandlers }
   }
   renderDropDown(isOpen) {
     if (isOpen == true) {
-      var style = [this.props.containerStyle, styles.defaultContainer]
+      var style = [ this.props.containerStyle, styles.defaultContainer ]
       var source = this.props.imageSrc
       var backgroundColor = this.props.containerStyle.backgroundColor
       switch (this.state.type) {
-        case 'info':
-          style = [styles.defaultContainer, {backgroundColor: MAIN_INFO_COLOR}]
-          source = Images.dropdownInfo
-          backgroundColor = MAIN_INFO_COLOR
-          break;
-        case 'warn':
-          style = [styles.defaultContainer, {backgroundColor: MAIN_WARN_COLOR}]
-          source = Images.dropdownWarn
-          backgroundColor = MAIN_WARN_COLOR
-          break;
-        case 'error':
-          style = [styles.defaultContainer, {backgroundColor: MAIN_ERROR_COLOR}]
-          source = Images.dropdownError
-          backgroundColor = MAIN_ERROR_COLOR
-          break;
-        case 'notification':
-          style = [styles.defaultContainer, {backgroundColor: NOTIFICATION_COLOR}]
-          source = Images.dropdownNotification
-          backgroundColor = NOTIFICATION_COLOR
+      case 'info':
+        style = [ styles.defaultContainer, { backgroundColor: MAIN_INFO_COLOR } ]
+        source = Images.dropdownInfo
+        backgroundColor = MAIN_INFO_COLOR
+        break
+      case 'warn':
+        style = [ styles.defaultContainer, { backgroundColor: MAIN_WARN_COLOR } ]
+        source = Images.dropdownWarn
+        backgroundColor = MAIN_WARN_COLOR
+        break
+      case 'error':
+        style = [ styles.defaultContainer, { backgroundColor: MAIN_ERROR_COLOR } ]
+        source = Images.dropdownError
+        backgroundColor = MAIN_ERROR_COLOR
+        break
+      case 'notification':
+        style = [ styles.defaultContainer, { backgroundColor: NOTIFICATION_COLOR } ]
+        source = Images.dropdownNotification
+        backgroundColor = NOTIFICATION_COLOR
       }
       return (
-          <Animated.View
-           ref={(ref) => this.mainView = ref}
-           {...panResponder.panHandlers ? this.dragResponders() : null}
-           style={{
-              transform: [{
-                translateY: this.state.animationValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [this.state.startDelta, this.state.endDelta]
-                }),
-              }],
-              position: 'absolute',
-              top: this.state.topValue,
-              left: 0,
-              right: 0
-            }}>
-            {this.renderStatusBar(this.state.type, backgroundColor)}
-            <TouchableOpacity
-                onPress={(this.props.showCancel) ? null : this.onClose}
-                underlayColor={backgroundColor}
-                onLayout={(event) => this.onLayoutEvent(event)}>
-              <View style={style}>
-                {this.renderImage(source, this.props.imageStyle)}
-                <View style={styles.textContainer}>
-                  {this.renderText(this.state.type, this.state.title, this.props.titleStyle, this.props.titleNumOfLines)}
-                  {this.renderText(this.state.type, this.state.message, this.props.messageStyle, this.props.messageNumOfLines)}
-                </View>
-                {this.renderButton(this.props.cancelBtnImageSrc, this.props.cancelBtnImageStyle, this.onCancel, backgroundColor, this.props.showCancel)}
+        <Animated.View
+          ref={(ref) => this.mainView = ref}
+          {...panResponder.panHandlers ? this.dragResponders() : null}
+          style={{
+            transform: [ {
+              translateY: this.state.animationValue.interpolate({
+                inputRange: [ 0, 1 ],
+                outputRange: [ this.state.startDelta, this.state.endDelta ]
+              }),
+            } ],
+            position: 'absolute',
+            top: this.state.topValue,
+            left: 0,
+            right: 0
+          }}>
+          {this.renderStatusBar(this.state.type, backgroundColor)}
+          <TouchableOpacity
+            onPress={(this.props.showCancel) ? null : this.onClose}
+            underlayColor={backgroundColor}
+            onLayout={(event) => this.onLayoutEvent(event)}>
+            <View style={style}>
+              {this.renderImage(source, this.props.imageStyle)}
+              <View style={styles.textContainer}>
+                {this.renderText(this.state.type, this.state.title, this.props.titleStyle, this.props.titleNumOfLines)}
+                {this.renderText(this.state.type, this.state.message, this.props.messageStyle, this.props.messageNumOfLines)}
               </View>
-            </TouchableOpacity>
-          </Animated.View>
+              {this.renderButton(this.props.cancelBtnImageSrc, this.props.cancelBtnImageStyle, this.onCancel, backgroundColor, this.props.showCancel)}
+            </View>
+          </TouchableOpacity>
+        </Animated.View>
       )
     }
     return null

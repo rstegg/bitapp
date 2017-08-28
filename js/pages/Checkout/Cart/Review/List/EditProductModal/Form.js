@@ -7,7 +7,7 @@ import TextField from 'components/TextField'
 
 import styles from './Styles'
 
-const EditProductField = ({ name, autoFocus, autoCapitalize, keyboardType, label }) =>
+const EditProductField = ({ name, autoFocus, keyboardType, label }) =>
   <View style={styles.inputGroup}>
     <Field
       component={TextField}
@@ -30,10 +30,10 @@ const ConnectedEditProductForm = reduxForm({
 })(EditProductForm)
 
 const mapStateToProps = ({ checkout }) =>
-({
-  initialValues: {
-    quantity: checkout.cart.editing.quantity
-  }
-})
+  ({
+    initialValues: {
+      quantity: checkout.cart.editing.quantity
+    }
+  })
 
 export default connect(mapStateToProps)(ConnectedEditProductForm)

@@ -28,7 +28,7 @@ const loginSubmit = action$ =>
         .map(loginSuccess)
         .catch(res => Observable.of(
           loginFailure(getError(res))
-        ))}
+        )) }
     )
 
 const loginForgotSubmit = action$ =>
@@ -49,7 +49,7 @@ const signupSubmit = action$ =>
         .catch(res => Observable.of(
           signupFailure(res)
         ))
-      )
+    )
 
 const signupPhoneSubmit = action$ =>
   action$.ofType('SIGNUP_PHONE_SUBMIT')
@@ -59,7 +59,7 @@ const signupPhoneSubmit = action$ =>
         .catch(res => Observable.of(
           signupFailure(getError(res))
         ))
-      )
+    )
 
 const signupVerifySubmit = action$ =>
   action$.ofType('SIGNUP_VERIFY_SUBMIT')
@@ -69,7 +69,7 @@ const signupVerifySubmit = action$ =>
         .catch(res => Observable.of(
           signupFailure(getError(res))
         ))
-      )
+    )
 
 export default combineEpics(
   loginSubmit,

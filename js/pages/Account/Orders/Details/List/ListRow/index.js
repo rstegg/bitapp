@@ -1,15 +1,15 @@
 import React from 'react'
-import { View, Image, TouchableOpacity } from 'react-native'
+import { View, Image } from 'react-native'
 import { path } from 'ramda'
+
 import Text from 'components/BitKitText'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import { Images } from 'themes'
 
 import styles from './Styles'
 
-const itemImage = path(['item', 'image'])
-const itemName = path(['item', 'name'])
+const itemImage = path([ 'item', 'image' ])
+const itemName = path([ 'item', 'name' ])
 
 const OrderDetailsRow = ({ product }) =>
   <View style={styles.listRow}>
@@ -24,6 +24,7 @@ const OrderDetailsRow = ({ product }) =>
         <Text numberOfLines={1} style={styles.priceText}>${product.unitPrice}</Text>
       </View>
     </View>
+    <View style={styles.verticalDivider}></View>
     <View style={styles.orderInfo}>
       <View style={styles.quantityContainer}>
         <Text numberOfLines={1} style={styles.quantityLabel}>Qty:</Text>

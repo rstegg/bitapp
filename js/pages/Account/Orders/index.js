@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-  ListView,
-  TouchableOpacity
-} from 'react-native'
+import { View, ListView } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchOrders, setActiveOrder } from 'actions/orders'
 
@@ -23,7 +18,7 @@ class OrderHistory extends Component {
 
   render() {
     const { isLoading, orders, setActiveOrder, navigation } = this.props
-    if(isLoading) {
+    if (isLoading) {
       return <Loader />
     }
     return (
@@ -33,7 +28,7 @@ class OrderHistory extends Component {
           center={<Header.Text>Orders</Header.Text>}
         />
         { orders.getRowCount() ? <OrdersList orders={orders} setActiveOrder={setActiveOrder} />
-        : <OrdersIntro navigation={navigation} /> }
+          : <OrdersIntro navigation={navigation} /> }
       </View>
     )
   }
@@ -43,17 +38,17 @@ class OrderHistory extends Component {
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
 const mapStateToProps = ({ user, orders }) =>
-({
-  isLoading: orders.history.isLoading,
-  orders: dataSource.cloneWithRows(orders.history.list),
-  user
-})
+  ({
+    isLoading: orders.history.isLoading,
+    orders: dataSource.cloneWithRows(orders.history.list),
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  fetchOrders: user => dispatch(fetchOrders(user)),
-  setActiveOrder: order => dispatch(setActiveOrder(order)),
-})
+  ({
+    fetchOrders: user => dispatch(fetchOrders(user)),
+    setActiveOrder: order => dispatch(setActiveOrder(order)),
+  })
 
 export default connect(
   mapStateToProps,

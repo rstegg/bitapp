@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-  ListView,
-  TouchableOpacity,
-  Alert
-} from 'react-native'
+import { View } from 'react-native'
 import { connect } from 'react-redux'
 import { fetchBalance } from 'actions/withdraw'
 
@@ -21,7 +15,7 @@ class Balance extends Component {
   }
   render() {
     const { isLoading, balanceBTC, balanceLTC, } = this.props
-    if(isLoading) {
+    if (isLoading) {
       return <Loader style={styles.balanceLoader} />
     }
     return (
@@ -44,31 +38,18 @@ class Balance extends Component {
   }
 }
 
-
-const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
-
 const mapStateToProps = ({ user, withdraw }) =>
-({
-  isLoading: withdraw.balance.isLoading,
-  balanceBTC: withdraw.balance.BTC,
-  balanceLTC: withdraw.balance.LTC,
-  user,
-})
-
-const confirmRemove = ({type, onConfirm}) =>
-  Alert.alert(
-    'Please Confirm',
-    `Are you sure you want to remove this ${type}?`,
-    [
-      {text: 'Cancel', style: 'cancel'},
-      {text: 'OK', onPress: onConfirm},
-    ]
-  )
+  ({
+    isLoading: withdraw.balance.isLoading,
+    balanceBTC: withdraw.balance.BTC,
+    balanceLTC: withdraw.balance.LTC,
+    user,
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  fetchBalance: user => dispatch(fetchBalance(user))
-})
+  ({
+    fetchBalance: user => dispatch(fetchBalance(user))
+  })
 
 export default connect(
   mapStateToProps,

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, BaseStyles, Colors } from 'themes'
+import { BaseStyles } from 'themes'
 
 export default StyleSheet.create({
   ...BaseStyles.screen,
@@ -13,4 +13,4 @@ export default StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 10,
   },
-});
+})

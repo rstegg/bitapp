@@ -5,12 +5,12 @@ export default StyleSheet.create({
   listRow: {
     flexGrow: 1,
     height: 80,
-    marginBottom: 10,
     overflow: 'hidden',
     borderColor: Colors.grey,
   },
   itemRow: {
     flexGrow: 1,
+    height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

@@ -3,6 +3,6 @@ import { Colors } from 'themes'
 
 export default StyleSheet.create({
   header: {
-    backgroundColor: 'black'
+    backgroundColor: Colors.header
   }
 })

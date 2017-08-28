@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-  Platform
-} from 'react-native'
+import { View } from 'react-native'
 
 import TextField from './field'
 import ErrorMessage from 'components/ErrorMessage'
@@ -13,7 +9,7 @@ export default class BitTextField extends Component {
     this.refs.defaultInput.focus()
   }
   render() {
-    const { label, multiline, style, underlineEnabled, textInputStyle, onSubmitEditing, input, meta: { touched, error, }, ...rest } = this.props
+    const { label, multiline, style, textInputStyle, onSubmitEditing, input, meta: { touched, error, }, ...rest } = this.props
     return (
       <View>
         <TextField
@@ -21,7 +17,7 @@ export default class BitTextField extends Component {
           {...input}
           {...rest}
           returnKeyLabel={onSubmitEditing ? 'next' : 'done'}
-          style={[styles.textInput, style, textInputStyle]}
+          style={[ styles.textInput, style, textInputStyle ]}
           tintColor='#aaa'
           label={label}
           multiline={multiline}

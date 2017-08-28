@@ -43,17 +43,17 @@ export default class Support extends Component {
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={() => this.openFAQ()} style={styles.buttonFilled}>
-              <Text style={{color: 'white', textAlign: 'center', }}>Browse our FAQs</Text>
+              <Text style={{ color: 'white', textAlign: 'center', }}>Browse our FAQs</Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity onPress={() => this.openEmail()} style={styles.buttonOutlined}>
-              <Text style={{color: '#2e8ba4', textAlign: 'center',}}>Email</Text>
+              <Text style={{ color: '#2e8ba4', textAlign: 'center', }}>Email</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => this.openMessenger()} style={styles.buttonOutlined}>
-              <Text style={{color: '#2e8ba4', textAlign: 'center',}}>Facebook Messenger</Text>
+              <Text style={{ color: '#2e8ba4', textAlign: 'center', }}>Facebook Messenger</Text>
             </TouchableOpacity>
           </View>
 

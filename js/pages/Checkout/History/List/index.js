@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Alert,
   Image,
   ListView,
   TouchableOpacity,
@@ -17,17 +16,6 @@ import { Images } from 'themes'
 
 import ListRow from './ListRow'
 import styles from './Styles'
-
-const OPTIONS = [
-  'Edit',
-  'Duplicate',
-  'Delete',
-  'Cancel',
-]
-const EDIT_INDEX = 0
-const DUPLICATE_INDEX = 1
-const DELETE_INDEX = 2
-const CANCEL_INDEX = 3
 
 class List extends Component {
   componentWillMount() {
@@ -53,35 +41,35 @@ class List extends Component {
             <Image source={Images.close} style={styles.arrow} resizeMode='contain' />
           </View>
         </TouchableOpacity>
-        <View style={{flexGrow: 1}} />
+        <View style={{ flexGrow: 1 }} />
       </View>
     )
   }
 
   renderRow(transaction) {
     return <ListRow
-            key={transaction.id}
-            transaction={transaction}
-            onSelect={() => this.props.setActiveTransaction(transaction)}
-            onOptionsBtnPress={() => {}} />
+      key={transaction.id}
+      transaction={transaction}
+      onSelect={() => this.props.setActiveTransaction(transaction)} />
   }
 
   renderList() {
     return <ListView key='items-list'
-              style={styles.list}
-              dataSource={this.props.history}
-              renderRow={this.renderRow.bind(this)}
-              keyboardDismissMode='on-drag'
-              keyboardShouldPersistTaps='always'
-              showsVerticalScrollIndicator={false}
-              removeClippedSubviews={false} />
+      style={styles.list}
+      dataSource={this.props.history}
+      renderRow={this.renderRow.bind(this)}
+      keyboardDismissMode='on-drag'
+      keyboardShouldPersistTaps='always'
+      showsVerticalScrollIndicator={false}
+      removeClippedSubviews={false}
+      renderSeparator={() => <View style={styles.divider}></View>} />
   }
 
   render() {
     let content
-    if(this.props.isLoading) {
+    if (this.props.isLoading) {
       content = <Loader />
-    } else if(this.props.history.getRowCount() > 0) {
+    } else if (this.props.history.getRowCount() > 0) {
       content = this.renderList()
     } else {
       content = this.renderIntro()
@@ -98,17 +86,17 @@ class List extends Component {
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
 const mapStateToProps = ({ checkout, user }) =>
-({
-  isLoading: checkout.history.isLoading,
-  history: dataSource.cloneWithRows(checkout.history.list),
-  user
-})
+  ({
+    isLoading: checkout.history.isLoading,
+    history: dataSource.cloneWithRows(checkout.history.list),
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  fetchCheckoutHistory: user => dispatch(fetchCheckoutHistory(user)),
-  setActiveTransaction: transaction => dispatch(setActiveTransaction(transaction)),
-})
+  ({
+    fetchCheckoutHistory: user => dispatch(fetchCheckoutHistory(user)),
+    setActiveTransaction: transaction => dispatch(setActiveTransaction(transaction)),
+  })
 
 export default connect(
   mapStateToProps,

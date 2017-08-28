@@ -31,6 +31,7 @@ const CANCEL_INDEX = 2
 
 class List extends Component {
   renderIntro() {
+    const { navigation } = this.props
     return (
       <View style={styles.intro}>
         <View style={styles.introTextContainer}>
@@ -50,7 +51,7 @@ class List extends Component {
             <Image source={Images.close} style={styles.arrow} resizeMode='contain' />
           </View>
         </TouchableOpacity>
-        <View style={{flexGrow: 1}} />
+        <View style={{ flexGrow: 1 }} />
       </View>
     )
   }
@@ -62,42 +63,40 @@ class List extends Component {
       destructiveButtonIndex: DELETE_INDEX,
     },
     (buttonIndex) => {
-      switch(buttonIndex) {
-        case DELETE_INDEX:
-          this.props.removeProductFromCart(product)
-          break
-        case EDIT_INDEX:
-          this.props.openEditProductModal(product)
-          break
+      switch (buttonIndex) {
+      case DELETE_INDEX:
+        this.props.removeProductFromCart(product)
+        break
+      case EDIT_INDEX:
+        this.props.openEditProductModal(product)
+        break
       }
     })
   }
 
   renderRow(product) {
-    console.log(product);
     return <ListRow
-            key={product.id}
-            product={product}
-            onSelect={() => {}}
-            onOptionsBtnPress={() => this.selectOptions(product)} />
+      key={product.id}
+      product={product}
+      onOptionsBtnPress={() => this.selectOptions(product)} />
   }
 
   renderList() {
     return <ListView key='items-list'
-              style={styles.list}
-              dataSource={this.props.products}
-              renderRow={this.renderRow.bind(this)}
-              keyboardDismissMode='on-drag'
-              keyboardShouldPersistTaps='always'
-              showsVerticalScrollIndicator={false}
-              removeClippedSubviews={false} />
+      style={styles.list}
+      dataSource={this.props.products}
+      renderRow={this.renderRow.bind(this)}
+      keyboardDismissMode='on-drag'
+      keyboardShouldPersistTaps='always'
+      showsVerticalScrollIndicator={false}
+      removeClippedSubviews={false} />
   }
 
   render() {
     let content
-    if(this.props.isLoading) {
+    if (this.props.isLoading) {
       content = <Loader />
-    } else if(this.props.products.getRowCount() > 0) {
+    } else if (this.props.products.getRowCount() > 0) {
       content = this.renderList()
     } else {
       content = this.renderIntro()
@@ -115,23 +114,23 @@ class List extends Component {
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
 const mapStateToProps = ({ checkout }) =>
-({
-  isLoading: checkout.cart.isLoading,
-  editProductOpen: checkout.cart.editProductOpen,
-  products: dataSource.cloneWithRows(checkout.cart.products),
-})
+  ({
+    isLoading: checkout.cart.isLoading,
+    editProductOpen: checkout.cart.editProductOpen,
+    products: dataSource.cloneWithRows(checkout.cart.products),
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  removeProductFromCart: product => {
-    Alert.alert(product.name, 'Are you sure you want to remove this product?', [
-      { text: 'Yes', onPress: () => dispatch(removeProductFromCart(product)) },
-      { text: 'No' },
-    ])
-  },
-  openEditProductModal: product => dispatch(openEditProductModal(product)),
-  closeEditProductModal: () => dispatch(closeEditProductModal()),
-})
+  ({
+    removeProductFromCart: product => {
+      Alert.alert(product.name, 'Are you sure you want to remove this product?', [
+        { text: 'Yes', onPress: () => dispatch(removeProductFromCart(product)) },
+        { text: 'No' },
+      ])
+    },
+    openEditProductModal: product => dispatch(openEditProductModal(product)),
+    closeEditProductModal: () => dispatch(closeEditProductModal()),
+  })
 
 export default connect(
   mapStateToProps,

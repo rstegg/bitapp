@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   Alert,
   View,
-  StyleSheet,
   TouchableOpacity
 } from 'react-native'
 import { connect } from 'react-redux'
@@ -25,7 +24,7 @@ const AccountListItem = ({ text, icon, onPress }) =>
         <FontAwesome name={icon} style={styles.buttonIcon} />
         <Text style={styles.buttonText}>{text}</Text>
       </View>
-      <FontAwesome name='chevron-right' style={{fontSize: 20, color: Colors.grey}} />
+      <FontAwesome name='chevron-right' style={{ fontSize: 20, color: Colors.grey }} />
     </View>
   </TouchableOpacity>
 
@@ -53,25 +52,25 @@ class Account extends Component {
         <AccountListItem text='Withdraw' icon='bank' onPress={() => navigation.navigate('AccountWithdrawScreen')} />
         <AccountListItem text='Support' icon='info-circle' onPress={() => navigation.navigate('AccountSupportScreen')} />
         <AccountLogoutItem onPress={() => handleLogout()} />
-    </View>
+      </View>
     )
   }
 }
 
 const mapStateToProps = ({ user }) =>
-({
-  user
-})
+  ({
+    user
+  })
 
 const mapDispatchToProps = dispatch =>
-({
-  handleLogout: () => {
-    Alert.alert('Log Out', 'Are you sure you want to log out?', [
-      { text: 'Cancel' },
-      { text: 'Log out', onPress: () => dispatch(logout()) },
-    ])
-  },
-})
+  ({
+    handleLogout: () => {
+      Alert.alert('Log Out', 'Are you sure you want to log out?', [
+        { text: 'Cancel' },
+        { text: 'Log out', onPress: () => dispatch(logout()) },
+      ])
+    },
+  })
 
 export default connect(
   mapStateToProps,

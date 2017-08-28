@@ -5,7 +5,7 @@ import {
   linkBankAccountSuccess,
 } from 'actions/withdraw'
 import { Observable } from 'rxjs/Rx'
-import { get, post, imagePost, put, remove } from './helpers/req'
+import { get, post } from './helpers/req'
 
 const api = {
   balance: ({ user }) =>
@@ -25,7 +25,7 @@ const fetchBalance = action$ =>
           type: 'FETCH_BALANCE_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const linkBankAccount = action$ =>
   action$.ofType('LINK_BANK_ACCOUNT')
@@ -36,7 +36,7 @@ const linkBankAccount = action$ =>
           type: 'LINK_BANK_ACCOUNT_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 const createWithdraw = action$ =>
   action$.ofType('CREATE_WITHDRAW')
@@ -47,7 +47,7 @@ const createWithdraw = action$ =>
           type: 'CREATE_WITHDRAW_FAILURE',
           payload: { error }
         }))
-      )
+    )
 
 export default combineEpics(
   fetchBalance,
