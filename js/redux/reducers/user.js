@@ -5,11 +5,16 @@ const initialState = {
   phone: '',
   banks: [],
   balance: [],
-  errors: {}
+  error: ''
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case 'REFRESH_USER':
+    return Object.assign({}, state, {
+      error: null,
+      isLoading: false
+    })
   case 'SIGNUP_PHONE_SUBMIT':
   case 'SIGNUP_VERIFY_SUBMIT':
   case 'SIGNUP_SUBMIT':
@@ -42,6 +47,12 @@ export default (state = initialState, action) => {
       isAuthenticated: true,
       token: 'JWT ' + action.payload.token,
       error: null,
+      isLoading: false
+    })
+  case 'SIGNUP_PHONE_FAILURE':
+  case 'SIGNUP_VERIFY_FAILURE':
+    return Object.assign({}, state, {
+      error: action.payload.error || 'Something went wrong.',
       isLoading: false
     })
   case 'SIGNUP_FAILURE':

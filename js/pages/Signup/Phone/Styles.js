@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { BaseStyles, Metrics } from 'themes'
+import { BaseStyles, Colors, Metrics } from 'themes'
 
 export default StyleSheet.create({
   ...BaseStyles.screen,
   signupScreen: {
-    flexGrow: 1,
-    height: Metrics.screenHeight,
+
   },
   inputGroup: {
     backgroundColor: 'white',
@@ -16,5 +15,11 @@ export default StyleSheet.create({
   textField: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  errorContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 5,
+    width: Metrics.screenWidth,
   }
 })

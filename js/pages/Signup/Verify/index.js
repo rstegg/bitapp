@@ -18,16 +18,16 @@ const SignupVerify = ({ phone, isLoading, navigation, onSubmit, signupVerifySubm
         left={<Header.TextButton text='Cancel' onPress={isLoading ? null : () => navigation.goBack()}/>}
         center={<Header.Logo />}
         right={<Header.TextButton text='Next' isLoading={isLoading} onPress={isLoading ? null : () => onSubmit()} />} />
-      <Text style={{ fontSize: 24, padding: 10, paddingLeft: 20, textAlign: 'center' }}>{phone}</Text>
-      <Text style={{ fontSize: 12, padding: 10, paddingLeft: 20, }}>We have sent you an SMS with a code to the number above.</Text>
-      <Text style={{ fontSize: 12, padding: 10, paddingLeft: 20, }}>To complete your phone number verification, please enter the activation code.</Text>
+      <Text style={styles.phoneNumber}>{phone}</Text>
+      <Text style={styles.instructions}>We have sent you an SMS with a code to the number above.</Text>
+      <Text style={styles.instructions}>To complete your phone number verification, please enter the activation code.</Text>
       <SignupVerifyForm phone={phone} onSubmit={({ code }) => signupVerifySubmit(code, phone)} />
     </View>
   </TouchableWithoutFeedback>
 
 const mapStateToProps = ({ user }) =>
   ({
-    errors: user.errors,
+    error: user.error,
     isLoading: user.isLoading,
     phone: user.phone
   })

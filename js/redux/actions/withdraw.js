@@ -19,7 +19,7 @@ export const fetchBalanceFailure = res =>
   ({
     type: 'FETCH_WITHDRAW_FAILURE',
     payload: {
-      error: res.body.error
+      error: res.body.error || res
     }
   })
 

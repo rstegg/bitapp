@@ -1,12 +1,16 @@
 import { combineEpics } from 'redux-observable'
 import { loginSuccess, loginFailure } from '../actions/login'
-import { signupSuccess, signupPhoneSuccess, signupVerifySuccess, signupFailure } from '../actions/signup'
+import {
+  signupSuccess,
+  signupPhoneSuccess,
+  signupVerifySuccess,
+  signupFailure,
+  signupPhoneFailure,
+  signupVerifyFailure, } from '../actions/signup'
 import { path } from 'ramda'
 import { Observable } from 'rxjs'
 
-import { openPost } from './helpers/req'
-
-const getError = path([ 'response', 'body', 'error' ])
+import { openPost, handleError } from './helpers/req'
 
 const api = {
   login: ({ phone, password }) =>
@@ -23,12 +27,10 @@ const api = {
 
 const loginSubmit = action$ =>
   action$.ofType('LOGIN_SUBMIT')
-    .mergeMap(action => {
-      return api.login(action.payload)
+    .mergeMap(action =>
+      api.login(action.payload)
         .map(loginSuccess)
-        .catch(res => Observable.of(
-          loginFailure(getError(res))
-        )) }
+        .catch(res => handleError(loginFailure, res))
     )
 
 const loginForgotSubmit = action$ =>
@@ -36,9 +38,7 @@ const loginForgotSubmit = action$ =>
     .mergeMap(action =>
       api.loginForgot(action.payload)
         .map(loginSuccess)
-        .catch(res => Observable.of(
-          loginFailure(getError(res))
-        ))
+        .catch(res => handleError(loginFailure, res))
     )
 
 const signupSubmit = action$ =>
@@ -46,9 +46,7 @@ const signupSubmit = action$ =>
     .mergeMap(action =>
       api.signup(action.payload)
         .map(signupSuccess)
-        .catch(res => Observable.of(
-          signupFailure(res)
-        ))
+        .catch(res => handleError(signupFailure, res))
     )
 
 const signupPhoneSubmit = action$ =>
@@ -56,9 +54,7 @@ const signupPhoneSubmit = action$ =>
     .mergeMap(action =>
       api.phone(action.payload)
         .map(signupPhoneSuccess)
-        .catch(res => Observable.of(
-          signupFailure(getError(res))
-        ))
+        .catch(res => handleError(signupPhoneFailure, res))
     )
 
 const signupVerifySubmit = action$ =>
@@ -66,9 +62,7 @@ const signupVerifySubmit = action$ =>
     .mergeMap(action =>
       api.verify(action.payload)
         .map(signupVerifySuccess)
-        .catch(res => Observable.of(
-          signupFailure(getError(res))
-        ))
+        .catch(res => handleError(signupVerifyFailure, res))
     )
 
 export default combineEpics(

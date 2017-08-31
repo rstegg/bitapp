@@ -84,7 +84,7 @@ export const checkoutFailure = res =>
   ({
     type: 'CHECKOUT_FAILURE',
     payload: {
-      error: res.body.error
+      error: res.body.error || res
     }
   })
 
@@ -110,7 +110,7 @@ export const currencyFailure = res =>
   ({
     type: 'CURRENCY_FAILURE',
     payload: {
-      error: res.body.error
+      error: res.body.error || res
     }
   })
 

@@ -19,13 +19,20 @@ const SignupSuccess = ({ user, isLoading, navigation, signupSubmit, onSubmit }) 
         center={<Header.Logo />}
         right={<Header.TextButton text='Sign Up' isLoading={isLoading} onPress={isLoading ? null : () => onSubmit()} />} />
       <SignupSuccessForm onSubmit={values => signupSubmit({ ...values, phone: user.phone })} />
-      <Text style={{ fontSize: 12, padding: 10, paddingLeft: 20, }}>Password must include at least six characters and one number</Text>
+      <View style={styles.instructionsContainer}>
+        <Text style={styles.instructions}>
+          Password must include at least six characters and one number
+        </Text>
+      </View>
+      <View style={styles.errorContainer}>
+        <ErrorMessage error={error} />
+      </View>
     </View>
   </TouchableWithoutFeedback>
 
 const mapStateToProps = ({ user }) =>
   ({
-    errors: user.errors,
+    error: user.error,
     isLoading: user.isLoading,
     user
   })

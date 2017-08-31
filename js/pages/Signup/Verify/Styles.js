@@ -19,5 +19,16 @@ export default StyleSheet.create({
   textField: {
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
+  phoneNumber: {
+    fontSize: 24,
+    padding: 10,
+    paddingLeft: 20,
+    textAlign: 'center'
+  },
+  instructions: {
+    fontSize: 12,
+    padding: 10,
+    paddingLeft: 20,
+  },
 })

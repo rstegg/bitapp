@@ -24,7 +24,7 @@ const ForgotPassword = ({ isLoading, navigation, onSubmit }) =>
 
 const mapStateToProps = ({ user }) =>
   ({
-    errors: user.errors,
+    error: user.error,
     isLoading: user.isLoading
   })
 

@@ -52,7 +52,7 @@ class CreateProduct extends Component {
 
 const mapStateToProps = ({ user, items, products }) =>
   ({
-    errors: products.newProduct.errors,
+    error: products.newProduct.error,
     isLoading: products.newProduct.isLoading,
     item: items.activeItem,
     user

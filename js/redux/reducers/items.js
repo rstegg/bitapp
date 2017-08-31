@@ -2,19 +2,19 @@ const initialState = {
   itemsList: {
     items: [],
     isLoading: false,
-    errors: {},
+    error: '',
   },
   newItem: {
     isLoading: false,
-    errors: {},
+    error: '',
   },
   activeItem: {
     isLoading: false,
-    errors: {},
+    error: '',
   },
   duplicateItem: {
     isLoading: false,
-    errors: {},
+    error: '',
   },
   keyword: ''
 }
@@ -29,20 +29,20 @@ export default (state = initialState, action) => {
   case 'FETCH_ITEMS_SUCCESS':
     return { ...state, itemsList: { isLoading: false, items: action.payload.items } }
   case 'FETCH_ITEMS_FAILURE':
-    return { ...state, itemsList: { isLoading: false, items: [], errors: action.payload.errors } }
+    return { ...state, itemsList: { isLoading: false, items: [], error: action.payload.error } }
 
   case 'SEARCH_ITEMS':
     return { ...state, keyword: action.payload.keyword }
   case 'SEARCH_ITEMS_SUCCESS':
     return { ...state, itemsList: { isLoading: false, items: action.payload.items } }
   case 'SEARCH_ITEMS_FAILURE':
-    return { ...state, itemsList: { ...state.itemsList, isLoading: false, errors: action.payload.errors } }
+    return { ...state, itemsList: { ...state.itemsList, isLoading: false, error: action.payload.error } }
 
   case 'CLEAR_SEARCH_ITEMS':
     return { ...state, keyword: '' }
 
   case 'CREATE_ITEM':
-    return { ...state, newItem: { ...state.item, isLoading: true, errors: { } } }
+    return { ...state, newItem: { ...state.item, isLoading: true, error: { } } }
   case 'CREATE_ITEM_SUCCESS':
     return { ...state, newItem: { ...state.item, isLoading: false }, activeItem: action.payload.item }
   case 'CREATE_ITEM_FAILURE':
@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
     return { ...state, duplicateItem: {  isLoading: true } }
 
   case 'DUPLICATE_ITEM_SUCCESS':
-    return { ...state, duplicateItem: {  isLoading: false, errors: { } } }
+    return { ...state, duplicateItem: {  isLoading: false, error: { } } }
   case 'DUPLICATE_ITEM_FAILURE':
     return { ...state, duplicateItem: {  isLoading: false } }
 
@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
     return { ...state, activeItem: action.payload.item }
 
   case 'EDIT_ITEM':
-    return { ...state, activeItem: { ...state.item, isLoading: true, errors: { } } }
+    return { ...state, activeItem: { ...state.item, isLoading: true, error: { } } }
   case 'EDIT_ITEM_SUCCESS':
   case 'EDIT_ITEM_FAILURE':
     return { ...state, activeItem: { ...action.payload.item, isLoading: false } }

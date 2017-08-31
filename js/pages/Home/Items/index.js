@@ -64,7 +64,7 @@ class Items extends Component {
 
 const mapStateToProps = ({ user, items }) =>
   ({
-    errors: items.errors,
+    error: items.error,
     isLoading: items.isLoading,
     user,
     keyword: items.keyword

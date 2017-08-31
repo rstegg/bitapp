@@ -24,11 +24,11 @@ export const fetchProductsSuccess = res =>
     }
   })
 
-export const fetchProductsFailure = errors =>
+export const fetchProductsFailure = error =>
   ({
     type: 'FETCH_PRODUCTS_FAILURE',
     payload: {
-      errors
+      error
     }
   })
 
@@ -49,11 +49,11 @@ export const searchProductsSuccess = res =>
     }
   })
 
-export const searchProductsFailure = errors =>
+export const searchProductsFailure = error =>
   ({
     type: 'SEARCH_PRODUCTS_FAILURE',
     payload: {
-      errors
+      error
     }
   })
 
@@ -75,11 +75,11 @@ export const createProductSuccess = res =>
     }
   })
 
-export const createProductFailure = errors =>
+export const createProductFailure = error =>
   ({
     type: 'CREATE_PRODUCT_FAILURE',
     payload: {
-      errors
+      error
     }
   })
 
@@ -111,10 +111,10 @@ export const editProductSuccess = product =>
     payload: { product }
   })
 
-export const editProductFailure = errors =>
+export const editProductFailure = error =>
   ({
     type: 'EDIT_PRODUCT_FAILURE',
-    payload: { errors }
+    payload: { error }
   })
 
 export const deleteProduct = (product, user) =>
@@ -129,10 +129,10 @@ export const deleteProductSuccess = product =>
     payload: { product }
   })
 
-export const deleteProductFailure = errors =>
+export const deleteProductFailure = error =>
   ({
     type: 'DELETE_PRODUCT_FAILURE',
-    payload: { errors }
+    payload: { error }
   })
 
 export const duplicateProduct = (product, item, user) =>
@@ -153,8 +153,8 @@ export const duplicateProductSuccess = res =>
     }
   })
 
-export const duplicateProductFailure = errors =>
+export const duplicateProductFailure = error =>
   ({
     type: 'DUPLICATE_PRODUCT_FAILURE',
-    payload: { errors }
+    payload: { error }
   })

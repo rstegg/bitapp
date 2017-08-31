@@ -1,7 +1,15 @@
 import su from 'superagent'
+import { path } from 'ramda'
 import { Observable } from 'rxjs'
 
 const API_HOST = 'http://localhost:3000/api/v1'
+
+export const getError = path([ 'body', 'error' ])
+
+export const handleError = (fn, res) =>
+  Observable.of(
+    fn(getError(res))
+  )
 
 export const openPost = (endpoint, body) =>
   Observable.from(

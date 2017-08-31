@@ -18,6 +18,11 @@ export const editProfileFailure = res =>
   ({
     type: 'EDIT_PROFILE_FAILURE',
     payload: {
-      error: res.body.error
+      error: res.body.error || res
     }
+  })
+
+export const refreshUser = () =>
+  ({
+    type: 'REFRESH_USER'
   })

@@ -49,7 +49,7 @@ class EditProduct extends Component {
 
 const mapStateToProps = ({ user, products }) =>
   ({
-    errors: products.activeProduct.errors,
+    error: products.activeProduct.error,
     isLoading: products.activeProduct.isLoading,
     product: products.activeProduct,
     user

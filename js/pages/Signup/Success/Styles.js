@@ -13,6 +13,14 @@ export default StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 2,
   },
+  instructionsContainer: {
+    
+  },
+  instructions: {
+    fontSize: 12,
+    padding: 10,
+    paddingLeft: 20,
+  },
   textField: {
     alignItems: 'center',
     justifyContent: 'center',

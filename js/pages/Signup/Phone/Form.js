@@ -3,10 +3,11 @@ import { View } from 'react-native'
 import { Field, reduxForm } from 'redux-form'
 
 import TextField from 'components/TextField'
+import ErrorMessage from 'components/ErrorMessage'
 
 import styles from './Styles'
 
-const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, password }) =>
+const SignupField = ({ name, autoFocus, autoCapitalize, keyboardType, label, password, error }) =>
   <View style={styles.inputGroup}>
     <Field
       component={TextField}

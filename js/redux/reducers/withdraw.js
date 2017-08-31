@@ -8,7 +8,7 @@ const initialState = {
     BTC: {},
     LTC: {},
   },
-  errors: {}
+  error: ''
 }
 
 export default (state = initialState, action) => {

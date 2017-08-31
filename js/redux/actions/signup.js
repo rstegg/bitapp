@@ -52,3 +52,19 @@ export const signupFailure = error =>
       error
     }
   })
+
+export const signupVerifyFailure = error =>
+  ({
+    type: 'SIGNUP_VERIFY_FAILURE',
+    payload: {
+      error
+    }
+  })
+
+export const signupPhoneFailure = error =>
+  ({
+    type: 'SIGNUP_PHONE_FAILURE',
+    payload: {
+      error
+    }
+  })

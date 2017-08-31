@@ -19,11 +19,11 @@ export const fetchItemsSuccess = res =>
     }
   })
 
-export const fetchItemsFailure = errors =>
+export const fetchItemsFailure = error =>
   ({
     type: 'FETCH_ITEMS_FAILURE',
     payload: {
-      errors
+      error
     }
   })
 
@@ -44,11 +44,11 @@ export const searchItemsSuccess = res =>
     }
   })
 
-export const searchItemsFailure = errors =>
+export const searchItemsFailure = error =>
   ({
     type: 'SEARCH_ITEMS_FAILURE',
     payload: {
-      errors
+      error
     }
   })
 
@@ -74,11 +74,11 @@ export const createItemSuccess = res =>
     }
   })
 
-export const createItemFailure = errors =>
+export const createItemFailure = error =>
   ({
     type: 'CREATE_ITEM_FAILURE',
     payload: {
-      errors
+      error
     }
   })
 
@@ -113,10 +113,10 @@ export const editItemSuccess = res =>
     payload: { item: res.body.item }
   })
 
-export const editItemFailure = errors =>
+export const editItemFailure = error =>
   ({
     type: 'EDIT_ITEM_FAILURE',
-    payload: { errors }
+    payload: { error }
   })
 
 export const deleteItem = (item, user) =>
@@ -131,10 +131,10 @@ export const deleteItemSuccess = res =>
     payload: { item: res.body.item }
   })
 
-export const deleteItemFailure = errors =>
+export const deleteItemFailure = error =>
   ({
     type: 'DELETE_ITEM_FAILURE',
-    payload: { errors }
+    payload: { error }
   })
 
 export const duplicateItem = (item, user) =>
@@ -154,10 +154,10 @@ export const duplicateItemSuccess = res =>
     }
   })
 
-export const duplicateItemFailure = errors =>
+export const duplicateItemFailure = error =>
   ({
     type: 'DUPLICATE_ITEM_FAILURE',
-    payload: { errors }
+    payload: { error }
   })
 
 export const uploadNewItemImage = (image, user) =>
@@ -175,7 +175,7 @@ export const uploadNewItemImageSuccess = res =>
 export const uploadNewItemImageFailure = res =>
   ({
     type: 'UPLOAD_NEW_ITEM_IMAGE_FAILURE',
-    payload: { errors: res.body.errors }
+    payload: { error: res.body.error || res }
   })
 
 export const removeNewItemImage = (image, user) =>
@@ -209,7 +209,7 @@ export const uploadActiveItemImageSuccess = res =>
 export const uploadActiveItemImageFailure = res =>
   ({
     type: 'UPLOAD_ACTIVE_ITEM_IMAGE_FAILURE',
-    payload: { errors: res.body.errors }
+    payload: { error: res.body.error || res }
   })
 
 export const removeActiveItemImage = (image, user) =>

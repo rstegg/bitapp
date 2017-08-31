@@ -5,6 +5,7 @@ import { submit } from 'redux-form'
 import { NavigationActions } from 'react-navigation'
 
 import { loginSubmit } from 'actions/login'
+import { refreshUser } from 'actions/user'
 
 import Header from 'components/Header'
 
@@ -32,12 +33,12 @@ class Login extends Component {
     }
   }
   render() {
-    const { isLoading, navigation, loginSubmit, onSubmit } = this.props
+    const { isLoading, navigation, loginSubmit, onSubmit, refreshUser } = this.props
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <Header
-            left={<Header.TextButton text='Cancel' onPress={isLoading ? null : () => navigation.goBack()}/>}
+            left={<Header.TextButton text='Cancel' onPress={isLoading ? null : () => refreshUser()}/>}
             center={<Header.Logo />}
             right={<Header.TextButton text='Sign In' isLoading={isLoading} onPress={isLoading ? null : () => onSubmit()} />} />
           <LoginForm navigation={navigation} onSubmit={loginSubmit} />
@@ -49,7 +50,7 @@ class Login extends Component {
 
 const mapStateToProps = ({ user }) =>
   ({
-    errors: user.errors,
+    error: user.error,
     isLoading: user.isLoading,
     user
   })
@@ -58,6 +59,7 @@ const mapDispatchToProps = dispatch =>
   ({
     loginSubmit: user => dispatch(loginSubmit(user)),
     onSubmit: () => dispatch(submit('login')),
+    refreshUser: () => dispatch(refreshUser()),
   })
 
 export default connect(

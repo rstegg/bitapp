@@ -94,7 +94,7 @@ class CreateItem extends Component {
 
 const mapStateToProps = ({ user, items }) =>
   ({
-    errors: items.activeItem.errors,
+    error: items.activeItem.error,
     isLoading: items.activeItem.isLoading,
     isImageLoading: items.activeItem.isImageLoading,
     item: items.activeItem,

@@ -16,11 +16,11 @@ export const loginSuccess = res =>
     }
   })
 
-export const loginFailure = res =>
+export const loginFailure = error =>
   ({
     type: 'LOGIN_FAILURE',
     payload: {
-      error: res.body.error
+      error
     }
   })
 
@@ -40,11 +40,11 @@ export const loginForgotSuccess = res =>
     }
   })
 
-export const loginForgotFailure = res =>
+export const loginForgotFailure = error =>
   ({
     type: 'LOGIN_FORGOT_FAILURE',
     payload: {
-      error: res.body.error
+      error
     }
   })
 

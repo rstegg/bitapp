@@ -116,6 +116,7 @@ export default (state, action) => {
       state
     )
     break
+  case 'REFRESH_USER':
   case 'LOGOUT':
     newState = PrimaryNav.router.getStateForAction(
       NavigationActions.reset({

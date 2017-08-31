@@ -1,16 +1,16 @@
 export default values => {
-  const errors = {}
+  const error = {}
   if (values.account !== values.confirmAccount) {
-    errors.confirmAccount = 'Account numbers do not match'
+    error.confirmAccount = 'Account numbers do not match'
   }
   if (!values.routing) {
-    errors.routing = 'Required'
+    error.routing = 'Required'
   }
   if (!values.account) {
-    errors.account = 'Required'
+    error.account = 'Required'
   }
   if (!values.confirmAccount) {
-    errors.confirmAccount = 'Required'
+    error.confirmAccount = 'Required'
   }
-  return errors
+  return error
 }

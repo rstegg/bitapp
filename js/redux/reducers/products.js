@@ -2,19 +2,19 @@ const initialState = {
   productsList: {
     products: [],
     isLoading: false,
-    errors: {},
+    error: '',
   },
   newProduct: {
     isLoading: false,
-    errors: {},
+    error: '',
   },
   activeProduct: {
     isLoading: false,
-    errors: {},
+    error: '',
   },
   duplicateProduct: {
     isLoading: false,
-    errors: {},
+    error: '',
   }
 }
 

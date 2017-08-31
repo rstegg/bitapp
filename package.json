@@ -7,6 +7,8 @@
     "refresh": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache clean && npm install && npm start -- --reset-cache",
     "lint": "eslint js",
     "lint:fix": "eslint js --fix",
+    "start:iphone": "react-native run-ios --device \"Ryan Stegman’s iPhone\"",
+    "build:iphone": "react-native bundle --platform ios --dev true --entry-file index.ios.js --bundle-output iOS/main.jsbundle",
     "test": "jest"
   },
   "dependencies": {
