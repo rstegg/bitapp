@@ -19,8 +19,12 @@ module.exports = {
     su.get(`${baseUrl}/${account}/balance/BTC`)
       .set('Accept', 'application/json')
       .then(prop('body')),
-  getBalanceLTC: account => 
+  getBalanceLTC: account =>
     su.get(`${baseUrl}/${account}/balance/LTC`)
+      .set('Accept', 'application/json')
+      .then(prop('body')),
+  withdraw: (account, amount) =>
+    su.get(`${baseUrl}/${account}/withdraw/${amount}`)
       .set('Accept', 'application/json')
       .then(prop('body')),
 }

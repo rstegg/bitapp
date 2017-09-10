@@ -15,21 +15,17 @@ module.exports = () => {
 
   const localStrategy = new LocalStrategy({
     usernameField: 'phone', passwordField: 'password'
-  }, function(phone, password, done) {
+  }, (phone, password, done) =>
     user.findOne({ where: { phone: phone } })
-      .then(function (user) {
-        if (!user) { return done(null, false, { error: 'Incorrect username' }) }
-
-        user.validPassword(password)
-          .then((valid) => {
-            if (!valid)  { return done(null, false, { error: 'Incorrect password' }) }
-            return done(null, user)
-          })
-      })
-      .catch(function(err) {
-        return done(err)
-      })
-  }
+      .then(user =>
+        !user ? done(null, false, { error: 'Incorrect username' })
+        : user.validPassword(password)
+            .then(valid =>
+              !valid ? done(null, false, { error: 'Incorrect password' })
+              : done(null, user)
+            )
+      )
+      .catch(err => done(err))
   )
 
   const jwtOptions = {}

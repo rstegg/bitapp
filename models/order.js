@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function(sequelize, DataTypes) {
-  var Order = sequelize.define('order', {
+  const Order = sequelize.define('order', {
     totalUSD: DataTypes.DECIMAL,
     products: DataTypes.ARRAY(DataTypes.JSONB)
   })

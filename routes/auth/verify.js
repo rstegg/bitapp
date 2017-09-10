@@ -19,12 +19,12 @@ const validate = req =>
     : user
   )
 
-const createAccount = validatedUser =>
+const createAccount = ({ id }) =>
   bitapi.createAccount()
     .then(accountId =>
       user.update(
         { accountId, verified: true },
-        { where: { id: validatedUser.id, verified: false }, returning: true, raw: true }
+        { where: { id, verified: false }, returning: true, raw: true }
       )
       .then(([ n, [ user ] ]) => !user ? Promise.reject('bad user') : user)
     )

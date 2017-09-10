@@ -1,7 +1,10 @@
-const Models = require('../../models')
-const { product, item, order } = Models
-const { sum, compose, splitEvery, unnest, map, product: prod, pluck, zip, zipObj } = require('ramda')
 const P = require('bluebird')
+const { sum, merge, compose, splitEvery, unnest, map, product: prod, pluck, zip, zipObj } = require('ramda')
+
+const Models = require('../../models')
+const bitapi = require('../../services/bitapi')
+
+const { product, item, transaction, order } = Models
 
 module.exports = (req, res) =>
   product.findAll({
@@ -28,5 +31,18 @@ module.exports = (req, res) =>
        userId: req.user.id,
      }, { raw: true })
   })
-  .then(order => res.json({ order }))
+  .then(validOrder => {
+    const orderObj = {
+      status: 'pending',
+      userId: req.user.id,
+      orderId: validOrder.id,
+      currency: 'BTC',
+      amountUSD: validOrder.totalUSD,
+    }
+    const requestObj = bitapi.startPayment(req.user.accountId, 'BTC', validOrder.totalUSD)
+    return Promise.all([ requestObj, orderObj ])
+  })
+  .then(([ newRequest, orderObj ]) => { console.log(newRequest); return transaction.create(merge(orderObj, newRequest)) })
+  .then(transaction => res.json({ transaction }))
+  .catch(errors => { console.log(errors); res.status(400).json({ errors }) })
   .catch(errors => { console.log(errors); res.status(400).json({ errors }) })

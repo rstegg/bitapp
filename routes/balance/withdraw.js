@@ -1,14 +1,22 @@
 const P = require('bluebird')
 const Models = require('../../models')
 const bitapi = require('../../services/bitapi')
-const { transaction, order } = Models
+const { transaction, order, withdrawal } = Models
 /**
  * products {orderId, currency}
  */
 
-module.exports = (req, res) => {
-  const getBalanceBTC = bitapi.getBalanceBTC(req.user.accountId)
-  const getBalanceLTC = bitapi.getBalanceLTC(req.user.accountId)
-  return P.all([ getBalanceBTC, getBalanceLTC ])
-    .then(console.log)
-}
+module.exports = (req, res) =>
+  bitapi.withdraw(req.user.accountId, req.body.amount)
+    .then(({ total, message, status }) =>
+      status === 'error' ? Promise.reject('invalid withdraw request')
+      : { total, message }
+    )
+    .then(({ total, message }) => withdrawal.create({ total, bank: req.body.bank, userId: req.user.id }))
+    .then(withdrawal => {
+
+      res.json({ withdrawal })
+      console.log(withdrawal);
+      //TODO: email withdrawal
+    })
+  .catch(error => res.status(400).json({ error }))
