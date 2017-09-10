@@ -6,58 +6,47 @@ const runner = require('./electrum')
 
 const { Transaction, HDPrivateKey, Networks } = bitcore
 
-const litecoin = require('./litecoin-net')
 const bitcoin = Networks.livenet
 
-const commands = {
-  BTC: 'electrum',
-  LTC: 'electrum-ltc',
-}
 
-const networks = {
-  BTC: bitcoin,
-  LTC: litecoin,
-}
+  const electrum = runner('electrum')
 
-module.exports = function (currency) {
-  const electrum = runner(commands[currency])
-  const api = {}
-
-  api.derivePrivKey = R.curry((xpriv, derivation) =>
+  const derivePrivKey = R.curry((xpriv, derivation) =>
     (new HDPrivateKey(xpriv)).derive(`m/0/${derivation}'`))
 
-  api.deriveAddress = R.curry((xpriv, derivation) =>
-    api.derivePrivKey(xpriv, derivation).privateKey.toAddress(networks[currency])
+  const deriveAddress = R.curry((xpriv, derivation) =>
+    derivePrivKey(xpriv, derivation).privateKey.toAddress(bitcoin)
   )
 
-  api.derivePrivKeys = (xpriv, derivations) =>
-    R.map(api.derivePrivKey(xpriv), derivations)
+  const derivePrivKeys = (xpriv, derivations) =>
+    R.map(derivePrivKey(xpriv), derivations)
 
-  api.payto = (payment) => {
-    const sources = payment.addresses
-    const {address, amount, change} = payment
-    const utxos = R.map(electrum.addressUTXO, sources)
-    return P.all(utxos)
-      .then(R.map(R.constructor(Transaction.UnspentOutput)))
-      .then((utxos)=>
+  const payto = ({ address, addresses, amount, change }) =>
+    P.all(R.map(electrum.addressUTXO, addresses))
+      .then(R.map(R.construct(Transaction.UnspentOutput)))
+      .then(utxos =>
         new Transaction()
           .from(utxos)
           .to(address, Math.floor(amount*1e8))
           .change(change)
-    )
-  }
+      )
 
-  api.sign = R.curry(
+  const sign = R.curry(
     (privateKeys, transaction) =>
       transaction.sign(privateKeys))
 
-  api.spend = (payment) =>{
-    return api.payto(payment)
-    .then(api.sign(payment.privateKeys))
-    .then(R.tap(console.log))
-  }
+  const spend = payment =>
+    payto(payment)
+      .then(sign(payment.privateKeys))
+      .then(R.tap(console.log))
 
-  // broadcast
+  const api = R.merge({
+    derivePrivKey,
+    deriveAddress,
+    derivePrivKeys,
+    payto,
+    sign,
+    spend,
+  }, electrum)
 
-  return R.merge(api, electrum)
-}
+module.exports = api

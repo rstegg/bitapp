@@ -4,35 +4,55 @@ const P = require('bluebird')
 const coins = require('../../coins')
 const validators = require('./validators')
 const convert = require('../../coins/convert')
+const su = require('superagent')
 
-module.exports ={
+const toUSD = confirmed =>
+  convert.convertToUSD(confirmed)
+
+
+// TODO: AVOID CALLING THIS ON EVERY REQUEST,
+// FIXME: MAKE A DIFFERENCE MODULE WITH 2 PRICE STREAMS THAT UPDATE
+// THEMSELVES EVERY <X> MINUTES
+
+const getPrice = () =>
+  su.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZUSD')
+  .then(
+    R.pipe(
+      R.prop('text'),
+      JSON.parse,
+      R.path(['result', 'XXBTZUSD', 'p', 0]),
+      parseFloat
+    )
+  )
+
+module.exports = {
   spec: R.pick(['accountId', 'currency'], validators),
   fn: ({accountId, currency}) => {
 
     const check = R.compose(
-      coins[currency].checkBalance,
+      coins.checkBalance,
       R.prop('address')
     )
 
     const addresses = models.Address
-      .findAll({ where:{ accountId, currency }, raw: true })
+      .findAll({ where:{ accountId }, raw: true })
 
-    return P.map(addresses, check)
-      .then((balances)=>{
-        const confirmed = R.map(  R.compose(parseFloat, R.prop('confirmed')), balances)
-        const unconfirmed = R.map(R.compose(parseFloat, R.prop('unconfirmed')), balances)
-        const confirmedUSD = confirmed.map(confirmed => convert.convertToUSD(currency, confirmed))
-        const unconfirmedUSD = confirmed.map(confirmed => convert.convertToUSD(currency, confirmed))
+    const mapBalances = P.map(addresses, check)
+    const btcPrice = getPrice()
+
+    return P.all([mapBalances, btcPrice])
+      .then(([balances, btcPrice]) => {
+        const confirmed = R.sum(R.map(R.compose(parseFloat, R.prop('confirmed')), balances))
+        const unconfirmed = R.sum(R.map(R.compose(parseFloat, R.prop('unconfirmed')), balances))
+        const confirmedUSD = R.multiply(confirmed, btcPrice)
+        const unconfirmedUSD = R.multiply(unconfirmed, btcPrice)
+
         return {
-          confirmed: R.sum(confirmed),
-          unconfirmed: R.sum(unconfirmed),
-          confirmedUSD: R.sum(confirmedUSD),
-          unconfirmedUSD: R.sum(unconfirmedUSD),
-<<<<<<< HEAD
+          confirmed,
+          unconfirmed,
+          confirmedUSD,
+          unconfirmedUSD,
           detail: balances
-=======
-          detail:balances
->>>>>>> 74f263b23f9084df13bb3398adb67fdc7814eedd
         }
       })
   }

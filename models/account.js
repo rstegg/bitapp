@@ -1,18 +1,6 @@
 'use strict';
 const R = require('ramda')
-const coins = require('../coins')
-
-const lastDerivation = (currency, accountId) => {
-  const {Address} = require('./index')
-  return Address.findAll({
-    limit: 1,
-    where: { currency, accountId },
-    order: [ [ 'createdAt', 'DESC' ]],
-    raw: true,
-  })
-  .then(R.head)
-
-}
+const btc = require('../coins')
 
 const nextDerivation =
   R.pipe(
@@ -21,8 +9,9 @@ const nextDerivation =
   )
 
 const derive = R.curry(
-  (xpriv, currency,  derivation) =>
-    coins[currency].deriveAddress(xpriv, derivation))
+  (xpriv, derivation) =>
+    btc.deriveAddress(xpriv, derivation)
+  )
 
 const selector = {
   BTC: "btcPrivKey",
@@ -30,33 +19,44 @@ const selector = {
 }
 
 module.exports = function(sequelize, DataTypes) {
-  var Account = sequelize.define('Account', {
-    ltcPrivKey: DataTypes.STRING,
-    btcPrivKey: DataTypes.STRING
-    }, {
-    classMethods: {
-      associate: function(models) {
-        Account.hasMany(models.Address)
-    }
-  }});
+  const Account = sequelize.define('Account', {
+    privKey: DataTypes.STRING
+  })
+
+  Account.associate = ({ Address }) => {
+    Account.hasMany(Address)
+  }
+
   /**
   * Gets a new address that has not been used before
   * @return {String} A new address to request a payment
   */
-  Account.prototype.nextAddress =
-    function (currency) {
-      const {Address} = require('./index')
-      const xpriv = this.getXpriv(currency)
-      const accountId = this.id
-      return lastDerivation(currency, accountId)
-      .then(nextDerivation)
-      .then((derivation) => {
-        const address = derive(xpriv, currency, derivation).toString()
-        return Address.create({address, currency, derivation, accountId})
+
+  Account.prototype.nextAddress = function() {
+    const { Address } = require('./')
+
+    const lastDerivation = accountId =>
+      Address.findAll({
+        limit: 1,
+        where: { accountId },
+        order: [ [ 'createdAt', 'DESC' ]],
+        raw: true,
       })
-    }
-  Account.prototype.getXpriv = function (currency) {
-    return this[selector[currency]]
-  };
-  return Account;
-};
+      .then(R.head)
+
+    const xpriv = this.getXpriv()
+    const accountId = this.id
+    return lastDerivation(accountId)
+    .then(nextDerivation)
+    .then(derivation => {
+      const address = derive(xpriv, derivation).toString()
+      return Address.create({ address, derivation, accountId })
+    })
+  }
+
+  Account.prototype.getXpriv = function() {
+    return this.privKey
+  }
+
+  return Account
+}

@@ -11,6 +11,7 @@ const cryptoURI =
     `${protocols[currency]}:${address}?amount=${amount}`
 
 const models = require('../../models')
+
 const R = require('ramda')
 const P = require('bluebird')
 const convert = require('../../coins/convert');
@@ -22,19 +23,22 @@ module.exports = {
 
   fn: ({accountId, currency, amountUSD}) => {
 
-    const address =  models.Account
-      .findOne({where: {id: accountId}})
-      .then((acc) => acc.nextAddress(currency))
+    const address =
+      models.Account
+        .findById(accountId)
+        .then(acc => acc.nextAddress())
 
-    const amount = convert(currency, amountUSD)
-    return P.join(amount, address,
-      (amount, address) => {
-        return  {
-          url: cryptoURI(currency, address.address, amount),
-          currency,
-          amount,
-          amountUSD
-        }
-    })
+    const amount = convert(amountUSD)
+
+    const createResponse = (amount, address) =>
+      ({
+        url: cryptoURI(currency, address.address, amount),
+        currency,
+        amount,
+        amountUSD
+      })
+
+    return P.join(amount, address, createResponse)
+    .catch(console.log)
   }
 }

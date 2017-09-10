@@ -12,7 +12,7 @@ module.exports = {
       R.prop('address')
     )
     const addresses = models.Address
-    .findAll({where:{accountId, currency }, raw: true })
+      .findAll({ where: { accountId, currency }, raw: true })
     return P.map(addresses, R.prop('address'))
   }
 }

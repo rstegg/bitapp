@@ -1,22 +1,20 @@
 const R = require('ramda')
 const su = require('superagent')
-const priceApi= (currency) => `https://api.kraken.com/0/public/Ticker?pair=${currency}`
 
 // TODO: AVOID CALLING THIS ON EVERY REQUEST,
 // FIXME: MAKE A DIFFERENCE MODULE WITH 2 PRICE STREAMS THAT UPDATE
 // THEMSELVES EVERY <X> MINUTES
 
-const getPrice  = (currency) =>
-  su.get(priceApi(currency))
-  .then(R.pipe(
-    R.prop('text'),
-    JSON.parse,
-    R.path(['result', currency, 'p', 0]),
-    parseFloat))
-
-const LTC = "XLTCZUSD"
-const BTC = "XXBTZUSD"
-const pairs = {LTC, BTC}
+const getPrice = () =>
+  su.get('https://api.kraken.com/0/public/Ticker?pair=XXBTZUSD')
+  .then(
+    R.pipe(
+      R.prop('text'),
+      JSON.parse,
+      R.path(['result', 'XXBTZUSD', 'p', 0]),
+      parseFloat
+    )
+  )
 
 /**
 * Function that converts the amount in USD to an ammount in either LTC or BTC
@@ -25,16 +23,20 @@ const pairs = {LTC, BTC}
 * @return {Promise Number} the corresponding amount in CURRENCY
 */
 
-const convert = (currency, amountUSD) =>
-  getPrice(pairs[currency])
-    .then(R.pipe(
-      R.divide(amountUSD),
-      R.multiply(10e8),
-      Math.floor,
-      R.divide(R.__, 10e8)))
+const convertFromUSD = amountUSD =>
+  R.pipe(
+    R.divide(amountUSD),
+    R.multiply(10e8),
+    Math.floor,
+    R.divide(R.__, 10e8)
+  )
 
-convert.convertToUSD = (currency, amount) =>
-  getPrice(pairs[currency])
+const convert = amountUSD =>
+  getPrice()
+    .then(convertFromUSD(amountUSD))
+
+convert.convertToUSD = amount =>
+  getPrice()
     .then(R.multiply(amount))
 
 module.exports = convert

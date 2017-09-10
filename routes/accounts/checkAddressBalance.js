@@ -10,6 +10,6 @@ module.exports = {
     .findOne({where:{accountId, currency, address}})
     .then((address)=> {
       if(R.isNil(address)) throw new Error("Address is not part of this account!")
-      return coins[currency].checkBalance(address.address)
+      return coins.checkBalance(address.address)
     })
 }}

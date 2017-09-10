@@ -1,7 +1,5 @@
-'use strict';
-module.exports = function(sequelize, DataTypes) {
-  var Address = sequelize.define('Address', {
-    currency: DataTypes.STRING,
+module.exports = (sequelize, DataTypes) => {
+  const Address = sequelize.define('Address', {
     address: DataTypes.STRING,
     derivation: DataTypes.INTEGER,
     accountId: {
@@ -12,12 +10,11 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-  }, {
-    classMethods: {
-      associate: function(models) {
-        Address.belongsTo(models.Account)
-      }
-    }
-  });
-  return Address;
-};
+  })
+
+  Address.associate = ({ Account }) => {
+    Address.belongsTo(Account)
+  }
+
+  return Address
+}

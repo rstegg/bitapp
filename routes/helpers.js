@@ -32,7 +32,7 @@ const validateSpec =
 const makeArguments =
   (spec, params) => {
     if(!sameKeys(spec, params)){
-      throw new Error("Missing parameters for this endpoint!!!")
+      throw new Error("Missing parameters")
     }
 
     if(!validateSpec(spec, params)){

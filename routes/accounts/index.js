@@ -6,6 +6,7 @@ const checkAddressBalance = require('./checkAddressBalance')
 const checkWalletBalance = require('./checkWalletBalance')
 const getAccountAddresses = require('./getAccountAddresses')
 const spend = require('./spend')
+const withdraw = require('./withdraw')
 const router = module.exports = require('express').Router()
 
 router
@@ -32,4 +33,8 @@ router
 .get('/:accountId/send/:currency/:address/:amountUSD',
   validateArguments(spend.spec),
   jsonHandler(spend.fn)
+)
+.get('/:accountId/withdraw/:amountUSD',
+  validateArguments(spend.spec),
+  jsonHandler(withdraw.fn)
 )
