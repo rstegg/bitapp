@@ -39,7 +39,7 @@ const linkBankAccount = action$ =>
     )
 
 const createWithdraw = action$ =>
-  action$.ofType('CREATE_WITHDRAW')
+  action$.ofType('WITHDRAW_REQUEST')
     .mergeMap(action =>
       api.withdraw(action.payload)
         .map(createWithdrawSuccess)

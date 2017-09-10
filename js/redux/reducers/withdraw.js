@@ -1,18 +1,25 @@
 const initialState = {
   banks: {
     isLoading: false,
-    list: []
+    list: [],
+    active: {}
   },
   balance: {
     isLoading: false,
-    BTC: {},
-    LTC: {},
+    BTC: {}
   },
   error: ''
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case 'SET_ACTIVE_BANK':
+    return { ...state,
+      banks: {
+        ...state.banks,
+        active: action.payload.bank
+      }
+    }
   case 'REMOVE_BANK_ACCOUNT':
     return { ...state,
       banks: {
@@ -51,7 +58,7 @@ export default (state = initialState, action) => {
   case 'FETCH_BALANCE':
     return { ...state, balance: { ...state.balance, isLoading: true } }
   case 'FETCH_BALANCE_SUCCESS':
-    return { ...state, balance: { BTC: action.payload.BTC, LTC: action.payload.LTC, isLoading: false } }
+    return { ...state, balance: { BTC: action.payload.BTC, isLoading: false } }
   case 'FETCH_BALANCE_FAILURE':
     return { ...state, balance: { ...state.balance, isLoading: false } }
   case 'LOGOUT':

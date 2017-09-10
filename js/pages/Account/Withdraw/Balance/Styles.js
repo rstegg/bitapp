@@ -12,7 +12,8 @@ export default StyleSheet.create({
   balanceLoader: {
     position: 'relative',
     alignSelf: 'center',
-    top: 50,
+    top: -12.5,
+    right: -12.5,
   },
   balanceLabel: {
     fontSize: 18,
@@ -30,21 +31,6 @@ export default StyleSheet.create({
     fontSize: 16,
   },
   balanceBTCText: {
-    fontSize: 16,
-    fontWeight: 'bold'
-  },
-  balanceLTC: {
-    flex: 1,
-    marginVertical: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    width: Metrics.screenWidth / 2,
-  },
-  balanceLTCLabel: {
-    fontSize: 16,
-  },
-  balanceLTCText: {
     fontSize: 16,
     fontWeight: 'bold'
   },

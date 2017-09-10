@@ -6,7 +6,7 @@ import {
   Alert
 } from 'react-native'
 import { connect } from 'react-redux'
-import { removeBankAccount } from 'actions/withdraw'
+import { removeBankAccount, setActiveBank } from 'actions/withdraw'
 
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
@@ -16,14 +16,14 @@ import BankAccountIntro from './Intro'
 import BalanceInfo from './Balance'
 import styles from './Styles'
 
-const Withdraw = ({ isLoading, withdrawalInfo, handleRemove, navigation, user }) =>
+const Withdraw = ({ isLoading, banks, handleRemove, setActiveBank, navigation, user }) =>
   <View style={styles.container}>
     <Header
       left={<Header.BackButton text='Back' to={() => navigation.goBack()} />}
       center={<Header.Text>Withdraw</Header.Text>}
     />
     <BalanceInfo />
-    { withdrawalInfo.getRowCount() ? <BankAccountList isLoading={isLoading} withdrawalInfo={withdrawalInfo} handleRemove={bank => handleRemove(bank, user)} />
+    { banks.getRowCount() ? <BankAccountList isLoading={isLoading} banks={banks} handleRemove={bank => handleRemove(bank, user)} setActiveBank={bank => setActiveBank(bank)} />
       : <BankAccountIntro /> }
     <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('AccountLinkBankScreen')}>
       <Text style={styles.actionButtonText}>Add Bank Account</Text>
@@ -36,7 +36,7 @@ const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1
 const mapStateToProps = ({ user, withdraw }) =>
   ({
     isLoading: withdraw.banks.isLoading,
-    withdrawalInfo: dataSource.cloneWithRows(withdraw.banks.list),
+    banks: dataSource.cloneWithRows(user.banks),
     user
   })
 
@@ -52,7 +52,8 @@ const confirmRemove = ({ type, onConfirm }) =>
 
 const mapDispatchToProps = dispatch =>
   ({
-    handleRemove: (bank, user) => confirmRemove({ type: 'bank', onConfirm: () => dispatch(removeBankAccount(bank, user)) })
+    handleRemove: (bank, user) => confirmRemove({ type: 'bank', onConfirm: () => dispatch(removeBankAccount(bank, user)) }),
+    setActiveBank: bank => dispatch(setActiveBank(bank)),
   })
 
 export default connect(

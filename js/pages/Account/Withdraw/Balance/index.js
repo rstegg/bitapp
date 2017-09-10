@@ -14,24 +14,17 @@ class Balance extends Component {
     fetchBalance(user)
   }
   render() {
-    const { isLoading, balanceBTC, balanceLTC, } = this.props
-    if (isLoading) {
-      return <Loader style={styles.balanceLoader} />
-    }
+    const { isLoading, balanceBTC } = this.props
     return (
       <View style={styles.container}>
         <Text style={styles.balanceLabel}>Balance</Text>
         <View style={styles.balanceBTC}>
           <Text style={styles.balanceBTCLabel}>BTC:</Text>
-          <Text style={styles.balanceBTCText}>{balanceBTC.confirmed}</Text>
-        </View>
-        <View style={styles.balanceLTC}>
-          <Text style={styles.balanceLTCLabel}>LTC:</Text>
-          <Text style={styles.balanceLTCText}>{balanceLTC.confirmed}</Text>
+          {isLoading ? <Loader style={styles.balanceLoader} /> : <Text style={styles.balanceBTCText}>{balanceBTC.confirmed}</Text>}
         </View>
         <View style={styles.totalUSD}>
           <Text style={styles.totalUSDLabel}>Total (USD):</Text>
-          <Text style={styles.totalUSDText}>${balanceBTC.confirmedUSD + balanceLTC.confirmedUSD}</Text>
+          {isLoading ? <Loader style={styles.balanceLoader} /> : <Text style={styles.totalUSDText}>${balanceBTC.confirmedUSD}</Text>}
         </View>
       </View>
     )
@@ -42,7 +35,6 @@ const mapStateToProps = ({ user, withdraw }) =>
   ({
     isLoading: withdraw.balance.isLoading,
     balanceBTC: withdraw.balance.BTC,
-    balanceLTC: withdraw.balance.LTC,
     user,
   })
 

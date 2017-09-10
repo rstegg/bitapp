@@ -62,44 +62,20 @@ export default (state = initialState, action) => {
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
-        isLoading: false,
-        active: {
-          orderId: action.payload.order.id
-        }
-      },
-    })
-  case 'CHECKOUT_FAILURE':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        isLoading: false
-      }
-    })
-  case 'CURRENCY_SUBMIT':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
-        active: {
-          ...state.cart.active,
-          isLoading: true
-        }
-      }
-    })
-  case 'CURRENCY_SUCCESS':
-    return Object.assign({}, state, {
-      cart: {
-        ...state.cart,
         active: {
           ...action.payload.transaction,
           isLoading: false,
         }
       }
     })
-  case 'CURRENCY_FAILURE':
+  case 'CHECKOUT_FAILURE':
     return Object.assign({}, state, {
       cart: {
         ...state.cart,
-        isLoading: false
+        active: {
+          ...state.cart.active,
+          isLoading: false
+        }
       }
     })
   case 'REMOVE_PRODUCT_FROM_CART':

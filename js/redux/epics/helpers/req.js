@@ -2,7 +2,7 @@ import su from 'superagent'
 import { path } from 'ramda'
 import { Observable } from 'rxjs'
 
-const API_HOST = 'http://localhost:3000/api/v1'
+const API_HOST = 'http://192.168.1.171:3000/api/v1'
 
 export const getError = path([ 'body', 'error' ])
 

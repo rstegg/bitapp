@@ -11,6 +11,8 @@ import Account from 'pages/Account'
 import AccountProfile from 'pages/Account/Profile'
 import AccountWithdraw from 'pages/Account/Withdraw'
 import AccountLinkBank from 'pages/Account/Withdraw/LinkBank'
+import WithdrawRequest from 'pages/Account/Withdraw/Request'
+import WithdrawRequestSuccess from 'pages/Account/Withdraw/Request/Success'
 import AccountOrders from 'pages/Account/Orders'
 import AccountOrdersDetails from 'pages/Account/Orders/Details'
 import AccountSupport from 'pages/Account/Support'
@@ -22,7 +24,6 @@ import EditProduct from 'pages/Product/Edit'
 
 import AddToCart from 'pages/Product/AddToCart'
 import CheckoutSuccess from 'pages/Checkout/Cart/Success'
-import CheckoutCoinSelect from 'pages/Checkout/Cart/CoinSelect'
 import CheckoutHistoryDetails from 'pages/Checkout/History/Details'
 
 import ReduxHomeTabNav from 'navigation/ReduxHomeTabNav'
@@ -51,9 +52,10 @@ const PrimaryNav = StackNavigator({
   EditProductScreen: { screen: EditProduct },
   AddToCartScreen: { screen: AddToCart },
   CheckoutScreen: { screen: ReduxCheckoutTabNav },
-  CheckoutCoinSelectScreen: { screen: CheckoutCoinSelect },
   CheckoutSuccessScreen: { screen: CheckoutSuccess },
   CheckoutHistoryDetailsScreen: { screen: CheckoutHistoryDetails },
+  WithdrawRequestScreen: { screen: WithdrawRequest },
+  WithdrawRequestSuccessScreen: { screen: WithdrawRequestSuccess },
 }, {
   headerMode: 'none',
   initialRouteName: 'LaunchScreen',

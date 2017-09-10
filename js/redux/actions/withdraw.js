@@ -10,8 +10,7 @@ export const fetchBalanceSuccess = res =>
   ({
     type: 'FETCH_BALANCE_SUCCESS',
     payload: {
-      BTC: res.body.BTC,
-      LTC: res.body.LTC,
+      BTC: res.body.BTC
     }
   })
 
@@ -20,6 +19,14 @@ export const fetchBalanceFailure = res =>
     type: 'FETCH_WITHDRAW_FAILURE',
     payload: {
       error: res.body.error || res
+    }
+  })
+
+export const setActiveBank = bank =>
+  ({
+    type: 'SET_ACTIVE_BANK',
+    payload: {
+      bank
     }
   })
 
@@ -67,6 +74,32 @@ export const removeBankAccountSuccess = res =>
 export const removeBankAccountFailure = res =>
   ({
     type: 'REMOVE_BANK_ACCOUNT_FAILURE',
+    payload: {
+      bankId: res.body.bankId
+    }
+  })
+
+export const withdrawRequest = (bank, amount, user) =>
+  ({
+    type: 'WITHDRAW_REQUEST',
+    payload: {
+      bank,
+      amount,
+      user
+    }
+  })
+
+export const withdrawRequestSuccess = res =>
+  ({
+    type: 'WITHDRAW_REQUEST_SUCCESS',
+    payload: {
+      bankId: res.body.bankId
+    }
+  })
+
+export const withdrawRequestFailure = res =>
+  ({
+    type: 'WITHDRAW_REQUEST_FAILURE',
     payload: {
       bankId: res.body.bankId
     }

@@ -76,39 +76,13 @@ export const checkoutSuccess = res =>
   ({
     type: 'CHECKOUT_SUCCESS',
     payload: {
-      order: res.body.order
+      transaction: res.body.transaction
     }
   })
 
 export const checkoutFailure = res =>
   ({
     type: 'CHECKOUT_FAILURE',
-    payload: {
-      error: res.body.error || res
-    }
-  })
-
-export const currencySubmit = (currency, orderId, user) =>
-  ({
-    type: 'CURRENCY_SUBMIT',
-    payload: {
-      currency,
-      orderId,
-      user
-    }
-  })
-
-export const currencySuccess = res =>
-  ({
-    type: 'CURRENCY_SUCCESS',
-    payload: {
-      transaction: res.body.transaction
-    }
-  })
-
-export const currencyFailure = res =>
-  ({
-    type: 'CURRENCY_FAILURE',
     payload: {
       error: res.body.error || res
     }

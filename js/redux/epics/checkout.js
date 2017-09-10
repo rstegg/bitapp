@@ -10,8 +10,6 @@ import { get, post } from './helpers/req'
 const api = {
   checkout: ({ products, user }) =>
     post('orders', { products }, user.token),
-  currency: ({ currency, orderId, user }) =>
-    post('transactions', { currency, orderId }, user.token),
   history: ({ user }) =>
     get('transactions', user.token),
 }
@@ -38,19 +36,7 @@ const checkoutSubmit = action$ =>
         }))
     )
 
-const currencySubmit = action$ =>
-  action$.ofType('CURRENCY_SUBMIT')
-    .mergeMap(action =>
-      api.currency(action.payload)
-        .map(currencySuccess)
-        .catch(error => Observable.of({
-          type: 'CURRENCY_FAILURE',
-          payload: { error }
-        }))
-    )
-
 export default combineEpics(
   fetchCheckoutHistory,
   checkoutSubmit,
-  currencySubmit,
 )

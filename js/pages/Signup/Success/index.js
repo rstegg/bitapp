@@ -5,13 +5,14 @@ import { submit } from 'redux-form'
 
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
+import ErrorMessage from 'components/ErrorMessage'
 
 import SignupSuccessForm from './Form'
 import styles from './Styles'
 
 import { signupSubmit } from 'actions/signup'
 
-const SignupSuccess = ({ user, isLoading, navigation, signupSubmit, onSubmit }) =>
+const SignupSuccess = ({ user, error, isLoading, navigation, signupSubmit, onSubmit }) =>
   <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <View style={styles.container}>
       <Header
@@ -43,4 +44,7 @@ const mapDispatchToProps = dispatch =>
     signupSubmit: user => dispatch(signupSubmit(user))
   })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignupSuccess)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignupSuccess)

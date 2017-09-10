@@ -4,12 +4,12 @@ import { ListView } from 'react-native'
 import BankAccountRow from './ListRow'
 import styles from './Styles'
 
-const BankAccountList = ({ withdrawalInfo, handleRemove, isLoading }) =>
+const BankAccountList = ({ banks, handleRemove, setActiveBank, isLoading }) =>
   <ListView
     key='withdraw-info-list'
     style={styles.listView}
-    dataSource={withdrawalInfo}
-    renderRow={bank => <BankAccountRow account={bank} isLoading={isLoading} onPressTrash={() => handleRemove(bank)}/>}
+    dataSource={banks}
+    renderRow={bank => <BankAccountRow account={bank} isLoading={isLoading} onPressTrash={() => handleRemove(bank)} onSelect={() => setActiveBank(bank)} />}
     keyboardDismissMode='on-drag'
     keyboardShouldPersistTaps='always'
     showsVerticalScrollIndicator={false}

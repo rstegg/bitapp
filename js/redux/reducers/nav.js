@@ -81,17 +81,6 @@ export default (state, action) => {
       NavigationActions.reset({
         index: 0,
         actions: [
-          NavigationActions.navigate({ routeName: 'CheckoutCoinSelectScreen' })
-        ]
-      }),
-      state
-    )
-    break
-  case 'CURRENCY_SUCCESS':
-    newState = PrimaryNav.router.getStateForAction(
-      NavigationActions.reset({
-        index: 0,
-        actions: [
           NavigationActions.navigate({ routeName: 'CheckoutSuccessScreen' })
         ]
       }),
@@ -110,9 +99,21 @@ export default (state, action) => {
       state
     )
     break
+  case 'SET_ACTIVE_BANK':
+    newState = PrimaryNav.router.getStateForAction(
+      NavigationActions.navigate({ routeName: 'WithdrawRequestScreen' }),
+      state
+    )
+    break
   case 'LINK_BANK_ACCOUNT_SUCCESS':
     newState = PrimaryNav.router.getStateForAction(
       NavigationActions.back(),
+      state
+    )
+    break
+  case 'WITHDRAW_REQUEST_SUCCESS':
+    newState = PrimaryNav.router.getStateForAction(
+      NavigationActions.navigate({ routeName: 'WithdrawRequestSuccessScreen' }),
       state
     )
     break
