@@ -8,6 +8,8 @@ import {
 import { connect } from 'react-redux'
 import { removeBankAccount, setActiveBank } from 'actions/withdraw'
 
+import { prop } from 'ramda'
+
 import Header from 'components/Header'
 import Text from 'components/BitKitText'
 
@@ -33,10 +35,13 @@ const Withdraw = ({ isLoading, banks, handleRemove, setActiveBank, navigation, u
 
 const dataSource = new ListView.DataSource({ rowHasChanged: (row1, row2) => row1 !== row2 })
 
+const getBanks = prop('banks')
+const hasBanks = user => getBanks(user) || []
+
 const mapStateToProps = ({ user, withdraw }) =>
   ({
     isLoading: withdraw.banks.isLoading,
-    banks: dataSource.cloneWithRows(user.banks),
+    banks: dataSource.cloneWithRows(hasBanks(user)),
     user
   })
 

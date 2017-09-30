@@ -20,11 +20,11 @@ class Balance extends Component {
         <Text style={styles.balanceLabel}>Balance</Text>
         <View style={styles.balanceBTC}>
           <Text style={styles.balanceBTCLabel}>BTC:</Text>
-          {isLoading ? <Loader style={styles.balanceLoader} /> : <Text style={styles.balanceBTCText}>{balanceBTC.confirmed}</Text>}
+          {isLoading ? <Loader style={styles.balanceLoader} /> : <Text style={styles.balanceBTCText}>{balanceBTC.confirmed || '0.00000001'}</Text>}
         </View>
         <View style={styles.totalUSD}>
           <Text style={styles.totalUSDLabel}>Total (USD):</Text>
-          {isLoading ? <Loader style={styles.balanceLoader} /> : <Text style={styles.totalUSDText}>${balanceBTC.confirmedUSD}</Text>}
+          {isLoading ? <Loader style={styles.balanceLoader} /> : <Text style={styles.totalUSDText}>${balanceBTC.confirmedUSD || '0.00'}</Text>}
         </View>
       </View>
     )
