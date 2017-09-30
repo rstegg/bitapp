@@ -1,8 +1,8 @@
 const Models = require('../../models')
-const { order } = Models
+const { Order } = Models
 
 module.exports = (req, res, next) =>
-  order.findAll({ where: { userId: req.user.id } })
+  Order.findAll({ where: { userId: req.user.id } })
     .then(orders =>
       !orders ? Promise.reject('No orders')
         : orders

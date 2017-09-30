@@ -1,13 +1,13 @@
 const P = require('bluebird')
-const { sum, merge, compose, splitEvery, unnest, map, product: prod, pluck, zip, zipObj } = require('ramda')
+const { sum, merge, compose, splitEvery, unnest, map, product, pluck, zip, zipObj } = require('ramda')
 
 const Models = require('../../models')
 const bitapi = require('../../services/bitapi')
 
-const { product, item, transaction, order } = Models
+const { Product, Transaction, Order } = Models
 
 module.exports = (req, res) =>
-  product.findAll({
+  Product.findAll({
     where: { id: { $in: pluck('id', req.body.products) }, userId: req.user.id },
     include: [ {
       model: item,
@@ -20,12 +20,12 @@ module.exports = (req, res) =>
 
     const unitPrices = pluck('unitPrice', products)
     const quantityPrices = zip(quantities, unitPrices)
-    const totals = map(prod, quantityPrices)
+    const totals = map(product, quantityPrices)
     const totalUSD = sum(totals)
 
     const productsWithDetails = products.map((product, i) => Object.assign({}, product, { quantity: quantities[i], total: totals[i] }))
 
-    return order.create({
+    return Order.create({
        totalUSD,
        products: productsWithDetails,
        userId: req.user.id,
@@ -42,7 +42,7 @@ module.exports = (req, res) =>
     const requestObj = bitapi.startPayment(req.user.accountId, 'BTC', validOrder.totalUSD)
     return Promise.all([ requestObj, orderObj ])
   })
-  .then(([ newRequest, orderObj ]) => { console.log(newRequest); return transaction.create(merge(orderObj, newRequest)) })
+  .then(([ newRequest, orderObj ]) => { console.log(newRequest); return Transaction.create(merge(orderObj, newRequest)) })
   .then(transaction => res.json({ transaction }))
   .catch(errors => { console.log(errors); res.status(400).json({ errors }) })
   .catch(errors => { console.log(errors); res.status(400).json({ errors }) })

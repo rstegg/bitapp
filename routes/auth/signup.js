@@ -1,11 +1,12 @@
 const Models = require('../../models')
+const { User } = Models
 const jwt = require('jsonwebtoken')
 const validatePhone = require('./helpers/validatePhone')
 
 module.exports = (req, res) =>
   validatePhone(req.body.user.phone)
-  .then(phone => 
-    Models.user.update(
+  .then(phone =>
+    User.update(
       { name: req.body.user.name, password: req.body.user.password, registered: true },
       { where: { phone }, returning: true, raw: true }
     )

@@ -1,8 +1,8 @@
 const Models = require('../../models')
-const { product } = Models
+const { Product } = Models
 
 module.exports = (req, res) =>
-  product.create({
+  Product.create({
     code: req.body.product.code,
     unit: req.body.product.unit,
     unitPrice: req.body.product.unitPrice,

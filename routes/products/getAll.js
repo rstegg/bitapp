@@ -1,9 +1,7 @@
 const Models = require('../../models')
-const { product, item } = Models
-
-const productParams = [ 'name', 'description', 'image' ]
+const { Product, Item } = Models
 
 module.exports = (req, res) =>
-  product.getProductsByUser(req.user, item)
+  Product.getProductsByUser(req.user, Item)
     .then(products => res.status(200).json({ products }))
     .catch(error => res.status(400).json({ error }))

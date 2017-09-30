@@ -13,9 +13,9 @@ module.exports = function(sequelize, DataTypes) {
     }
   })
 
-  Item.associate = (models) => {
-    Item.belongsTo(models.user)
-    Item.hasMany(models.product)
+  Item.associate = ({ User, Product }) => {
+    Item.belongsTo(User)
+    Item.hasMany(Product)
   }
 
   Item.getItemsByUser = user =>

@@ -1,12 +1,12 @@
 const Models = require('../../models')
-const { user } = Models
+const { User } = Models
 const validatePhone = require('./helpers/validatePhone')
 const bitapi = require('../../services/bitapi')
 
 const validate = req =>
   validatePhone(req.body.phone)
   .then(phone =>
-    user.findOne({
+    User.findOne({
       where: {
         phone,
         verifyCode: req.body.code,
@@ -22,7 +22,7 @@ const validate = req =>
 const createAccount = ({ id }) =>
   bitapi.createAccount()
     .then(accountId =>
-      user.update(
+      User.update(
         { accountId, verified: true },
         { where: { id, verified: false }, returning: true, raw: true }
       )

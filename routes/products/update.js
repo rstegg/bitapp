@@ -1,12 +1,12 @@
 const Models = require('../../models')
-const { product } = Models
+const { Product } = Models
 const { pick } = require('ramda')
 
-const productParams = [ 'unit', 'unitPrice' ]
+const ProductParams = [ 'unit', 'unitPrice' ]
 
 module.exports = (req, res) =>
-  product.update(
-    pick(productParams, req.body.product),
+  Product.update(
+    pick(ProductParams, req.body.product),
     { where: { userId: req.user.id, id: req.params.id }, returning: true, raw: true }
   )
     .then(([ n, [ product ] ]) => !product ? Promise.reject('bad product') : product)

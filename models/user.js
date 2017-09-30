@@ -22,9 +22,9 @@ module.exports = function(sequelize, DataTypes) {
     image: DataTypes.STRING,
   })
 
-  User.associate = (models) => {
-    User.hasMany(models.item)
-    User.hasMany(models.product)
+  User.associate = ({ Item, Product }) => {
+    User.hasMany(Item)
+    User.hasMany(Product)
   }
 
   User.prototype.validPassword = function(password) {

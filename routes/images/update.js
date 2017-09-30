@@ -1,8 +1,8 @@
 const Models = require('../../models')
-const { item } = Models
+const { Item } = Models
 
 module.exports = (req, res) =>
-  item.update(
+  Item.update(
     { image: req.file.location },
     { where: { id: req.params.itemId, userId: req.user.id }, returning: true, raw: true }
   )

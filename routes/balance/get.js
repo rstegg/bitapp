@@ -1,7 +1,7 @@
 const P = require('bluebird')
 const Models = require('../../models')
 const bitapi = require('../../services/bitapi')
-const { transaction, order } = Models
+
 /**
  * products {orderId, currency}
  */

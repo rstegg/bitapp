@@ -7,6 +7,8 @@ var env       = process.env.NODE_ENV || 'development'
 var config    = require(__dirname + '/../config/config.js')[env]
 var db        = {}
 
+const upperFirst = name => name.charAt(0).toUpperCase() + name.slice(1)
+
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable])
 } else {
@@ -20,7 +22,8 @@ fs
   })
   .forEach(function(file) {
     var model = sequelize['import'](path.join(__dirname, file))
-    db[model.name] = model
+    const modelRef = upperFirst(model.name)
+    db[modelRef] = model
   })
 
 Object.keys(db).forEach(function(modelName) {

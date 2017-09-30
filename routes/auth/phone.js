@@ -1,4 +1,5 @@
 const Models = require('../../models')
+const { User } = Models
 const twilio = require('../../services/twilio')
 const validatePhone = require('./helpers/validatePhone')
 
@@ -24,7 +25,7 @@ const createError = error => {
 module.exports = (req, res) =>
   validatePhone(req.body.phone)
     .then(phone =>
-      Models.user.create({ phone, verifyCode: Math.floor(1000 + Math.random() * 9000) })
+      User.create({ phone, verifyCode: Math.floor(1000 + Math.random() * 9000) })
     )
     .then(user => {
       twilio.messages.create({

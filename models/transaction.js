@@ -1,4 +1,3 @@
-'use strict'
 module.exports = function(sequelize, DataTypes) {
   const Transaction = sequelize.define('transaction', {
     url: DataTypes.STRING,
@@ -9,9 +8,9 @@ module.exports = function(sequelize, DataTypes) {
     amount: DataTypes.DECIMAL
   })
 
-  Transaction.associate = function(models) {
-    Transaction.belongsTo(models.user)
-    Transaction.belongsTo(models.order)
+  Transaction.associate = ({ User, Order }) => {
+    Transaction.belongsTo(User)
+    Transaction.belongsTo(Order)
   }
 
   return Transaction

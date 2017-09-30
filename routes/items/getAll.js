@@ -1,9 +1,7 @@
 const Models = require('../../models')
-const { item } = Models
-
-const itemAttrs = [ 'id', 'name', 'description', 'image' ]
+const { Item } = Models
 
 module.exports = (req, res) =>
-  item.getItemsByUser(req.user)
+  Item.getItemsByUser(req.user)
     .then(items => res.status(200).json({ items }))
     .catch(error => res.status(400).json({ error }))

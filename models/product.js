@@ -1,5 +1,6 @@
 const ProductAttributes = [ 'id', 'unit', 'unitPrice', 'code' ]
 const { propEq, find } = require('ramda')
+
 module.exports = function(sequelize, DataTypes) {
   const Product = sequelize.define('product', {
     unit: DataTypes.STRING,
@@ -10,9 +11,9 @@ module.exports = function(sequelize, DataTypes) {
     }
   })
 
-  Product.associate = (models) => {
-    Product.belongsTo(models.user)
-    Product.belongsTo(models.item)
+  Product.associate = ({ User, Item }) => {
+    Product.belongsTo(User)
+    Product.belongsTo(Item)
   }
 
   Product.getProductsByUser = (user, Item) =>
@@ -29,7 +30,7 @@ module.exports = function(sequelize, DataTypes) {
           : products
       )
 
-  Product.searchByCode = (user, code ,Item) =>
+  Product.searchByCode = (user, code, Item) =>
     Product.findOne({
       where: { userId: user.id, code },
       include: [ {

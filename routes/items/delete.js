@@ -1,7 +1,7 @@
 const Models = require('../../models')
-const { item } = Models
+const { Item } = Models
 
 module.exports = (req, res) =>
-  item.destroy({ where: { id: req.params.id, userId: req.user.id } })
+  Item.destroy({ where: { id: req.params.id, userId: req.user.id } })
     .then(item => res.status(200).json({ item }))
     .catch(error => res.status(400).json({ error }))
