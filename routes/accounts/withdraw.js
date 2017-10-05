@@ -94,7 +94,7 @@ const getChangeAddress = account =>
 module.exports = {
   spec:
     R.pick(
-      [ 'accountId', 'address', 'amountUSD'],
+      [ 'accountId', 'address', 'amountUSD' ],
       validators),
   fn:
     ({ accountId, amountUSD }) => {
