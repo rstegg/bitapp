@@ -14,6 +14,8 @@ const hashPassword = require('../middleware/hash-password')
 
 const validField = p => obj => !isNil(path([ p ], obj))
 
+const logger = (req, res, next) => { console.log(req); next(); }
+
 module.exports =
   router
     .post('/phone',
@@ -30,6 +32,7 @@ module.exports =
       signup
     )
     .post('/login',
+      logger,
       passport.authenticate('local', { session: false }),
       login
     )
